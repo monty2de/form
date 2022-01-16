@@ -91,8 +91,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
 
 
-                Padding(
-                  padding: const EdgeInsets.only(top: 100),
+                Container(
+                  margin: const EdgeInsets.only(top: 410 ),
                   child: ListView.builder(
                       physics: const AlwaysScrollableScrollPhysics(),
                       scrollDirection: Axis.vertical,
@@ -117,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 Text('title' ,style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
-                                  color: Colors.white
+                                  color: Colors.black
                                   
                                 ),),
                                 SizedBox(height: 15,),
@@ -127,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   Text('sub text', style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.white
+                                  color: Colors.black
                                 ),),  
                               ],
                               )

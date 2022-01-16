@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "520370134301",
+    "project_id": "form-20621",
+    "storage_bucket": "form-20621.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520370134301:android:1b2fdc5d31ae6c52ee55f4",
+        "android_client_info": {
+          "package_name": "com.monty.form"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "520370134301-0i9enpua2s1565bhvlg8tqdn6nop4o9a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.monty.form",
+            "certificate_hash": "c3b20a617fbf076da85bf824bc3ff1131e35871c"
+          }
+        },
+        {
+          "client_id": "520370134301-j7on6p2tqg5bun63vs75fqoj3tamht6a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfvI_IesO9uUrXop2-h61WaBBrmBXJNi4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "520370134301-j7on6p2tqg5bun63vs75fqoj3tamht6a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

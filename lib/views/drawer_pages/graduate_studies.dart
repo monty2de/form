@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:form/views/pages_lv2/curriculum_final.dart';
 
-import '../drawer.dart';
+import '../../drawer.dart';
 
 class GraduateStudies extends StatefulWidget {
+
+  late int role;
+
+  GraduateStudies(this.role);
+
   @override
   _GraduateStudiesState createState() => _GraduateStudiesState();
 }
@@ -11,7 +17,7 @@ class _GraduateStudiesState extends State<GraduateStudies> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(),
+      drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
         title: Text('الدراسات العليا'),
         centerTitle: true,
@@ -29,9 +35,10 @@ class _GraduateStudiesState extends State<GraduateStudies> {
                     color: Colors.black),
               ),
               onTap: () {
-                // Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                //         return GraduateStudies();
-                //         } ));
+                Navigator.push(context,
+                MaterialPageRoute(builder: (context) {
+                  return CurriculumFinal(this.widget.role);
+                }));
               },
             ),
             SizedBox(

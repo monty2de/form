@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../drawer.dart';
+import '../../drawer.dart';
 
 class Departmentstaff extends StatefulWidget {
+  late int role;
+
+  Departmentstaff(this.role);
+
   @override
   _DepartmentstaffState createState() => _DepartmentstaffState();
 }
@@ -11,7 +15,7 @@ class _DepartmentstaffState extends State<Departmentstaff> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(),
+      drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
         centerTitle: true,
         title: Text('كادر القسم'),

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../drawer.dart';
+import '../../drawer.dart';
 
 class SectionPillarsPerement extends StatefulWidget {
+  late int role;
+
+  SectionPillarsPerement(this.role);
+
   @override
   _SectionPillarsPerementState createState() => _SectionPillarsPerementState();
 }
@@ -11,7 +15,7 @@ class _SectionPillarsPerementState extends State<SectionPillarsPerement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(),
+      drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
         title: Center(child: Text('اركان القسم - الدائمة')),
       ),

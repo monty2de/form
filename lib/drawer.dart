@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:form/views/drawer_pages/about.dart';
+import 'package:form/views/drawer_pages/curriculum.dart';
+import 'package:form/views/drawer_pages/department_activities.dart';
+import 'package:form/views/drawer_pages/department_staff.dart';
+import 'package:form/views/drawer_pages/exam_committee.dart';
+import 'package:form/views/drawer_pages/graduate_studies.dart';
+import 'package:form/views/drawer_pages/section_pillars.dart';
+import 'package:form/views/drawer_pages/students_affairs.dart';
 import 'dart:math';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:form/drawer_pages/about.dart';
-
-import 'drawer_pages/curriculum.dart';
-import 'drawer_pages/department_activities.dart';
-import 'drawer_pages/department_staff.dart';
-import 'drawer_pages/exam_committee.dart';
-import 'drawer_pages/graduate_studies.dart';
-import 'drawer_pages/section_pillars.dart';
-import 'drawer_pages/students_affairs.dart';
 import 'main.dart';
 
 class NavigationDrawerWidget extends StatefulWidget {
+  late int role;
+
+  NavigationDrawerWidget(this.role);
+
   @override
   _NavigationDrawerWidgetState createState() => _NavigationDrawerWidgetState();
 }
@@ -44,7 +48,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     onClicked: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return MyHomePage();
+                        return MyHomePage(this.widget.role);
                       }));
                     },
                   ),
@@ -54,7 +58,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     onClicked: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return About();
+                        return About(this.widget.role);
                       }));
                     },
                   ),
@@ -64,7 +68,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     onClicked: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return SectionPillars();
+                        return SectionPillars(this.widget.role);
                       }));
                     },
                   ),
@@ -74,7 +78,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     onClicked: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return ExamCommittee();
+                        return ExamCommittee(this.widget.role);
                       }));
                     },
                   ),
@@ -84,7 +88,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     onClicked: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return Departmentstaff();
+                        return Departmentstaff(this.widget.role);
                       }));
                     },
                   ),
@@ -94,7 +98,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     onClicked: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return StudentsAffairs();
+                        return StudentsAffairs(this.widget.role);
                       }));
                     },
                   ),
@@ -104,7 +108,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     onClicked: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return Departmentactivities();
+                        return Departmentactivities(this.widget.role);
                       }));
                     },
                   ),
@@ -114,7 +118,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     onClicked: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return Curriculum();
+                        return Curriculum(this.widget.role);
                       }));
                     },
                   ),
@@ -124,7 +128,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     onClicked: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return GraduateStudies();
+                        return GraduateStudies(this.widget.role);
                       }));
                     },
                   ),

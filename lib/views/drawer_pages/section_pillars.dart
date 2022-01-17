@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:form/pages_lv2/section_pillars_perement.dart';
+import 'package:form/views/pages_lv2/section_pillars_perement.dart';
 
-import '../drawer.dart';
+import '../../drawer.dart';
 
 class SectionPillars extends StatefulWidget {
+
+  late int role;
+
+  SectionPillars(this.role);
+
   @override
   _SectionPillarsState createState() => _SectionPillarsState();
 }
@@ -12,7 +17,7 @@ class _SectionPillarsState extends State<SectionPillars> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(),
+      drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
         centerTitle: true,
         title: Text('اركان القسم'),
@@ -33,7 +38,7 @@ class _SectionPillarsState extends State<SectionPillars> {
                 ),
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return SectionPillarsPerement();
+                    return SectionPillarsPerement(this.widget.role);
                   }));
                 },
               ),

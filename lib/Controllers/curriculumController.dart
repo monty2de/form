@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:form/models/curriculum.dart';
-import 'package:form/models/news.dart';
 
-class curriculumController   {
+class CurriculumController   {
 
   
-  var curriculumItem = <curriculum>[];
+  var curriculumItem = <Curriculum>[];
 
 
 
@@ -18,7 +17,7 @@ class curriculumController   {
         
       Map<String, dynamic> data = element.data() as Map<String, dynamic>;
 
-      curriculumItem.add(curriculum.fromFirebase(data));
+      curriculumItem.add(Curriculum.fromFirebase(data));
 
 
     });

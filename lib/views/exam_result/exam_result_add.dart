@@ -3,23 +3,25 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:form/views/pages_lv2/curriculum_final.dart';
-import 'package:form/views/pages_lv2/curriculum_first.dart';
 
 
 
 
-class CurriculumAdd extends StatefulWidget {
+
+
+class ExamResultAdd extends StatefulWidget {
 late int role;
 late int type;
 
-  CurriculumAdd(this.role , this.type);
+  ExamResultAdd(this.role , this.type );
 
   @override
-  CurriculumAddState createState() => CurriculumAddState();
+  ExamResultAddState createState() => ExamResultAddState();
 }
 
-class CurriculumAddState extends State<CurriculumAdd> {
+class ExamResultAddState extends State<ExamResultAdd> {
+
+  var subjectName ;
 
   String generateRandomString(int len) {
     var r = Random.secure();
@@ -30,42 +32,33 @@ class CurriculumAddState extends State<CurriculumAdd> {
   
   var globalKey = GlobalKey<FormState>();
  
-  late TextEditingController nameController = new TextEditingController();
-  late  TextEditingController yearController = new TextEditingController(  );
+  late TextEditingController studentNameController = new TextEditingController();
+  late  TextEditingController yearController = new TextEditingController( );
+  late  TextEditingController degreeController = new TextEditingController( );
 
 
 
-  Future store(String name, year) async {
 
+  Future store(String studentName, year , degree , subjectName) async {
 
     var id = generateRandomString(32);
 
-    var check = await FirebaseFirestore.instance.collection('curriculum').doc(id).get();
+    var check = await FirebaseFirestore.instance.collection('examResult').doc(id).get();
     if(check.exists){
       id = generateRandomString(32);
     }
 
-    var orders  =  FirebaseFirestore.instance.collection('curriculum').doc(id) ;
+    var orders  =  FirebaseFirestore.instance.collection('examResult').doc(id) ;
     await orders.set({
       'id' : id,
-      'name' : name ,
+      'studentName' : studentName ,
       'year' : year,
-      'type' :this.widget.type
+      'degree' : degree,
+      'subjectName' : subjectName
       
     });
-    if (this.widget.type == 1) {
-      Navigator.push(context,
-      MaterialPageRoute(builder: (context) {
-      return CurriculumFirst(this.widget.role);
-     }));
-    }else{
-      
-      Navigator.push(context,
-      MaterialPageRoute(builder: (context) {
-      return CurriculumFinal(this.widget.role);
-     }));
-
-    }
+   
+  Navigator.pop(context, false);
     
    
   }
@@ -82,10 +75,11 @@ class CurriculumAddState extends State<CurriculumAdd> {
         onPressed:  () {
        
           if(globalKey.currentState!.validate()){
-            store(nameController.text,  yearController.text );
+            store(studentNameController.text,  yearController.text , degreeController.text , subjectName );
           }
-        },
+        },    
         child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
+        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
       ),
     );
   }
@@ -96,7 +90,7 @@ class CurriculumAddState extends State<CurriculumAdd> {
       child: Column(
         children: <Widget>[
           Text(
-            'العنوان',
+            'اسم الطالب',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           TextFormField(
@@ -104,7 +98,7 @@ class CurriculumAddState extends State<CurriculumAdd> {
               if(value!.isEmpty) return 'يجب ادخال العنوان';
               return null;
             },
-            controller: nameController,
+            controller: studentNameController,
             cursorColor: Colors.black,
 
             style: TextStyle(color: Colors.black),
@@ -120,12 +114,12 @@ class CurriculumAddState extends State<CurriculumAdd> {
             ),
           ),
           Text(
-            '  الوصف ',
+            '  المرحلة ',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           TextFormField(
             validator: (value){
-              if(value!.isEmpty) return 'يجب ادخال  الوصف';
+              if(value!.isEmpty) return 'يجب ادخال  المرحلة';
               return null;
             },
             controller: yearController,
@@ -144,7 +138,61 @@ class CurriculumAddState extends State<CurriculumAdd> {
             ),
           ),
          
-          
+          Text(
+            '  الدرجة ',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          TextFormField(
+            validator: (value){
+              if(value!.isEmpty) return 'يجب ادخال  الدرجة';
+              return null;
+            },
+            controller: degreeController,
+            cursorColor: Colors.black,
+
+            style: TextStyle(color: Colors.black),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+
+              icon: Icon(Icons.email, color: Colors.white70),
+
+
+              hintStyle: TextStyle(color: Colors.white70),
+            ),
+          ),
+
+          Text(
+            '  اسم المادة ',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance.collection('curriculum').where('type' , isEqualTo: this.widget.type).snapshots(),
+              builder: (context , snapshot){
+                if(!snapshot.hasData){
+                  return Text('error');
+                }
+                List<String> shubjects = [];
+                for (var i = 0; i < snapshot.data!.docs.length; i++) {
+                  shubjects.add(snapshot.data!.docs[i]['name']);
+                }
+                return DropdownButtonFormField(
+
+                          items :  shubjects.map( (String item){
+                            return DropdownMenuItem<String>(
+                              value: item,
+                              child: Text(item),
+                            );
+                          } ).toList(),
+
+                          onChanged: (value) {
+                            subjectName = value.toString();
+                          },
+
+            );
+              },
+            ) ,
 
         ],
       ),
@@ -163,8 +211,6 @@ class CurriculumAddState extends State<CurriculumAdd> {
           Navigator.pop(context, false);
         },
       ),
-
-      title: Text('اضافة مادة'),
 
     ),
 

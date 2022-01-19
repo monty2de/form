@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:form/Controllers/curriculumController.dart';
 import 'package:form/models/curriculum.dart';
+import 'package:form/views/exam_result/exam_result_add.dart';
 import 'package:form/views/pages_lv4/exam_result_show.dart';
 
 import '../../drawer.dart';
-import '../exam_result_add.dart';
 
 
 class ExamResultFinal extends StatefulWidget {
@@ -23,21 +23,28 @@ class _ExamResultFinalState extends State<ExamResultFinal> {
     return Scaffold(
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
+        leading: IconButton(icon: Icon(Icons.arrow_back_ios ,  ),
+        onPressed:() {
+          Navigator.pop(context, false);
+        },
+      ),
 
         actions: [
 
-          this.widget.role == 1 ? FlatButton(
+          this.widget.role == 1 ? TextButton(
             onPressed: () {
              
              
-             
-              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => ExamResultAdd(this.widget.role , 2 )), (Route<dynamic> route) => false);
+             Navigator.push(context,
+      MaterialPageRoute(builder: (context) {
+      return ExamResultAdd(this.widget.role , 2 );
+     }));
             },
             child: Text(" اضافة درجة ", style: TextStyle(color: Colors.white)),
           ) :Container(),
         ],
         centerTitle: true,
-        title: Text('المناهج'),
+        title: Text('اسماء المواد'),
       ),
       body: Center(
         child: Column(
@@ -45,7 +52,7 @@ class _ExamResultFinalState extends State<ExamResultFinal> {
           children: <Widget>[
             
             FutureBuilder(
-            future:   curriculumController().index(2),
+            future:   CurriculumController().index(2),
             builder: ( BuildContext context , AsyncSnapshot snapshot ){
     
               switch ( snapshot.connectionState ){
@@ -56,7 +63,7 @@ class _ExamResultFinalState extends State<ExamResultFinal> {
                     return Container();
                   }
                   if(snapshot.hasData){
-                    return Result(snapshot.data , context);
+                    return result(snapshot.data , context);
                   }
                   break;
                 case ConnectionState.none:
@@ -77,7 +84,7 @@ class _ExamResultFinalState extends State<ExamResultFinal> {
   }
 
 
-   Widget Result( List<curriculum> curriculum , BuildContext context ){
+   Widget result( List<Curriculum> curriculum , BuildContext context ){
 
     
   return Expanded(
@@ -97,7 +104,17 @@ class _ExamResultFinalState extends State<ExamResultFinal> {
                             child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            InkWell(
+                            Row(
+                              children: [
+                                Text(
+                                'المادة:',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
+                              ),
+
+                                InkWell(
                               child: Text(
                                 curriculum[position].name,
                                 style: TextStyle(
@@ -107,19 +124,34 @@ class _ExamResultFinalState extends State<ExamResultFinal> {
                               ),
 
                               onTap: (){
-
-                                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => ExamResultShow(this.widget.role , curriculum[position].name )), (Route<dynamic> route) => false);
+                                Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                                return ExamResultShow(this.widget.role , curriculum[position].name );
+                                }));
 
 
                               },
                             ),
+                              ],
+                            ),
                             SizedBox(height: 15),
+                            Row(
+                              children: [
+                                Text(
+                              'المرحلة:',
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black),
+                            ),
                             Text(
                               curriculum[position].year,
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black),
+                            )
+                              ],
                             )
                           ],
                         )),

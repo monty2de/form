@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:form/models/examTable.dart';
 import 'package:form/views/pages_lv3/exam_table_final.dart';
 import 'package:form/views/pages_lv3/exam_table_first.dart';
 
@@ -10,17 +11,18 @@ import 'package:form/views/pages_lv3/exam_table_first.dart';
 
 
 
-class ExamTableAdd extends StatefulWidget {
+class ExamTableUpdate extends StatefulWidget {
 late int role;
+late ExamTable exaxmtable;
 
 
-  ExamTableAdd(this.role );
+  ExamTableUpdate(this.role , this.exaxmtable );
 
   @override
-  ExamTableAddState createState() => ExamTableAddState();
+  ExamTableUpdateState createState() => ExamTableUpdateState();
 }
 
-class ExamTableAddState extends State<ExamTableAdd> {
+class ExamTableUpdateState extends State<ExamTableUpdate> {
 
   String generateRandomString(int len) {
     var r = Random.secure();
@@ -31,9 +33,9 @@ class ExamTableAddState extends State<ExamTableAdd> {
   
   var globalKey = GlobalKey<FormState>();
  
-  late TextEditingController nameController = new TextEditingController();
-  late  TextEditingController yearController = new TextEditingController( );
-  late  TextEditingController dateController = new TextEditingController(  );
+  late TextEditingController nameController = new TextEditingController( text: this.widget.exaxmtable.name );
+  late  TextEditingController yearController = new TextEditingController(text: this.widget.exaxmtable.year );
+  late  TextEditingController dateController = new TextEditingController( text: this.widget.exaxmtable.date );
 
 
 
@@ -42,32 +44,17 @@ class ExamTableAddState extends State<ExamTableAdd> {
 
     var id;
     var test_exist = await FirebaseFirestore.instance.collection('examTable').where('year' , isEqualTo: year).get();
-    if(test_exist.docs.isEmpty){
-       id = generateRandomString(32);
-
-      var check = await FirebaseFirestore.instance.collection('examTable').doc(id).get();
-      if(check.exists){
-        id = generateRandomString(32);
-      }
-
-      var exam_year  =  FirebaseFirestore.instance.collection('examTable').doc(id) ;
-      await exam_year.set({
-      'id' : id,
-      'year' : year,
-      
-      
-      });
-
-    }else{
+    
       test_exist.docs.forEach((data) {           
         id = data.data()['id']   ;
  
       });
 
-    }
-    var id_for_item = generateRandomString(32);
-    var item  =  FirebaseFirestore.instance.collection('examTable').doc(id).collection('Item').doc(id_for_item).set({
-      'id' : id_for_item,
+
+
+    // ignore: unused_local_variable
+    var item  =  FirebaseFirestore.instance.collection('examTable').doc(id).collection('Item').doc(this.widget.exaxmtable.id).update({
+      'id' : this.widget.exaxmtable.id,
       'name' : name,
       'date' : date,
       'year' : year,
@@ -101,17 +88,15 @@ class ExamTableAddState extends State<ExamTableAdd> {
       height: 40.0,
       padding: EdgeInsets.only(left: 120 , right: 120),
       margin: EdgeInsets.only(top: 15.0),
-      child: RaisedButton(
+      child: ElevatedButton(
         onPressed:  () {
        
           if(globalKey.currentState!.validate()){
             store(nameController.text,  yearController.text , dateController.text );
           }
         },
-        elevation: 0.0,
-        color: Colors.red[600],
         child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
       ),
     );
   }
@@ -146,12 +131,12 @@ class ExamTableAddState extends State<ExamTableAdd> {
             ),
           ),
           Text(
-            '  الوصف ',
+            '  المرحلة ',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           TextFormField(
             validator: (value){
-              if(value!.isEmpty) return 'يجب ادخال  الوصف';
+              if(value!.isEmpty) return 'يجب ادخال  المرحلة';
               return null;
             },
             controller: yearController,
@@ -206,6 +191,12 @@ class ExamTableAddState extends State<ExamTableAdd> {
   @override
   Widget build(BuildContext context) =>  Scaffold(
     appBar: AppBar(
+
+      leading: IconButton(icon: Icon(Icons.arrow_back_ios ,  ),
+        onPressed:() {
+          Navigator.pop(context, false);
+        },
+      ),
 
     ),
 

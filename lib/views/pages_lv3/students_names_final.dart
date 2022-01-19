@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:form/views/exam_table/exam_table_add.dart';
-import 'package:form/views/pages_lv4/exam_table_show.dart';
+import 'package:form/views/pages_lv4/students_name_show.dart';
+import 'package:form/views/student/students_add.dart';
 
 import '../../drawer.dart';
 
 
-class ExamTableFinal extends StatefulWidget {
+class StudentsNamesFinal extends StatefulWidget {
 
   late int role;
 
-  ExamTableFinal(this.role);
+  StudentsNamesFinal(this.role);
 
   @override
-  _ExamTableFinalState createState() => _ExamTableFinalState();
+  _StudentsNamesFinalState createState() => _StudentsNamesFinalState();
 }
 
-class _ExamTableFinalState extends State<ExamTableFinal> {
+class _StudentsNamesFinalState extends State<StudentsNamesFinal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
-
 
         leading: IconButton(icon: Icon(Icons.arrow_back_ios ,  ),
         onPressed:() {
@@ -31,20 +30,22 @@ class _ExamTableFinalState extends State<ExamTableFinal> {
 
         actions: [
 
+          
+
           this.widget.role == 1 ? TextButton(
             onPressed: () {
              
-             Navigator.push(context,
-      MaterialPageRoute(builder: (context) {
-      return ExamTableAdd(this.widget.role );
-     }));
-             
+              Navigator.push(context,
+              MaterialPageRoute(builder: (context) {
+              return StudentsAdd(this.widget.role   );
+              }));
+                  
             },
             child: Text(" اضافة  ", style: TextStyle(color: Colors.white)),
           ) :Container(),
         ],
         centerTitle: true,
-        title: Text('جدول الامتحانات'),
+        title: Text('اسماء الطلبة'),
       ),
       body: Center(
         child: Column(
@@ -61,7 +62,7 @@ class _ExamTableFinalState extends State<ExamTableFinal> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return ExamTableShow(this.widget.role , 6);
+                        return StudentsNamesShow(this.widget.role , 6);
                         } ));
               },
             ),
@@ -77,8 +78,8 @@ class _ExamTableFinalState extends State<ExamTableFinal> {
                     color: Colors.black),
               ),
               onTap: () {
-               Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return ExamTableShow(this.widget.role , 7);
+                Navigator.push(context, MaterialPageRoute( builder:  ( context ){
+                        return StudentsNamesShow(this.widget.role , 7);
                         } ));
               },
             ),

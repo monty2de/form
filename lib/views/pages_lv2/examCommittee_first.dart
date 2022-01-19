@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form/views/pages_lv3/exam_result_first.dart';
 import 'package:form/views/pages_lv3/exam_table_first.dart';
+import 'package:form/views/pages_lv3/students_names_first.dart';
 
 import '../../drawer.dart';
 
@@ -19,7 +20,13 @@ class _ExamCommitteeFirstState extends State<ExamCommitteeFirst> {
     return Scaffold(
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
-        title: Text('اللجنة الامتحانية'),
+
+        leading: IconButton(icon: Icon(Icons.arrow_back_ios ,  ),
+        onPressed:() {
+          Navigator.pop(context, false);
+        },
+      ),
+        title: Text(' اللجنة الامتحانية الاولية' ),
       ),
       body: Center(
         child: Column(
@@ -53,9 +60,9 @@ class _ExamCommitteeFirstState extends State<ExamCommitteeFirst> {
                     color: Colors.black),
               ),
               onTap: () {
-                // Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                //         return GraduateStudies();
-                //         } ));
+                Navigator.push(context, MaterialPageRoute( builder:  ( context ){
+                        return StudentsNamesFirst(this.widget.role);
+                        } ));
               },
             ),
             SizedBox(

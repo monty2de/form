@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -5,6 +7,7 @@ import 'package:form/Controllers/NewsController.dart';
 import 'package:form/models/news.dart';
 import 'package:form/views/login.dart';
 import 'package:form/views/news_add.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'drawer.dart';
 
 void main() async{
@@ -23,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primarySwatch: Colors.blue,
           appBarTheme: AppBarTheme(color: Colors.blue[900])),
-      home: Login(),
+      home: MyHomePage(),
       supportedLocales: [Locale('ar', '')],
       localeResolutionCallback: (currentLocale, supportedLocales) {
         return supportedLocales.first;
@@ -37,29 +40,72 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  late int role;
+  final int role;
 
-  MyHomePage(this.role);
+  const MyHomePage(
+      {Key? key,
+      this.role = 0  ,
+      })
+      : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+var role_check;
+
+Future getvalidationData() async {
+ SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+  var role = sharedPreferences.getInt('role');
+  setState(() {
+      role_check = role;
+  });
+
+}
+
+@override
+void initState() {
+    getvalidationData().whenComplete(() async{
+      Timer(Duration(seconds: 2), (){
+        print(role_check);
+
+        if (role_check == 0) {
+
+          Navigator.push(context,
+          MaterialPageRoute(builder: (context) {
+          return Login( );
+          }));
+          
+        }
+      });
+    });
+
+    
+    super.initState();
+  }
+
+  
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(this.widget.role),
+      drawer: NavigationDrawerWidget(role_check),
       appBar: AppBar(
         actions: [
 
           
-            this.widget.role == 1 ? FlatButton(
+            role_check == 1 ? TextButton(
             onPressed: () {
              
              
-             
-              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => NewsAdd(this.widget.role)), (Route<dynamic> route) => false);
+             Navigator.push(context,
+      MaterialPageRoute(builder: (context) {
+      return NewsAdd(role_check);
+     }));
             },
             child: Text(" اضافة خبر ", style: TextStyle(color: Colors.white)),
           ) :Container(),
@@ -113,17 +159,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     return Container();
                   }
                   if(snapshot.hasData){
-                    return Result(snapshot.data , context);
+                    return result(snapshot.data , context);
                   }
                   break;
                 case ConnectionState.none:
-                  // TODO: Handle this case.
                   break;
                 case ConnectionState.waiting:
-                  // TODO: Handle this case.
                   break;
                 case ConnectionState.active:
-                  // TODO: Handle this case.
                   break;
               }
               return Container();
@@ -136,7 +179,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 
-  Widget Result( List<News> news , BuildContext context ){
+  Widget result( List<News> news , BuildContext context ){
 
     
   return Expanded(

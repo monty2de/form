@@ -7,8 +7,9 @@ import 'package:form/views/drawer_pages/exam_committee.dart';
 import 'package:form/views/drawer_pages/graduate_studies.dart';
 import 'package:form/views/drawer_pages/section_pillars.dart';
 import 'package:form/views/drawer_pages/students_affairs.dart';
-import 'dart:math';
+import 'package:form/views/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:math';
 
 import 'main.dart';
 
@@ -48,7 +49,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     onClicked: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return MyHomePage(this.widget.role);
+                        return MyHomePage(role: this.widget.role,);
                       }));
                     },
                   ),
@@ -133,6 +134,21 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     },
                   ),
                   const SizedBox(height: 1),
+
+                  buildMenuItem(
+                    text: '   تسجيل الخروج  ',
+                    onClicked: () async {
+                     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+                      sharedPreferences.clear();
+                      // ignore: deprecated_member_use
+                      sharedPreferences.commit();
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return Login();
+                      }));
+                    },
+                  ),
                 ],
               ),
             ),

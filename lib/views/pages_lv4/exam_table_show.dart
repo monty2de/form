@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:form/Controllers/ExamTableController.dart';
 import 'package:form/models/examTable.dart';
+import 'package:form/views/exam_table/exam_table_add.dart';
+import 'package:form/views/exam_table/exam_table_update.dart';
 
 
 import '../../drawer.dart';
-import '../exam_table_add.dart';
 
 
 // ignore: must_be_immutable
@@ -26,20 +27,15 @@ class _ExamTableShowState extends State<ExamTableShow> {
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
 
-        actions: [
+        leading: IconButton(icon: Icon(Icons.arrow_back_ios ,  ),
+        onPressed:() {
+          Navigator.pop(context, false);
+        },
+      ),
 
-          this.widget.role == 1 ? FlatButton(
-            onPressed: () {
-             
-             
-             
-              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => ExamTableAdd(this.widget.role )), (Route<dynamic> route) => false);
-            },
-            child: Text(" اضافة  ", style: TextStyle(color: Colors.white)),
-          ) :Container(),
-        ],
+        
         centerTitle: true,
-        title: Text('المناهج'),
+        title: Text('جدول الامتحانات'),
       ),
       body: Center(
         child: Column(
@@ -58,7 +54,7 @@ class _ExamTableShowState extends State<ExamTableShow> {
                     return Container();
                   }
                   if(snapshot.hasData){
-                    return Result(snapshot.data , context);
+                    return result(snapshot.data , context);
                   }
                   break;
                 case ConnectionState.none:
@@ -78,7 +74,7 @@ class _ExamTableShowState extends State<ExamTableShow> {
     );
   }
 
-Widget Result( List<ExamTable> ExamTable , BuildContext context ){
+Widget result( List<ExamTable> result , BuildContext context ){
 
     
   return Expanded(
@@ -86,7 +82,7 @@ Widget Result( List<ExamTable> ExamTable , BuildContext context ){
       physics: const AlwaysScrollableScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: ExamTable.length,
+                itemCount: result.length,
                 itemBuilder: (BuildContext context, int position) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,21 +94,49 @@ Widget Result( List<ExamTable> ExamTable , BuildContext context ){
                             child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(
-                              ExamTable[position].name,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black),
+                            InkWell(
+                              child: Text(
+                                result[position].name,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
+                              ),
+
+                              onTap: (){
+                                if (this.widget.role == 1 || this.widget.role == 2) {
+                                  Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                  return ExamTableUpdate(this.widget.role , result[position]);
+                                  }));
+                                }
+                              },
                             ),
                             SizedBox(height: 15),
                             Text(
-                              ExamTable[position].date,
+                              result[position].date,
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black),
-                            )
+                            ),
+
+                            SizedBox(height: 15),
+                            InkWell(
+                              child: Text(
+                                'حذف',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.red),
+                              ),
+
+                              onTap:(){
+                                ExamTableController().delet(result[position].id, this.widget.year);
+
+                                Navigator.pop(context, false);
+                              }
+                            ),
                           ],
                         )),
                       ),

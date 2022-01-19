@@ -1,5 +1,10 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../main.dart';
 
 
 
@@ -7,30 +12,31 @@ class AuthController  {
 
  
 
-void login(String username, String password) async {
-    try {
+// void login(String email, String password) async {
+//     try {
 
-      var admins = await FirebaseFirestore.instance.collection('admins').get();
+//       UserCredential authResult = await FirebaseAuth.instance.signInWithEmailAndPassword(
+//       email: email.trim(), password: password);
+    
+//       // print(authResult.user!.uid);
+//       SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
-                  admins.docs.forEach((data) {
-                    if (data.data()['id'] != username.trim() ) {
-                     print(data.data()['id']);
-                      print('id wronge');
-                    }else if(data.data()['password'] != password.trim()){
-                      print('pass wronge');
-                    }
-                    else {
-                      // role = data.data()['role'] ;
-                      // go to home page
-                    }
-                  });
+//       var user = await FirebaseFirestore.instance.collection('students').where('id' , isEqualTo:authResult.user!.uid ).get();
 
+//                   user.docs.forEach((data) {
+//                       sharedPreferences.setInt('role', data.data()['role']);
+//                         var role =int.parse(sharedPreferences.getInt('role').toString());
+//                       Navigator.push(context,
+//                           MaterialPageRoute(builder: (context) {
+//                         return MyHomePage( role  );
+//                       }));
+                    
+//                   });
 
-
-    } catch (e) {
+//     } catch (e) {
       
-    }
-  }
+//     }
+//   }
   
 
 

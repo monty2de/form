@@ -33,6 +33,22 @@ class ExamTableController   {
   }
 
 
+  void delet(String idItem , int year  ) async{
+
+
+    // ignore: unused_local_variable
+    var q1  = await FirebaseFirestore.instance.collection('examTable').where('year' , isEqualTo: year.toString()).get();
+    var id;
+    q1.docs.forEach((data) {           
+      id = data.data()['id']   ;
+    });
+
+   
+   var q  = await FirebaseFirestore.instance.collection('examTable').doc(id).collection('Item').doc(idItem).delete();
+
+  }
+
+
 
 
 

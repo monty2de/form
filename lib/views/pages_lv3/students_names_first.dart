@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:form/views/exam_table/exam_table_add.dart';
-import 'package:form/views/pages_lv4/exam_table_show.dart';
+import 'package:form/views/pages_lv4/students_name_show.dart';
+import 'package:form/views/student/students_add.dart';
 
 import '../../drawer.dart';
 
 
-class ExamTableFirst extends StatefulWidget {
+class StudentsNamesFirst extends StatefulWidget {
 
   late int role;
 
-  ExamTableFirst(this.role);
+  StudentsNamesFirst(this.role);
 
   @override
-  _ExamTableFirstState createState() => _ExamTableFirstState();
+  _StudentsNamesFirstState createState() => _StudentsNamesFirstState();
 }
 
-class _ExamTableFirstState extends State<ExamTableFirst> {
+class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,17 +35,17 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
           this.widget.role == 1 ? TextButton(
             onPressed: () {
              
-             Navigator.push(context,
-      MaterialPageRoute(builder: (context) {
-      return ExamTableAdd(this.widget.role );
-     }));
-             
+              Navigator.push(context,
+              MaterialPageRoute(builder: (context) {
+              return StudentsAdd(this.widget.role );
+              }));
+                  
             },
             child: Text(" اضافة  ", style: TextStyle(color: Colors.white)),
           ) :Container(),
         ],
         centerTitle: true,
-        title: Text('جدول الامتحانات'),
+        title: Text('اسماء الطلبة'),
       ),
       body: Center(
         child: Column(
@@ -62,7 +62,7 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return ExamTableShow(this.widget.role , 1);
+                        return StudentsNamesShow(this.widget.role , 1);
                         } ));
               },
             ),
@@ -79,7 +79,7 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return ExamTableShow(this.widget.role , 2);
+                        return StudentsNamesShow(this.widget.role , 2);
                         } ));
               },
             ),
@@ -96,7 +96,7 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return ExamTableShow(this.widget.role , 3);
+                        return StudentsNamesShow(this.widget.role , 3);
                         } ));
               },
             ),
@@ -114,7 +114,7 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return ExamTableShow(this.widget.role , 4);
+                        return StudentsNamesShow(this.widget.role , 4);
                         } ));
               },
             ),
@@ -132,7 +132,7 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return ExamTableShow(this.widget.role , 5);
+                        return StudentsNamesShow(this.widget.role , 5);
                         } ));
               },
             ),

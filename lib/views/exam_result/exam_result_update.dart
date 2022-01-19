@@ -3,21 +3,26 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
-import '../main.dart';
-
+import 'package:form/models/examResult.dart';
 
 
-class NewsAdd extends StatefulWidget {
+
+
+
+
+class ExamResultUpdate extends StatefulWidget {
 late int role;
 
-  NewsAdd(this.role);
+late ExamResult examResult;
+  ExamResultUpdate(this.role  , this.examResult );
 
   @override
-  _NewsAddState createState() => _NewsAddState();
+  ExamResultUpdateState createState() => ExamResultUpdateState();
 }
 
-class _NewsAddState extends State<NewsAdd> {
+class ExamResultUpdateState extends State<ExamResultUpdate> {
+
+  var subjectName ;
 
   String generateRandomString(int len) {
     var r = Random.secure();
@@ -28,33 +33,30 @@ class _NewsAddState extends State<NewsAdd> {
   
   var globalKey = GlobalKey<FormState>();
  
-  late TextEditingController bodyController = new TextEditingController();
-  late  TextEditingController titleController = new TextEditingController(  );
+  late TextEditingController studentNameController = new TextEditingController(text: this.widget.examResult.studentName);
+  late  TextEditingController yearController = new TextEditingController( text: this.widget.examResult.year);
+  late  TextEditingController degreeController = new TextEditingController(text: this.widget.examResult.degree );
 
 
 
-  Future store(String title, body) async {
+
+  Future store(String studentName, year , degree , subjectName) async {
 
 
-    var id = generateRandomString(32);
-
-    var check = await FirebaseFirestore.instance.collection('news').doc(id).get();
-    if(check.exists){
-      id = generateRandomString(32);
+    if(subjectName == null){
+      subjectName = this.widget.examResult.subjectName;
     }
-
-    var orders  =  FirebaseFirestore.instance.collection('news').doc(id) ;
-    await orders.set({
-      'id' : id,
-      'title' : title ,
-      'body' : body,
+    var orders  =  FirebaseFirestore.instance.collection('examResult').doc(this.widget.examResult.id) ;
+    await orders.update({
+      'id' : this.widget.examResult.id,
+      'studentName' : studentName ,
+      'year' : year,
+      'degree' : degree,
+      'subjectName' : subjectName
       
     });
-
-    Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return MyHomePage(   );
-                      }));
+   
+   Navigator.pop(context, false);
    
   }
 
@@ -70,9 +72,9 @@ class _NewsAddState extends State<NewsAdd> {
         onPressed:  () {
        
           if(globalKey.currentState!.validate()){
-            store(titleController.text,  bodyController.text );
+            store(studentNameController.text,  yearController.text , degreeController.text , subjectName );
           }
-        },
+        },    
         child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
         // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
       ),
@@ -85,7 +87,7 @@ class _NewsAddState extends State<NewsAdd> {
       child: Column(
         children: <Widget>[
           Text(
-            'العنوان',
+            'اسم الطالب',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           TextFormField(
@@ -93,7 +95,7 @@ class _NewsAddState extends State<NewsAdd> {
               if(value!.isEmpty) return 'يجب ادخال العنوان';
               return null;
             },
-            controller: titleController,
+            controller: studentNameController,
             cursorColor: Colors.black,
 
             style: TextStyle(color: Colors.black),
@@ -103,21 +105,21 @@ class _NewsAddState extends State<NewsAdd> {
               ),
 
               icon: Icon(Icons.email, color: Colors.white70),
-              // hintText: "name",
+              
 
               hintStyle: TextStyle(color: Colors.white70),
             ),
           ),
           Text(
-            '  الوصف ',
+            '  المرحلة ',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           TextFormField(
             validator: (value){
-              if(value!.isEmpty) return 'يجب ادخال  الوصف';
+              if(value!.isEmpty) return 'يجب ادخال  المرحلة';
               return null;
             },
-            controller: bodyController,
+            controller: yearController,
             cursorColor: Colors.black,
 
             style: TextStyle(color: Colors.black),
@@ -133,7 +135,33 @@ class _NewsAddState extends State<NewsAdd> {
             ),
           ),
          
+          Text(
+            '  الدرجة ',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          TextFormField(
+            validator: (value){
+              if(value!.isEmpty) return 'يجب ادخال  الدرجة';
+              return null;
+            },
+            controller: degreeController,
+            cursorColor: Colors.black,
+
+            style: TextStyle(color: Colors.black),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+
+              icon: Icon(Icons.email, color: Colors.white70),
+
+
+              hintStyle: TextStyle(color: Colors.white70),
+            ),
+          ),
+
           
+         
 
         ],
       ),
@@ -146,6 +174,12 @@ class _NewsAddState extends State<NewsAdd> {
   @override
   Widget build(BuildContext context) =>  Scaffold(
     appBar: AppBar(
+
+      leading: IconButton(icon: Icon(Icons.arrow_back_ios ,  ),
+        onPressed:() {
+          Navigator.pop(context, false);
+        },
+      ),
 
     ),
 

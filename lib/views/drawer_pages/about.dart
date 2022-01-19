@@ -20,6 +20,7 @@ class _AboutState extends State<About> {
       appBar: AppBar(
         title: Text('نبذة عن القسم'),
         centerTitle: true,
+        
       ),
       body: Center(
         child: Column(

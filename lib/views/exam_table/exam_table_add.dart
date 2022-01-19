@@ -3,25 +3,24 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:form/views/pages_lv3/exam_table_final.dart';
+import 'package:form/views/pages_lv3/exam_table_first.dart';
 
 
 
 
 
-
-class ExamResultAdd extends StatefulWidget {
+class ExamTableAdd extends StatefulWidget {
 late int role;
-late int type;
 
-  ExamResultAdd(this.role , this.type );
+
+  ExamTableAdd(this.role );
 
   @override
-  ExamResultAddState createState() => ExamResultAddState();
+  ExamTableAddState createState() => ExamTableAddState();
 }
 
-class ExamResultAddState extends State<ExamResultAdd> {
-
-  var subjectName ;
+class ExamTableAddState extends State<ExamTableAdd> {
 
   String generateRandomString(int len) {
     var r = Random.secure();
@@ -32,48 +31,65 @@ class ExamResultAddState extends State<ExamResultAdd> {
   
   var globalKey = GlobalKey<FormState>();
  
-  late TextEditingController studentNameController = new TextEditingController();
+  late TextEditingController nameController = new TextEditingController();
   late  TextEditingController yearController = new TextEditingController( );
-  late  TextEditingController degreeController = new TextEditingController( );
+  late  TextEditingController dateController = new TextEditingController(  );
 
 
 
 
-  Future store(String studentName, year , degree , subjectName) async {
+  Future store(String name, year , date) async {
 
-    var id = generateRandomString(32);
+    var id;
+    var test_exist = await FirebaseFirestore.instance.collection('examTable').where('year' , isEqualTo: year).get();
+    if(test_exist.docs.isEmpty){
+       id = generateRandomString(32);
 
-    var check = await FirebaseFirestore.instance.collection('examResult').doc(id).get();
-    if(check.exists){
-      id = generateRandomString(32);
-    }
+      var check = await FirebaseFirestore.instance.collection('examTable').doc(id).get();
+      if(check.exists){
+        id = generateRandomString(32);
+      }
 
-    var orders  =  FirebaseFirestore.instance.collection('examResult').doc(id) ;
-    await orders.set({
+      var exam_year  =  FirebaseFirestore.instance.collection('examTable').doc(id) ;
+      await exam_year.set({
       'id' : id,
-      'studentName' : studentName ,
       'year' : year,
-      'degree' : degree,
-      'subjectName' : subjectName
       
-    });
-   
-    print('okkkkkkkkkkkkkkkkkkk');
-    // if (year == '4' || year == '3'  || year == '2' || year == '1' || year == '5') {
-    //   Navigator.push(context,
-    //   MaterialPageRoute(builder: (context) {
-    //   return ExamTableFirst(this.widget.role);
-    //  }));
-    // }
- 
-    // else{
       
-    //   Navigator.push(context,
-    //   MaterialPageRoute(builder: (context) {
-    //   return ExamTableFinal(this.widget.role);
-    //  }));
+      });
 
-    // }
+    }else{
+      test_exist.docs.forEach((data) {           
+        id = data.data()['id']   ;
+ 
+      });
+
+    }
+    var id_for_item = generateRandomString(32);
+    // ignore: unused_local_variable
+    var item  =  FirebaseFirestore.instance.collection('examTable').doc(id).collection('Item').doc(id_for_item).set({
+      'id' : id_for_item,
+      'name' : name,
+      'date' : date,
+      'year' : year,
+      });
+
+
+    if (year == '4' || year == '3'  || year == '2' || year == '1' || year == '5') {
+      Navigator.push(context,
+      MaterialPageRoute(builder: (context) {
+      return ExamTableFirst(this.widget.role);
+     }));
+    }
+ 
+    else{
+      
+      Navigator.push(context,
+      MaterialPageRoute(builder: (context) {
+      return ExamTableFinal(this.widget.role);
+     }));
+
+    }
     
    
   }
@@ -86,17 +102,15 @@ class ExamResultAddState extends State<ExamResultAdd> {
       height: 40.0,
       padding: EdgeInsets.only(left: 120 , right: 120),
       margin: EdgeInsets.only(top: 15.0),
-      child: RaisedButton(
+      child: ElevatedButton(
         onPressed:  () {
        
           if(globalKey.currentState!.validate()){
-            store(studentNameController.text,  yearController.text , degreeController.text , subjectName );
+            store(nameController.text,  yearController.text , dateController.text );
           }
-        },    
-        elevation: 0.0,
-        color: Colors.red[600],
+        },
         child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
       ),
     );
   }
@@ -107,7 +121,7 @@ class ExamResultAddState extends State<ExamResultAdd> {
       child: Column(
         children: <Widget>[
           Text(
-            'اسم الطالب',
+            'العنوان',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           TextFormField(
@@ -115,7 +129,7 @@ class ExamResultAddState extends State<ExamResultAdd> {
               if(value!.isEmpty) return 'يجب ادخال العنوان';
               return null;
             },
-            controller: studentNameController,
+            controller: nameController,
             cursorColor: Colors.black,
 
             style: TextStyle(color: Colors.black),
@@ -131,12 +145,12 @@ class ExamResultAddState extends State<ExamResultAdd> {
             ),
           ),
           Text(
-            '  المرحلة ',
+            '  الوصف ',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           TextFormField(
             validator: (value){
-              if(value!.isEmpty) return 'يجب ادخال  المرحلة';
+              if(value!.isEmpty) return 'يجب ادخال  الوصف';
               return null;
             },
             controller: yearController,
@@ -156,15 +170,15 @@ class ExamResultAddState extends State<ExamResultAdd> {
           ),
          
           Text(
-            '  الدرجة ',
+            '  التاريخ ',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           TextFormField(
             validator: (value){
-              if(value!.isEmpty) return 'يجب ادخال  الدرجة';
+              if(value!.isEmpty) return 'يجب ادخال  التاريخ';
               return null;
             },
-            controller: degreeController,
+            controller: dateController,
             cursorColor: Colors.black,
 
             style: TextStyle(color: Colors.black),
@@ -180,34 +194,6 @@ class ExamResultAddState extends State<ExamResultAdd> {
             ),
           ),
 
-
-          StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance.collection('curriculum').where('type' , isEqualTo: this.widget.type).snapshots(),
-              builder: (context , snapshot){
-                if(!snapshot.hasData){
-                  return Text('error');
-                }
-                List<String> shubjects = [];
-                for (var i = 0; i < snapshot.data!.docs.length; i++) {
-                  shubjects.add(snapshot.data!.docs[i]['name']);
-                }
-                return DropdownButtonFormField(
-
-                          items :  shubjects.map( (String item){
-                            return DropdownMenuItem<String>(
-                              value: item,
-                              child: Text(item),
-                            );
-                          } ).toList(),
-
-                          onChanged: (value) {
-                            subjectName = value.toString();
-                          },
-
-            );
-              },
-            ) ,
-
         ],
       ),
     );
@@ -219,6 +205,12 @@ class ExamResultAddState extends State<ExamResultAdd> {
   @override
   Widget build(BuildContext context) =>  Scaffold(
     appBar: AppBar(
+
+      leading: IconButton(icon: Icon(Icons.arrow_back_ios ,  ),
+        onPressed:() {
+          Navigator.pop(context, false);
+        },
+      ),
 
     ),
 

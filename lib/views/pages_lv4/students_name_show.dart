@@ -1,56 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:form/Controllers/curriculumController.dart';
-import 'package:form/models/curriculum.dart';
-
+import 'package:form/Controllers/StudentController.dart';
+import 'package:form/models/student.dart';
+import 'package:form/views/student/student_update.dart';
 import '../../drawer.dart';
-import '../curriculum_add.dart';
 
 
-class CurriculumFinal extends StatefulWidget {
+// ignore: must_be_immutable
+class StudentsNamesShow extends StatefulWidget {
 
   late int role;
+  late int year;
 
-  CurriculumFinal(this.role);
+  StudentsNamesShow(this.role , this.year);
 
   @override
-  _CurriculumFinalState createState() => _CurriculumFinalState();
+  StudentsNamesShowState createState() => StudentsNamesShowState();
 }
 
-class _CurriculumFinalState extends State<CurriculumFinal> {
+class StudentsNamesShowState extends State<StudentsNamesShow> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
+
         leading: IconButton(icon: Icon(Icons.arrow_back_ios ,  ),
         onPressed:() {
           Navigator.pop(context, false);
         },
       ),
-        actions: [
-
-          this.widget.role == 1 ? TextButton(
-            onPressed: () {
-             
-             
-             Navigator.push(context,
-      MaterialPageRoute(builder: (context) {
-      return CurriculumAdd(this.widget.role , 2);
-     }));
-            },
-            child: Text(" اضافة مادة ", style: TextStyle(color: Colors.white)),
-          ) :Container(),
-        ],
+          
+        
         centerTitle: true,
-        title: Text('المناهج'),
+        title: Text('قائمة الطلاب'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             
-            FutureBuilder(
-            future:   CurriculumController().index(2),
+           FutureBuilder(
+            future:   StudentController().index(this.widget.year),
             builder: ( BuildContext context , AsyncSnapshot snapshot ){
     
               switch ( snapshot.connectionState ){
@@ -81,8 +71,7 @@ class _CurriculumFinalState extends State<CurriculumFinal> {
     );
   }
 
-
-   Widget result( List<Curriculum> curriculum , BuildContext context ){
+Widget result( List<Student> result , BuildContext context ){
 
     
   return Expanded(
@@ -90,7 +79,7 @@ class _CurriculumFinalState extends State<CurriculumFinal> {
       physics: const AlwaysScrollableScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: curriculum.length,
+                itemCount: result.length,
                 itemBuilder: (BuildContext context, int position) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,20 +91,38 @@ class _CurriculumFinalState extends State<CurriculumFinal> {
                             child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(
-                              curriculum[position].name,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black),
+                            InkWell(
+                              child: Text(
+                                result[position].name,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
+                              ),
+
+                              onTap: (){
+                                if (this.widget.role == 1 || this.widget.role == 2) {
+                                  Navigator.push(context, MaterialPageRoute( builder:  ( context ){
+                                return StudentsUpdate(this.widget.role ,  result[position]);
+                                } )); 
+                                }
+                                                             
+                                },
                             ),
                             SizedBox(height: 15),
-                            Text(
-                              curriculum[position].year,
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black),
+                            InkWell(
+                              child: Text(
+                                'حذف',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.red),
+                              ),
+                              onTap: (){
+                                StudentController().delet(result[position].id, position);
+
+                               Navigator.pop(context, false);
+                              },
                             )
                           ],
                         )),
@@ -127,4 +134,5 @@ class _CurriculumFinalState extends State<CurriculumFinal> {
   );
   
 }
+   
 }

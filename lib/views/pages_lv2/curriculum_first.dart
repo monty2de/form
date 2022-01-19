@@ -22,15 +22,21 @@ class _CurriculumFirstState extends State<CurriculumFirst> {
     return Scaffold(
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
-
+        leading: IconButton(icon: Icon(Icons.arrow_back_ios ,  ),
+        onPressed:() {
+          Navigator.pop(context, false);
+        },
+      ),
         actions: [
 
-          this.widget.role == 1 ? FlatButton(
+          this.widget.role == 1 ? TextButton(
             onPressed: () {
              
              
-             
-              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => CurriculumAdd(this.widget.role , 1)), (Route<dynamic> route) => false);
+             Navigator.push(context,
+      MaterialPageRoute(builder: (context) {
+      return CurriculumAdd(this.widget.role , 1);
+     }));
             },
             child: Text(" اضافة مادة ", style: TextStyle(color: Colors.white)),
           ) :Container(),
@@ -44,7 +50,7 @@ class _CurriculumFirstState extends State<CurriculumFirst> {
           children: <Widget>[
             
             FutureBuilder(
-            future:   curriculumController().index(1),
+            future:   CurriculumController().index(1),
             builder: ( BuildContext context , AsyncSnapshot snapshot ){
     
               switch ( snapshot.connectionState ){
@@ -55,7 +61,7 @@ class _CurriculumFirstState extends State<CurriculumFirst> {
                     return Container();
                   }
                   if(snapshot.hasData){
-                    return Result(snapshot.data , context);
+                    return result(snapshot.data , context);
                   }
                   break;
                 case ConnectionState.none:
@@ -76,7 +82,7 @@ class _CurriculumFirstState extends State<CurriculumFirst> {
   }
 
 
-   Widget Result( List<curriculum> curriculum , BuildContext context ){
+   Widget result( List<Curriculum> curriculum , BuildContext context ){
 
     
   return Expanded(

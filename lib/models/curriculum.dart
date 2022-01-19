@@ -1,5 +1,5 @@
 
-class curriculum {
+class Curriculum {
 
  
   late String id , name , year  ;
@@ -7,9 +7,9 @@ class curriculum {
 
 
  
-  curriculum({id , name , year , type });
+  Curriculum({id , name , year , type });
 
-  curriculum.fromFirebase(  var data ){
+  Curriculum.fromFirebase(  var data ){
   
     this.id = data['id'] ;
     this.name = data['name'] ;

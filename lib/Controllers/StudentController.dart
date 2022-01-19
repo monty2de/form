@@ -8,23 +8,49 @@ class StudentController   {
 
 
 
-   index(int year) async {
+  index(int year) async {
 
 
-    var q  = await FirebaseFirestore.instance.collection('students').where('year' , isEqualTo: year.toString()).get();
-    item = [];
-    q.docs.forEach((DocumentSnapshot element) {
-        
-      Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+  var q  = await FirebaseFirestore.instance.collection('students').where('year' , isEqualTo: year.toString()).get();
+  item = [];
+  q.docs.forEach((DocumentSnapshot element) {
+      
+    Map<String, dynamic> data = element.data() as Map<String, dynamic>;
 
-      item.add(Student.fromFirebase(data));
+    item.add(Student.fromFirebase(data));
 
 
-    });
+  });
 
-    return item;
+  return item;
 
-  }
+}
+
+show( ) async {
+
+
+  var q  = await FirebaseFirestore.instance.collection('students').where('year' , isEqualTo: '6').get();
+  var q2  = await FirebaseFirestore.instance.collection('students').where('year' , isEqualTo: '7').get();
+  item = [];
+  q.docs.forEach((DocumentSnapshot element) {
+      
+    Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+
+    item.add(Student.fromFirebase(data));
+  });
+
+  q2.docs.forEach((DocumentSnapshot element) {
+      
+    Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+
+    item.add(Student.fromFirebase(data));
+  });
+
+  return item;
+
+}
+
+  
 
 
   void delet(String id , int position) async{

@@ -28,6 +28,14 @@ class CurriculumController   {
 
 
 
+  void delet(String id  ) async{
+
+    // ignore: unused_local_variable
+    var q  = await FirebaseFirestore.instance.collection('curriculum').doc(id).delete();
+  }
+
+
+
 
 
 }

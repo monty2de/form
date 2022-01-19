@@ -27,6 +27,13 @@ class NewsController   {
   }
 
 
+  void delet(String id  ) async{
+
+    // ignore: unused_local_variable
+    var q  = await FirebaseFirestore.instance.collection('news').doc(id).delete();
+  }
+
+
 
 
 

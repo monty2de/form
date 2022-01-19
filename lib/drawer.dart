@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:form/views/drawer_pages/about.dart';
-import 'package:form/views/drawer_pages/curriculum.dart';
 import 'package:form/views/drawer_pages/department_activities.dart';
 import 'package:form/views/drawer_pages/department_staff.dart';
-import 'package:form/views/drawer_pages/exam_committee.dart';
-import 'package:form/views/drawer_pages/graduate_studies.dart';
-import 'package:form/views/drawer_pages/section_pillars.dart';
 import 'package:form/views/drawer_pages/students_affairs.dart';
 import 'package:form/views/login.dart';
+import 'package:form/views/pages_lv2/curriculum_final.dart';
+import 'package:form/views/pages_lv2/curriculum_first.dart';
+import 'package:form/views/pages_lv2/examCommittee_final.dart';
+import 'package:form/views/pages_lv2/examCommittee_first.dart';
+import 'package:form/views/pages_lv2/section_pillars_perement.dart';
+import 'package:form/views/pages_lv4/students_name_final_show.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:math';
-
 import 'main.dart';
 
 // ignore: must_be_immutable
@@ -66,22 +67,38 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                   ),
                   const SizedBox(height: 1),
                   buildMenuItem(
-                    text: '  اركان القسم ',
+                    text: '  اركان القسم-الدائمة ',
                     onClicked: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return SectionPillars(this.widget.role);
-                      }));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return SectionPillarsPerement(this.widget.role);
+                  }));
+                    },
+                  ),
+
+                  const SizedBox(height: 1),
+                  buildMenuItem(
+                    text: '  اركان القسم-المؤقتة ',
+                    onClicked: () {
+                      
+                    },
+                  ),
+
+                  const SizedBox(height: 1),
+                  buildMenuItem(
+                    text: '  اللجنة الامتحانية-اولية  ',
+                    onClicked: () {
+                      Navigator.push(context, MaterialPageRoute( builder:  ( context ){
+                        return ExamCommitteeFirst(this.widget.role);
+                        } ));
                     },
                   ),
                   const SizedBox(height: 1),
                   buildMenuItem(
-                    text: '  اللجنة الامتحانية  ',
+                    text: '  اللجنة الامتحانية-عليا  ',
                     onClicked: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return ExamCommittee(this.widget.role);
-                      }));
+                      Navigator.push(context, MaterialPageRoute( builder:  ( context ){
+                        return ExamCommitteeFinal(this.widget.role);
+                        } ));
                     },
                   ),
                   const SizedBox(height: 1),
@@ -116,26 +133,44 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                   ),
                   const SizedBox(height: 1),
                   buildMenuItem(
-                    text: '  المناهج  ',
+                    text: '  المناهج-اولية  ',
+                    onClicked: () {
+                      Navigator.push(context, MaterialPageRoute( builder:  ( context ){
+                        return CurriculumFirst(this.widget.role);
+                        } ));
+                    },
+                  ),
+
+                  const SizedBox(height: 1),
+                  buildMenuItem(
+                    text: '  المناهج-عليا  ',
+                    onClicked: () {
+                      Navigator.push(context, MaterialPageRoute( builder:  ( context ){
+                        return CurriculumFinal(this.widget.role);
+                        } ));
+                    },
+                  ),
+                  const SizedBox(height: 1),
+                  buildMenuItem(
+                    text: ' الدراسات العليا-المناهج  ',
                     onClicked: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return Curriculum(this.widget.role);
+                      MaterialPageRoute(builder: (context) {
+                      return CurriculumFinal(this.widget.role);
                       }));
                     },
                   ),
                   const SizedBox(height: 1),
                   buildMenuItem(
-                    text: '  الدراسات العليا  ',
+                    text: ' الدراسات العليا-الطلبة  ',
                     onClicked: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return GraduateStudies(this.widget.role);
+                      MaterialPageRoute(builder: (context) {
+                      return StudentsNamesFinalShow(this.widget.role);
                       }));
                     },
                   ),
                   const SizedBox(height: 1),
-
                   buildMenuItem(
                     text: '   تسجيل الخروج  ',
                     onClicked: () async {

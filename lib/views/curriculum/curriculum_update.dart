@@ -3,22 +3,23 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:form/models/curriculum.dart';
 
-import '../main.dart';
 
 
 
 // ignore: must_be_immutable
-class NewsAdd extends StatefulWidget {
+class CurriculumUpdate extends StatefulWidget {
 late int role;
+late Curriculum curriculum;
 
-  NewsAdd(this.role);
+  CurriculumUpdate(this.role  , this.curriculum) ;
 
   @override
-  _NewsAddState createState() => _NewsAddState();
+  CurriculumUpdateState createState() => CurriculumUpdateState();
 }
 
-class _NewsAddState extends State<NewsAdd> {
+class CurriculumUpdateState extends State<CurriculumUpdate> {
 
   String generateRandomString(int len) {
     var r = Random.secure();
@@ -29,33 +30,26 @@ class _NewsAddState extends State<NewsAdd> {
   
   var globalKey = GlobalKey<FormState>();
  
-  late TextEditingController bodyController = new TextEditingController();
-  late  TextEditingController titleController = new TextEditingController(  );
+  late TextEditingController nameController = new TextEditingController( text: this.widget.curriculum.name);
+  late  TextEditingController yearController = new TextEditingController( text: this.widget.curriculum.year );
 
 
 
-  Future store(String title, body) async {
+  Future store(String name, year) async {
 
 
-    var id = generateRandomString(32);
+   
+    var subject  =  FirebaseFirestore.instance.collection('curriculum').doc(this.widget.curriculum.id) ;
+    await subject.update({
+      'id' : this.widget.curriculum.id,
+      'name' : name ,
+      'year' : year,
 
-    var check = await FirebaseFirestore.instance.collection('news').doc(id).get();
-    if(check.exists){
-      id = generateRandomString(32);
-    }
-
-    var orders  =  FirebaseFirestore.instance.collection('news').doc(id) ;
-    await orders.set({
-      'id' : id,
-      'title' : title ,
-      'body' : body,
       
     });
 
-    Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return MyHomePage(   );
-                      }));
+    Navigator.pop(context, false);
+    
    
   }
 
@@ -71,11 +65,10 @@ class _NewsAddState extends State<NewsAdd> {
         onPressed:  () {
        
           if(globalKey.currentState!.validate()){
-            store(titleController.text,  bodyController.text );
+            store(nameController.text,  yearController.text );
           }
         },
         child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
-        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
       ),
     );
   }
@@ -94,7 +87,7 @@ class _NewsAddState extends State<NewsAdd> {
               if(value!.isEmpty) return 'يجب ادخال العنوان';
               return null;
             },
-            controller: titleController,
+            controller: nameController,
             cursorColor: Colors.black,
 
             style: TextStyle(color: Colors.black),
@@ -104,7 +97,7 @@ class _NewsAddState extends State<NewsAdd> {
               ),
 
               icon: Icon(Icons.email, color: Colors.white70),
-              // hintText: "name",
+              
 
               hintStyle: TextStyle(color: Colors.white70),
             ),
@@ -118,7 +111,7 @@ class _NewsAddState extends State<NewsAdd> {
               if(value!.isEmpty) return 'يجب ادخال  الوصف';
               return null;
             },
-            controller: bodyController,
+            controller: yearController,
             cursorColor: Colors.black,
 
             style: TextStyle(color: Colors.black),
@@ -147,6 +140,14 @@ class _NewsAddState extends State<NewsAdd> {
   @override
   Widget build(BuildContext context) =>  Scaffold(
     appBar: AppBar(
+
+      leading: IconButton(icon: Icon(Icons.arrow_back_ios ,  ),
+        onPressed:() {
+          Navigator.pop(context, false);
+        },
+      ),
+
+      title: Text('اضافة مادة'),
 
     ),
 

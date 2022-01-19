@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:form/Controllers/ExamTableController.dart';
-import 'package:form/models/examTable.dart';
-import 'package:form/views/exam_table/exam_table_update.dart';
+import 'package:form/Controllers/StudentController.dart';
+import 'package:form/models/student.dart';
+import 'package:form/views/student/student_update.dart';
 import '../../drawer.dart';
 
 
 // ignore: must_be_immutable
-class ExamTableShow extends StatefulWidget {
+class StudentsNamesFinalShow extends StatefulWidget {
 
   late int role;
-  late int year;
 
-  ExamTableShow(this.role , this.year);
+  StudentsNamesFinalShow(this.role );
 
   @override
-  _ExamTableShowState createState() => _ExamTableShowState();
+  StudentsNamesFinalShowState createState() => StudentsNamesFinalShowState();
 }
 
-class _ExamTableShowState extends State<ExamTableShow> {
+class StudentsNamesFinalShowState extends State<StudentsNamesFinalShow> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,10 +28,10 @@ class _ExamTableShowState extends State<ExamTableShow> {
           Navigator.pop(context, false);
         },
       ),
-
+          
         
         centerTitle: true,
-        title: Text('جدول الامتحانات'),
+        title: Text('قائمة الطلاب'),
       ),
       body: Center(
         child: Column(
@@ -40,7 +39,7 @@ class _ExamTableShowState extends State<ExamTableShow> {
           children: <Widget>[
             
            FutureBuilder(
-            future:   ExamTableController().index(this.widget.year),
+            future:   StudentController().show(),
             builder: ( BuildContext context , AsyncSnapshot snapshot ){
     
               switch ( snapshot.connectionState ){
@@ -71,7 +70,7 @@ class _ExamTableShowState extends State<ExamTableShow> {
     );
   }
 
-Widget result( List<ExamTable> result , BuildContext context ){
+Widget result( List<Student> result , BuildContext context ){
 
     
   return Expanded(
@@ -102,22 +101,13 @@ Widget result( List<ExamTable> result , BuildContext context ){
 
                               onTap: (){
                                 if (this.widget.role == 1 || this.widget.role == 2) {
-                                  Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                  return ExamTableUpdate(this.widget.role , result[position]);
-                                  }));
+                                  Navigator.push(context, MaterialPageRoute( builder:  ( context ){
+                                return StudentsUpdate(this.widget.role ,  result[position]);
+                                } )); 
                                 }
-                              },
+                                                             
+                                },
                             ),
-                            SizedBox(height: 15),
-                            Text(
-                              result[position].date,
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black),
-                            ),
-
                             SizedBox(height: 15),
                             this.widget.role == 1 || this.widget.role == 2?InkWell(
                               child: Text(
@@ -127,14 +117,13 @@ Widget result( List<ExamTable> result , BuildContext context ){
                                     fontWeight: FontWeight.w500,
                                     color: Colors.red),
                               ),
+                              onTap: (){
+                                StudentController().delet(result[position].id, position);
 
-                              onTap:(){
-                                ExamTableController().delet(result[position].id, this.widget.year);
-
-                                setState(() {
-                                  
-                                });
-                              }
+                               setState(() {
+                                 
+                               });
+                              },
                             ):Container()
                           ],
                         )),

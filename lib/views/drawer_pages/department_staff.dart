@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:form/views/teacher/teacher_add.dart';
+import 'package:form/views/teacher/teacher_show.dart';
 
 import '../../drawer.dart';
 
@@ -18,6 +20,20 @@ class _DepartmentstaffState extends State<Departmentstaff> {
     return Scaffold(
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
+        actions: [
+
+          this.widget.role == 1 ? TextButton(
+          onPressed: () {
+              
+            Navigator.push(context,
+            MaterialPageRoute(builder: (context) {
+            return TeacherAdd(this.widget.role  );
+            }));
+
+          },
+          child: Text(" اضافة  ", style: TextStyle(color: Colors.white)),
+          ) :Container(),
+        ],
         centerTitle: true,
         title: Text('كادر القسم'),
       ),
@@ -34,9 +50,9 @@ class _DepartmentstaffState extends State<Departmentstaff> {
                     color: Colors.black),
               ),
               onTap: () {
-                // Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                //         return GraduateStudies();
-                //         } ));
+                Navigator.push(context, MaterialPageRoute( builder:  ( context ){
+                        return TeacherShow(this.widget.role, 'تدريسي');
+                        } ));
               },
             ),
             SizedBox(
@@ -51,9 +67,9 @@ class _DepartmentstaffState extends State<Departmentstaff> {
                     color: Colors.black),
               ),
               onTap: () {
-                // Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                //         return GraduateStudies();
-                //         } ));
+                Navigator.push(context, MaterialPageRoute( builder:  ( context ){
+                        return TeacherShow(this.widget.role, 'مهندس');
+                        } ));
               },
             ),
             SizedBox(
@@ -68,9 +84,9 @@ class _DepartmentstaffState extends State<Departmentstaff> {
                     color: Colors.black),
               ),
               onTap: () {
-                // Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                //         return GraduateStudies();
-                //         } ));
+                Navigator.push(context, MaterialPageRoute( builder:  ( context ){
+                        return TeacherShow(this.widget.role, 'منتسب');
+                        } ));
               },
             ),
             SizedBox(
@@ -85,9 +101,9 @@ class _DepartmentstaffState extends State<Departmentstaff> {
                     color: Colors.black),
               ),
               onTap: () {
-                // Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                //         return GraduateStudies();
-                //         } ));
+                Navigator.push(context, MaterialPageRoute( builder:  ( context ){
+                        return TeacherShow(this.widget.role, 'خدمات');
+                        } ));
               },
             ),
           ],

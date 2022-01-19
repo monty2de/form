@@ -110,7 +110,7 @@ Widget result( List<Student> result , BuildContext context ){
                                 },
                             ),
                             SizedBox(height: 15),
-                            InkWell(
+                            this.widget.role == 1 || this.widget.role == 2?InkWell(
                               child: Text(
                                 'حذف',
                                 style: TextStyle(
@@ -121,9 +121,11 @@ Widget result( List<Student> result , BuildContext context ){
                               onTap: (){
                                 StudentController().delet(result[position].id, position);
 
-                               Navigator.pop(context, false);
+                               setState(() {
+                                 
+                               });
                               },
-                            )
+                            ):Container()
                           ],
                         )),
                       ),

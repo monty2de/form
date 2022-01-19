@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:form/Controllers/curriculumController.dart';
 import 'package:form/models/curriculum.dart';
+import 'package:form/views/curriculum/curriculum_add.dart';
+import 'package:form/views/curriculum/curriculum_update.dart';
 
 import '../../drawer.dart';
-import '../curriculum_add.dart';
 
 
 // ignore: must_be_immutable
@@ -103,21 +104,85 @@ class _CurriculumFinalState extends State<CurriculumFinal> {
                             child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(
-                              curriculum[position].name,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black),
+                            Row(
+                              children: [
+                                InkWell(
+                                  child: Text(
+                                    'اسم المادة:',
+                                    style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
+                                  ),
+                                  onTap: (){
+                                    if (this.widget.role == 1 || this.widget.role == 2) {
+                                      
+
+                                      Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                      return CurriculumUpdate(this.widget.role , curriculum[position]);
+                                      }));
+                                    }
+                                  },
+                                ),
+
+                            InkWell(
+                              child: Text(
+                                curriculum[position].name,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
+                              ),
+                              onTap: (){
+                                    if (this.widget.role == 1 || this.widget.role == 2) {
+                                      
+
+                                      Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                      return CurriculumUpdate(this.widget.role , curriculum[position]);
+                                      }));
+                                    }
+                                  },
+                            ),
+                              ],
                             ),
                             SizedBox(height: 15),
+                            Row(
+                              children: [
+                                Text(
+                              'المرحلة:',
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black),
+                            ),
+
                             Text(
                               curriculum[position].year,
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black),
-                            )
+                            ),
+                              ],
+                            ),
+
+                            this.widget.role == 1 || this.widget.role == 2?InkWell(
+                              child: Text(
+                              'حذف',
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.red),
+                            ),
+                            onTap: (){
+                              if (this.widget.role == 1 || this.widget.role == 2) {
+                                CurriculumController().delet(curriculum[position].id);
+                                Navigator.pop(context, false);
+                              }
+                            },
+                            ):Container()
                           ],
                         )),
                       ),

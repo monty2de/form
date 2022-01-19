@@ -33,15 +33,15 @@ class _ExamResultFinalState extends State<ExamResultFinal> {
         actions: [
 
           this.widget.role == 1 ? TextButton(
-            onPressed: () {
-             
-             
-             Navigator.push(context,
-      MaterialPageRoute(builder: (context) {
-      return ExamResultAdd(this.widget.role , 2 );
-     }));
-            },
-            child: Text(" اضافة درجة ", style: TextStyle(color: Colors.white)),
+          onPressed: () {
+              
+              
+            Navigator.push(context,
+            MaterialPageRoute(builder: (context) {
+            return ExamResultAdd(this.widget.role , 2 );
+            }));
+          },
+          child: Text(" اضافة درجة ", style: TextStyle(color: Colors.white)),
           ) :Container(),
         ],
         centerTitle: true,

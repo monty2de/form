@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:form/Controllers/ExamResultController.dart';
-import 'package:form/models/examResult.dart';
-import 'package:form/views/exam_result/exam_result_update.dart';
-
-
+import 'package:form/Controllers/StudentController.dart';
+import 'package:form/Controllers/TeacherController.dart';
+import 'package:form/models/student.dart';
+import 'package:form/models/teacher.dart';
+import 'package:form/views/student/student_update.dart';
+import 'package:form/views/teacher/teacher_update.dart';
 import '../../drawer.dart';
 
 
 // ignore: must_be_immutable
-class ExamResultShow extends StatefulWidget {
+class TeacherShow extends StatefulWidget {
 
   late int role;
-  late String subjectName;
-  ExamResultShow(this.role , this.subjectName);
+  late String position;
+
+
+  TeacherShow(this.role , this.position );
 
   @override
-  _ExamResultShowState createState() => _ExamResultShowState();
+  TeacherShowState createState() => TeacherShowState();
 }
 
-class _ExamResultShowState extends State<ExamResultShow> {
+class TeacherShowState extends State<TeacherShow> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,10 +33,10 @@ class _ExamResultShowState extends State<ExamResultShow> {
           Navigator.pop(context, false);
         },
       ),
-
+          
         
         centerTitle: true,
-        title: Text('النتائج'),
+        title: Text('اسماء الكادر '),
       ),
       body: Center(
         child: Column(
@@ -41,7 +44,7 @@ class _ExamResultShowState extends State<ExamResultShow> {
           children: <Widget>[
             
            FutureBuilder(
-            future:   ExamResultController().index(this.widget.subjectName),
+            future:   TeacherController().index(this.widget.position),
             builder: ( BuildContext context , AsyncSnapshot snapshot ){
     
               switch ( snapshot.connectionState ){
@@ -72,7 +75,7 @@ class _ExamResultShowState extends State<ExamResultShow> {
     );
   }
 
-Widget result( List<ExamResult> result , BuildContext context ){
+Widget result( List<Teacher> result , BuildContext context ){
 
     
   return Expanded(
@@ -94,75 +97,54 @@ Widget result( List<ExamResult> result , BuildContext context ){
                           children: <Widget>[
                             Row(
                               children: [
-                                InkWell(
-                                  child: Text(
-                                    'اسم الطالب:',
-                                    style: TextStyle(
+
+                                Text(
+                                'الاسم:',
+                                style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.black),
-                                                            ),
-                                    onTap: (){
-                                      if (this.widget.role == 1 || this.widget.role == 2) {
+                              ),
 
-                                        Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                                        return ExamResultUpdate(this.widget.role , result[position] );
-                                        } ));
-                                      }
-                                    },
-                                ),
-
-                            Text(
-                              result[position].studentName,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black),
-                            ),
-                              ],
-                            ),
-                            
-                            Row(
-                              children: [
-
-                                Text(
-                              'الدرجة:',
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black),
-                            ),
-
-                                Text(
-                              result[position].degree,
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black),
-                            )
-
-                              ],
-                            ),
-                            SizedBox(height: 15),
-
-                            this.widget.role == 1 || this.widget.role == 2? InkWell(
+                                InkWell(
                               child: Text(
-                                'حذف',
+                                result[position].name,
                                 style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.red),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
                               ),
 
                               onTap: (){
-                                ExamResultController().delet(result[position].id);
-                                setState(() {
-                                  
-                                });
-                              },
-                            ) : Container()
+                                if (this.widget.role == 1 ) {
 
-                            
+                                  Navigator.push(context, MaterialPageRoute( builder:  ( context ){
+                                return TeacherUpdate(this.widget.role ,  result[position]);
+                                } )); 
+
+                                }
+                                                             
+                                },
+                            ),
+                              ],
+                            ),
+                            SizedBox(height: 15),
+                            this.widget.role == 1 ?InkWell(
+                              child: Text(
+                                'حذف',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.red),
+                              ),
+                              onTap: (){
+                                TeacherController().delet(result[position].id);
+
+                               setState(() {
+                                 
+                               });
+                              },
+                            ):Container()
                           ],
                         )),
                       ),

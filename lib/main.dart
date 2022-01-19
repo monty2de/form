@@ -6,7 +6,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:form/Controllers/NewsController.dart';
 import 'package:form/models/news.dart';
 import 'package:form/views/login.dart';
-import 'package:form/views/news_add.dart';
+import 'package:form/views/news/news_add.dart';
+import 'package:form/views/news/news_update.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'drawer.dart';
 
@@ -200,12 +201,22 @@ void initState() {
                             child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(
-                              news[position].title,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black),
+                            InkWell(
+                              child: Text(
+                                news[position].title,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
+                              ),
+                              onTap: (){
+                                if (this.role_check == 1 || this.role_check == 2) {
+                                  Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                  return NewsUpdate( this.role_check ,  news[position]  );
+                                  }));
+                                }
+                              },
                             ),
                             SizedBox(height: 15),
                             Text(
@@ -214,7 +225,23 @@ void initState() {
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black),
-                            )
+                            ),
+                            this.role_check == 1 || this.role_check == 2?InkWell(
+                              child: Text(
+                                'حذف',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.red),
+                              ),
+                              onTap: (){
+                                NewsController().delet(news[position].id);
+                                setState(() {
+                                  
+                                });
+                              },
+                            ):Container(),
+                        
                           ],
                         )),
                       ),

@@ -5,6 +5,7 @@ import 'package:form/views/pages_lv2/curriculum_first.dart';
 import '../../drawer.dart';
 
 
+// ignore: must_be_immutable
 class Curriculum extends StatefulWidget {
   late int role;
 

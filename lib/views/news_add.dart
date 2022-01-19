@@ -8,6 +8,7 @@ import '../main.dart';
 
 
 
+// ignore: must_be_immutable
 class NewsAdd extends StatefulWidget {
 late int role;
 

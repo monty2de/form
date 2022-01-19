@@ -4,6 +4,7 @@ import 'package:form/views/pages_lv2/examCommittee_first.dart';
 
 import '../../drawer.dart';
 
+// ignore: must_be_immutable
 class ExamCommittee extends StatefulWidget {
   late int role;
 

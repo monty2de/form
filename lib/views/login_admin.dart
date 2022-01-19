@@ -54,6 +54,7 @@ class _LoginAdminState extends State<LoginAdmin> {
                     }
                     else {
                       sharedPreferences.setInt('role', data.data()['role']);
+                        // ignore: unused_local_variable
                         var role =int.parse(sharedPreferences.getInt('role').toString());
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {

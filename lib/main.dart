@@ -54,6 +54,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+// ignore: non_constant_identifier_names
 var role_check;
 
 Future getvalidationData() async {

@@ -10,6 +10,7 @@ import 'package:form/views/pages_lv3/exam_table_first.dart';
 
 
 
+// ignore: must_be_immutable
 class ExamTableAdd extends StatefulWidget {
 late int role;
 
@@ -41,6 +42,7 @@ class ExamTableAddState extends State<ExamTableAdd> {
   Future store(String name, year , date) async {
 
     var id;
+    // ignore: non_constant_identifier_names
     var test_exist = await FirebaseFirestore.instance.collection('examTable').where('year' , isEqualTo: year).get();
     if(test_exist.docs.isEmpty){
        id = generateRandomString(32);
@@ -50,6 +52,7 @@ class ExamTableAddState extends State<ExamTableAdd> {
         id = generateRandomString(32);
       }
 
+      // ignore: non_constant_identifier_names
       var exam_year  =  FirebaseFirestore.instance.collection('examTable').doc(id) ;
       await exam_year.set({
       'id' : id,
@@ -65,6 +68,7 @@ class ExamTableAddState extends State<ExamTableAdd> {
       });
 
     }
+    // ignore: non_constant_identifier_names
     var id_for_item = generateRandomString(32);
     // ignore: unused_local_variable
     var item  =  FirebaseFirestore.instance.collection('examTable').doc(id).collection('Item').doc(id_for_item).set({

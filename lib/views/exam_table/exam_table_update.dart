@@ -11,6 +11,7 @@ import 'package:form/views/pages_lv3/exam_table_first.dart';
 
 
 
+// ignore: must_be_immutable
 class ExamTableUpdate extends StatefulWidget {
 late int role;
 late ExamTable exaxmtable;
@@ -43,6 +44,7 @@ class ExamTableUpdateState extends State<ExamTableUpdate> {
   Future store(String name, year , date) async {
 
     var id;
+    // ignore: non_constant_identifier_names
     var test_exist = await FirebaseFirestore.instance.collection('examTable').where('year' , isEqualTo: year).get();
     
       test_exist.docs.forEach((data) {           

@@ -44,6 +44,7 @@ class ExamTableController   {
     });
 
    
+   // ignore: unused_local_variable
    var q  = await FirebaseFirestore.instance.collection('examTable').doc(id).collection('Item').doc(idItem).delete();
 
   }

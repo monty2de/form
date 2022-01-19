@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 
 
 
+// ignore: must_be_immutable
 class ExamResultAdd extends StatefulWidget {
 late int role;
 late int type;

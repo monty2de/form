@@ -2,7 +2,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:form/Controllers/authController.dart';
 import 'package:form/views/login_admin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -56,6 +55,7 @@ class _LoginState extends State<Login> {
 
                   user.docs.forEach((data) {
                       sharedPreferences.setInt('role', data.data()['role']);
+                        // ignore: unused_local_variable
                         var role =int.parse(sharedPreferences.getInt('role').toString());
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {

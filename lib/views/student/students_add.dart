@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 
 
 
+// ignore: must_be_immutable
 class StudentsAdd extends StatefulWidget {
 
 
@@ -40,6 +41,7 @@ var sextype ;
     return List.generate(len, (index) => _chars[r.nextInt(_chars.length)]).join();
   }
 
+  // ignore: non_constant_identifier_names
   Future store(String studentName , sex , BLocation , BDate ,  location , number , year , email , pass) async {
 
 

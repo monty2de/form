@@ -2,7 +2,6 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:form/models/student.dart';
 
@@ -11,6 +10,7 @@ import 'package:form/models/student.dart';
 
 
 
+// ignore: must_be_immutable
 class StudentsUpdate extends StatefulWidget {
 
 
@@ -40,6 +40,7 @@ var sextype ;
     return List.generate(len, (index) => _chars[r.nextInt(_chars.length)]).join();
   }
 
+  // ignore: non_constant_identifier_names
   Future store(String studentName , sex , BLocation , BDate ,  location , number , year ) async {
 
       if (sex == null) {

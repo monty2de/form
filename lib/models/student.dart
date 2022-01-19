@@ -2,11 +2,13 @@
 class Student {
 
  
+  // ignore: non_constant_identifier_names
   late String id , name , BDate , BLocation , email , location , number , sex , year  ;
 
 
 
  
+  // ignore: non_constant_identifier_names
   Student({id , name , BDate , BLocation , email , location , number , sex , year });
 
   Student.fromFirebase(  var data ){

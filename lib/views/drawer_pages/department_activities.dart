@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../drawer.dart';
 
 
+// ignore: must_be_immutable
 class Departmentactivities extends StatefulWidget {
   late int role;
 

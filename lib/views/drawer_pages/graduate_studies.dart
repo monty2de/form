@@ -3,6 +3,7 @@ import 'package:form/views/pages_lv2/curriculum_final.dart';
 
 import '../../drawer.dart';
 
+// ignore: must_be_immutable
 class GraduateStudies extends StatefulWidget {
 
   late int role;

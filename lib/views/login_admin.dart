@@ -18,7 +18,7 @@ class _LoginAdminState extends State<LoginAdmin> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Login"),
+        title: Text("تسجيل الدخول"),
       ),
       body: Center(
         child: Padding(
@@ -27,19 +27,19 @@ class _LoginAdminState extends State<LoginAdmin> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextFormField(
-                decoration: InputDecoration(hintText: "username"),
+                decoration: InputDecoration(hintText: "اسم المستخدم"),
                 controller: emailController,
               ),
               SizedBox(
                 height: 40,
               ),
               TextFormField(
-                decoration: InputDecoration(hintText: "Password"),
+                decoration: InputDecoration(hintText: "كلمة السر"),
                 controller: passwordController,
                 obscureText: true,
               ),
               ElevatedButton(
-                child: Text("Log In"),
+                child: Text(" تسجيل الدخول"),
                 onPressed: () async{
 
                   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();

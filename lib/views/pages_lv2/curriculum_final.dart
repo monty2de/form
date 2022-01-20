@@ -31,7 +31,7 @@ class _CurriculumFinalState extends State<CurriculumFinal> {
       ),
         actions: [
 
-          this.widget.role == 1 ? TextButton(
+          this.widget.role == 1 || this.widget.role == 2  ? TextButton(
             onPressed: () {
              
              

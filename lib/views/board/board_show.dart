@@ -1,55 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:form/Controllers/curriculumController.dart';
-import 'package:form/models/curriculum.dart';
-import 'package:form/views/exam_result/exam_result_add.dart';
-import 'package:form/views/exam_result/exam_result_show.dart';
+import 'package:form/Controllers/BoardController.dart';
+import 'package:form/models/board.dart';
+import 'package:form/views/board/board_update.dart';
 
 import '../../drawer.dart';
 
 
 // ignore: must_be_immutable
-class ExamResultFirst extends StatefulWidget {
+class BoardShow extends StatefulWidget {
 
   late int role;
+  late String boardName;
 
-  ExamResultFirst(this.role);
+  BoardShow(this.role , this.boardName);
 
   @override
-  _ExamResultFirstState createState() => _ExamResultFirstState();
+  _BoardShowState createState() => _BoardShowState();
 }
 
-class _ExamResultFirstState extends State<ExamResultFirst> {
+class _BoardShowState extends State<BoardShow> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
-
-        
         leading: IconButton(icon: Icon(Icons.arrow_back_ios ,  ),
         onPressed:() {
           Navigator.pop(context, false);
         },
       ),
-
-        actions: [
-
-          this.widget.role == 1 || this.widget.role == 2 ? TextButton(
-            onPressed: () {
-             
-             Navigator.push(context,
-      MaterialPageRoute(builder: (context) {
-      return ExamResultAdd(this.widget.role , 1 );
-     }));
-             
-            },
-            child: Text(" اضافة درجة ", style: TextStyle(color: Colors.white)),
-          ) :Container(),
-        ],
-        centerTitle: true,
-        title: Text('اسماء المواد'),
-
         
+        centerTitle: true,
+        title: Text('اسماء الاعضاء'),
       ),
       body: Center(
         child: Column(
@@ -57,7 +39,7 @@ class _ExamResultFirstState extends State<ExamResultFirst> {
           children: <Widget>[
             
             FutureBuilder(
-            future:   CurriculumController().index(1),
+            future:   BoardController().index(this.widget.boardName),
             builder: ( BuildContext context , AsyncSnapshot snapshot ){
     
               switch ( snapshot.connectionState ){
@@ -89,7 +71,7 @@ class _ExamResultFirstState extends State<ExamResultFirst> {
   }
 
 
-   Widget result( List<Curriculum> curriculum , BuildContext context ){
+   Widget result( List<Board> result , BuildContext context ){
 
     
   return Expanded(
@@ -97,7 +79,7 @@ class _ExamResultFirstState extends State<ExamResultFirst> {
       physics: const AlwaysScrollableScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: curriculum.length,
+                itemCount: result.length,
                 itemBuilder: (BuildContext context, int position) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,55 +91,71 @@ class _ExamResultFirstState extends State<ExamResultFirst> {
                             child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                             Row(
+                            Row(
                               children: [
-                                Text(
-                                'المادة:',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black),
-                              ),
-
                                 InkWell(
+                                  child: Text(
+                                    'الاسم :',
+                                    style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
+                                  ),
+                                  onTap: (){
+                                    if (this.widget.role == 1 || this.widget.role == 2) {
+                                      
+
+                                      Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                      return BoardUpdate(this.widget.role , result[position]);
+                                      }));
+                                    }
+                                  },
+                                ),
+
+                            InkWell(
                               child: Text(
-                                curriculum[position].name,
+                                result[position].teacherName,
                                 style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.black),
                               ),
-
                               onTap: (){
-                                Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                                return ExamResultShow(this.widget.role , curriculum[position].name );
-                                }));
+                                    if (this.widget.role == 1 || this.widget.role == 2) {
+                                      
 
-
-                              },
+                                      Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                      return BoardUpdate(this.widget.role , result[position]);
+                                      }));
+                                    }
+                                  },
                             ),
                               ],
                             ),
                             SizedBox(height: 15),
-                            Row(
-                              children: [
-                                Text(
-                              'المرحلة:',
+                            
+
+                            this.widget.role == 1 || this.widget.role == 2?InkWell(
+                              child: Text(
+                              'حذف',
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black),
+                                  color: Colors.red),
                             ),
-                            Text(
-                              curriculum[position].year,
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black),
-                            )
-                              ],
-                            )
+                            onTap: (){
+                              if (this.widget.role == 1 || this.widget.role == 2) {
+
+                                BoardController().delet(result[position].id);
+
+                                setState(() {
+                                  
+                                });
+                              }
+                            },
+                            ):Container()
                           ],
                         )),
                       ),

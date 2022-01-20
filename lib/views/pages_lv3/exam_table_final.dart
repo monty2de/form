@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:form/views/exam_table/exam_table_add.dart';
-import 'package:form/views/pages_lv4/exam_table_show.dart';
+import 'package:form/views/exam_table/exam_table_show.dart';
 
 import '../../drawer.dart';
 
@@ -32,7 +32,7 @@ class _ExamTableFinalState extends State<ExamTableFinal> {
 
         actions: [
 
-          this.widget.role == 1 ? TextButton(
+          this.widget.role == 1 || this.widget.role == 2 ? TextButton(
             onPressed: () {
              
              Navigator.push(context,

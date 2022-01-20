@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:form/views/pages_lv4/students_name_show.dart';
 import 'package:form/views/student/students_add.dart';
+import 'package:form/views/student/students_name_show.dart';
 
 import '../../drawer.dart';
 
@@ -33,7 +33,7 @@ class _StudentsNamesFinalState extends State<StudentsNamesFinal> {
 
           
 
-          this.widget.role == 1 ? TextButton(
+          this.widget.role == 1 || this.widget.role == 2 ? TextButton(
             onPressed: () {
              
               Navigator.push(context,

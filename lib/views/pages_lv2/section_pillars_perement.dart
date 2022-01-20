@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:form/views/board/board_add.dart';
+import 'package:form/views/board/board_show.dart';
 
 import '../../drawer.dart';
 
@@ -18,6 +20,21 @@ class _SectionPillarsPerementState extends State<SectionPillarsPerement> {
     return Scaffold(
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
+
+        actions: [
+
+          this.widget.role == 1 || this.widget.role == 2 ? TextButton(
+            onPressed: () {
+             
+             Navigator.push(context,
+             MaterialPageRoute(builder: (context) {
+             return BoardAdd(this.widget.role  );
+             }));
+             
+            },
+            child: Text(" اضافة عضو ", style: TextStyle(color: Colors.white)),
+          ) :Container(),
+        ],
 
         leading: IconButton(icon: Icon(Icons.arrow_back_ios ,  ),
         onPressed:() {
@@ -41,9 +58,9 @@ class _SectionPillarsPerementState extends State<SectionPillarsPerement> {
                       color: Colors.black),
                 ),
                 onTap: () {
-                  // Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                  //         return GraduateStudies();
-                  //         } ));
+                  Navigator.push(context, MaterialPageRoute( builder:  ( context ){
+                          return BoardShow(this.widget.role, ' اللجنة العلمية');
+                          } ));
                 },
               ),
               SizedBox(height: 20),
@@ -56,9 +73,9 @@ class _SectionPillarsPerementState extends State<SectionPillarsPerement> {
                       color: Colors.black),
                 ),
                 onTap: () {
-                  // Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                  //         return GraduateStudies();
-                  //         } ));
+                  Navigator.push(context, MaterialPageRoute( builder:  ( context ){
+                          return BoardShow(this.widget.role, 'مجلس القسم');
+                          } ));
                 },
               ),
               SizedBox(height: 20),
@@ -71,9 +88,9 @@ class _SectionPillarsPerementState extends State<SectionPillarsPerement> {
                       color: Colors.black),
                 ),
                 onTap: () {
-                  // Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                  //         return GraduateStudies();
-                  //         } ));
+                  Navigator.push(context, MaterialPageRoute( builder:  ( context ){
+                          return BoardShow(this.widget.role, 'لجنة ضمان الجودة');
+                          } ));
                 },
               ),
               SizedBox(
@@ -88,9 +105,9 @@ class _SectionPillarsPerementState extends State<SectionPillarsPerement> {
                       color: Colors.black),
                 ),
                 onTap: () {
-                  // Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                  //         return GraduateStudies();
-                  //         } ));
+                  Navigator.push(context, MaterialPageRoute( builder:  ( context ){
+                          return BoardShow(this.widget.role, 'لجنة شؤون الطلبة');
+                          } ));
                 },
               ),
             ],

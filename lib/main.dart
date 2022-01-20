@@ -72,9 +72,10 @@ Future getvalidationData() async {
 void initState() {
     getvalidationData().whenComplete(() async{
       Timer(Duration(seconds: 2), (){
+        // TODO : remove this print
         print(role_check);
 
-        if (role_check == 0) {
+        if (role_check == 0 || role_check == null) {
 
           Navigator.push(context,
           MaterialPageRoute(builder: (context) {

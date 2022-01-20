@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:form/Controllers/StudentController.dart';
 import 'package:form/Controllers/TeacherController.dart';
-import 'package:form/models/student.dart';
 import 'package:form/models/teacher.dart';
-import 'package:form/views/student/student_update.dart';
 import 'package:form/views/teacher/teacher_update.dart';
 import '../../drawer.dart';
 

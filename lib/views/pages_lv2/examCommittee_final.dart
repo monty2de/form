@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form/views/board/board_show.dart';
 import 'package:form/views/pages_lv3/exam_result_final.dart';
 import 'package:form/views/pages_lv3/exam_table_final.dart';
 import 'package:form/views/pages_lv3/students_names_final.dart';
@@ -44,9 +45,9 @@ class _ExamCommitteeFinalState extends State<ExamCommitteeFinal> {
                     color: Colors.black),
               ),
               onTap: () {
-                // Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                //         return GraduateStudies();
-                //         } ));
+                Navigator.push(context, MaterialPageRoute( builder:  ( context ){
+                          return BoardShow(this.widget.role, 'اللجنة الامتحانية-عليا');
+                          } ));
               },
             ),
             SizedBox(

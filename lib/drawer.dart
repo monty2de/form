@@ -9,7 +9,7 @@ import 'package:form/views/pages_lv2/curriculum_first.dart';
 import 'package:form/views/pages_lv2/examCommittee_final.dart';
 import 'package:form/views/pages_lv2/examCommittee_first.dart';
 import 'package:form/views/pages_lv2/section_pillars_perement.dart';
-import 'package:form/views/pages_lv4/students_name_final_show.dart';
+import 'package:form/views/student/students_name_final_show.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:math';
 import 'main.dart';

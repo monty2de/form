@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:form/Controllers/curriculumController.dart';
 import 'package:form/models/curriculum.dart';
 import 'package:form/views/exam_result/exam_result_add.dart';
-import 'package:form/views/pages_lv4/exam_result_show.dart';
+import 'package:form/views/exam_result/exam_result_show.dart';
 
 import '../../drawer.dart';
 
@@ -32,7 +32,7 @@ class _ExamResultFinalState extends State<ExamResultFinal> {
 
         actions: [
 
-          this.widget.role == 1 ? TextButton(
+          this.widget.role == 1 || this.widget.role == 2 ? TextButton(
           onPressed: () {
               
               

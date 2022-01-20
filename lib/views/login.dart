@@ -66,6 +66,30 @@ class _LoginState extends State<Login> {
 
                 },
               ),
+
+              ElevatedButton(
+                child: Text("  الاستمرار بدون حساب"),
+                onPressed: () async{
+                
+    
+      
+                SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+
+             
+                      sharedPreferences.setInt('role', 4);
+
+                        // ignore: unused_local_variable
+                        var role =int.parse(sharedPreferences.getInt('role').toString());
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return MyHomePage( );
+                      }));
+                    
+            
+
+                },
+              ),
               
               Container(
                 margin: EdgeInsets.only(top: 30),

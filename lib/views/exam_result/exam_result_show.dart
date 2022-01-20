@@ -89,82 +89,85 @@ Widget result( List<ExamResult> result , BuildContext context ){
                         padding: const EdgeInsets.only(
                             left: 30, right: 30, bottom: 30),
                         child: Expanded(
-                            child: Column(
+                            child: Container(
+                              margin: const EdgeInsets.only(top:10),
+                              child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Row(
-                              children: [
-                                InkWell(
-                                  child: Text(
-                                    'اسم الطالب:',
-                                    style: TextStyle(
+                              Row(
+                                children: [
+                                  InkWell(
+                                    child: Text(
+                                      'اسم الطالب:',
+                                      style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black),
+                                                              ),
+                                      onTap: (){
+                                        if (this.widget.role == 1 || this.widget.role == 2) {
+
+                                          Navigator.push(context, MaterialPageRoute( builder:  ( context ){
+                                          return ExamResultUpdate(this.widget.role , result[position] );
+                                          } ));
+                                        }
+                                      },
+                                  ),
+
+                              Text(
+                                result[position].studentName,
+                                style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.black),
-                                                            ),
-                                    onTap: (){
-                                      if (this.widget.role == 1 || this.widget.role == 2) {
+                              ),
+                                ],
+                              ),
+                              
+                              Row(
+                                children: [
 
-                                        Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                                        return ExamResultUpdate(this.widget.role , result[position] );
-                                        } ));
-                                      }
-                                    },
-                                ),
-
-                            Text(
-                              result[position].studentName,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black),
-                            ),
-                              ],
-                            ),
-                            
-                            Row(
-                              children: [
-
-                                Text(
-                              'الدرجة:',
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black),
-                            ),
-
-                                Text(
-                              result[position].degree,
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black),
-                            )
-
-                              ],
-                            ),
-                            SizedBox(height: 15),
-
-                            this.widget.role == 1 || this.widget.role == 2? InkWell(
-                              child: Text(
-                                'حذف',
+                                  Text(
+                                'الدرجة:',
                                 style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.red),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black),
                               ),
 
-                              onTap: (){
-                                ExamResultController().delet(result[position].id);
-                                setState(() {
-                                  
-                                });
-                              },
-                            ) : Container()
+                                  Text(
+                                result[position].degree,
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black),
+                              )
 
-                            
+                                ],
+                              ),
+                              SizedBox(height: 15),
+
+                              this.widget.role == 1 || this.widget.role == 2? InkWell(
+                                child: Text(
+                                  'حذف',
+                                  style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.red),
+                                ),
+
+                                onTap: (){
+                                  ExamResultController().delet(result[position].id);
+                                  setState(() {
+                                    
+                                  });
+                                },
+                              ) : Container()
+
+                              
                           ],
-                        )),
+                        ),
+                            )),
                       ),
                     ],
                   );

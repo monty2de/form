@@ -102,60 +102,63 @@ class _ExamResultFinalState extends State<ExamResultFinal> {
                         padding: const EdgeInsets.only(
                             left: 30, right: 30, bottom: 30),
                         child: Expanded(
-                            child: Column(
+                            child: Container(
+                              margin: const EdgeInsets.only(top:10),
+                              child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Row(
-                              children: [
-                                Text(
-                                'المادة:',
+                              Row(
+                                children: [
+                                  Text(
+                                  'المادة:',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black),
+                                ),
+
+                                  InkWell(
+                                child: Text(
+                                  curriculum[position].name,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black),
+                                ),
+
+                                onTap: (){
+                                  Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                  return ExamResultShow(this.widget.role , curriculum[position].name );
+                                  }));
+
+
+                                },
+                              ),
+                                ],
+                              ),
+                              SizedBox(height: 15),
+                              Row(
+                                children: [
+                                  Text(
+                                'المرحلة:',
                                 style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
                                     color: Colors.black),
                               ),
-
-                                InkWell(
-                              child: Text(
-                                curriculum[position].name,
+                              Text(
+                                curriculum[position].year,
                                 style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
                                     color: Colors.black),
-                              ),
-
-                              onTap: (){
-                                Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                                return ExamResultShow(this.widget.role , curriculum[position].name );
-                                }));
-
-
-                              },
-                            ),
-                              ],
-                            ),
-                            SizedBox(height: 15),
-                            Row(
-                              children: [
-                                Text(
-                              'المرحلة:',
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black),
-                            ),
-                            Text(
-                              curriculum[position].year,
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black),
-                            )
-                              ],
-                            )
+                              )
+                                ],
+                              )
                           ],
-                        )),
+                        ),
+                            )),
                       ),
                     ],
                   );

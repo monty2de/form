@@ -125,12 +125,12 @@ class ExamTableAddState extends State<ExamTableAdd> {
       child: Column(
         children: <Widget>[
           Text(
-            'العنوان',
+            'الاسم',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           TextFormField(
             validator: (value){
-              if(value!.isEmpty) return 'يجب ادخال العنوان';
+              if(value!.isEmpty) return 'يجب ادخال الاسم';
               return null;
             },
             controller: nameController,
@@ -149,12 +149,12 @@ class ExamTableAddState extends State<ExamTableAdd> {
             ),
           ),
           Text(
-            '  الوصف ',
+            '  المرحلة(رقم) ',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           TextFormField(
             validator: (value){
-              if(value!.isEmpty) return 'يجب ادخال  الوصف';
+              if(value!.isEmpty) return 'يجب ادخال  المرحلة(رقم)';
               return null;
             },
             controller: yearController,
@@ -215,6 +215,8 @@ class ExamTableAddState extends State<ExamTableAdd> {
           Navigator.pop(context, false);
         },
       ),
+
+      title: Text('اضافة'),
 
     ),
 

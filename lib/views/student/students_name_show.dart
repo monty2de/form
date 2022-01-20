@@ -88,46 +88,49 @@ Widget result( List<Student> result , BuildContext context ){
                         padding: const EdgeInsets.only(
                             left: 30, right: 30, bottom: 30),
                         child: Expanded(
-                            child: Column(
+                            child: Container(
+                              margin: const EdgeInsets.only(top:10),
+                              child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            InkWell(
-                              child: Text(
-                                result[position].name,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black),
-                              ),
+                              InkWell(
+                                child: Text(
+                                  result[position].name,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black),
+                                ),
 
-                              onTap: (){
-                                if (this.widget.role == 1 || this.widget.role == 2) {
-                                  Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                                return StudentsUpdate(this.widget.role ,  result[position]);
-                                } )); 
-                                }
-                                                             
+                                onTap: (){
+                                  if (this.widget.role == 1 || this.widget.role == 2) {
+                                    Navigator.push(context, MaterialPageRoute( builder:  ( context ){
+                                  return StudentsUpdate(this.widget.role ,  result[position]);
+                                  } )); 
+                                  }
+                                                               
+                                  },
+                              ),
+                              SizedBox(height: 15),
+                              this.widget.role == 1 || this.widget.role == 2?InkWell(
+                                child: Text(
+                                  'حذف',
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.red),
+                                ),
+                                onTap: (){
+                                  StudentController().delet(result[position].id, position);
+
+                                 setState(() {
+                                   
+                                 });
                                 },
-                            ),
-                            SizedBox(height: 15),
-                            this.widget.role == 1 || this.widget.role == 2?InkWell(
-                              child: Text(
-                                'حذف',
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.red),
-                              ),
-                              onTap: (){
-                                StudentController().delet(result[position].id, position);
-
-                               setState(() {
-                                 
-                               });
-                              },
-                            ):Container()
+                              ):Container()
                           ],
-                        )),
+                        ),
+                            )),
                       ),
                     ],
                   );

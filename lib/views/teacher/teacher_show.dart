@@ -89,61 +89,64 @@ Widget result( List<Teacher> result , BuildContext context ){
                         padding: const EdgeInsets.only(
                             left: 30, right: 30, bottom: 30),
                         child: Expanded(
-                            child: Column(
+                            child: Container(
+                              margin:const EdgeInsets.only(top:10),
+                              child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Row(
-                              children: [
+                              Row(
+                                children: [
 
-                                Text(
-                                'الاسم:',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black),
+                                  Text(
+                                  'الاسم:',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black),
+                                ),
+
+                                  InkWell(
+                                child: Text(
+                                  result[position].name,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black),
+                                ),
+
+                                onTap: (){
+                                  if (this.widget.role == 1 ) {
+
+                                    Navigator.push(context, MaterialPageRoute( builder:  ( context ){
+                                  return TeacherUpdate(this.widget.role ,  result[position]);
+                                  } )); 
+
+                                  }
+                                                               
+                                  },
                               ),
-
-                                InkWell(
-                              child: Text(
-                                result[position].name,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black),
+                                ],
                               ),
+                              SizedBox(height: 15),
+                              this.widget.role == 1 ?InkWell(
+                                child: Text(
+                                  'حذف',
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.red),
+                                ),
+                                onTap: (){
+                                  TeacherController().delet(result[position].id);
 
-                              onTap: (){
-                                if (this.widget.role == 1 ) {
-
-                                  Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                                return TeacherUpdate(this.widget.role ,  result[position]);
-                                } )); 
-
-                                }
-                                                             
+                                 setState(() {
+                                   
+                                 });
                                 },
-                            ),
-                              ],
-                            ),
-                            SizedBox(height: 15),
-                            this.widget.role == 1 ?InkWell(
-                              child: Text(
-                                'حذف',
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.red),
-                              ),
-                              onTap: (){
-                                TeacherController().delet(result[position].id);
-
-                               setState(() {
-                                 
-                               });
-                              },
-                            ):Container()
+                              ):Container()
                           ],
-                        )),
+                        ),
+                            )),
                       ),
                     ],
                   );

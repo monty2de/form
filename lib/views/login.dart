@@ -52,9 +52,13 @@ class _LoginState extends State<Login> {
                 SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
                 var user = await FirebaseFirestore.instance.collection('students').where('id' , isEqualTo:authResult.user!.uid ).get();
+                if (user.docs.isEmpty) {
+                  user = await FirebaseFirestore.instance.collection('teachers').where('id' , isEqualTo:authResult.user!.uid ).get();
+                }
 
                   user.docs.forEach((data) {
                       sharedPreferences.setInt('role', data.data()['role']);
+                      sharedPreferences.setString('id', data.data()['id']);
                         // ignore: unused_local_variable
                         var role =int.parse(sharedPreferences.getInt('role').toString());
                       Navigator.push(context,

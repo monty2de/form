@@ -157,7 +157,7 @@ class BoardAddState extends State<BoardAdd> {
         },
       ),
 
-      title: Text('اضافة مادة'),
+      title: Text('اضافة عضو'),
 
     ),
 
@@ -170,7 +170,17 @@ class BoardAddState extends State<BoardAdd> {
         children: [
        
           textSection(),
-          buttonSection(),
+          // buttonSection(),
+
+          ElevatedButton(
+        onPressed:  () {
+       
+          if(globalKey.currentState!.validate()){
+            store(boardName,  teacherName );
+          }
+        },
+        child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
+      ),
         ],
 
       ),

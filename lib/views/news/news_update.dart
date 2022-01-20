@@ -156,7 +156,17 @@ class _NewsUpdateState extends State<NewsUpdate> {
         children: [
        
           textSection(),
-          buttonSection(),
+          // buttonSection(),
+          ElevatedButton(
+        onPressed:  () {
+       
+          if(globalKey.currentState!.validate()){
+            store(titleController.text,  bodyController.text );
+          }
+        },
+        child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
+        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+      ),
         ],
 
       ),

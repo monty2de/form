@@ -147,7 +147,7 @@ class CurriculumUpdateState extends State<CurriculumUpdate> {
         },
       ),
 
-      title: Text('اضافة مادة'),
+      title: Text('تعديل '),
 
     ),
 
@@ -160,7 +160,17 @@ class CurriculumUpdateState extends State<CurriculumUpdate> {
         children: [
        
           textSection(),
-          buttonSection(),
+          // buttonSection(),
+
+          ElevatedButton(
+        onPressed:  () {
+       
+          if(globalKey.currentState!.validate()){
+            store(nameController.text,  yearController.text );
+          }
+        },
+        child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
+      ),
         ],
 
       ),

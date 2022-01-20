@@ -28,7 +28,7 @@ class _ExamCommitteeFinalState extends State<ExamCommitteeFinal> {
           Navigator.pop(context, false);
         },
       ),
-        title: Text('اللجنة الامتحانية'),
+        title: Text('اللجنة الامتحانية-عليا'),
       ),
       body: Center(
         child: Column(

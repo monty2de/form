@@ -352,7 +352,16 @@ var sextype ;
         children: [
        
           textSection(),
-          buttonSection(),
+          // buttonSection(),
+
+          ElevatedButton(
+        onPressed:  () {
+          if(globalKey.currentState!.validate()){
+            store(studentNameController.text,  sextype , bLocationController.text , bDateController.text , locationController.text , numberController.text , yearController.text , emailController.text , passController.text );
+          }
+        },    
+        child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
+      ),
         ],
 
       ),

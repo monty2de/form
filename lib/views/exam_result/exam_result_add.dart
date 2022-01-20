@@ -213,6 +213,8 @@ class ExamResultAddState extends State<ExamResultAdd> {
         },
       ),
 
+      title:Text('اضافة درجة')
+
     ),
 
 
@@ -224,7 +226,18 @@ class ExamResultAddState extends State<ExamResultAdd> {
         children: [
        
           textSection(),
-          buttonSection(),
+          // buttonSection(),
+
+          ElevatedButton(
+        onPressed:  () {
+       
+          if(globalKey.currentState!.validate()){
+            store(studentNameController.text,  yearController.text , degreeController.text , subjectName );
+          }
+        },    
+        child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
+        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+      ),
         ],
 
       ),

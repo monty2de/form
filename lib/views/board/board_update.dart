@@ -160,7 +160,7 @@ class BoardUpdateState extends State<BoardUpdate> {
         },
       ),
 
-      title: Text('اضافة مادة'),
+      title: Text(' تعديل'),
 
     ),
 
@@ -173,7 +173,17 @@ class BoardUpdateState extends State<BoardUpdate> {
         children: [
        
           textSection(),
-          buttonSection(),
+          // buttonSection(),
+
+          ElevatedButton(
+        onPressed:  () {
+       
+          if(globalKey.currentState!.validate()){
+            store(boardName,  teacherName );
+          }
+        },
+        child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
+      ),
         ],
 
       ),

@@ -178,7 +178,16 @@ class CurriculumAddState extends State<CurriculumAdd> {
         children: [
        
           textSection(),
-          buttonSection(),
+          // buttonSection(),
+          ElevatedButton(
+        onPressed:  () {
+       
+          if(globalKey.currentState!.validate()){
+            store(nameController.text,  yearController.text );
+          }
+        },
+        child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
+      ),
         ],
 
       ),

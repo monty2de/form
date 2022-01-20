@@ -298,7 +298,20 @@ var position ;
         children: [
        
           textSection(),
-          buttonSection(),
+          // buttonSection(),
+
+          ElevatedButton(
+        onPressed:  () {
+          if(globalKey.currentState!.validate()){
+                 
+
+
+
+            store(teacherNameController.text,  bDateController.text , locationController.text , numberController.text  , emailController.text , passController.text , position );
+          }
+        },    
+        child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
+      ),
         ],
 
       ),

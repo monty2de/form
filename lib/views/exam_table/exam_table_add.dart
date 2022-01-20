@@ -229,7 +229,18 @@ class ExamTableAddState extends State<ExamTableAdd> {
         children: [
        
           textSection(),
-          buttonSection(),
+          // buttonSection(),
+
+          ElevatedButton(
+          onPressed:  () {
+       
+          if(globalKey.currentState!.validate()){
+            store(nameController.text,  yearController.text , dateController.text );
+          }
+        },
+        child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
+        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+      ),
         ],
 
       ),

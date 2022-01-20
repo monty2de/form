@@ -16,7 +16,7 @@ import 'main.dart';
 
 // ignore: must_be_immutable
 class NavigationDrawerWidget extends StatefulWidget {
-  late int role;
+  late var role;
 
   NavigationDrawerWidget(this.role);
 
@@ -85,7 +85,15 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
 
                   const SizedBox(height: 1),
                   buildMenuItem(
-                    text: '  اللجنة الامتحانية-اولية  ',
+                    text: '  اللجنة الامتحانية  ',
+                    onClicked: () {
+                      
+                    },
+                  ),
+
+                  const SizedBox(height: 1),
+                  buildMenuItem(
+                    text: '  اولية  ',
                     onClicked: () {
                       Navigator.push(context, MaterialPageRoute( builder:  ( context ){
                         return ExamCommitteeFirst(this.widget.role);
@@ -94,7 +102,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                   ),
                   const SizedBox(height: 1),
                   buildMenuItem(
-                    text: '  اللجنة الامتحانية-عليا  ',
+                    text: '   عليا  ',
                     onClicked: () {
                       Navigator.push(context, MaterialPageRoute( builder:  ( context ){
                         return ExamCommitteeFinal(this.widget.role);
@@ -179,10 +187,8 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                       sharedPreferences.clear();
                       // ignore: deprecated_member_use
                       sharedPreferences.commit();
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return Login();
-                      }));
+                               Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => Login()), (Route<dynamic> route) => false);
+
                     },
                   ),
                 ],

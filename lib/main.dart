@@ -62,9 +62,23 @@ Future getvalidationData() async {
  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
   var role = sharedPreferences.getInt('role');
-  setState(() {
+
+  if (role == null ) {
+  
+
+    setState(() {
+      role_check = 0;
+    });
+
+
+  }else if (role == 1 || role == 2 || role == 3 || role == 4){
+
+    setState(() {
       role_check = role;
-  });
+    });
+
+  }
+  
 
 }
 
@@ -74,12 +88,15 @@ void initState() {
       Timer(Duration(seconds: 2), (){
        
 
-        if (role_check == 0 || role_check == null) {
+        if (role_check == 0 ) {
 
-          Navigator.push(context,
-          MaterialPageRoute(builder: (context) {
-          return Login( );
-          }));
+          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => Login()), (Route<dynamic> route) => false);
+
+
+          // Navigator.push(context,
+          // MaterialPageRoute(builder: (context) {
+          // return Login( );
+          // }));
           
         }
       });

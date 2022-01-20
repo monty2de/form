@@ -24,11 +24,7 @@ class _CurriculumFirstState extends State<CurriculumFirst> {
     return Scaffold(
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
-        leading: IconButton(icon: Icon(Icons.arrow_back_ios ,  ),
-        onPressed:() {
-          Navigator.pop(context, false);
-        },
-      ),
+        
         actions: [
 
           this.widget.role == 1 || this.widget.role == 2 ? TextButton(

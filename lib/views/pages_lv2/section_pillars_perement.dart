@@ -36,11 +36,7 @@ class _SectionPillarsPerementState extends State<SectionPillarsPerement> {
           ) :Container(),
         ],
 
-        leading: IconButton(icon: Icon(Icons.arrow_back_ios ,  ),
-        onPressed:() {
-          Navigator.pop(context, false);
-        },
-      ),
+        
         title: Center(child: Text('اركان القسم - الدائمة')),
       ),
       body: Container(

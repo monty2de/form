@@ -24,11 +24,7 @@ class StudentsAffairsState extends State<StudentsAffairs> {
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
 
-        leading: IconButton(icon: Icon(Icons.arrow_back_ios ,  ),
-        onPressed:() {
-          Navigator.pop(context, false);
-        },
-      ),
+        
           
         
         centerTitle: true,

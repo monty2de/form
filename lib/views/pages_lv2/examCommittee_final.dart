@@ -23,11 +23,7 @@ class _ExamCommitteeFinalState extends State<ExamCommitteeFinal> {
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
 
-        leading: IconButton(icon: Icon(Icons.arrow_back_ios ,  ),
-        onPressed:() {
-          Navigator.pop(context, false);
-        },
-      ),
+        
         title: Text('اللجنة الامتحانية-عليا'),
       ),
       body: Center(

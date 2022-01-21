@@ -4,10 +4,8 @@ import 'package:form/views/exam_table/exam_table_show.dart';
 
 import '../../drawer.dart';
 
-
 // ignore: must_be_immutable
 class ExamTableFirst extends StatefulWidget {
-
   late int role;
 
   ExamTableFirst(this.role);
@@ -22,28 +20,19 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
     return Scaffold(
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
-
-        leading: IconButton(icon: Icon(Icons.arrow_back_ios ,  ),
-        onPressed:() {
-          Navigator.pop(context, false);
-        },
-      ),
-
         actions: [
-
-          
-
-          this.widget.role == 1 || this.widget.role == 2 ? TextButton(
-            onPressed: () {
-             
-             Navigator.push(context,
-      MaterialPageRoute(builder: (context) {
-      return ExamTableAdd(this.widget.role );
-     }));
-             
-            },
-            child: Text(" اضافة  ", style: TextStyle(color: Colors.white)),
-          ) :Container(),
+          this.widget.role == 1 || this.widget.role == 2
+              ? TextButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return ExamTableAdd(this.widget.role);
+                    }));
+                  },
+                  child:
+                      Text(" اضافة  ", style: TextStyle(color: Colors.white)),
+                )
+              : Container(),
         ],
         centerTitle: true,
         title: Text('جدول الامتحانات'),
@@ -52,8 +41,7 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            
-           InkWell(
+            InkWell(
               child: Text(
                 '  المرحلة الاولى  ',
                 style: TextStyle(
@@ -62,9 +50,9 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
                     color: Colors.black),
               ),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return ExamTableShow(this.widget.role , 'الاولى');
-                        } ));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ExamTableShow(this.widget.role, 'الاولى');
+                }));
               },
             ),
             SizedBox(
@@ -79,9 +67,9 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
                     color: Colors.black),
               ),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return ExamTableShow(this.widget.role , 'الثانية');
-                        } ));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ExamTableShow(this.widget.role, 'الثانية');
+                }));
               },
             ),
             SizedBox(
@@ -96,12 +84,11 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
                     color: Colors.black),
               ),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return ExamTableShow(this.widget.role , 'الثالثة');
-                        } ));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ExamTableShow(this.widget.role, 'الثالثة');
+                }));
               },
             ),
-
             SizedBox(
               height: 20,
             ),
@@ -114,12 +101,11 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
                     color: Colors.black),
               ),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return ExamTableShow(this.widget.role , 'الرابعة');
-                        } ));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ExamTableShow(this.widget.role, 'الرابعة');
+                }));
               },
             ),
-
             SizedBox(
               height: 20,
             ),
@@ -132,18 +118,14 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
                     color: Colors.black),
               ),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return ExamTableShow(this.widget.role , 'الخامسة');
-                        } ));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ExamTableShow(this.widget.role, 'الخامسة');
+                }));
               },
             ),
-            
           ],
         ),
       ),
     );
   }
-
-
-   
 }

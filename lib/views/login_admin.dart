@@ -58,10 +58,10 @@ class _LoginAdminState extends State<LoginAdmin> {
                       // ignore: unused_local_variable
                       var role = int.parse(
                           sharedPreferences.getInt('role').toString());
-                      Navigator.pushReplacement(context,
+                      Navigator.pushAndRemoveUntil(context,
                           MaterialPageRoute(builder: (context) {
                         return MyHomePage(role: 1);
-                      }));
+                      }), (Route<dynamic> route) => false);
                     }
                   });
                 },

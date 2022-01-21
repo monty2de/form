@@ -67,10 +67,10 @@ class _LoginState extends State<Login> {
                       // ignore: unused_local_variable
                       var role = int.parse(
                           sharedPreferences.getInt('role').toString());
-                      Navigator.pushReplacement(context,
+                      Navigator.pushAndRemoveUntil(context,
                           MaterialPageRoute(builder: (context) {
                         return MyHomePage(role: role);
-                      }));
+                      }), (Route<dynamic> route) => false);
                     });
                   },
                 ),
@@ -90,10 +90,10 @@ class _LoginState extends State<Login> {
                         // ignore: unused_local_variable
                         var role = int.parse(
                             sharedPreferences.getInt('role').toString());
-                        Navigator.pushReplacement(context,
+                        Navigator.pushAndRemoveUntil(context,
                             MaterialPageRoute(builder: (context) {
                           return MyHomePage(role: role);
-                        }));
+                        }), (Route<dynamic> route) => false);
                       },
                     ),
                     AppButton(

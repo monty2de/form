@@ -5,10 +5,8 @@ import 'package:form/views/student/students_name_show.dart';
 
 import '../../drawer.dart';
 
-
 // ignore: must_be_immutable
 class StudentsNamesFirst extends StatefulWidget {
-
   late int role;
 
   StudentsNamesFirst(this.role);
@@ -18,8 +16,8 @@ class StudentsNamesFirst extends StatefulWidget {
 }
 
 class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
-  late TextEditingController studentNameController = new TextEditingController();
-
+  late TextEditingController studentNameController =
+      new TextEditingController();
 
   var globalKey = GlobalKey<FormState>();
 
@@ -28,30 +26,19 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
     return Scaffold(
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
-
-        leading: IconButton(icon: Icon(Icons.arrow_back_ios ,  ),
-        onPressed:() {
-          Navigator.pop(context, false);
-        },
-      ),
-
         actions: [
-
-          
-
-          this.widget.role == 1 || this.widget.role == 2 ? TextButton(
-            onPressed: () {
-             
-              Navigator.push(context,
-              MaterialPageRoute(builder: (context) {
-              return StudentsAdd(this.widget.role );
-              }));
-                  
-            },
-            child: Text(" اضافة  ", style: TextStyle(color: Colors.white)),
-          ) :Container(),
-
-
+          this.widget.role == 1 || this.widget.role == 2
+              ? TextButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return StudentsAdd(this.widget.role);
+                    }));
+                  },
+                  child:
+                      Text(" اضافة  ", style: TextStyle(color: Colors.white)),
+                )
+              : Container(),
         ],
         centerTitle: true,
         title: Text('اسماء الطلبة'),
@@ -60,35 +47,28 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-
             Form(
-      key: globalKey,
-      child: Column(
-       
-        children: [
-       
-          textSection(),
-      
-
-          ElevatedButton(
-        onPressed:  () {
-          if(globalKey.currentState!.validate()){
-
-            Navigator.push(context,
-              MaterialPageRoute(builder: (context) {
-              return SearchStudent(this.widget.role , studentNameController.text );
-              }));
-
-          }
-        },    
-        child: Text(" بحث", style: TextStyle(color: Colors.white70)),
-      ),
-        ],
-
-      ),
-    ),
-            
-           InkWell(
+              key: globalKey,
+              child: Column(
+                children: [
+                  textSection(),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (globalKey.currentState!.validate()) {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return SearchStudent(
+                              this.widget.role, studentNameController.text);
+                        }));
+                      }
+                    },
+                    child:
+                        Text(" بحث", style: TextStyle(color: Colors.white70)),
+                  ),
+                ],
+              ),
+            ),
+            InkWell(
               child: Text(
                 '  المرحلة الاولى  ',
                 style: TextStyle(
@@ -97,9 +77,9 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
                     color: Colors.black),
               ),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return StudentsNamesShow(this.widget.role , 'الاولى');
-                        } ));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return StudentsNamesShow(this.widget.role, 'الاولى');
+                }));
               },
             ),
             SizedBox(
@@ -114,9 +94,9 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
                     color: Colors.black),
               ),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return StudentsNamesShow(this.widget.role , 'الثانية');
-                        } ));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return StudentsNamesShow(this.widget.role, 'الثانية');
+                }));
               },
             ),
             SizedBox(
@@ -131,12 +111,11 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
                     color: Colors.black),
               ),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return StudentsNamesShow(this.widget.role , 'الثالثة');
-                        } ));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return StudentsNamesShow(this.widget.role, 'الثالثة');
+                }));
               },
             ),
-
             SizedBox(
               height: 20,
             ),
@@ -149,12 +128,11 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
                     color: Colors.black),
               ),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return StudentsNamesShow(this.widget.role , 'الرابعة');
-                        } ));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return StudentsNamesShow(this.widget.role, 'الرابعة');
+                }));
               },
             ),
-
             SizedBox(
               height: 20,
             ),
@@ -167,22 +145,18 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
                     color: Colors.black),
               ),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return StudentsNamesShow(this.widget.role , 'الخامسة');
-                        } ));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return StudentsNamesShow(this.widget.role, 'الخامسة');
+                }));
               },
             ),
-            
           ],
         ),
       ),
     );
-
-    
   }
 
-Container textSection() {
-
+  Container textSection() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
       child: Column(
@@ -192,36 +166,23 @@ Container textSection() {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           TextFormField(
-            validator: (value){
-              if(value!.isEmpty) return 'يجب ادخال اسم الطالب';
+            validator: (value) {
+              if (value!.isEmpty) return 'يجب ادخال اسم الطالب';
               return null;
             },
             controller: studentNameController,
             cursorColor: Colors.black,
-
             style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
-
               icon: Icon(Icons.email, color: Colors.white70),
-              
-
               hintStyle: TextStyle(color: Colors.white70),
             ),
           ),
-          
-
-
-
-          
-
         ],
       ),
     );
   }
-
- 
-   
 }

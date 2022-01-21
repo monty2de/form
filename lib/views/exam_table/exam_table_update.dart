@@ -1,4 +1,3 @@
-
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,17 +6,12 @@ import 'package:form/models/examTable.dart';
 import 'package:form/views/pages_lv3/exam_table_final.dart';
 import 'package:form/views/pages_lv3/exam_table_first.dart';
 
-
-
-
-
 // ignore: must_be_immutable
 class ExamTableUpdate extends StatefulWidget {
-late int role;
-late ExamTable exaxmtable;
+  late int role;
+  late ExamTable exaxmtable;
 
-
-  ExamTableUpdate(this.role , this.exaxmtable );
+  ExamTableUpdate(this.role, this.exaxmtable);
 
   @override
   ExamTableUpdateState createState() => ExamTableUpdateState();
@@ -28,78 +22,76 @@ class ExamTableUpdateState extends State<ExamTableUpdate> {
 
   String generateRandomString(int len) {
     var r = Random.secure();
-    const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-    return List.generate(len, (index) => _chars[r.nextInt(_chars.length)]).join();
+    const _chars =
+        'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+    return List.generate(len, (index) => _chars[r.nextInt(_chars.length)])
+        .join();
   }
 
-  
   var globalKey = GlobalKey<FormState>();
- 
-  late TextEditingController nameController = new TextEditingController( text: this.widget.exaxmtable.name );
-  late  TextEditingController yearController = new TextEditingController(text: this.widget.exaxmtable.year );
-  late  TextEditingController dateController = new TextEditingController( text: this.widget.exaxmtable.date );
 
+  late TextEditingController nameController =
+      new TextEditingController(text: this.widget.exaxmtable.name);
+  late TextEditingController yearController =
+      new TextEditingController(text: this.widget.exaxmtable.year);
+  late TextEditingController dateController =
+      new TextEditingController(text: this.widget.exaxmtable.date);
 
-
-
-  Future store(String name, year , date) async {
-
+  Future store(String name, year, date) async {
     if (year == null) {
       year = this.widget.exaxmtable.year;
     }
 
     var id;
     // ignore: non_constant_identifier_names
-    var test_exist = await FirebaseFirestore.instance.collection('examTable').where('year' , isEqualTo: year).get();
-    
-      test_exist.docs.forEach((data) {           
-        id = data.data()['id']   ;
- 
-      });
+    var test_exist = await FirebaseFirestore.instance
+        .collection('examTable')
+        .where('year', isEqualTo: year)
+        .get();
 
-
+    test_exist.docs.forEach((data) {
+      id = data.data()['id'];
+    });
 
     // ignore: unused_local_variable
-    var item  =  FirebaseFirestore.instance.collection('examTable').doc(id).collection('Item').doc(this.widget.exaxmtable.id).update({
-      'id' : this.widget.exaxmtable.id,
-      'name' : name,
-      'date' : date,
-      'year' : year,
-      });
+    var item = FirebaseFirestore.instance
+        .collection('examTable')
+        .doc(id)
+        .collection('Item')
+        .doc(this.widget.exaxmtable.id)
+        .update({
+      'id': this.widget.exaxmtable.id,
+      'name': name,
+      'date': date,
+      'year': year,
+    });
 
-
-    if (year == '4' || year == '3'  || year == '2' || year == '1' || year == '5') {
-      Navigator.push(context,
-      MaterialPageRoute(builder: (context) {
-      return ExamTableFirst(this.widget.role);
-     }));
+    if (year == '4' ||
+        year == '3' ||
+        year == '2' ||
+        year == '1' ||
+        year == '5') {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return ExamTableFirst(this.widget.role);
+      }));
+    } else {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return ExamTableFinal(this.widget.role);
+      }));
     }
- 
-    else{
-      
-      Navigator.push(context,
-      MaterialPageRoute(builder: (context) {
-      return ExamTableFinal(this.widget.role);
-     }));
-
-    }
-    
-   
   }
-
-
 
   Container buttonSection() {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 40.0,
-      padding: EdgeInsets.only(left: 120 , right: 120),
+      padding: EdgeInsets.only(left: 120, right: 120),
       margin: EdgeInsets.only(top: 15.0),
       child: ElevatedButton(
-        onPressed:  () {
-       
-          if(globalKey.currentState!.validate()){
-            store(nameController.text,  yearController.text , dateController.text );
+        onPressed: () {
+          if (globalKey.currentState!.validate()) {
+            store(
+                nameController.text, yearController.text, dateController.text);
           }
         },
         child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
@@ -109,7 +101,15 @@ class ExamTableUpdateState extends State<ExamTableUpdate> {
   }
 
   Container textSection() {
-    var yearArry = [ 'عليا اولى' , 'عليا ثانية' , 'الخامسة' , 'الرابعة' , 'الثالثة' , 'الثانية' , ' الاولى'];
+    var yearArry = [
+      'عليا اولى',
+      'عليا ثانية',
+      'الخامسة',
+      'الرابعة',
+      'الثالثة',
+      'الثانية',
+      ' الاولى'
+    ];
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
@@ -120,22 +120,18 @@ class ExamTableUpdateState extends State<ExamTableUpdate> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           TextFormField(
-            validator: (value){
-              if(value!.isEmpty) return 'يجب ادخال العنوان';
+            validator: (value) {
+              if (value!.isEmpty) return 'يجب ادخال العنوان';
               return null;
             },
             controller: nameController,
             cursorColor: Colors.black,
-
             style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
-
               icon: Icon(Icons.email, color: Colors.white70),
-              
-
               hintStyle: TextStyle(color: Colors.white70),
             ),
           ),
@@ -144,92 +140,74 @@ class ExamTableUpdateState extends State<ExamTableUpdate> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           DropdownButtonFormField(
-
-            items :  yearArry.map( (String item){
+            items: yearArry.map((String item) {
               return DropdownMenuItem<String>(
                 value: item,
                 child: Text(item),
               );
-            } ).toList(),
-
+            }).toList(),
             onChanged: (value) {
-            
               yearName = value;
-           
-              
             },
-
-            ),
-         
+          ),
           Text(
             '  التاريخ ',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           TextFormField(
-            validator: (value){
-              if(value!.isEmpty) return 'يجب ادخال  التاريخ';
+            validator: (value) {
+              if (value!.isEmpty) return 'يجب ادخال  التاريخ';
               return null;
             },
             controller: dateController,
             cursorColor: Colors.black,
-
             style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
-
               icon: Icon(Icons.email, color: Colors.white70),
-
-
               hintStyle: TextStyle(color: Colors.white70),
             ),
           ),
-
         ],
       ),
     );
   }
 
-
-
-
   @override
-  Widget build(BuildContext context) =>  Scaffold(
-    appBar: AppBar(
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+            ),
+            onPressed: () {
+              Navigator.pop(context, false);
+            },
+          ),
+          title: Text('تعديل'),
+        ),
+        body: Form(
+          key: globalKey,
+          child: ListView(
+            padding: EdgeInsets.symmetric(horizontal: 32),
+            physics: BouncingScrollPhysics(),
+            children: [
+              textSection(),
+              // buttonSection(),
 
-      leading: IconButton(icon: Icon(Icons.arrow_back_ios ,  ),
-        onPressed:() {
-          Navigator.pop(context, false);
-        },
-      ),
-      title: Text('تعديل'),
-    ),
-
-
-    body:   Form(
-      key: globalKey,
-      child: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 32),
-        physics: BouncingScrollPhysics(),
-        children: [
-       
-          textSection(),
-          // buttonSection(),
-
-          ElevatedButton(
-        onPressed:  () {
-       
-          if(globalKey.currentState!.validate()){
-            store(nameController.text,  yearName, dateController.text );
-          }
-        },
-        child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
-        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-      ),
-        ],
-
-      ),
-    ),
-  );
+              ElevatedButton(
+                onPressed: () {
+                  if (globalKey.currentState!.validate()) {
+                    store(nameController.text, yearName, dateController.text);
+                  }
+                },
+                child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
+                // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+              ),
+            ],
+          ),
+        ),
+      );
 }

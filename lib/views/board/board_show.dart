@@ -22,14 +22,6 @@ class _BoardShowState extends State<BoardShow> {
     return Scaffold(
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios,
-          ),
-          onPressed: () {
-            Navigator.pop(context, false);
-          },
-        ),
         centerTitle: true,
         title: Text('اسماء الاعضاء'),
       ),

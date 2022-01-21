@@ -91,17 +91,20 @@ class ExamTableAddState extends State<ExamTableAdd> {
       height: 40.0,
       padding: EdgeInsets.only(left: 120, right: 120),
       margin: EdgeInsets.only(top: 15.0),
-      child: RaisedButton(
+      child: ElevatedButton(
         onPressed: () {
           if (globalKey.currentState!.validate()) {
             store(
                 nameController.text, yearController.text, dateController.text);
           }
         },
-        elevation: 0.0,
-        color: Colors.red[600],
+        style: ElevatedButton.styleFrom(
+          elevation: 0.0,
+          primary: Colors.red[600],
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+        ),
         child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
       ),
     );
   }

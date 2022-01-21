@@ -1,32 +1,19 @@
-
 class Curriculum {
+  final String id, name, year;
+  final int type;
 
- 
-  late String id , name , year  ;
-  late int type;
+  Curriculum({
+    required this.id,
+    required this.name,
+    required this.year,
+    required this.type,
+  });
 
-
- 
-  Curriculum({id , name , year , type });
-
-  Curriculum.fromFirebase(  var data ){
-  
-    this.id = data['id'] ;
-    this.name = data['name'] ;
-    this.year = data['year'] ;
-    this.type = data['type'] ;
-
+  factory Curriculum.fromFirebase(var data) {
+    return Curriculum(
+        id: data['id'],
+        name: data['name'],
+        year: data['year'],
+        type: data['type']);
   }
-
 }
-
-
-
-
-          
-
-
-
-
-
-    

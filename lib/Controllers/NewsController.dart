@@ -1,40 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:form/models/news.dart';
 
-class NewsController   {
-
-  
+class NewsController {
   var newsItem = <News>[];
 
-
-
-   index() async {
-
-
-    var q  = await FirebaseFirestore.instance.collection('news').get();
+  index() async {
+    var q = await FirebaseFirestore.instance.collection('news').get();
     newsItem = [];
     q.docs.forEach((DocumentSnapshot element) {
-        
       Map<String, dynamic> data = element.data() as Map<String, dynamic>;
 
       newsItem.add(News.fromFirebase(data));
-
-
     });
 
     return newsItem;
-
   }
 
-
-  void delet(String id  ) async{
-
-    // ignore: unused_local_variable
-    var q  = await FirebaseFirestore.instance.collection('news').doc(id).delete();
+  void delet(String id) async {
+    await FirebaseFirestore.instance.collection('news').doc(id).delete();
   }
-
-
-
-
-
 }

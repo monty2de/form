@@ -11,14 +11,17 @@ import 'package:form/views/news/news_update.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'drawer.dart';
 
-void main() async{
-   WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
-  runApp(MyApp());
+  final role = await getvalidationData();
+  runApp(MyApp(role: role));
 }
 
 class MyApp extends StatelessWidget {
+  final int role;
+
+  const MyApp({Key? key, this.role = 0}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,8 +29,13 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
           primarySwatch: Colors.blue,
+          colorScheme: ColorScheme.light(
+            primary: Colors.blue[900]!,
+            // secondary: Colors.blue[900]!,
+          ),
+          primaryColor: Colors.blue[900],
           appBarTheme: AppBarTheme(color: Colors.blue[900])),
-      home: MyHomePage(),
+      home: role == 0 ? Login() : MyHomePage(role: role),
       supportedLocales: [Locale('ar', '')],
       localeResolutionCallback: (currentLocale, supportedLocales) {
         return supportedLocales.first;
@@ -40,96 +48,56 @@ class MyApp extends StatelessWidget {
   }
 }
 
+Future<int> getvalidationData() async {
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  var role = sharedPreferences.getInt('role');
+
+  if (role == null) {
+    return 0;
+  } else if (role == 1 || role == 2 || role == 3 || role == 4) {
+    return role;
+  } else {
+    return 0;
+  }
+}
+
 class MyHomePage extends StatefulWidget {
   final int role;
 
-  const MyHomePage(
-      {Key? key,
-      this.role = 0  ,
-      })
-      : super(key: key);
+  const MyHomePage({Key? key, this.role = 0}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
 // ignore: non_constant_identifier_names
-var role_check;
+  late int role_check;
 
-Future getvalidationData() async {
- SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  @override
+  void initState() {
+    role_check = widget.role;
 
-  var role = sharedPreferences.getInt('role');
-
-  if (role == null ) {
-  
-
-    setState(() {
-      role_check = 0;
-    });
-
-
-  }else if (role == 1 || role == 2 || role == 3 || role == 4){
-
-    setState(() {
-      role_check = role;
-    });
-
-  }
-  
-
-}
-
-@override
-void initState() {
-    getvalidationData().whenComplete(() async{
-      Timer(Duration(seconds: 2), (){
-       
-
-        if (role_check == 0 ) {
-
-          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => Login()), (Route<dynamic> route) => false);
-
-
-          // Navigator.push(context,
-          // MaterialPageRoute(builder: (context) {
-          // return Login( );
-          // }));
-          
-        }
-      });
-    });
-
-    
     super.initState();
   }
-
-  
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavigationDrawerWidget(role_check),
-      appBar: AppBar(
-        actions: [
-
-          
-            role_check == 1 ? TextButton(
-            onPressed: () {
-             
-             
-             Navigator.push(context,
-      MaterialPageRoute(builder: (context) {
-      return NewsAdd(role_check);
-     }));
-            },
-            child: Text(" اضافة خبر ", style: TextStyle(color: Colors.white)),
-          ) :Container(),
-        ],
-        title: Text('الرئيسية'), centerTitle: true),
+      appBar: AppBar(actions: [
+        role_check == 1
+            ? TextButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return NewsAdd(role_check);
+                  }));
+                },
+                child:
+                    Text(" اضافة خبر ", style: TextStyle(color: Colors.white)),
+              )
+            : Container(),
+      ], title: Text('الرئيسية'), centerTitle: true),
       body: Column(
         children: [
           Stack(
@@ -165,27 +133,24 @@ void initState() {
           ),
           Divider(thickness: 2),
           SizedBox(height: 10),
-
           FutureBuilder(
-            future:   NewsController().index(),
-            builder: ( BuildContext context , AsyncSnapshot snapshot ){
-    
-              switch ( snapshot.connectionState ){
-    
-                case ConnectionState.active :
-                          return _loading();
-                          // ignore: dead_code
-                          break;
-                        case ConnectionState.waiting :
-                          return _loading();
-                          // ignore: dead_code
-                          break;
-                case ConnectionState.done :
-                  if(snapshot.hasError){
+            future: NewsController().index(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.active:
+                  return _loading();
+                  // ignore: dead_code
+                  break;
+                case ConnectionState.waiting:
+                  return _loading();
+                  // ignore: dead_code
+                  break;
+                case ConnectionState.done:
+                  if (snapshot.hasError) {
                     return Container();
                   }
-                  if(snapshot.hasData){
-                    return result(snapshot.data , context);
+                  if (snapshot.hasData) {
+                    return result(snapshot.data, context);
                   }
                   break;
                 case ConnectionState.none:
@@ -198,86 +163,78 @@ void initState() {
               return Container();
             },
           ),
-          
         ],
       ),
     );
   }
 
-
-  Widget result( List<News> news , BuildContext context ){
-
-    
-  return Expanded(
-    child: ListView.builder(
-      physics: const AlwaysScrollableScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: news.length,
-                itemBuilder: (BuildContext context, int position) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 30, right: 30, bottom: 30),
-                        child: Expanded(
-                            child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            InkWell(
-                              child: Text(
-                                news[position].title,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black),
-                              ),
-                              onTap: (){
-                                if (this.role_check == 1 || this.role_check == 2) {
-                                  Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                  return NewsUpdate( this.role_check ,  news[position]  );
-                                  }));
-                                }
-                              },
-                            ),
-                            SizedBox(height: 15),
-                            Text(
-                              news[position].body,
+  Widget result(List<News> news, BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+        physics: const AlwaysScrollableScrollPhysics(),
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        itemCount: news.length,
+        itemBuilder: (BuildContext context, int position) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    InkWell(
+                      child: Text(
+                        news[position].title,
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black),
+                      ),
+                      onTap: () {
+                        if (this.role_check == 1 || this.role_check == 2) {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return NewsUpdate(this.role_check, news[position]);
+                          }));
+                        }
+                      },
+                    ),
+                    SizedBox(height: 15),
+                    Text(
+                      news[position].body,
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
+                    ),
+                    this.role_check == 1 || this.role_check == 2
+                        ? InkWell(
+                            child: Text(
+                              'حذف',
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black),
+                                  color: Colors.red),
                             ),
-                            this.role_check == 1 || this.role_check == 2?InkWell(
-                              child: Text(
-                                'حذف',
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.red),
-                              ),
-                              onTap: (){
-                                NewsController().delet(news[position].id);
-                                setState(() {
-                                  
-                                });
-                              },
-                            ):Container(),
-                        
-                          ],
-                        )),
-                      ),
-                    ],
-                  );
-                },
+                            onTap: () {
+                              NewsController().delet(news[position].id);
+                              setState(() {});
+                            },
+                          )
+                        : Container(),
+                  ],
+                ),
               ),
-  );
-  
-}
+            ],
+          );
+        },
+      ),
+    );
+  }
 
-Widget _loading(){
+  Widget _loading() {
     return Container(
       child: Center(
         child: CircularProgressIndicator(),

@@ -1,12 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:form/utils/app_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../main.dart';
 
-
 class LoginAdmin extends StatefulWidget {
-
   @override
   _LoginAdminState createState() => _LoginAdminState();
 }
@@ -38,36 +37,35 @@ class _LoginAdminState extends State<LoginAdmin> {
                 controller: passwordController,
                 obscureText: true,
               ),
-              ElevatedButton(
-                child: Text(" تسجيل الدخول"),
-                onPressed: () async{
-
-                  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-                  var admins = await FirebaseFirestore.instance.collection('admins').get();
+              AppButton(
+                title: " تسجيل الدخول",
+                onPressed: () async {
+                  SharedPreferences sharedPreferences =
+                      await SharedPreferences.getInstance();
+                  var admins = await FirebaseFirestore.instance
+                      .collection('admins')
+                      .get();
 
                   admins.docs.forEach((data) {
-                    if (data.data()['id'] != emailController.text.trim() ) {
-                     print(data.data()['id']);
+                    if (data.data()['id'] != emailController.text.trim()) {
+                      print(data.data()['id']);
                       print('id wronge');
-                    }else if(data.data()['password'] != passwordController.text.trim()){
+                    } else if (data.data()['password'] !=
+                        passwordController.text.trim()) {
                       print('pass wronge');
-                    }
-                    else {
+                    } else {
                       sharedPreferences.setInt('role', data.data()['role']);
-                        // ignore: unused_local_variable
-                        var role =int.parse(sharedPreferences.getInt('role').toString());
-                      Navigator.push(context,
+                      // ignore: unused_local_variable
+                      var role = int.parse(
+                          sharedPreferences.getInt('role').toString());
+                      Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context) {
-                        return MyHomePage(   );
+                        return MyHomePage(role: 1);
                       }));
                     }
                   });
-                  
                 },
               ),
-              
-             
-              
             ],
           ),
         ),
@@ -75,5 +73,3 @@ class _LoginAdminState extends State<LoginAdmin> {
     );
   }
 }
-
-

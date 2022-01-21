@@ -40,7 +40,16 @@ class StudentsAffairsState extends State<StudentsAffairs> {
             builder: ( BuildContext context , AsyncSnapshot snapshot ){
     
               switch ( snapshot.connectionState ){
-    
+                
+
+                case ConnectionState.active :
+                          return _loading();
+                          // ignore: dead_code
+                          break;
+                        case ConnectionState.waiting :
+                          return _loading();
+                          // ignore: dead_code
+                          break;
                 
                 case ConnectionState.done :
                   if(snapshot.hasError){
@@ -213,5 +222,11 @@ Widget result( List<Student> result , BuildContext context ){
   );
   
 }
-   
+   Widget _loading(){
+    return Container(
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
 }

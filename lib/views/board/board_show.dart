@@ -44,7 +44,14 @@ class _BoardShowState extends State<BoardShow> {
     
               switch ( snapshot.connectionState ){
     
-                
+                case ConnectionState.active :
+                          return _loading();
+                          // ignore: dead_code
+                          break;
+                        case ConnectionState.waiting :
+                          return _loading();
+                          // ignore: dead_code
+                          break;
                 case ConnectionState.done :
                   if(snapshot.hasError){
                     return Container();
@@ -169,4 +176,11 @@ class _BoardShowState extends State<BoardShow> {
   );
   
 }
+Widget _loading(){
+    return Container(
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
 }

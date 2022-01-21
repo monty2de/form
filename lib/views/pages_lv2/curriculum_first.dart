@@ -52,7 +52,15 @@ class _CurriculumFirstState extends State<CurriculumFirst> {
             builder: ( BuildContext context , AsyncSnapshot snapshot ){
     
               switch ( snapshot.connectionState ){
-    
+                
+                case ConnectionState.active :
+                          return _loading();
+                          // ignore: dead_code
+                          break;
+                        case ConnectionState.waiting :
+                          return _loading();
+                          // ignore: dead_code
+                          break;
                 
                 case ConnectionState.done :
                   if(snapshot.hasError){
@@ -194,4 +202,11 @@ class _CurriculumFirstState extends State<CurriculumFirst> {
   );
   
 }
+Widget _loading(){
+    return Container(
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
 }

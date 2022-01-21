@@ -46,7 +46,14 @@ class _ExamResultShowState extends State<ExamResultShow> {
     
               switch ( snapshot.connectionState ){
     
-                
+                case ConnectionState.active :
+                          return _loading();
+                          // ignore: dead_code
+                          break;
+                        case ConnectionState.waiting :
+                          return _loading();
+                          // ignore: dead_code
+                          break;
                 case ConnectionState.done :
                   if(snapshot.hasError){
                     return Container();
@@ -176,5 +183,11 @@ Widget result( List<ExamResult> result , BuildContext context ){
   );
   
 }
-   
+   Widget _loading(){
+    return Container(
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
 }

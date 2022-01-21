@@ -53,7 +53,14 @@ class _CurriculumFinalState extends State<CurriculumFinal> {
     
               switch ( snapshot.connectionState ){
     
-                
+                case ConnectionState.active :
+                          return _loading();
+                          // ignore: dead_code
+                          break;
+                        case ConnectionState.waiting :
+                          return _loading();
+                          // ignore: dead_code
+                          break;
                 case ConnectionState.done :
                   if(snapshot.hasError){
                     return Container();
@@ -192,4 +199,11 @@ class _CurriculumFinalState extends State<CurriculumFinal> {
   );
   
 }
+Widget _loading(){
+    return Container(
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
 }

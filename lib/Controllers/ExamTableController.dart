@@ -8,10 +8,10 @@ class ExamTableController   {
 
 
 
-   index(int year) async {
+   index(String year) async {
 
 
-    var q  = await FirebaseFirestore.instance.collection('examTable').where('year' , isEqualTo: year.toString()).get();
+    var q  = await FirebaseFirestore.instance.collection('examTable').where('year' , isEqualTo: year).get();
     var id;
     q.docs.forEach((data) {           
       id = data.data()['id']   ;
@@ -33,11 +33,11 @@ class ExamTableController   {
   }
 
 
-  void delet(String idItem , int year  ) async{
+  void delet(String idItem , String year  ) async{
 
 
     // ignore: unused_local_variable
-    var q1  = await FirebaseFirestore.instance.collection('examTable').where('year' , isEqualTo: year.toString()).get();
+    var q1  = await FirebaseFirestore.instance.collection('examTable').where('year' , isEqualTo: year).get();
     var id;
     q1.docs.forEach((data) {           
       id = data.data()['id']   ;

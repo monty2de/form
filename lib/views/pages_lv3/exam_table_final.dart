@@ -62,7 +62,7 @@ class _ExamTableFinalState extends State<ExamTableFinal> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return ExamTableShow(this.widget.role , 6);
+                        return ExamTableShow(this.widget.role , 'عليا اولى');
                         } ));
               },
             ),
@@ -79,7 +79,7 @@ class _ExamTableFinalState extends State<ExamTableFinal> {
               ),
               onTap: () {
                Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return ExamTableShow(this.widget.role , 7);
+                        return ExamTableShow(this.widget.role , 'عليا ثانية');
                         } ));
               },
             ),

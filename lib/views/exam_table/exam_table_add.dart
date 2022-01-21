@@ -3,8 +3,6 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:form/views/pages_lv3/exam_table_final.dart';
-import 'package:form/views/pages_lv3/exam_table_first.dart';
 
 
 
@@ -22,6 +20,7 @@ late int role;
 }
 
 class ExamTableAddState extends State<ExamTableAdd> {
+  var yearName;
 
   String generateRandomString(int len) {
     var r = Random.secure();
@@ -33,7 +32,6 @@ class ExamTableAddState extends State<ExamTableAdd> {
   var globalKey = GlobalKey<FormState>();
  
   late TextEditingController nameController = new TextEditingController();
-  late  TextEditingController yearController = new TextEditingController( );
   late  TextEditingController dateController = new TextEditingController(  );
 
 
@@ -79,47 +77,36 @@ class ExamTableAddState extends State<ExamTableAdd> {
       });
 
 
-    if (year == '4' || year == '3'  || year == '2' || year == '1' || year == '5') {
-      Navigator.push(context,
-      MaterialPageRoute(builder: (context) {
-      return ExamTableFirst(this.widget.role);
-     }));
-    }
+    Navigator.pop(context, false);
  
-    else{
-      
-      Navigator.push(context,
-      MaterialPageRoute(builder: (context) {
-      return ExamTableFinal(this.widget.role);
-     }));
-
-    }
     
    
   }
 
 
 
-  Container buttonSection() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 40.0,
-      padding: EdgeInsets.only(left: 120 , right: 120),
-      margin: EdgeInsets.only(top: 15.0),
-      child: ElevatedButton(
-        onPressed:  () {
+  // Container buttonSection() {
+  //   return Container(
+  //     width: MediaQuery.of(context).size.width,
+  //     height: 40.0,
+  //     padding: EdgeInsets.only(left: 120 , right: 120),
+  //     margin: EdgeInsets.only(top: 15.0),
+  //     child: ElevatedButton(
+  //       onPressed:  () {
        
-          if(globalKey.currentState!.validate()){
-            store(nameController.text,  yearController.text , dateController.text );
-          }
-        },
-        child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
-        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-      ),
-    );
-  }
+  //         if(globalKey.currentState!.validate()){
+  //           store(nameController.text,  yearController.text , dateController.text );
+  //         }
+  //       },
+  //       child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
+  //       // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+  //     ),
+  //   );
+  // }
 
   Container textSection() {
+    var yearArry = [ 'عليا اولى' , 'عليا ثانية' , 'الخامسة' , 'الرابعة' , 'الثالثة' , 'الثانية' , ' الاولى'];
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
       child: Column(
@@ -149,29 +136,26 @@ class ExamTableAddState extends State<ExamTableAdd> {
             ),
           ),
           Text(
-            '  المرحلة(رقم) ',
+            '  المرحلة ',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
-          TextFormField(
-            validator: (value){
-              if(value!.isEmpty) return 'يجب ادخال  المرحلة(رقم)';
-              return null;
+          DropdownButtonFormField(
+
+            items :  yearArry.map( (String item){
+              return DropdownMenuItem<String>(
+                value: item,
+                child: Text(item),
+              );
+            } ).toList(),
+
+            onChanged: (value) {
+            
+              yearName = value;
+           
+              
             },
-            controller: yearController,
-            cursorColor: Colors.black,
 
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-
-              icon: Icon(Icons.email, color: Colors.white70),
-
-
-              hintStyle: TextStyle(color: Colors.white70),
             ),
-          ),
          
           Text(
             '  التاريخ ',
@@ -235,7 +219,7 @@ class ExamTableAddState extends State<ExamTableAdd> {
           onPressed:  () {
        
           if(globalKey.currentState!.validate()){
-            store(nameController.text,  yearController.text , dateController.text );
+            store(nameController.text,  yearName, dateController.text );
           }
         },
         child: Text(" حفظ", style: TextStyle(color: Colors.white70)),

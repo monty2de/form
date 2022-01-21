@@ -63,7 +63,7 @@ class _StudentsNamesFinalState extends State<StudentsNamesFinal> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return StudentsNamesShow(this.widget.role , 6);
+                        return StudentsNamesShow(this.widget.role , 'عليا اولى');
                         } ));
               },
             ),
@@ -80,7 +80,7 @@ class _StudentsNamesFinalState extends State<StudentsNamesFinal> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return StudentsNamesShow(this.widget.role , 7);
+                        return StudentsNamesShow(this.widget.role , 'عليا ثانية');
                         } ));
               },
             ),

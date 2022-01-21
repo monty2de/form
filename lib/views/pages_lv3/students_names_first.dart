@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form/views/student/student_search.dart';
 import 'package:form/views/student/students_add.dart';
 import 'package:form/views/student/students_name_show.dart';
 
@@ -17,6 +18,11 @@ class StudentsNamesFirst extends StatefulWidget {
 }
 
 class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
+  late TextEditingController studentNameController = new TextEditingController();
+
+
+  var globalKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +50,8 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
             },
             child: Text(" اضافة  ", style: TextStyle(color: Colors.white)),
           ) :Container(),
+
+
         ],
         centerTitle: true,
         title: Text('اسماء الطلبة'),
@@ -52,6 +60,33 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+
+            Form(
+      key: globalKey,
+      child: Column(
+       
+        children: [
+       
+          textSection(),
+      
+
+          ElevatedButton(
+        onPressed:  () {
+          if(globalKey.currentState!.validate()){
+
+            Navigator.push(context,
+              MaterialPageRoute(builder: (context) {
+              return SearchStudent(this.widget.role , studentNameController.text );
+              }));
+
+          }
+        },    
+        child: Text(" بحث", style: TextStyle(color: Colors.white70)),
+      ),
+        ],
+
+      ),
+    ),
             
            InkWell(
               child: Text(
@@ -63,7 +98,7 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return StudentsNamesShow(this.widget.role , 1);
+                        return StudentsNamesShow(this.widget.role , 'الاولى');
                         } ));
               },
             ),
@@ -80,7 +115,7 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return StudentsNamesShow(this.widget.role , 2);
+                        return StudentsNamesShow(this.widget.role , 'الثانية');
                         } ));
               },
             ),
@@ -97,7 +132,7 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return StudentsNamesShow(this.widget.role , 3);
+                        return StudentsNamesShow(this.widget.role , 'الثالثة');
                         } ));
               },
             ),
@@ -115,7 +150,7 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return StudentsNamesShow(this.widget.role , 4);
+                        return StudentsNamesShow(this.widget.role , 'الرابعة');
                         } ));
               },
             ),
@@ -133,7 +168,7 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return StudentsNamesShow(this.widget.role , 5);
+                        return StudentsNamesShow(this.widget.role , 'الخامسة');
                         } ));
               },
             ),
@@ -142,8 +177,51 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
         ),
       ),
     );
+
+    
   }
 
+Container textSection() {
 
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+      child: Column(
+        children: <Widget>[
+          Text(
+            'اسم الطالب',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          TextFormField(
+            validator: (value){
+              if(value!.isEmpty) return 'يجب ادخال اسم الطالب';
+              return null;
+            },
+            controller: studentNameController,
+            cursorColor: Colors.black,
+
+            style: TextStyle(color: Colors.black),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+
+              icon: Icon(Icons.email, color: Colors.white70),
+              
+
+              hintStyle: TextStyle(color: Colors.white70),
+            ),
+          ),
+          
+
+
+
+          
+
+        ],
+      ),
+    );
+  }
+
+ 
    
 }

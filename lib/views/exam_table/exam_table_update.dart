@@ -24,6 +24,7 @@ late ExamTable exaxmtable;
 }
 
 class ExamTableUpdateState extends State<ExamTableUpdate> {
+  var yearName;
 
   String generateRandomString(int len) {
     var r = Random.secure();
@@ -42,6 +43,10 @@ class ExamTableUpdateState extends State<ExamTableUpdate> {
 
 
   Future store(String name, year , date) async {
+
+    if (year == null) {
+      year = this.widget.exaxmtable.year;
+    }
 
     var id;
     // ignore: non_constant_identifier_names
@@ -104,6 +109,8 @@ class ExamTableUpdateState extends State<ExamTableUpdate> {
   }
 
   Container textSection() {
+    var yearArry = [ 'عليا اولى' , 'عليا ثانية' , 'الخامسة' , 'الرابعة' , 'الثالثة' , 'الثانية' , ' الاولى'];
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
       child: Column(
@@ -136,26 +143,23 @@ class ExamTableUpdateState extends State<ExamTableUpdate> {
             '  المرحلة ',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
-          TextFormField(
-            validator: (value){
-              if(value!.isEmpty) return 'يجب ادخال  المرحلة';
-              return null;
+          DropdownButtonFormField(
+
+            items :  yearArry.map( (String item){
+              return DropdownMenuItem<String>(
+                value: item,
+                child: Text(item),
+              );
+            } ).toList(),
+
+            onChanged: (value) {
+            
+              yearName = value;
+           
+              
             },
-            controller: yearController,
-            cursorColor: Colors.black,
 
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-
-              icon: Icon(Icons.email, color: Colors.white70),
-
-
-              hintStyle: TextStyle(color: Colors.white70),
             ),
-          ),
          
           Text(
             '  التاريخ ',
@@ -217,7 +221,7 @@ class ExamTableUpdateState extends State<ExamTableUpdate> {
         onPressed:  () {
        
           if(globalKey.currentState!.validate()){
-            store(nameController.text,  yearController.text , dateController.text );
+            store(nameController.text,  yearName, dateController.text );
           }
         },
         child: Text(" حفظ", style: TextStyle(color: Colors.white70)),

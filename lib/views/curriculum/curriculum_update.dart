@@ -21,6 +21,8 @@ late Curriculum curriculum;
 
 class CurriculumUpdateState extends State<CurriculumUpdate> {
 
+  var yearName;
+
   String generateRandomString(int len) {
     var r = Random.secure();
     const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
@@ -31,13 +33,14 @@ class CurriculumUpdateState extends State<CurriculumUpdate> {
   var globalKey = GlobalKey<FormState>();
  
   late TextEditingController nameController = new TextEditingController( text: this.widget.curriculum.name);
-  late  TextEditingController yearController = new TextEditingController( text: this.widget.curriculum.year );
 
 
 
   Future store(String name, year) async {
 
-
+    if (year == null) {
+      year = this.widget.curriculum.year;
+    }
    
     var subject  =  FirebaseFirestore.instance.collection('curriculum').doc(this.widget.curriculum.id) ;
     await subject.update({
@@ -55,25 +58,10 @@ class CurriculumUpdateState extends State<CurriculumUpdate> {
 
 
 
-  Container buttonSection() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 40.0,
-      padding: EdgeInsets.only(left: 120 , right: 120),
-      margin: EdgeInsets.only(top: 15.0),
-      child: ElevatedButton(
-        onPressed:  () {
-       
-          if(globalKey.currentState!.validate()){
-            store(nameController.text,  yearController.text );
-          }
-        },
-        child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
-      ),
-    );
-  }
 
   Container textSection() {
+   var yearArry = [ 'عليا اولى' , 'عليا ثانية' , 'الخامسة' , 'الرابعة' , 'الثالثة' , 'الثانية' , ' الاولى'];
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
       child: Column(
@@ -106,26 +94,23 @@ class CurriculumUpdateState extends State<CurriculumUpdate> {
             '  الوصف ',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
-          TextFormField(
-            validator: (value){
-              if(value!.isEmpty) return 'يجب ادخال  الوصف';
-              return null;
+          DropdownButtonFormField(
+
+            items :  yearArry.map( (String item){
+              return DropdownMenuItem<String>(
+                value: item,
+                child: Text(item),
+              );
+            } ).toList(),
+
+            onChanged: (value) {
+            
+              yearName = value;
+          
+              
             },
-            controller: yearController,
-            cursorColor: Colors.black,
 
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-
-              icon: Icon(Icons.email, color: Colors.white70),
-
-
-              hintStyle: TextStyle(color: Colors.white70),
             ),
-          ),
          
           
 
@@ -166,7 +151,7 @@ class CurriculumUpdateState extends State<CurriculumUpdate> {
         onPressed:  () {
        
           if(globalKey.currentState!.validate()){
-            store(nameController.text,  yearController.text );
+            store(nameController.text,  yearName );
           }
         },
         child: Text(" حفظ", style: TextStyle(color: Colors.white70)),

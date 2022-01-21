@@ -9,7 +9,7 @@ import '../../drawer.dart';
 class ExamTableShow extends StatefulWidget {
 
   late int role;
-  late int year;
+  late String year;
 
   ExamTableShow(this.role , this.year);
 

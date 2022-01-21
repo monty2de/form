@@ -9,10 +9,10 @@ class StudentController   {
 
 
 
-  index(int year) async {
+  index(String year) async {
 
 
-  var q  = await FirebaseFirestore.instance.collection('students').where('year' , isEqualTo: year.toString()).get();
+  var q  = await FirebaseFirestore.instance.collection('students').where('year' , isEqualTo: year).get();
   item = [];
   q.docs.forEach((DocumentSnapshot element) {
       
@@ -78,6 +78,28 @@ profile()async{
   
 
 }
+
+search(String name)async{
+
+  
+  var user = await FirebaseFirestore.instance.collection('students').where('name' , isEqualTo:name ).get();
+
+  item = [];
+  user.docs.forEach((DocumentSnapshot element) {
+      
+    Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+
+    item.add(Student.fromFirebase(data));
+
+
+  });
+
+  return item;
+
+  
+  
+
+  }
   
 
 

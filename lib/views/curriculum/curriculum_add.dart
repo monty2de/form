@@ -22,6 +22,8 @@ late int type;
 
 class CurriculumAddState extends State<CurriculumAdd> {
 
+  var yearName;
+
   String generateRandomString(int len) {
     var r = Random.secure();
     const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
@@ -38,7 +40,7 @@ class CurriculumAddState extends State<CurriculumAdd> {
 
   Future store(String name, year) async {
 
-
+    print(year);
     var id = generateRandomString(32);
 
     var check = await FirebaseFirestore.instance.collection('curriculum').doc(id).get();
@@ -81,9 +83,9 @@ class CurriculumAddState extends State<CurriculumAdd> {
       margin: EdgeInsets.only(top: 15.0),
       child: ElevatedButton(
         onPressed:  () {
-       
+          print(yearName);
           if(globalKey.currentState!.validate()){
-            store(nameController.text,  yearController.text );
+            store(nameController.text,  yearName );
           }
         },
         child: Text(" حفظ", style: TextStyle(color: Colors.white70)),
@@ -92,17 +94,19 @@ class CurriculumAddState extends State<CurriculumAdd> {
   }
 
   Container textSection() {
+   var yearArry = [ 'عليا اولى' , 'عليا ثانية' , 'الخامسة' , 'الرابعة' , 'الثالثة' , 'الثانية' , ' الاولى'];
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
       child: Column(
         children: <Widget>[
           Text(
-            'العنوان',
+            'الاسم',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           TextFormField(
             validator: (value){
-              if(value!.isEmpty) return 'يجب ادخال العنوان';
+              if(value!.isEmpty) return 'يجب ادخال الاسم';
               return null;
             },
             controller: nameController,
@@ -121,29 +125,28 @@ class CurriculumAddState extends State<CurriculumAdd> {
             ),
           ),
           Text(
-            '  الوصف ',
+            '  المرحلة ',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
-          TextFormField(
-            validator: (value){
-              if(value!.isEmpty) return 'يجب ادخال  الوصف';
-              return null;
+          DropdownButtonFormField(
+
+            items :  yearArry.map( (String item){
+              return DropdownMenuItem<String>(
+                value: item,
+                child: Text(item),
+              );
+            } ).toList(),
+
+            onChanged: (value) {
+              // print(value);
+              yearName = value;
+              print(yearName);
+              setState(() {
+                yearName = value;
+              });
             },
-            controller: yearController,
-            cursorColor: Colors.black,
 
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-
-              icon: Icon(Icons.email, color: Colors.white70),
-
-
-              hintStyle: TextStyle(color: Colors.white70),
             ),
-          ),
          
           
 
@@ -183,7 +186,7 @@ class CurriculumAddState extends State<CurriculumAdd> {
         onPressed:  () {
        
           if(globalKey.currentState!.validate()){
-            store(nameController.text,  yearController.text );
+            store(nameController.text,  yearName );
           }
         },
         child: Text(" حفظ", style: TextStyle(color: Colors.white70)),

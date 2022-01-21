@@ -31,7 +31,8 @@ class StudentsAddState extends State<StudentsAdd> {
   late  TextEditingController locationController = new TextEditingController( );
   late  TextEditingController numberController = new TextEditingController(text: '' );
   late  TextEditingController passController = new TextEditingController( );
-var sextype ;
+  var sextype ;
+  var yearName;
   late TextEditingController studentNameController = new TextEditingController();
   late  TextEditingController yearController = new TextEditingController( );
 
@@ -89,6 +90,8 @@ var sextype ;
   }
 
   Container textSection() {
+    var yearArry = [ 'عليا اولى' , 'عليا ثانية' , 'الخامسة' , 'الرابعة' , 'الثالثة' , 'الثانية' , 'الاولى'];
+
     var sex = ['ذكر' , 'انثى'];
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
@@ -147,26 +150,24 @@ var sextype ;
             '  المرحلة ',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
-          TextFormField(
-            validator: (value){
-              if(value!.isEmpty) return 'يجب ادخال  المرحلة';
-              return null;
+          
+          DropdownButtonFormField(
+
+            items :  yearArry.map( (String item){
+              return DropdownMenuItem<String>(
+                value: item,
+                child: Text(item),
+              );
+            } ).toList(),
+
+            onChanged: (value) {
+            
+              yearName = value;
+           
+              
             },
-            controller: yearController,
-            cursorColor: Colors.black,
 
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-
-              icon: Icon(Icons.email, color: Colors.white70),
-
-
-              hintStyle: TextStyle(color: Colors.white70),
             ),
-          ),
          
           Text(
             '  مكان الولادة ',
@@ -357,7 +358,7 @@ var sextype ;
           ElevatedButton(
         onPressed:  () {
           if(globalKey.currentState!.validate()){
-            store(studentNameController.text,  sextype , bLocationController.text , bDateController.text , locationController.text , numberController.text , yearController.text , emailController.text , passController.text );
+            store(studentNameController.text,  sextype , bLocationController.text , bDateController.text , locationController.text , numberController.text , yearName, emailController.text , passController.text );
           }
         },    
         child: Text(" حفظ", style: TextStyle(color: Colors.white70)),

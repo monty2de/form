@@ -63,7 +63,7 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return ExamTableShow(this.widget.role , 1);
+                        return ExamTableShow(this.widget.role , 'الاولى');
                         } ));
               },
             ),
@@ -80,7 +80,7 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return ExamTableShow(this.widget.role , 2);
+                        return ExamTableShow(this.widget.role , 'الثانية');
                         } ));
               },
             ),
@@ -97,7 +97,7 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return ExamTableShow(this.widget.role , 3);
+                        return ExamTableShow(this.widget.role , 'الثالثة');
                         } ));
               },
             ),
@@ -115,7 +115,7 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return ExamTableShow(this.widget.role , 4);
+                        return ExamTableShow(this.widget.role , 'الرابعة');
                         } ));
               },
             ),
@@ -133,7 +133,7 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                        return ExamTableShow(this.widget.role , 5);
+                        return ExamTableShow(this.widget.role , 'الخامسة');
                         } ));
               },
             ),

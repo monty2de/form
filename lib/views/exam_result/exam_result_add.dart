@@ -23,6 +23,7 @@ late int type;
 class ExamResultAddState extends State<ExamResultAdd> {
 
   var subjectName ;
+  var yearName;
 
   String generateRandomString(int len) {
     var r = Random.secure();
@@ -86,6 +87,8 @@ class ExamResultAddState extends State<ExamResultAdd> {
   }
 
   Container textSection() {
+    var yearArry = [ 'عليا اولى' , 'عليا ثانية' , 'الخامسة' , 'الرابعة' , 'الثالثة' , 'الثانية' , ' الاولى'];
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
       child: Column(
@@ -118,26 +121,24 @@ class ExamResultAddState extends State<ExamResultAdd> {
             '  المرحلة ',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
-          TextFormField(
-            validator: (value){
-              if(value!.isEmpty) return 'يجب ادخال  المرحلة';
-              return null;
+          
+          DropdownButtonFormField(
+
+            items :  yearArry.map( (String item){
+              return DropdownMenuItem<String>(
+                value: item,
+                child: Text(item),
+              );
+            } ).toList(),
+
+            onChanged: (value) {
+            
+              yearName = value;
+           
+              
             },
-            controller: yearController,
-            cursorColor: Colors.black,
 
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-
-              icon: Icon(Icons.email, color: Colors.white70),
-
-
-              hintStyle: TextStyle(color: Colors.white70),
             ),
-          ),
          
           Text(
             '  الدرجة ',
@@ -232,7 +233,7 @@ class ExamResultAddState extends State<ExamResultAdd> {
         onPressed:  () {
        
           if(globalKey.currentState!.validate()){
-            store(studentNameController.text,  yearController.text , degreeController.text , subjectName );
+            store(studentNameController.text,  yearName , degreeController.text , subjectName );
           }
         },    
         child: Text(" حفظ", style: TextStyle(color: Colors.white70)),

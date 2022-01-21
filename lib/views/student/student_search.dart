@@ -6,18 +6,18 @@ import '../../drawer.dart';
 
 
 // ignore: must_be_immutable
-class StudentsNamesShow extends StatefulWidget {
+class SearchStudent extends StatefulWidget {
 
   late int role;
-  late String year;
+  late String name;
 
-  StudentsNamesShow(this.role , this.year);
+  SearchStudent(this.role , this.name);
 
   @override
-  StudentsNamesShowState createState() => StudentsNamesShowState();
+  SearchStudentState createState() => SearchStudentState();
 }
 
-class StudentsNamesShowState extends State<StudentsNamesShow> {
+class SearchStudentState extends State<SearchStudent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +32,7 @@ class StudentsNamesShowState extends State<StudentsNamesShow> {
           
         
         centerTitle: true,
-        title: Text('قائمة الطلاب'),
+        title: Text('النتائج '),
       ),
       body: Center(
         child: Column(
@@ -40,7 +40,7 @@ class StudentsNamesShowState extends State<StudentsNamesShow> {
           children: <Widget>[
             
            FutureBuilder(
-            future:   StudentController().index(this.widget.year),
+            future:   StudentController().search(this.widget.name),
             builder: ( BuildContext context , AsyncSnapshot snapshot ){
     
               switch ( snapshot.connectionState ){

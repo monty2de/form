@@ -30,7 +30,8 @@ class StudentsUpdateState extends State<StudentsUpdate> {
   var globalKey = GlobalKey<FormState>();
   late  TextEditingController locationController = new TextEditingController( text: this.widget.student.location);
   late  TextEditingController numberController = new TextEditingController( text: this.widget.student.number);
-var sextype ;
+  var sextype ;
+  var yearName;
   late TextEditingController studentNameController = new TextEditingController(text: this.widget.student.name);
   late  TextEditingController yearController = new TextEditingController(text: this.widget.student.year );
 
@@ -45,6 +46,9 @@ var sextype ;
 
       if (sex == null) {
         sex = this.widget.student.sex;
+      }
+      if (year == null) {
+        year = this.widget.student.year;
       }
    
 
@@ -92,6 +96,8 @@ var sextype ;
 
   Container textSection() {
     var sex = ['ذكر' , 'انثى'];
+    var yearArry = [ 'عليا اولى' , 'عليا ثانية' , 'الخامسة' , 'الرابعة' , 'الثالثة' , 'الثانية' , ' الاولى'];
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
       child: Column(
@@ -149,26 +155,23 @@ var sextype ;
             '  المرحلة ',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
-          TextFormField(
-            validator: (value){
-              if(value!.isEmpty) return 'يجب ادخال  المرحلة';
-              return null;
+          DropdownButtonFormField(
+
+            items :  yearArry.map( (String item){
+              return DropdownMenuItem<String>(
+                value: item,
+                child: Text(item),
+              );
+            } ).toList(),
+
+            onChanged: (value) {
+            
+              yearName = value;
+           
+              
             },
-            controller: yearController,
-            cursorColor: Colors.black,
 
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-
-              icon: Icon(Icons.email, color: Colors.white70),
-
-
-              hintStyle: TextStyle(color: Colors.white70),
             ),
-          ),
          
           Text(
             '  مكان الولادة ',
@@ -312,7 +315,7 @@ var sextype ;
           ElevatedButton(
         onPressed:  () {
           if(globalKey.currentState!.validate()){
-            store(studentNameController.text,  sextype , bLocationController.text , bDateController.text , locationController.text , numberController.text , yearController.text  );
+            store(studentNameController.text,  sextype , bLocationController.text , bDateController.text , locationController.text , numberController.text , yearName  );
           }
         },    
         child: Text(" حفظ", style: TextStyle(color: Colors.white70)),

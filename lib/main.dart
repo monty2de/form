@@ -6,8 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:form/Controllers/NewsController.dart';
 import 'package:form/models/news.dart';
 import 'package:form/views/login.dart';
-import 'package:form/views/news/news_add.dart';
-import 'package:form/views/news/news_update.dart';
+import 'package:form/views/news/news_add_update.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'drawer.dart';
 
@@ -90,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ? TextButton(
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return NewsAdd(role_check);
+                    return NewsAddUpdate(role_check);
                   }));
                 },
                 child:
@@ -196,7 +195,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         if (this.role_check == 1 || this.role_check == 2) {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                            return NewsUpdate(this.role_check, news[position]);
+                            return NewsAddUpdate(this.role_check, news: news[position],);
                           }));
                         }
                       },

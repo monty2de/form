@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form/Controllers/StudentController.dart';
 import 'package:form/models/student.dart';
-import 'package:form/views/student/student_update.dart';
+import 'package:form/views/student/student_add_update.dart';
 import '../../drawer.dart';
 
 
@@ -113,7 +113,7 @@ Widget result( List<Student> result , BuildContext context ){
                                 onTap: (){
                                   if (this.widget.role == 1 || this.widget.role == 2) {
                                     Navigator.push(context, MaterialPageRoute( builder:  ( context ){
-                                  return StudentsUpdate(this.widget.role ,  result[position]);
+                                  return StudentAddUpdate(this.widget.role ,  student: result[position]);
                                   } )); 
                                   }
                                                                
@@ -135,7 +135,8 @@ Widget result( List<Student> result , BuildContext context ){
                                    
                                  });
                                 },
-                              ):Container()
+                              ):Container(),
+                              Divider()
                           ],
                         ),
                             )),

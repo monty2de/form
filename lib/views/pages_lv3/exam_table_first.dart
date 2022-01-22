@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:form/views/exam_table/exam_table_add.dart';
+import 'package:form/views/exam_table/exam_table_add_update.dart';
 import 'package:form/views/exam_table/exam_table_show.dart';
 
 import '../../drawer.dart';
@@ -26,7 +26,7 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return ExamTableAdd(this.widget.role);
+                      return ExamTableAddUpdate(this.widget.role);
                     }));
                   },
                   child:
@@ -106,23 +106,8 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
                 }));
               },
             ),
-            SizedBox(
-              height: 20,
-            ),
-            InkWell(
-              child: Text(
-                '  المرحلة الخامسة   ',
-                style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black),
-              ),
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return ExamTableShow(this.widget.role, 'الخامسة');
-                }));
-              },
-            ),
+            
+            
           ],
         ),
       ),

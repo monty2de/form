@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form/Controllers/ExamResultController.dart';
 import 'package:form/models/examResult.dart';
-import 'package:form/views/exam_result/exam_result_update.dart';
+import 'package:form/views/exam_result/exam_result_add_update.dart';
 
 import '../../drawer.dart';
 
@@ -106,8 +106,8 @@ class _ExamResultShowState extends State<ExamResultShow> {
                                   this.widget.role == 2) {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return ExamResultUpdate(
-                                      this.widget.role, result[position]);
+                                  return ExamResultAddUpdate(
+                                      this.widget.role, examResult: result[position], );
                                 }));
                               }
                             },
@@ -155,7 +155,8 @@ class _ExamResultShowState extends State<ExamResultShow> {
                                 setState(() {});
                               },
                             )
-                          : Container()
+                          : Container(),
+                          Divider()
                     ],
                   ),
                 )),

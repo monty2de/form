@@ -2,37 +2,37 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:form/models/curriculum.dart';
+import 'package:form/models/examTable.dart';
 import 'package:form/utils/app_button.dart';
 
-class CurriculumAdd extends StatefulWidget {
+class ExamTableAddUpdate extends StatefulWidget {
   final int role;
-  final int type;
+
 
   /// Should be passed when updating the curriculum
-  final Curriculum? curriculum;
+  final ExamTable? examTable;
 
-  CurriculumAdd(this.role, this.type, {this.curriculum});
+  ExamTableAddUpdate(this.role,  {this.examTable});
 
   @override
-  CurriculumAddState createState() => CurriculumAddState();
+  ExamTableAddUpdateState createState() => ExamTableAddUpdateState();
 }
 
-class CurriculumAddState extends State<CurriculumAdd> {
+class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
   String? yearName;
 
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
 
   late TextEditingController nameController;
-  late TextEditingController yearController;
+  late TextEditingController dateController;
 
   @override
   void initState() {
     super.initState();
-    yearName = widget.curriculum?.year;
-    nameController = TextEditingController(text: widget.curriculum?.name);
-    yearController = TextEditingController(text: widget.curriculum?.year);
+    yearName = widget.examTable?.year;
+    nameController = TextEditingController(text: widget.examTable?.name);
+    dateController = TextEditingController(text: widget.examTable?.date);
   }
 
   Widget textSection() {
@@ -50,12 +50,12 @@ class CurriculumAddState extends State<CurriculumAdd> {
       child: Column(
         children: <Widget>[
           Text(
-            'الاسم',
+            'اسم المادة',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           TextFormField(
             validator: (value) {
-              if (value!.isEmpty) return 'يجب ادخال الاسم';
+              if (value!.isEmpty) return 'يجب ادخال اسم المادة';
               return null;
             },
             enabled: !loading,
@@ -96,6 +96,27 @@ class CurriculumAddState extends State<CurriculumAdd> {
               });
             },
           ),
+          Text(
+            ' التاريخ',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          TextFormField(
+            validator: (value) {
+              if (value!.isEmpty) return 'يجب ادخال  التاريخ';
+              return null;
+            },
+            enabled: !loading,
+            controller: dateController,
+            cursorColor: Colors.black,
+            style: TextStyle(color: Colors.black),
+            decoration: InputDecoration(
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              icon: Icon(Icons.email, color: Colors.black),
+              hintStyle: TextStyle(color: Colors.black),
+            ),
+          ),
+          SizedBox(height: 10),
         ],
       ),
     );
@@ -111,10 +132,10 @@ class CurriculumAddState extends State<CurriculumAdd> {
             Navigator.pop(context, false);
           },
         ),
-        title: Text(widget.curriculum != null ? 'اضافة مادة' : 'تعديل مادة'),
+        title: Text(widget.examTable != null ? 'اضافة ' : 'تعديل '),
       ),
       body: Center(
-        child: Column(
+        child: ListView(
           children: [
             Form(
               key: _formKey,
@@ -125,7 +146,7 @@ class CurriculumAddState extends State<CurriculumAdd> {
                 onPressed: () async {
                   setState(() => loading = true);
                   if (_formKey.currentState!.validate()) {
-                    await addNewCurriculum(nameController.text, yearName);
+                    await addNewExamTable(nameController.text, yearName , dateController.text);
                     setState(() => loading = true);
                   }
                 },
@@ -136,26 +157,29 @@ class CurriculumAddState extends State<CurriculumAdd> {
     );
   }
 
-  Future addNewCurriculum(String name, year) async {
+  Future addNewExamTable(String name, year , date) async {
     
     //This means that the user is performing an update
-    if (widget.curriculum != null) {
+    if (widget.examTable != null) {
+      if (year == null) {
+      year = this.widget.examTable?.year;
+      }
       var subject = FirebaseFirestore.instance
-          .collection('curriculum')
-          .doc(this.widget.curriculum!.id);
+          .collection('examTable')
+          .doc(this.widget.examTable!.id);
       await subject.update(
-          {'id': this.widget.curriculum!.id, 'name': name, 'year': year});
+          {'id': this.widget.examTable!.id, 'name': name, 'year': year , 'date':date});
       Navigator.pop(context);
       return;
     }
     String id = generateRandomString(32);
     final check =
-        await FirebaseFirestore.instance.collection('curriculum').doc(id).get();
+        await FirebaseFirestore.instance.collection('examTable').doc(id).get();
     if (check.exists) id = generateRandomString(32);
 
-    final orders = FirebaseFirestore.instance.collection('curriculum').doc(id);
+    final orders = FirebaseFirestore.instance.collection('examTable').doc(id);
     await orders
-        .set({'id': id, 'name': name, 'year': year, 'type': this.widget.type});
+        .set({'id': id, 'name': name, 'year': year, 'date':date});
     Navigator.pop(context);
   }
 

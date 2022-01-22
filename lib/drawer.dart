@@ -1,16 +1,18 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:form/views/board/board_add_update.dart';
 import 'package:form/views/drawer_pages/about.dart';
 import 'package:form/views/drawer_pages/department_activities.dart';
 import 'package:form/views/drawer_pages/students_affairs.dart';
 import 'package:form/views/login.dart';
 import 'package:form/views/pages_lv2/curriculum_final.dart';
 import 'package:form/views/pages_lv2/curriculum_first.dart';
+import 'package:form/views/student/student_show_all.dart';
 import 'package:form/views/student/students_name_final_show.dart';
+import 'package:form/views/teacher/teacher_add_update.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'main.dart';
-import 'views/board/board_add.dart';
 import 'views/board/board_show.dart';
 import 'views/pages_lv3/exam_result_final.dart';
 import 'views/pages_lv3/exam_result_first.dart';
@@ -18,7 +20,6 @@ import 'views/pages_lv3/exam_table_final.dart';
 import 'views/pages_lv3/exam_table_first.dart';
 import 'views/pages_lv3/students_names_final.dart';
 import 'views/pages_lv3/students_names_first.dart';
-import 'views/teacher/teacher_add.dart';
 import 'views/teacher/teacher_show.dart';
 
 class NavigationDrawerWidget extends StatefulWidget {
@@ -118,10 +119,12 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                             SubCategory(
                                 name: 'اضافة عضو جديد',
                                 onPressed: () {
-                                  Navigator.pushAndRemoveUntil(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return BoardAdd(this.widget.role);
-                                  }), (Route<dynamic> route) => false);
+
+                            
+                                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                return BoardAddUpdate(this.widget.role);
+                                }));
+                                
                                 })
                         ],
                       ),
@@ -249,20 +252,35 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                           SubCategory(
                               name: 'اضافة عضو جديد',
                               onPressed: () {
-                                Navigator.pushAndRemoveUntil(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return TeacherAdd(widget.role);
-                                }), (Route<dynamic> route) => false);
+  
+                              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                              return TeacherAddUpdate(widget.role);
+                              }));
+                              
                               }),
                       ]),
                   Divider(thickness: 2),
                   buildMenuItem(
                     text: 'شؤون الطلبة',
                     onClicked: () {
-                      Navigator.pushAndRemoveUntil(context,
+                      if (widget.role ==  3) {
+                        Navigator.pushAndRemoveUntil(context,
                           MaterialPageRoute(builder: (context) {
                         return StudentsAffairs(widget.role);
                       }), (Route<dynamic> route) => false);
+                      }
+                      else{
+                        Navigator.pushAndRemoveUntil(context,
+                          MaterialPageRoute(builder: (context) {
+                        return StudentShowAll(widget.role);
+                      }), (Route<dynamic> route) => false);
+                      
+                        
+                      }
+                      
+
+
+
                     },
                   ),
                   Divider(thickness: 2),

@@ -182,7 +182,8 @@ class _CurriculumFinalState extends State<CurriculumFinal> {
                                 }
                               },
                             )
-                          : Container()
+                          : Container(),
+                          Divider()
                     ],
                   ),
                 )),

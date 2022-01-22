@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:form/views/exam_table/exam_table_add.dart';
+import 'package:form/views/exam_table/exam_table_add_update.dart';
 import 'package:form/views/exam_table/exam_table_show.dart';
 
 import '../../drawer.dart';
@@ -26,7 +26,7 @@ class _ExamTableFinalState extends State<ExamTableFinal> {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return ExamTableAdd(this.widget.role);
+                      return ExamTableAddUpdate(this.widget.role);
                     }));
                   },
                   child:

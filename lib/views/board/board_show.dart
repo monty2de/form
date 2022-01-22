@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form/Controllers/BoardController.dart';
 import 'package:form/models/board.dart';
-import 'package:form/views/board/board_update.dart';
+import 'package:form/views/board/board_add_update.dart';
 
 import '../../drawer.dart';
 
@@ -99,8 +99,8 @@ class _BoardShowState extends State<BoardShow> {
                                   this.widget.role == 2) {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return BoardUpdate(
-                                      this.widget.role, result[position]);
+                                  return BoardAddUpdate(
+                                      this.widget.role, board:result[position]);
                                 }));
                               }
                             },
@@ -118,8 +118,8 @@ class _BoardShowState extends State<BoardShow> {
                                   this.widget.role == 2) {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return BoardUpdate(
-                                      this.widget.role, result[position]);
+                                  return BoardAddUpdate(
+                                      this.widget.role, board:result[position]);
                                 }));
                               }
                             },
@@ -145,7 +145,8 @@ class _BoardShowState extends State<BoardShow> {
                                 }
                               },
                             )
-                          : Container()
+                          : Container(),
+                          Divider()
                     ],
                   ),
                 )),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:form/views/student/student_add_update.dart';
 import 'package:form/views/student/student_search.dart';
-import 'package:form/views/student/students_add.dart';
 import 'package:form/views/student/students_name_show.dart';
 
 import '../../drawer.dart';
@@ -32,7 +32,7 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return StudentsAdd(this.widget.role);
+                      return StudentAddUpdate(this.widget.role);
                     }));
                   },
                   child:
@@ -133,23 +133,7 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
                 }));
               },
             ),
-            SizedBox(
-              height: 20,
-            ),
-            InkWell(
-              child: Text(
-                '  المرحلة الخامسة   ',
-                style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black),
-              ),
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return StudentsNamesShow(this.widget.role, 'الخامسة');
-                }));
-              },
-            ),
+
           ],
         ),
       ),

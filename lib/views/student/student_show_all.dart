@@ -6,29 +6,25 @@ import '../../drawer.dart';
 
 
 // ignore: must_be_immutable
-class StudentsNamesShow extends StatefulWidget {
+class StudentShowAll extends StatefulWidget {
 
   late int role;
-  late String year;
 
-  StudentsNamesShow(this.role , this.year);
+
+  StudentShowAll(this.role );
 
   @override
-  StudentsNamesShowState createState() => StudentsNamesShowState();
+  StudentShowAllState createState() => StudentShowAllState();
 }
 
-class StudentsNamesShowState extends State<StudentsNamesShow> {
+class StudentShowAllState extends State<StudentShowAll> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
 
-        leading: IconButton(icon: Icon(Icons.arrow_back_ios ,  ),
-        onPressed:() {
-          Navigator.pop(context, false);
-        },
-      ),
+        
           
         
         centerTitle: true,
@@ -40,7 +36,7 @@ class StudentsNamesShowState extends State<StudentsNamesShow> {
           children: <Widget>[
             
            FutureBuilder(
-            future:   StudentController().index(this.widget.year),
+            future:   StudentController().all(),
             builder: ( BuildContext context , AsyncSnapshot snapshot ){
     
               switch ( snapshot.connectionState ){
@@ -136,7 +132,7 @@ Widget result( List<Student> result , BuildContext context ){
                                  });
                                 },
                               ):Container(),
-                              Divider()
+                              Divider(),
                           ],
                         ),
                             )),

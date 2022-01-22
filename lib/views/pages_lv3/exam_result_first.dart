@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form/Controllers/curriculumController.dart';
 import 'package:form/models/curriculum.dart';
-import 'package:form/views/exam_result/exam_result_add.dart';
+import 'package:form/views/exam_result/exam_result_add_update.dart';
 import 'package:form/views/exam_result/exam_result_show.dart';
 
 import '../../drawer.dart';
@@ -28,7 +28,7 @@ class _ExamResultFirstState extends State<ExamResultFirst> {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return ExamResultAdd(this.widget.role, 1);
+                      return ExamResultAddUpdate(this.widget.role);
                     }));
                   },
                   child: Text(" اضافة درجة ",
@@ -142,7 +142,8 @@ class _ExamResultFirstState extends State<ExamResultFirst> {
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.black),
-                          )
+                          ),
+Divider()
                         ],
                       )
                     ],

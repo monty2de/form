@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form/Controllers/TeacherController.dart';
 import 'package:form/models/teacher.dart';
-import 'package:form/views/teacher/teacher_update.dart';
+import 'package:form/views/teacher/teacher_add_update.dart';
 import '../../drawer.dart';
 
 // ignore: must_be_immutable
@@ -105,8 +105,8 @@ class TeacherShowState extends State<TeacherShow> {
                               if (this.widget.role == 1) {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return TeacherUpdate(
-                                      this.widget.role, result[position]);
+                                  return TeacherAddUpdate(
+                                      this.widget.role, teacher: result[position],);
                                 }));
                               }
                             },
@@ -129,7 +129,8 @@ class TeacherShowState extends State<TeacherShow> {
                                 setState(() {});
                               },
                             )
-                          : Container()
+                          : Container(),
+                          Divider()
                     ],
                   ),
                 )),

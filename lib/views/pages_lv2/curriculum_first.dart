@@ -180,7 +180,8 @@ class _CurriculumFirstState extends State<CurriculumFirst> {
                                 }
                               },
                             )
-                          : Container()
+                          : Container(),
+                          Divider()
                     ],
                   ),
                 ),

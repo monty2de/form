@@ -19,6 +19,20 @@ class StudentController {
 
     return item;
   }
+  all()async {
+     var q = await FirebaseFirestore.instance
+        .collection('students')
+        
+        .get();
+    item = [];
+    q.docs.forEach((DocumentSnapshot element) {
+      Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+
+      item.add(Student.fromFirebase(data));
+    });
+
+    return item;
+  }
 
   show() async {
     var q = await FirebaseFirestore.instance

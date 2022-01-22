@@ -1,65 +1,55 @@
 import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:form/models/curriculum.dart';
+import 'package:form/models/news.dart';
 import 'package:form/utils/app_button.dart';
 
-class CurriculumAdd extends StatefulWidget {
+class NewsAddUpdate extends StatefulWidget {
   final int role;
-  final int type;
 
   /// Should be passed when updating the curriculum
-  final Curriculum? curriculum;
+  final News? news;
 
-  CurriculumAdd(this.role, this.type, {this.curriculum});
+  NewsAddUpdate(this.role, {this.news});
 
   @override
-  CurriculumAddState createState() => CurriculumAddState();
+  NewsAddUpdateState createState() => NewsAddUpdateState();
 }
 
-class CurriculumAddState extends State<CurriculumAdd> {
-  String? yearName;
+class NewsAddUpdateState extends State<NewsAddUpdate> {
+
 
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
 
-  late TextEditingController nameController;
-  late TextEditingController yearController;
+  late TextEditingController bodyController;
+  late TextEditingController titleController;
 
   @override
   void initState() {
     super.initState();
-    yearName = widget.curriculum?.year;
-    nameController = TextEditingController(text: widget.curriculum?.name);
-    yearController = TextEditingController(text: widget.curriculum?.year);
+    bodyController = TextEditingController(text: widget.news?.body);
+    titleController = TextEditingController(text: widget.news?.title);
   }
 
   Widget textSection() {
-    List<String> yearArry = [
-      'عليا اولى',
-      'عليا ثانية',
-      'الرابعة',
-      'الثالثة',
-      'الثانية',
-      'الاولى',
-    ];
+  
 
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
         children: <Widget>[
           Text(
-            'الاسم',
+            'العنوان',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           TextFormField(
             validator: (value) {
-              if (value!.isEmpty) return 'يجب ادخال الاسم';
+              if (value!.isEmpty) return 'يجب ادخال العنوان';
               return null;
             },
             enabled: !loading,
-            controller: nameController,
+            controller: titleController,
             cursorColor: Colors.black,
             style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
@@ -71,30 +61,24 @@ class CurriculumAddState extends State<CurriculumAdd> {
           ),
           SizedBox(height: 10),
           Text(
-            'المرحلة',
+            'الوصف',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
-          DropdownButtonFormField<String>(
-            value: yearName,
-            items: yearArry.map((String item) {
-              return DropdownMenuItem<String>(value: item, child: Text(item));
-            }).toList(),
+          TextFormField(
             validator: (value) {
-              if (value!.isEmpty) return 'يجب اختيار المرحلة';
+              if (value!.isEmpty) return 'يجب ادخال الوصف';
               return null;
             },
-            enableFeedback: !loading,
+            enabled: !loading,
+            controller: bodyController,
+            cursorColor: Colors.black,
+            style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              icon: Icon(Icons.stacked_bar_chart, color: Colors.black),
+              icon: Icon(Icons.email, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
-            onChanged: (value) {
-              setState(() {
-                yearName = value;
-              });
-            },
           ),
         ],
       ),
@@ -111,7 +95,7 @@ class CurriculumAddState extends State<CurriculumAdd> {
             Navigator.pop(context, false);
           },
         ),
-        title: Text(widget.curriculum != null ? 'اضافة مادة' : 'تعديل مادة'),
+        title: Text(widget.news != null ? 'اضافة خبر' : 'تعديل خبر'),
       ),
       body: Center(
         child: Column(
@@ -125,7 +109,7 @@ class CurriculumAddState extends State<CurriculumAdd> {
                 onPressed: () async {
                   setState(() => loading = true);
                   if (_formKey.currentState!.validate()) {
-                    await addNewCurriculum(nameController.text, yearName);
+                    await addNewnews(titleController.text, bodyController.text);
                     setState(() => loading = true);
                   }
                 },
@@ -136,26 +120,26 @@ class CurriculumAddState extends State<CurriculumAdd> {
     );
   }
 
-  Future addNewCurriculum(String name, year) async {
+  Future addNewnews(String title, body) async {
     
     //This means that the user is performing an update
-    if (widget.curriculum != null) {
+    if (widget.news != null) {
       var subject = FirebaseFirestore.instance
-          .collection('curriculum')
-          .doc(this.widget.curriculum!.id);
+          .collection('news')
+          .doc(this.widget.news?.id);
       await subject.update(
-          {'id': this.widget.curriculum!.id, 'name': name, 'year': year});
+          {'id': this.widget.news?.id, 'title': title, 'body': body});
       Navigator.pop(context);
       return;
     }
     String id = generateRandomString(32);
     final check =
-        await FirebaseFirestore.instance.collection('curriculum').doc(id).get();
+        await FirebaseFirestore.instance.collection('news').doc(id).get();
     if (check.exists) id = generateRandomString(32);
 
-    final orders = FirebaseFirestore.instance.collection('curriculum').doc(id);
+    final orders = FirebaseFirestore.instance.collection('news').doc(id);
     await orders
-        .set({'id': id, 'name': name, 'year': year, 'type': this.widget.type});
+        .set({'id': id, 'title': title, 'body': body});
     Navigator.pop(context);
   }
 

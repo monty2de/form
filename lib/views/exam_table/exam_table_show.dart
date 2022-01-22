@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form/Controllers/ExamTableController.dart';
 import 'package:form/models/examTable.dart';
-import 'package:form/views/exam_table/exam_table_update.dart';
+import 'package:form/views/exam_table/exam_table_add_update.dart';
 import '../../drawer.dart';
 
 // ignore: must_be_immutable
@@ -113,8 +113,8 @@ class _ExamTableShowState extends State<ExamTableShow> {
                                   this.widget.role == 2) {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return ExamTableUpdate(
-                                      this.widget.role, result[position]);
+                                  return ExamTableAddUpdate(
+                                      this.widget.role, examTable: result[position],);
                                 }));
                               }
                             },
@@ -156,7 +156,8 @@ class _ExamTableShowState extends State<ExamTableShow> {
 
                                 setState(() {});
                               })
-                          : Container()
+                          : Container(),
+                          Divider()
                     ],
                   ),
                 )),

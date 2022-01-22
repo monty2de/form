@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:form/views/student/students_add.dart';
+import 'package:form/views/student/student_add_update.dart';
 import 'package:form/views/student/students_name_show.dart';
 
 import '../../drawer.dart';
@@ -26,7 +26,7 @@ class _StudentsNamesFinalState extends State<StudentsNamesFinal> {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return StudentsAdd(this.widget.role);
+                      return StudentAddUpdate(this.widget.role);
                     }));
                   },
                   child:

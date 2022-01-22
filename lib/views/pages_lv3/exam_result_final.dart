@@ -80,80 +80,44 @@ class _ExamResultFinalState extends State<ExamResultFinal> {
   }
 
   Widget result(List<Curriculum> curriculum, BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        physics: const AlwaysScrollableScrollPhysics(),
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        itemCount: curriculum.length,
-        itemBuilder: (BuildContext context, int position) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
-                child: Expanded(
-                    child: Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Row(
-                        children: [
-                          Text(
-                            'المادة:',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black),
-                          ),
-                          InkWell(
-                            child: Text(
-                              curriculum[position].name,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black),
-                            ),
-                            onTap: () {
-                              Navigator.push(context,
+
+    return DataTable(
+      columns: <DataColumn>[
+        DataColumn(
+          label: Text(" المادة"),
+          numeric: false,
+        ),
+        DataColumn(
+          label: Text(" المرحلة"),
+          numeric: false,
+        ),
+       
+      ],
+      rows: curriculum
+          .map(
+            (subject) => DataRow(
+              cells: [
+                DataCell(
+                  InkWell(
+                      child: Text(subject.name),
+                      onTap: () {
+                        Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 return ExamResultShow(this.widget.role,
-                                    curriculum[position].name);
+                                    subject.name);
                               }));
-                            },
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 15),
-                      Row(
-                        children: [
-                          Text(
-                            'المرحلة:',
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black),
-                          ),
-                          Text(
-                            curriculum[position].year,
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black),
-                          ),
-                          Divider()
-                        ],
-                      )
-                    ],
-                  ),
-                )),
-              ),
-            ],
-          );
-        },
-      ),
+                      }),
+                ),
+                DataCell(
+                  Text(subject.year),
+                ),
+                
+              ],
+            ),
+          )
+          .toList(),
     );
+   
   }
 
   Widget _loading() {

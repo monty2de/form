@@ -73,100 +73,62 @@ class _ExamTableShowState extends State<ExamTableShow> {
   }
 
   Widget result(List<ExamTable> result, BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        physics: const AlwaysScrollableScrollPhysics(),
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        itemCount: result.length,
-        itemBuilder: (BuildContext context, int position) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
-                child: Expanded(
-                    child: Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Row(
-                        children: [
-                          Text(
-                            'الاسم:',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black),
-                          ),
-                          InkWell(
-                            child: Text(
-                              result[position].name,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black),
-                            ),
-                            onTap: () {
-                              if (this.widget.role == 1 ||
-                                  this.widget.role == 2) {
-                                Navigator.push(context,
+
+    return DataTable(
+      columns: <DataColumn>[
+        DataColumn(
+          label: Text(" الاسم"),
+          numeric: false,
+        ),
+        DataColumn(
+          label: Text(" التاريخ"),
+          numeric: false,
+        ),
+        DataColumn(
+          label: Text(" حذف"),
+          numeric: false,
+        ),
+      ],
+      rows: result
+          .map(
+            (table) => DataRow(
+              cells: [
+                DataCell(
+                  InkWell(
+                      child: Text(table.name),
+                      onTap: () {
+                        if (this.widget.role == 1 || this.widget.role == 2) {
+                          Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
                                   return ExamTableAddUpdate(
-                                      this.widget.role, examTable: result[position],);
+                                      this.widget.role, examTable: table,);
                                 }));
-                              }
-                            },
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 15),
-                      Row(
-                        children: [
-                          Text(
-                            'التاريخ:',
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black),
-                          ),
-                          Text(
-                            result[position].date,
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 15),
-                      this.widget.role == 1 || this.widget.role == 2
-                          ? InkWell(
-                              child: Text(
-                                'حذف',
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.red),
-                              ),
-                              onTap: () {
-                                ExamTableController().delet(
-                                    result[position].id, this.widget.year);
+                        }
+                      }),
+                ),
+                DataCell(
+                  Text(table.date),
+                ),
+                DataCell(
+                  InkWell(
+                    child: Text('حذف'),
+                    onTap: () {
+                      if (this.widget.role == 1 || this.widget.role == 2) {
+                      ExamTableController().delet(
+                                    table.id, this.widget.year);
 
-                                setState(() {});
-                              })
-                          : Container(),
-                          Divider()
-                    ],
+                      setState(() {});
+
+                      }
+                    },
                   ),
-                )),
-              ),
-            ],
-          );
-        },
-      ),
+                ),
+              ],
+            ),
+          )
+          .toList(),
     );
+  
   }
 
   Widget _loading() {

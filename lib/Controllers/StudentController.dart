@@ -99,8 +99,7 @@ class StudentController {
     return item;
   }
 
-  void delet(String id, int position) async {
-    print(position);
+  void delet(String id) async {
 
     // ignore: unused_local_variable
     var q = await FirebaseFirestore.instance

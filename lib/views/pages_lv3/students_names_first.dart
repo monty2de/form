@@ -161,7 +161,7 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
-              icon: Icon(Icons.email, color: Colors.white70),
+              // icon: Icon(Icons.email, color: Colors.white70),
               hintStyle: TextStyle(color: Colors.white70),
             ),
           ),

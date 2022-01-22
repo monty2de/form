@@ -1,4 +1,6 @@
 
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,7 @@ class StudentAddUpdate extends StatefulWidget {
 }
 
 class StudentAddUpdateState extends State<StudentAddUpdate> {
+  
   String? yearName;
   String? sextype ;
 
@@ -81,7 +84,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              icon: Icon(Icons.email, color: Colors.black),
+              // icon: Icon(Icons.email, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
           ),
@@ -91,7 +94,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           DropdownButtonFormField<String>(
-            value: yearName,
+           
             items: yearArry.map((String item) {
               return DropdownMenuItem<String>(value: item, child: Text(item));
             }).toList(),
@@ -103,7 +106,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              icon: Icon(Icons.stacked_bar_chart, color: Colors.black),
+              // icon: Icon(Icons.stacked_bar_chart, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
             onChanged: (value) {
@@ -118,7 +121,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           DropdownButtonFormField<String>(
-            value: sextype,
+          
             items: sex.map((String item) {
               return DropdownMenuItem<String>(value: item, child: Text(item));
             }).toList(),
@@ -130,7 +133,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              icon: Icon(Icons.stacked_bar_chart, color: Colors.black),
+              // icon: Icon(Icons.stacked_bar_chart, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
             onChanged: (value) {
@@ -156,7 +159,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              icon: Icon(Icons.email, color: Colors.black),
+              // icon: Icon(Icons.email, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
           ),
@@ -178,7 +181,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              icon: Icon(Icons.email, color: Colors.black),
+              // icon: Icon(Icons.email, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
           ),
@@ -200,7 +203,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              icon: Icon(Icons.email, color: Colors.black),
+              // icon: Icon(Icons.email, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
           ),
@@ -222,7 +225,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              icon: Icon(Icons.email, color: Colors.black),
+              // icon: Icon(Icons.email, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
           ),
@@ -240,7 +243,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              icon: Icon(Icons.email, color: Colors.black),
+              // icon: Icon(Icons.email, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
           ):Container(),
@@ -259,7 +262,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              icon: Icon(Icons.email, color: Colors.black),
+              // icon: Icon(Icons.email, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
           ):Container(),

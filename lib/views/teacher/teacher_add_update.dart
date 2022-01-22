@@ -65,7 +65,7 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              icon: Icon(Icons.email, color: Colors.black),
+              // icon: Icon(Icons.email, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
           ),
@@ -87,7 +87,7 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              icon: Icon(Icons.stacked_bar_chart, color: Colors.black),
+              // icon: Icon(Icons.stacked_bar_chart, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
             onChanged: (value) {
@@ -113,7 +113,7 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              icon: Icon(Icons.email, color: Colors.black),
+              // icon: Icon(Icons.email, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
           ),
@@ -134,7 +134,7 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              icon: Icon(Icons.email, color: Colors.black),
+              // icon: Icon(Icons.email, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
           ),
@@ -156,7 +156,7 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              icon: Icon(Icons.email, color: Colors.black),
+              // icon: Icon(Icons.email, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
           ),
@@ -174,7 +174,7 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              icon: Icon(Icons.email, color: Colors.black),
+              // icon: Icon(Icons.email, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
           ): Container(),
@@ -193,7 +193,7 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              icon: Icon(Icons.email, color: Colors.black),
+              // icon: Icon(Icons.email, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
           ): Container(),
@@ -237,6 +237,7 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Future addNewTeacher(String teacherName, BDate, location, number, email, pass,position) async {
     
     //This means that the user is performing an update

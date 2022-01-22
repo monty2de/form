@@ -65,7 +65,7 @@ class CurriculumAddState extends State<CurriculumAdd> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              icon: Icon(Icons.email, color: Colors.black),
+              // icon: Icon(Icons.email, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
           ),
@@ -87,7 +87,7 @@ class CurriculumAddState extends State<CurriculumAdd> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              icon: Icon(Icons.stacked_bar_chart, color: Colors.black),
+              // icon: Icon(Icons.stacked_bar_chart, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
             onChanged: (value) {

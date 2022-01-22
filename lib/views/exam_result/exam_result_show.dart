@@ -73,99 +73,62 @@ class _ExamResultShowState extends State<ExamResultShow> {
   }
 
   Widget result(List<ExamResult> result, BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        physics: const AlwaysScrollableScrollPhysics(),
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        itemCount: result.length,
-        itemBuilder: (BuildContext context, int position) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
-                child: Expanded(
-                    child: Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Row(
-                        children: [
-                          InkWell(
-                            child: Text(
-                              'اسم الطالب:',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black),
-                            ),
-                            onTap: () {
-                              if (this.widget.role == 1 ||
-                                  this.widget.role == 2) {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return ExamResultAddUpdate(
-                                      this.widget.role, examResult: result[position], );
-                                }));
-                              }
-                            },
-                          ),
-                          Text(
-                            result[position].studentName,
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'الدرجة:',
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black),
-                          ),
-                          Text(
-                            result[position].degree,
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black),
-                          )
-                        ],
-                      ),
-                      SizedBox(height: 15),
-                      this.widget.role == 1 || this.widget.role == 2
-                          ? InkWell(
-                              child: Text(
-                                'حذف',
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.red),
-                              ),
-                              onTap: () {
-                                ExamResultController()
-                                    .delet(result[position].id);
-                                setState(() {});
-                              },
-                            )
-                          : Container(),
-                          Divider()
-                    ],
+    return DataTable(
+      columns: <DataColumn>[
+        DataColumn(
+          label: Text(" الاسم"),
+          numeric: false,
+        ),
+        DataColumn(
+          label: Text(" الدرجة"),
+          numeric: false,
+        ),
+        DataColumn(
+          label: Text(" حذف"),
+          numeric: false,
+        ),
+      ],
+      rows: result
+          .map(
+            (examresult) => DataRow(
+              cells: [
+                DataCell(
+                  InkWell(
+                      child: Text(examresult.studentName),
+                      onTap: () {
+                        if (this.widget.role == 1 || this.widget.role == 2) {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return ExamResultAddUpdate(
+                              this.widget.role,
+                              examResult: examresult,
+                            );
+                          }));
+                        }
+                      }),
+                ),
+                DataCell(
+                  Text(examresult.degree),
+                ),
+                DataCell(
+                  InkWell(
+                    child: Text('حذف'),
+                    onTap: () {
+                      if (this.widget.role == 1 || this.widget.role == 2) {
+                        ExamResultController().delet(examresult.id);
+
+                        setState(() {});
+                      }
+                    },
                   ),
-                )),
-              ),
-            ],
-          );
-        },
-      ),
+                ),
+              ],
+            ),
+          )
+          .toList(),
     );
+
+  
   }
 
   Widget _loading() {

@@ -65,70 +65,62 @@ class StudentsNamesFinalShowState extends State<StudentsNamesFinalShow> {
   }
 
   Widget result(List<Student> result, BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        physics: const AlwaysScrollableScrollPhysics(),
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        itemCount: result.length,
-        itemBuilder: (BuildContext context, int position) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
-                child: Expanded(
-                    child: Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      InkWell(
-                        child: Text(
-                          result[position].name,
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black),
-                        ),
-                        onTap: () {
-                          if (this.widget.role == 1 || this.widget.role == 2) {
-                            Navigator.push(context,
+
+    return DataTable(
+      columns: <DataColumn>[
+        DataColumn(
+          label: Text(" الاسم"),
+          numeric: false,
+        ),
+        DataColumn(
+          label: Text(" المرحلة"),
+          numeric: false,
+        ),
+        DataColumn(
+          label: Text(" حذف"),
+          numeric: false,
+        ),
+      ],
+      rows: result
+          .map(
+            (student) => DataRow(
+              cells: [
+                DataCell(
+                  InkWell(
+                      child: Text(student.name),
+                      onTap: () {
+                        if (this.widget.role == 1 || this.widget.role == 2) {
+                          Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
                               return StudentAddUpdate(
-                                  this.widget.role, student: result[position]);
+                                  this.widget.role, student: student);
                             }));
-                          }
-                        },
-                      ),
-                      SizedBox(height: 15),
-                      this.widget.role == 1 || this.widget.role == 2
-                          ? InkWell(
-                              child: Text(
-                                'حذف',
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.red),
-                              ),
-                              onTap: () {
-                                StudentController()
-                                    .delet(result[position].id, position);
+                        }
+                      }),
+                ),
+                DataCell(
+                  Text(student.year),
+                ),
+                DataCell(
+                  InkWell(
+                    child: Text('حذف'),
+                    onTap: () {
+                      if (this.widget.role == 1 || this.widget.role == 2) {
+                      StudentController().delet(student.id);
+                    
 
-                                setState(() {});
-                              },
-                            )
-                          : Container(),
-                          Divider()
-                    ],
+                      setState(() {});
+
+                      }
+                    },
                   ),
-                )),
-              ),
-            ],
-          );
-        },
-      ),
+                ),
+              ],
+            ),
+          )
+          .toList(),
     );
+ 
   }
 
   Widget _loading() {

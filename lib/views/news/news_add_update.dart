@@ -55,7 +55,7 @@ class NewsAddUpdateState extends State<NewsAddUpdate> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              icon: Icon(Icons.email, color: Colors.black),
+              // icon: Icon(Icons.email, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
           ),
@@ -76,7 +76,7 @@ class NewsAddUpdateState extends State<NewsAddUpdate> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              icon: Icon(Icons.email, color: Colors.black),
+              // icon: Icon(Icons.email, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
           ),

@@ -8,6 +8,7 @@ import 'package:form/views/drawer_pages/students_affairs.dart';
 import 'package:form/views/login.dart';
 import 'package:form/views/pages_lv2/curriculum_final.dart';
 import 'package:form/views/pages_lv2/curriculum_first.dart';
+import 'package:form/views/student/student_login.dart';
 import 'package:form/views/student/student_show_all.dart';
 import 'package:form/views/student/students_name_final_show.dart';
 import 'package:form/views/teacher/teacher_add_update.dart';
@@ -119,12 +120,10 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                             SubCategory(
                                 name: 'اضافة عضو جديد',
                                 onPressed: () {
-
-                            
-                                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                return BoardAddUpdate(this.widget.role);
-                                }));
-                                
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return BoardAddUpdate(this.widget.role);
+                                  }));
                                 })
                         ],
                       ),
@@ -252,35 +251,30 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                           SubCategory(
                               name: 'اضافة عضو جديد',
                               onPressed: () {
-  
-                              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                              return TeacherAddUpdate(widget.role);
-                              }));
-                              
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return TeacherAddUpdate(widget.role);
+                                }));
                               }),
                       ]),
                   Divider(thickness: 2),
                   buildMenuItem(
                     text: 'شؤون الطلبة',
                     onClicked: () {
-                      if (widget.role ==  3) {
+                      if (widget.role == 1 || widget.role == 2) {
+                        Navigator.pushAndRemoveUntil(context,
+                            MaterialPageRoute(builder: (context) {
+                          return StudentShowAll(widget.role);
+                        }), (Route<dynamic> route) => false);
+                      } else {
+
+                          
                         Navigator.pushAndRemoveUntil(context,
                           MaterialPageRoute(builder: (context) {
-                        return StudentsAffairs(widget.role);
+                        return StudentLogin();
                       }), (Route<dynamic> route) => false);
+
                       }
-                      else{
-                        Navigator.pushAndRemoveUntil(context,
-                          MaterialPageRoute(builder: (context) {
-                        return StudentShowAll(widget.role);
-                      }), (Route<dynamic> route) => false);
-                      
-                        
-                      }
-                      
-
-
-
                     },
                   ),
                   Divider(thickness: 2),

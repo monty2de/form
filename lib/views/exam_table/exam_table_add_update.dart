@@ -20,19 +20,19 @@ class ExamTableAddUpdate extends StatefulWidget {
 
 class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
   String? yearName;
+  late DateTime dateStudent;
+
 
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
 
   late TextEditingController nameController;
-  late TextEditingController dateController;
 
   @override
   void initState() {
     super.initState();
     yearName = widget.examTable?.year;
     nameController = TextEditingController(text: widget.examTable?.name);
-    dateController = TextEditingController(text: widget.examTable?.date);
   }
 
   Widget textSection() {
@@ -96,26 +96,21 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
               });
             },
           ),
-          Text(
-            ' التاريخ',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-          TextFormField(
-            validator: (value) {
-              if (value!.isEmpty) return 'يجب ادخال  التاريخ';
-              return null;
-            },
-            enabled: !loading,
-            controller: dateController,
-            cursorColor: Colors.black,
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              // icon: Icon(Icons.email, color: Colors.black),
-              hintStyle: TextStyle(color: Colors.black),
-            ),
-          ),
+          ElevatedButton(
+        child: Text('التاريخ  '),
+        onPressed: () {
+           showDatePicker(
+             context: context,
+             initialDate: DateTime.now(),
+             firstDate: DateTime(1960),
+             lastDate: DateTime (2222)
+          ). then((date) {
+             setState(() {
+                dateStudent = date!;
+             });
+           });
+        },
+       ),
           SizedBox(height: 10),
         ],
       ),
@@ -146,7 +141,7 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
                 onPressed: () async {
                   setState(() => loading = true);
                   if (_formKey.currentState!.validate()) {
-                    await addNewExamTable(nameController.text, yearName , dateController.text);
+                    await addNewExamTable(nameController.text, yearName , dateStudent);
                     setState(() => loading = true);
                   }
                 },
@@ -163,6 +158,9 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
     if (widget.examTable != null) {
       if (year == null) {
       year = this.widget.examTable?.year;
+      }
+      if (date == null) {
+      date = this.widget.examTable?.date;
       }
       var subject = FirebaseFirestore.instance
           .collection('examTable')

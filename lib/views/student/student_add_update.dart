@@ -23,11 +23,11 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
   
   String? yearName;
   String? sextype ;
+  late DateTime dateStudent;
 
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
 
-  late TextEditingController bDateController;
   late TextEditingController bLocationController;
   late TextEditingController locationController;
   late TextEditingController numberController;
@@ -43,7 +43,6 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
     yearName = widget.student?.year;
     sextype = widget.student?.sex;
     studentNameController = TextEditingController(text: widget.student?.name);
-    bDateController = TextEditingController(text: widget.student?.BDate);
     bLocationController = TextEditingController(text: widget.student?.BLocation);
     locationController = TextEditingController(text: widget.student?.location);
     numberController = TextEditingController(text: widget.student?.number);
@@ -165,26 +164,8 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
           ),
 
           SizedBox(height: 10),
-          Text(
-            ' تاريخ الولادة',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-          TextFormField(
-            validator: (value) {
-              if (value!.isEmpty) return 'يجب ادخال  تاريخ الولادة';
-              return null;
-            },
-            enabled: !loading,
-            controller: bDateController,
-            cursorColor: Colors.black,
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              // icon: Icon(Icons.email, color: Colors.black),
-              hintStyle: TextStyle(color: Colors.black),
-            ),
-          ),
+          
+         
 
           SizedBox(height: 10),
           Text(
@@ -266,6 +247,22 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
               hintStyle: TextStyle(color: Colors.black),
             ),
           ):Container(),
+
+          ElevatedButton(
+        child: Text('تاريخ الولادة '),
+        onPressed: () {
+           showDatePicker(
+             context: context,
+             initialDate: DateTime.now(),
+             firstDate: DateTime(1960),
+             lastDate: DateTime (2222)
+          ). then((date) {
+             setState(() {
+                dateStudent = date!;
+             });
+           });
+        },
+       )
         ],
       ),
     );
@@ -295,7 +292,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
                 onPressed: () async {
                   setState(() => loading = true);
                   if (_formKey.currentState!.validate()) {
-                    await addNewStudent(studentNameController.text, sextype , bLocationController.text, bDateController.text , locationController.text , numberController.text , yearName , emailController.text , passController.text );
+                    await addNewStudent(studentNameController.text, sextype , bLocationController.text, dateStudent , locationController.text , numberController.text , yearName , emailController.text , passController.text );
                     setState(() => loading = true);
                   }
                 },
@@ -310,6 +307,9 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
     
     //This means that the user is performing an update
     if (widget.student != null) {
+      if (BDate == null) {
+        BDate = this.widget.student!.BDate;
+      }
       var subject = FirebaseFirestore.instance
           .collection('students')
           .doc(this.widget.student!.id);

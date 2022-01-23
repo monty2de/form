@@ -19,11 +19,12 @@ class TeacherAddUpdate extends StatefulWidget {
 
 class TeacherAddUpdateState extends State<TeacherAddUpdate> {
   String? position;
+    late DateTime dateStudent;
+
 
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
 
-  late TextEditingController bDateController;
   late TextEditingController emailController;
   late TextEditingController locationController;
   late TextEditingController passController;
@@ -39,7 +40,6 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
     passController = TextEditingController();
     emailController = TextEditingController();
     locationController = TextEditingController(text: widget.teacher?.location);
-    bDateController = TextEditingController(text: widget.teacher?.BDate);
 
   }
 
@@ -96,27 +96,7 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
               });
             },
           ),
-          SizedBox(height: 10),
-          Text(
-            'تاريخ الولادة',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-          TextFormField(
-            validator: (value) {
-              if (value!.isEmpty) return 'يجب ادخال تاريخ الولادة';
-              return null;
-            },
-            enabled: !loading,
-            controller: bDateController,
-            cursorColor: Colors.black,
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              // icon: Icon(Icons.email, color: Colors.black),
-              hintStyle: TextStyle(color: Colors.black),
-            ),
-          ),
+          
           SizedBox(height: 10),
           Text(
             'العنوان',
@@ -197,6 +177,22 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
               hintStyle: TextStyle(color: Colors.black),
             ),
           ): Container(),
+
+          ElevatedButton(
+        child: Text('تاريخ الولادة '),
+        onPressed: () {
+           showDatePicker(
+             context: context,
+             initialDate: DateTime.now(),
+             firstDate: DateTime(1960),
+             lastDate: DateTime (2222)
+          ). then((date) {
+             setState(() {
+                dateStudent = date!;
+             });
+           });
+        },
+       )
         ],
       ),
     );
@@ -226,7 +222,7 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
                 onPressed: () async {
                   setState(() => loading = true);
                   if (_formKey.currentState!.validate()) {
-                    await addNewTeacher(teacherNameController.text, bDateController.text , locationController.text , numberController.text , emailController.text , passController.text , position  );
+                    await addNewTeacher(teacherNameController.text, dateStudent , locationController.text , numberController.text , emailController.text , passController.text , position  );
                     setState(() => loading = true);
                   }
                 },
@@ -242,6 +238,9 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
     
     //This means that the user is performing an update
     if (widget.teacher != null) {
+      if (BDate == null) {
+        BDate = this.widget.teacher!.BDate;
+      }
       var subject = FirebaseFirestore.instance
           .collection('teachers')
           .doc(this.widget.teacher!.id);

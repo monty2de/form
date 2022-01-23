@@ -107,7 +107,7 @@ class _ExamTableShowState extends State<ExamTableShow> {
                       }),
                 ),
                 DataCell(
-                  Text(table.date),
+                  Text(table.date.toString()),
                 ),
                 DataCell(
                   InkWell(

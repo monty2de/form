@@ -1,6 +1,6 @@
 class Teacher {
-  // ignore: non_constant_identifier_names
   late String id, name, email, location, number, position, pass;
+  // ignore: non_constant_identifier_names
   late DateTime BDate;
 
   // ignore: non_constant_identifier_names

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:form/views/board/board_add_update.dart';
 import 'package:form/views/drawer_pages/about.dart';
 import 'package:form/views/drawer_pages/department_activities.dart';
-import 'package:form/views/drawer_pages/students_affairs.dart';
 import 'package:form/views/login.dart';
 import 'package:form/views/pages_lv2/curriculum_final.dart';
 import 'package:form/views/pages_lv2/curriculum_first.dart';

@@ -13,6 +13,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+ var loading = 0;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   @override
@@ -39,14 +40,22 @@ class _LoginState extends State<Login> {
                   obscureText: true,
                 ),
                 SizedBox(height: 20),
+                loading == 1? _loading():Container(),
                 AppButton(
                   title: "تسجيل الدخول",
                   onPressed: () async {
-                    UserCredential authResult = await FirebaseAuth.instance
+                   late UserCredential authResult;
+                   setState(() {
+                        loading = 1;
+                      });
+                    try {
+                      
+                       authResult = await FirebaseAuth.instance
                         .signInWithEmailAndPassword(
                             email: emailController.text.trim(),
                             password: passwordController.text);
 
+                      
                     SharedPreferences sharedPreferences =
                         await SharedPreferences.getInstance();
 
@@ -60,6 +69,9 @@ class _LoginState extends State<Login> {
                           .where('id', isEqualTo: authResult.user!.uid)
                           .get();
                     }
+                    setState(() {
+                        loading = 0;
+                      });
 
                     user.docs.forEach((data) {
                       sharedPreferences.setInt('role', data.data()['role']);
@@ -72,6 +84,19 @@ class _LoginState extends State<Login> {
                         return MyHomePage(role: role);
                       }), (Route<dynamic> route) => false);
                     });
+                      
+                    } on FirebaseAuthException catch (e) {
+                      setState(() {
+                        loading =0;
+                      });
+             
+                      final message = e.message;
+                      final snackBar = SnackBar(
+                         content:  Text(message!));
+                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
+                    
+                    
                   },
                 ),
                 SizedBox(height: 60),
@@ -113,6 +138,14 @@ class _LoginState extends State<Login> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _loading() {
+    return Container(
+      child: Center(
+        child: CircularProgressIndicator(),
       ),
     );
   }

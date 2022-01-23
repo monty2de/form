@@ -12,6 +12,8 @@ class StudentLogin extends StatefulWidget {
 }
 
 class _StudentLoginState extends State<StudentLogin> {
+   var loading = 0;
+
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   @override
@@ -38,9 +40,16 @@ class _StudentLoginState extends State<StudentLogin> {
                   obscureText: true,
                 ),
                 SizedBox(height: 20),
+                loading == 1? _loading():Container(),
                 AppButton(
                   title: "تسجيل الدخول",
                   onPressed: () async {
+                    setState(() {
+                        loading = 1;
+                      });
+
+                    try {
+                      
                     UserCredential authResult = await FirebaseAuth.instance
                         .signInWithEmailAndPassword(
                             email: emailController.text.trim(),
@@ -53,7 +62,9 @@ class _StudentLoginState extends State<StudentLogin> {
                         .where('id', isEqualTo: authResult.user!.uid)
                         .get();
                     
-
+setState(() {
+                        loading = 0;
+                      });
                     user.docs.forEach((data) {
                       sharedPreferences.setInt('role', data.data()['role']);
                       sharedPreferences.setString('id', data.data()['id']);
@@ -65,6 +76,18 @@ class _StudentLoginState extends State<StudentLogin> {
                         return StudentsAffairs(role);
                       }), (Route<dynamic> route) => false);
                     });
+                    }on FirebaseAuthException catch (e) {
+
+                      setState(() {
+                        loading =0;
+                      });
+             
+                      final message = e.message;
+                      final snackBar = SnackBar(
+                         content:  Text(message!));
+                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
+                    
                   },
                 ),
                
@@ -73,6 +96,14 @@ class _StudentLoginState extends State<StudentLogin> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _loading() {
+    return Container(
+      child: Center(
+        child: CircularProgressIndicator(),
       ),
     );
   }

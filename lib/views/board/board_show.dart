@@ -1,9 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:form/Controllers/BoardController.dart';
 import 'package:form/models/board.dart';
 import 'package:form/views/board/board_add_update.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../drawer.dart';

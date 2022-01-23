@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:form/views/board/board_add_update.dart';
 import 'package:form/views/drawer_pages/about.dart';
@@ -82,12 +83,37 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                         subCategories: [
                           SubCategory(
                               name: 'اللجنة العلمية',
-                              onPressed: () {
-                                Navigator.pushAndRemoveUntil(context,
+                              onPressed: () async{
+                                if (widget.role == 2) {
+
+
+                                  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+                                  var id = sharedPreferences.getString('id');
+                                  var user = await FirebaseFirestore.instance.collection('teachers').where('id', isEqualTo: id).get();
+                                  var position;
+                                  user.docs.forEach((data) {
+                                    position = data.data()['position'];
+                                  });
+
+                                   
+                                  Navigator.pushAndRemoveUntil(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return BoardShow(
+                                      widget.role, ' اللجنة العلمية' , position: position,);
+                                }), (Route<dynamic> route) => false);
+                                  
+                                }else{
+                                  Navigator.pushAndRemoveUntil(context,
                                     MaterialPageRoute(builder: (context) {
                                   return BoardShow(
                                       widget.role, ' اللجنة العلمية');
                                 }), (Route<dynamic> route) => false);
+                                }
+
+                                
+                              
+                              
+                              
                               }),
                           SubCategory(
                               name: 'مجلس القسم',

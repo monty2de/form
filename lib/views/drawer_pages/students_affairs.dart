@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:form/Controllers/StudentController.dart';
 import 'package:form/models/student.dart';
 import 'package:form/views/student/student_add_update.dart';
+import 'package:form/views/student/student_change_pass.dart';
 import '../../drawer.dart';
 
 // ignore: must_be_immutable
@@ -189,6 +190,23 @@ class StudentsAffairsState extends State<StudentsAffairs> {
                               MaterialPageRoute(builder: (context) {
                             return StudentAddUpdate(
                                 this.widget.role, student: result[position]);
+                          }));
+                        },
+                      ),
+                      SizedBox(height: 15),
+                      InkWell(
+                        child: Text(
+                          ' تغيير كلمة السر',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.red),
+                        ),
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return StudentChangePass(
+                                result[position].pass);
                           }));
                         },
                       ),

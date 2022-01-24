@@ -1,6 +1,6 @@
 class Student {
   // ignore: non_constant_identifier_names
-  late String id, name , BLocation, email, location, number, sex, year;
+  late String id, name , BLocation, email, location, number, sex, year , pass;
   // ignore: non_constant_identifier_names
   late DateTime BDate;
 
@@ -17,5 +17,6 @@ class Student {
     this.number = data['number'];
     this.sex = data['sex'];
     this.year = data['year'];
+    this.pass = data['pass'];
   }
 }

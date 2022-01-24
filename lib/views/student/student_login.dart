@@ -62,12 +62,13 @@ class _StudentLoginState extends State<StudentLogin> {
                         .where('id', isEqualTo: authResult.user!.uid)
                         .get();
                     
-setState(() {
+                        setState(() {
                         loading = 0;
                       });
                     user.docs.forEach((data) {
                       sharedPreferences.setInt('role', data.data()['role']);
                       sharedPreferences.setString('id', data.data()['id']);
+                      sharedPreferences.setString('email', data.data()['email']);
                       // ignore: unused_local_variable
                       var role = int.parse(sharedPreferences.getInt('role').toString());
 

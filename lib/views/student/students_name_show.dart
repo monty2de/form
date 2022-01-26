@@ -36,7 +36,6 @@ class StudentsNamesShowState extends State<StudentsNamesShow> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             
            FutureBuilder(

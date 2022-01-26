@@ -82,7 +82,8 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
               return DropdownMenuItem<String>(value: item, child: Text(item));
             }).toList(),
             validator: (value) {
-              if (value!.isEmpty) return 'يجب اختيار المرحلة';
+              var temp = value?? 0;
+              if (temp == 0) return 'يجب اختيار المرحلة';
               return null;
             },
             enableFeedback: !loading,
@@ -143,6 +144,11 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
                     child: Text(item),
                   );
                 }).toList(),
+                validator: (value) {
+              var temp = value?? 0;
+              if (temp == 0) return 'يجب اختيار اسم المادة';
+              return null;
+            },
                 enableFeedback: !loading,
                 decoration: InputDecoration(
                   border:
@@ -171,7 +177,7 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
             Navigator.pop(context, false);
           },
         ),
-        title: Text(widget.examResult != null ? 'اضافة درجة' : 'تعديل درجة'),
+        title: Text(widget.examResult != null ? 'تعديل درجة' : 'اضافة درجة'),
       ),
       body: Center(
         child: ListView(

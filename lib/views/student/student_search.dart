@@ -36,7 +36,6 @@ class SearchStudentState extends State<SearchStudent> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             
            FutureBuilder(

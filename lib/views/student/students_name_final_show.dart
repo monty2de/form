@@ -25,7 +25,6 @@ class StudentsNamesFinalShowState extends State<StudentsNamesFinalShow> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             FutureBuilder(
               future: StudentController().show(),

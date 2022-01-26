@@ -41,7 +41,6 @@ class _ExamResultFinalState extends State<ExamResultFinal> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             FutureBuilder(
               future: CurriculumController().index(2),

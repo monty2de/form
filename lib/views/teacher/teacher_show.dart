@@ -26,7 +26,6 @@ class TeacherShowState extends State<TeacherShow> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             FutureBuilder(
               future: TeacherController().index(this.widget.position),

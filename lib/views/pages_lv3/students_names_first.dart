@@ -16,8 +16,7 @@ class StudentsNamesFirst extends StatefulWidget {
 }
 
 class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
-  late TextEditingController studentNameController =
-      new TextEditingController();
+  late TextEditingController studentNameController = new TextEditingController();
 
   var globalKey = GlobalKey<FormState>();
 
@@ -44,8 +43,9 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
         title: Text('اسماء الطلبة'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: ListView(
+
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Form(
               key: globalKey,
@@ -68,70 +68,78 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
                 ],
               ),
             ),
-            InkWell(
-              child: Text(
-                '  المرحلة الاولى  ',
-                style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black),
+            Center(
+              child: InkWell(
+                child: Text(
+                  '  المرحلة الاولى  ',
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black),
+                ),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return StudentsNamesShow(this.widget.role, 'الاولى');
+                  }));
+                },
               ),
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return StudentsNamesShow(this.widget.role, 'الاولى');
-                }));
-              },
             ),
             SizedBox(
               height: 20,
             ),
-            InkWell(
-              child: Text(
-                '  المرحلة الثانية  ',
-                style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black),
+            Center(
+              child: InkWell(
+                child: Text(
+                  '  المرحلة الثانية  ',
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black),
+                ),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return StudentsNamesShow(this.widget.role, 'الثانية');
+                  }));
+                },
               ),
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return StudentsNamesShow(this.widget.role, 'الثانية');
-                }));
-              },
             ),
             SizedBox(
               height: 20,
             ),
-            InkWell(
-              child: Text(
-                '  المرحلة الثالثة   ',
-                style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black),
+            Center(
+              child: InkWell(
+                child: Text(
+                  '  المرحلة الثالثة   ',
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black),
+                ),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return StudentsNamesShow(this.widget.role, 'الثالثة');
+                  }));
+                },
               ),
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return StudentsNamesShow(this.widget.role, 'الثالثة');
-                }));
-              },
             ),
             SizedBox(
               height: 20,
             ),
-            InkWell(
-              child: Text(
-                '  المرحلة الرابعة   ',
-                style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black),
+            Center(
+              child: InkWell(
+                child: Text(
+                  '  المرحلة الرابعة   ',
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black),
+                ),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return StudentsNamesShow(this.widget.role, 'الرابعة');
+                  }));
+                },
               ),
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return StudentsNamesShow(this.widget.role, 'الرابعة');
-                }));
-              },
             ),
 
           ],

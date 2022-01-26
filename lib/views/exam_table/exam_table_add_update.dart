@@ -80,7 +80,8 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
               return DropdownMenuItem<String>(value: item, child: Text(item));
             }).toList(),
             validator: (value) {
-              if (value!.isEmpty) return 'يجب اختيار المرحلة';
+              var temp = value?? 0;
+              if ( temp == 0 ) return 'يجب اختيار المرحلة';
               return null;
             },
             enableFeedback: !loading,
@@ -127,7 +128,7 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
             Navigator.pop(context, false);
           },
         ),
-        title: Text(widget.examTable != null ? 'اضافة ' : 'تعديل '),
+        title: Text(widget.examTable != null ? 'تعديل ' : 'اضافة '),
       ),
       body: Center(
         child: ListView(
@@ -162,24 +163,70 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
       if (date == null) {
       date = this.widget.examTable?.date;
       }
-      var subject = FirebaseFirestore.instance
-          .collection('examTable')
-          .doc(this.widget.examTable!.id);
-      await subject.update(
-          {'id': this.widget.examTable!.id, 'name': name, 'year': year , 'date':date});
+      
+      var id;
+      var testExist = await FirebaseFirestore.instance.collection('examTable').where('year' , isEqualTo: year).get();
+      testExist.docs.forEach((data) {           
+        id = data.data()['id'];
+      });
+
+    // ignore: unused_local_variable
+    var item  =  FirebaseFirestore.instance.collection('examTable').doc(id).collection('Item').doc(this.widget.examTable?.id).update({
+      'id' : this.widget.examTable?.id,
+      'name' : name,
+      'date' : date,
+      'year' : year,
+    });
+
       Navigator.pop(context);
       return;
     }
-    String id = generateRandomString(32);
-    final check =
-        await FirebaseFirestore.instance.collection('examTable').doc(id).get();
-    if (check.exists) id = generateRandomString(32);
 
-    final orders = FirebaseFirestore.instance.collection('examTable').doc(id);
-    await orders
-        .set({'id': id, 'name': name, 'year': year, 'date':date});
+
+
+
+    var id;
+    var testExist = await FirebaseFirestore.instance.collection('examTable').where('year' , isEqualTo: year).get();
+    if(testExist.docs.isEmpty){
+       id = generateRandomString(32);
+
+      var check = await FirebaseFirestore.instance.collection('examTable').doc(id).get();
+      if(check.exists){
+        id = generateRandomString(32);
+      }
+
+      var examYear  =  FirebaseFirestore.instance.collection('examTable').doc(id) ;
+      await examYear.set({
+      'id' : id,
+      'year' : year,
+      
+      
+      });
+
+    }else{
+      testExist.docs.forEach((data) {           
+        id = data.data()['id']   ;
+ 
+      });
+
+    }
+    // ignore: non_constant_identifier_names
+    var id_for_item = generateRandomString(32);
+    // ignore: unused_local_variable
+    var item  =  FirebaseFirestore.instance.collection('examTable').doc(id).collection('Item').doc(id_for_item).set({
+      'id' : id_for_item,
+      'name' : name,
+      'date' : date,
+      'year' : year,
+      });
+
+
+
     Navigator.pop(context);
-  }
+
+
+
+  } 
 
   String generateRandomString(int len) {
     var r = Random.secure();

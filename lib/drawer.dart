@@ -343,7 +343,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                         onPressed: () {
                           Navigator.pushAndRemoveUntil(context,
                               MaterialPageRoute(builder: (context) {
-                            return CurriculumFirst(widget.role);
+                            return CurriculumFinal(widget.role);
                           }), (Route<dynamic> route) => false);
                         },
                       ),

@@ -34,7 +34,6 @@ class _ExamResultShowState extends State<ExamResultShow> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             FutureBuilder(
               future: ExamResultController().index(this.widget.subjectName),

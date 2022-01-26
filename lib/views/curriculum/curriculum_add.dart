@@ -75,12 +75,13 @@ class CurriculumAddState extends State<CurriculumAdd> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           DropdownButtonFormField<String>(
-            value: yearName,
+            
             items: yearArry.map((String item) {
               return DropdownMenuItem<String>(value: item, child: Text(item));
             }).toList(),
             validator: (value) {
-              if (value!.isEmpty) return 'يجب اختيار المرحلة';
+              var temp = value?? 0;
+              if (temp == 0) return 'يجب اختيار المرحلة';
               return null;
             },
             enableFeedback: !loading,
@@ -111,7 +112,7 @@ class CurriculumAddState extends State<CurriculumAdd> {
             Navigator.pop(context, false);
           },
         ),
-        title: Text(widget.curriculum != null ? 'اضافة مادة' : 'تعديل مادة'),
+        title: Text(widget.curriculum != null ? 'تعديل مادة' : 'اضافة مادة'),
       ),
       body: Center(
         child: Column(

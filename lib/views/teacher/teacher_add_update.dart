@@ -80,7 +80,8 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
               return DropdownMenuItem<String>(value: item, child: Text(item));
             }).toList(),
             validator: (value) {
-              if (value!.isEmpty) return 'يجب اختيار العنوان الوظيفي';
+              var temp = value?? 0;
+              if ( temp == 0 ) return 'يجب اختيار العنوان الوظيفي';
               return null;
             },
             enableFeedback: !loading,
@@ -208,7 +209,7 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
             Navigator.pop(context, false);
           },
         ),
-        title: Text(widget.teacher!= null ? 'اضافة موظف' : 'تعديل موظف'),
+        title: Text(widget.teacher!= null ? 'تعديل موظف' : 'اضافة موظف'),
       ),
       body: Center(
         child: ListView(

@@ -65,6 +65,11 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
                     child: Text(item),
                   );
                 }).toList(),
+                validator: (value) {
+              var temp = value?? 0;
+              if (temp == 0) return 'يجب اختيار اسم العضو';
+              return null;
+            },
                 enableFeedback: !loading,
                 decoration: InputDecoration(
                 border:
@@ -86,12 +91,13 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           DropdownButtonFormField<String>(
-            value: boardName,
+            
             items: positionarray.map((String item) {
               return DropdownMenuItem<String>(value: item, child: Text(item));
             }).toList(),
             validator: (value) {
-              if (value!.isEmpty) return 'يجب اختيار اسم اللجنة';
+              var temp = value?? 0;
+              if (temp == 0) return 'يجب اختيار اسم اللجنة';
               return null;
             },
             enableFeedback: !loading,
@@ -117,7 +123,7 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
     return Scaffold(
       appBar: AppBar(
         
-        title: Text(widget.board != null ? 'اضافة عضو' : 'تعديل عضو'),
+        title: Text(widget.board != null ? 'تعديل عضو' : 'اضافة عضو'),
       ),
       body: Center(
         child: Column(

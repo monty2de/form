@@ -34,7 +34,7 @@ class _ExamTableShowState extends State<ExamTableShow> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+           
           children: <Widget>[
             FutureBuilder(
               future: ExamTableController().index(this.widget.year),
@@ -110,17 +110,20 @@ class _ExamTableShowState extends State<ExamTableShow> {
                   Text(table.date.toString()),
                 ),
                 DataCell(
-                  InkWell(
-                    child: Text('حذف'),
-                    onTap: () {
-                      if (this.widget.role == 1 || this.widget.role == 2) {
-                      ExamTableController().delet(
-                                    table.id, this.widget.year);
+                  Container(
+                     margin: const EdgeInsets.all( 4),
+                    child: InkWell(
+                      child: Text('حذف'),
+                      onTap: () {
+                        if (this.widget.role == 1 || this.widget.role == 2) {
+                        ExamTableController().delet(
+                                      table.id, this.widget.year);
 
-                      setState(() {});
+                        setState(() {});
 
-                      }
-                    },
+                        }
+                      },
+                    ),
                   ),
                 ),
               ],

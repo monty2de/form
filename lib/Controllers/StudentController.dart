@@ -37,11 +37,11 @@ class StudentController {
   show() async {
     var q = await FirebaseFirestore.instance
         .collection('students')
-        .where('year', isEqualTo: '6')
+        .where('year', isEqualTo: 'عليا اولى')
         .get();
     var q2 = await FirebaseFirestore.instance
         .collection('students')
-        .where('year', isEqualTo: '7')
+        .where('year', isEqualTo: 'عليا ثانية')
         .get();
     item = [];
     q.docs.forEach((DocumentSnapshot element) {

@@ -98,8 +98,9 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
               return DropdownMenuItem<String>(value: item, child: Text(item));
             }).toList(),
             validator: (value) {
-              if (value!.isEmpty) return 'يجب اختيار المرحلة';
-              return null;
+              var temp = value?? 0;
+              if (temp == 0) return 'يجب اختيار المرحلة';
+        
             },
             enableFeedback: !loading,
             decoration: InputDecoration(
@@ -125,7 +126,8 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
               return DropdownMenuItem<String>(value: item, child: Text(item));
             }).toList(),
             validator: (value) {
-              if (value!.isEmpty) return 'يجب اختيار الجنس';
+              var temp = value?? 0;
+              if (temp == 0) return 'يجب اختيار الجنس';
               return null;
             },
             enableFeedback: !loading,
@@ -278,7 +280,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             Navigator.pop(context, false);
           },
         ),
-        title: Text(widget.student != null ? 'اضافة طالب' : 'تعديل طالب'),
+        title: Text(widget.student != null ? 'تعديل طالب' : 'اضافة طالب'),
       ),
       body: Center(
         child: ListView(

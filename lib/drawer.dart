@@ -205,7 +205,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                               Navigator.pushAndRemoveUntil(context,
                                   MaterialPageRoute(builder: (context) {
                                 return BoardShow(
-                                    widget.role, 'اللجنة الامتحانية- عليا');
+                                    widget.role, 'اللجنة الامتحانية-عليا');
                               }), (Route<dynamic> route) => false);
                             }),
                         SubCategory(

@@ -100,11 +100,10 @@ class _LoginState extends State<Login> {
                   },
                 ),
                 SizedBox(height: 60),
-                Row(
+                Column(
                   children: [
                     AppButton(
                       title: 'الاستمرار بدون حساب',
-                      width: MediaQuery.of(context).size.width * 0.4,
                       type: ButtonType.secondary,
                       onPressed: () async {
                         SharedPreferences sharedPreferences =

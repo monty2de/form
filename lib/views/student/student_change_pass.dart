@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:form/utils/app_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// ignore: must_be_immutable
 class StudentChangePass extends StatefulWidget {
   late String currentPass;
   StudentChangePass(this.currentPass);

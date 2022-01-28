@@ -4,9 +4,8 @@ import 'package:form/models/student.dart';
 import 'package:form/views/student/student_add_update.dart';
 import '../../drawer.dart';
 
-// ignore: must_be_immutable
 class StudentsNamesFinalShow extends StatefulWidget {
-  late int role;
+  final int role;
 
   StudentsNamesFinalShow(this.role);
 
@@ -32,12 +31,9 @@ class StudentsNamesFinalShowState extends State<StudentsNamesFinalShow> {
                 switch (snapshot.connectionState) {
                   case ConnectionState.active:
                     return _loading();
-                    // ignore: dead_code
-                    break;
+
                   case ConnectionState.waiting:
                     return _loading();
-                    // ignore: dead_code
-                    break;
 
                   case ConnectionState.done:
                     if (snapshot.hasError) {
@@ -48,10 +44,6 @@ class StudentsNamesFinalShowState extends State<StudentsNamesFinalShow> {
                     }
                     break;
                   case ConnectionState.none:
-                    break;
-                  case ConnectionState.waiting:
-                    break;
-                  case ConnectionState.active:
                     break;
                 }
                 return Container();
@@ -64,69 +56,45 @@ class StudentsNamesFinalShowState extends State<StudentsNamesFinalShow> {
   }
 
   Widget result(List<Student> result, BuildContext context) {
-
     return DataTable(
       columns: <DataColumn>[
-        DataColumn(
-          label: Text(" الاسم"),
-          numeric: false,
-        ),
-        DataColumn(
-          label: Text(" المرحلة"),
-          numeric: false,
-        ),
-        DataColumn(
-          label: Text(" حذف"),
-          numeric: false,
-        ),
+        DataColumn(label: Text("الاسم"), numeric: false),
+        DataColumn(label: Text("المرحلة"), numeric: false),
+        if (this.widget.role == 1 || this.widget.role == 2)
+          DataColumn(label: Text(""), numeric: false),
       ],
       rows: result
           .map(
             (student) => DataRow(
               cells: [
-                DataCell(
-                  InkWell(
-                      child: Text(student.name),
-                      onTap: () {
-                        if (this.widget.role == 1 || this.widget.role == 2) {
-                          Navigator.push(context,
+                DataCell(Text(student.name),
+                    onTap: this.widget.role == 1 || this.widget.role == 2
+                        ? () {
+                            Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return StudentAddUpdate(
-                                  this.widget.role, student: student);
+                              return StudentAddUpdate(this.widget.role,
+                                  student: student);
                             }));
-                        }
-                      }),
-                ),
-                DataCell(
-                  Text(student.year),
-                ),
-                DataCell(
-                  InkWell(
-                    child: Text('حذف'),
-                    onTap: () {
-                      if (this.widget.role == 1 || this.widget.role == 2) {
-                      StudentController().delet(student.id);
-                    
+                          }
+                        : null),
+                DataCell(Text(student.year)),
+                if (this.widget.role == 1 || this.widget.role == 2)
+                  DataCell(Text('حذف', style: TextStyle(color: Colors.red)),
+                      onTap: () {
+                    StudentController().delet(student.id);
 
-                      setState(() {});
-
-                      }
-                    },
-                  ),
-                ),
+                    setState(() {});
+                  }),
               ],
             ),
           )
           .toList(),
     );
- 
   }
 
   Widget _loading() {
     return Container(
-      child: Center(
-        child: CircularProgressIndicator(),
-      ),
+      child: Center(child: CircularProgressIndicator()),
     );
   }
 }

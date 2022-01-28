@@ -1,11 +1,12 @@
-
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:form/models/student.dart';
 import 'package:form/utils/app_button.dart';
+import 'package:intl/intl.dart';
 
 class StudentAddUpdate extends StatefulWidget {
   final int role;
@@ -20,10 +21,9 @@ class StudentAddUpdate extends StatefulWidget {
 }
 
 class StudentAddUpdateState extends State<StudentAddUpdate> {
-  
   String? yearName;
-  String? sextype ;
-  late DateTime dateStudent;
+  String? sextype;
+  DateTime? dateStudent;
 
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
@@ -35,21 +35,19 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
   late TextEditingController passController;
   late TextEditingController emailController;
 
-  
-
   @override
   void initState() {
     super.initState();
     yearName = widget.student?.year;
     sextype = widget.student?.sex;
+    dateStudent = widget.student?.BDate;
     studentNameController = TextEditingController(text: widget.student?.name);
-    bLocationController = TextEditingController(text: widget.student?.BLocation);
+    bLocationController =
+        TextEditingController(text: widget.student?.BLocation);
     locationController = TextEditingController(text: widget.student?.location);
     numberController = TextEditingController(text: widget.student?.number);
     passController = TextEditingController();
     emailController = TextEditingController();
-
-   
   }
 
   Widget textSection() {
@@ -61,7 +59,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
       'الثانية',
       'الاولى',
     ];
-    var sex = ['ذكر' , 'انثى'];
+    var sex = ['ذكر', 'انثى'];
 
     return Padding(
       padding: const EdgeInsets.all(10.0),
@@ -93,14 +91,13 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           DropdownButtonFormField<String>(
-           
+            value: yearName,
             items: yearArry.map((String item) {
               return DropdownMenuItem<String>(value: item, child: Text(item));
             }).toList(),
             validator: (value) {
-              var temp = value?? 0;
+              var temp = value ?? 0;
               if (temp == 0) return 'يجب اختيار المرحلة';
-        
             },
             enableFeedback: !loading,
             decoration: InputDecoration(
@@ -121,12 +118,12 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           DropdownButtonFormField<String>(
-          
+            value: sextype,
             items: sex.map((String item) {
               return DropdownMenuItem<String>(value: item, child: Text(item));
             }).toList(),
             validator: (value) {
-              var temp = value?? 0;
+              var temp = value ?? 0;
               if (temp == 0) return 'يجب اختيار الجنس';
               return null;
             },
@@ -164,14 +161,10 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
               hintStyle: TextStyle(color: Colors.black),
             ),
           ),
-
           SizedBox(height: 10),
-          
-         
-
           SizedBox(height: 10),
           Text(
-            '  العنوان',
+            'العنوان',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           TextFormField(
@@ -190,10 +183,9 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
               hintStyle: TextStyle(color: Colors.black),
             ),
           ),
-
           SizedBox(height: 10),
           Text(
-            '  رقم الهاتف',
+            'رقم الهاتف',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           TextFormField(
@@ -204,6 +196,8 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             enabled: !loading,
             controller: numberController,
             cursorColor: Colors.black,
+            keyboardType: TextInputType.number,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
               border:
@@ -213,58 +207,68 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             ),
           ),
           SizedBox(height: 10),
-          widget.student == null? Text(
-            '   الايميل',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ):Container(),
-          widget.student == null? TextFormField(
-           
-            enabled: !loading,
-            controller: emailController,
-            cursorColor: Colors.black,
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              // icon: Icon(Icons.email, color: Colors.black),
-              hintStyle: TextStyle(color: Colors.black),
-            ),
-          ):Container(),
-
+          widget.student == null
+              ? Text(
+                  'الايميل',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                )
+              : Container(),
+          widget.student == null
+              ? TextFormField(
+                  enabled: !loading,
+                  controller: emailController,
+                  cursorColor: Colors.black,
+                  style: TextStyle(color: Colors.black),
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    // icon: Icon(Icons.email, color: Colors.black),
+                    hintStyle: TextStyle(color: Colors.black),
+                  ),
+                )
+              : Container(),
           SizedBox(height: 10),
-          widget.student == null? Text(
-            '   كلمة المرور',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ):Container(),
-          widget.student == null? TextFormField(
-            
-            enabled: !loading,
-            controller: passController,
-            cursorColor: Colors.black,
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              // icon: Icon(Icons.email, color: Colors.black),
-              hintStyle: TextStyle(color: Colors.black),
+          widget.student == null
+              ? Text(
+                  'كلمة المرور',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                )
+              : Container(),
+          widget.student == null
+              ? TextFormField(
+                  enabled: !loading,
+                  controller: passController,
+                  cursorColor: Colors.black,
+                  style: TextStyle(color: Colors.black),
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    // icon: Icon(Icons.email, color: Colors.black),
+                    hintStyle: TextStyle(color: Colors.black),
+                  ),
+                )
+              : Container(),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 50,
+            child: OutlinedButton(
+              child: Text(dateStudent != null
+                  ? DateFormat.yMMMMEEEEd().format(dateStudent!)
+                  : 'تاريخ الولادة '),
+              onPressed: () {
+                showDatePicker(
+                        context: context,
+                        initialDate: dateStudent ?? DateTime.now(),
+                        firstDate: DateTime(1960),
+                        lastDate: DateTime(2222))
+                    .then((date) {
+                  setState(() {
+                    dateStudent = date!;
+                  });
+                });
+              },
             ),
-          ):Container(),
-
-          ElevatedButton(
-        child: Text('تاريخ الولادة '),
-        onPressed: () {
-           showDatePicker(
-             context: context,
-             initialDate: DateTime.now(),
-             firstDate: DateTime(1960),
-             lastDate: DateTime (2222)
-          ). then((date) {
-             setState(() {
-                dateStudent = date!;
-             });
-           });
-        },
-       )
+          )
         ],
       ),
     );
@@ -294,7 +298,16 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
                 onPressed: () async {
                   setState(() => loading = true);
                   if (_formKey.currentState!.validate()) {
-                    await addNewStudent(studentNameController.text, sextype , bLocationController.text, dateStudent , locationController.text , numberController.text , yearName , emailController.text , passController.text );
+                    await addNewStudent(
+                        studentNameController.text,
+                        sextype,
+                        bLocationController.text,
+                        dateStudent,
+                        locationController.text,
+                        numberController.text,
+                        yearName,
+                        emailController.text,
+                        passController.text);
                     setState(() => loading = true);
                   }
                 },
@@ -305,8 +318,8 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
     );
   }
 
-  Future addNewStudent(String studentName , sex , BLocation , BDate ,  location , number , year , email , pass) async {
-    
+  Future addNewStudent(String studentName, sex, BLocation, BDate, location,
+      number, year, email, pass) async {
     //This means that the user is performing an update
     if (widget.student != null) {
       if (BDate == null) {
@@ -315,39 +328,42 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
       var subject = FirebaseFirestore.instance
           .collection('students')
           .doc(this.widget.student!.id);
-      await subject.update(
-          {'id': this.widget.student!.id, 'name' : studentName,
-        'sex' : sex,
-        'BLocation' : BLocation,
-        'BDate' : BDate,
-        'location' : location,
-        'year' : year,
-        'number' : number,});
+      await subject.update({
+        'id': this.widget.student!.id,
+        'name': studentName,
+        'sex': sex,
+        'BLocation': BLocation,
+        'BDate': BDate,
+        'location': location,
+        'year': year,
+        'number': number,
+      });
       Navigator.pop(context);
       return;
     }
 
-    UserCredential _authResult = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: email.trim(), password: pass);
+    UserCredential _authResult = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email.trim(), password: pass);
 
-  
-    FirebaseFirestore.instance.collection('students').doc(_authResult.user!.uid,).set({
-        'id' : _authResult.user!.uid,
-        'name' : studentName,
-        'email' : email,
-        'sex' : sex,
-        'BLocation' : BLocation,
-        'BDate' : BDate,
-        'location' : location,
-        'year' : year,
-        'number' : number,
-        'pass' : pass,
-        'role' :3
-      });
-
+    FirebaseFirestore.instance
+        .collection('students')
+        .doc(
+          _authResult.user!.uid,
+        )
+        .set({
+      'id': _authResult.user!.uid,
+      'name': studentName,
+      'email': email,
+      'sex': sex,
+      'BLocation': BLocation,
+      'BDate': BDate,
+      'location': location,
+      'year': year,
+      'number': number,
+      'pass': pass,
+      'role': 3
+    });
 
     Navigator.pop(context);
   }
-
-  
 }

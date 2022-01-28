@@ -34,7 +34,6 @@ class _ExamTableShowState extends State<ExamTableShow> {
       ),
       body: Center(
         child: Column(
-           
           children: <Widget>[
             FutureBuilder(
               future: ExamTableController().index(this.widget.year),
@@ -73,65 +72,48 @@ class _ExamTableShowState extends State<ExamTableShow> {
   }
 
   Widget result(List<ExamTable> result, BuildContext context) {
-
     return DataTable(
       columns: <DataColumn>[
-        DataColumn(
-          label: Text(" الاسم"),
-          numeric: false,
-        ),
-        DataColumn(
-          label: Text(" التاريخ"),
-          numeric: false,
-        ),
-        DataColumn(
-          label: Text(" حذف"),
-          numeric: false,
-        ),
+        DataColumn(label: Text(" الاسم"), numeric: false),
+        DataColumn(label: Text(" التاريخ"), numeric: false),
+        if (this.widget.role == 1 || this.widget.role == 2)
+          DataColumn(label: Text(""), numeric: false),
       ],
       rows: result
           .map(
             (table) => DataRow(
               cells: [
-                DataCell(
-                  InkWell(
-                      child: Text(table.name),
-                      onTap: () {
-                        if (this.widget.role == 1 || this.widget.role == 2) {
-                          Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return ExamTableAddUpdate(
-                                      this.widget.role, examTable: table,);
-                                }));
-                        }
-                      }),
-                ),
+                DataCell(Text(table.name),
+                    onTap: this.widget.role == 1 || this.widget.role == 2
+                        ? () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return ExamTableAddUpdate(
+                                widget.role,
+                                examTable: table,
+                              );
+                            }));
+                          }
+                        : null),
                 DataCell(
                   Text(table.date.toString()),
                 ),
-                DataCell(
-                  Container(
-                     margin: const EdgeInsets.all( 4),
-                    child: InkWell(
-                      child: Text('حذف'),
-                      onTap: () {
-                        if (this.widget.role == 1 || this.widget.role == 2) {
-                        ExamTableController().delet(
-                                      table.id, this.widget.year);
-
-                        setState(() {});
-
-                        }
-                      },
+                if (this.widget.role == 1 || this.widget.role == 2)
+                  DataCell(
+                    Text(
+                      'حذف',
+                      style: TextStyle(color: Colors.red),
                     ),
+                    onTap: () {
+                      ExamTableController().delet(table.id, this.widget.year);
+                      setState(() {});
+                    },
                   ),
-                ),
               ],
             ),
           )
           .toList(),
     );
-  
   }
 
   Widget _loading() {

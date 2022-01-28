@@ -82,37 +82,32 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                         subCategories: [
                           SubCategory(
                               name: 'اللجنة العلمية',
-                              onPressed: () async{
+                              onPressed: () async {
                                 if (widget.role == 2) {
-
-
-                                  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+                                  SharedPreferences sharedPreferences =
+                                      await SharedPreferences.getInstance();
                                   var id = sharedPreferences.getString('id');
-                                  var user = await FirebaseFirestore.instance.collection('teachers').where('id', isEqualTo: id).get();
+                                  var user = await FirebaseFirestore.instance
+                                      .collection('teachers')
+                                      .where('id', isEqualTo: id)
+                                      .get();
                                   var position;
                                   user.docs.forEach((data) {
                                     position = data.data()['position'];
                                   });
-
-                                   
                                   Navigator.pushAndRemoveUntil(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return BoardShow(
-                                      widget.role, ' اللجنة العلمية' , position: position,);
-                                }), (Route<dynamic> route) => false);
-                                  
-                                }else{
+                                      MaterialPageRoute(builder: (context) {
+                                    return BoardShow(
+                                        widget.role, ' اللجنة العلمية',
+                                        position: position);
+                                  }), (Route<dynamic> route) => false);
+                                } else {
                                   Navigator.pushAndRemoveUntil(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return BoardShow(
-                                      widget.role, ' اللجنة العلمية');
-                                }), (Route<dynamic> route) => false);
+                                      MaterialPageRoute(builder: (context) {
+                                    return BoardShow(
+                                        widget.role, ' اللجنة العلمية');
+                                  }), (Route<dynamic> route) => false);
                                 }
-
-                                
-                              
-                              
-                              
                               }),
                           SubCategory(
                               name: 'مجلس القسم',
@@ -292,13 +287,10 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                           return StudentShowAll(widget.role);
                         }), (Route<dynamic> route) => false);
                       } else {
-
-                          
                         Navigator.pushAndRemoveUntil(context,
-                          MaterialPageRoute(builder: (context) {
-                        return StudentLogin();
-                      }), (Route<dynamic> route) => false);
-
+                            MaterialPageRoute(builder: (context) {
+                          return StudentLogin();
+                        }), (Route<dynamic> route) => false);
                       }
                     },
                   ),

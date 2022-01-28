@@ -11,7 +11,7 @@ class BoardAddUpdate extends StatefulWidget {
   /// Should be passed when updating the curriculum
   final Board? board;
 
-  BoardAddUpdate(this.role,  {this.board});
+  BoardAddUpdate(this.role, {this.board});
 
   @override
   BoardAddUpdateState createState() => BoardAddUpdateState();
@@ -27,7 +27,12 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
   late TextEditingController nameController;
   late TextEditingController yearController;
 
- 
+  @override
+  void initState() {
+    super.initState();
+    teacherName = widget.board?.teacherName;
+    boardName = widget.board?.name;
+  }
 
   Widget textSection() {
     var positionarray = [
@@ -46,7 +51,6 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
             'اسم العضو',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
-
           StreamBuilder<QuerySnapshot>(
             stream:
                 FirebaseFirestore.instance.collection('teachers').snapshots(),
@@ -59,6 +63,7 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
                 shubjects.add(snapshot.data!.docs[i]['name']);
               }
               return DropdownButtonFormField(
+                value: teacherName,
                 items: shubjects.map((String item) {
                   return DropdownMenuItem<String>(
                     value: item,
@@ -66,37 +71,35 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
                   );
                 }).toList(),
                 validator: (value) {
-              var temp = value?? 0;
-              if (temp == 0) return 'يجب اختيار اسم العضو';
-              return null;
-            },
+                  var temp = value ?? 0;
+                  if (temp == 0) return 'يجب اختيار اسم العضو';
+                  return null;
+                },
                 enableFeedback: !loading,
                 decoration: InputDecoration(
-                border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10)),
                   // icon: Icon(Icons.stacked_bar_chart, color: Colors.black),
                   hintStyle: TextStyle(color: Colors.black),
                 ),
-                
                 onChanged: (value) {
                   teacherName = value.toString();
                 },
               );
             },
           ),
-          
           SizedBox(height: 10),
           Text(
             'اسم اللجنة',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           DropdownButtonFormField<String>(
-            
+            value: boardName,
             items: positionarray.map((String item) {
               return DropdownMenuItem<String>(value: item, child: Text(item));
             }).toList(),
             validator: (value) {
-              var temp = value?? 0;
+              var temp = value ?? 0;
               if (temp == 0) return 'يجب اختيار اسم اللجنة';
               return null;
             },
@@ -122,7 +125,6 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        
         title: Text(widget.board != null ? 'تعديل عضو' : 'اضافة عضو'),
       ),
       body: Center(
@@ -149,17 +151,19 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
   }
 
   Future addNewBoard(String boardName, teacherName) async {
-    
     //This means that the user is performing an update
     if (widget.board != null) {
       if (teacherName == null) {
-      teacherName = this.widget.board?.teacherName;
-    }
+        teacherName = this.widget.board?.teacherName;
+      }
       var item = FirebaseFirestore.instance
           .collection('boards')
           .doc(this.widget.board!.id);
-      await item.update(
-          {'id': this.widget.board!.id, 'name': boardName, 'teacherName': teacherName});
+      await item.update({
+        'id': this.widget.board!.id,
+        'name': boardName,
+        'teacherName': teacherName
+      });
       Navigator.pop(context);
       return;
     }
@@ -169,8 +173,7 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
     if (check.exists) id = generateRandomString(32);
 
     final orders = FirebaseFirestore.instance.collection('boards').doc(id);
-    await orders
-        .set({'id': id, 'name': boardName, 'teacherName': teacherName});
+    await orders.set({'id': id, 'name': boardName, 'teacherName': teacherName});
     Navigator.pop(context);
   }
 

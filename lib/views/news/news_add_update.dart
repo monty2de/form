@@ -17,8 +17,6 @@ class NewsAddUpdate extends StatefulWidget {
 }
 
 class NewsAddUpdateState extends State<NewsAddUpdate> {
-
-
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
 
@@ -33,8 +31,6 @@ class NewsAddUpdateState extends State<NewsAddUpdate> {
   }
 
   Widget textSection() {
-  
-
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
@@ -95,7 +91,7 @@ class NewsAddUpdateState extends State<NewsAddUpdate> {
             Navigator.pop(context, false);
           },
         ),
-        title: Text(widget.news != null ? 'اضافة خبر' : 'تعديل خبر'),
+        title: Text(widget.news == null ? 'اضافة خبر' : 'تعديل خبر'),
       ),
       body: Center(
         child: Column(
@@ -121,14 +117,13 @@ class NewsAddUpdateState extends State<NewsAddUpdate> {
   }
 
   Future addNewnews(String title, body) async {
-    
     //This means that the user is performing an update
     if (widget.news != null) {
       var subject = FirebaseFirestore.instance
           .collection('news')
           .doc(this.widget.news?.id);
-      await subject.update(
-          {'id': this.widget.news?.id, 'title': title, 'body': body});
+      await subject
+          .update({'id': this.widget.news?.id, 'title': title, 'body': body});
       Navigator.pop(context);
       return;
     }
@@ -138,8 +133,7 @@ class NewsAddUpdateState extends State<NewsAddUpdate> {
     if (check.exists) id = generateRandomString(32);
 
     final orders = FirebaseFirestore.instance.collection('news').doc(id);
-    await orders
-        .set({'id': id, 'title': title, 'body': body});
+    await orders.set({'id': id, 'title': title, 'body': body});
     Navigator.pop(context);
   }
 

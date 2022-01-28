@@ -6,9 +6,8 @@ import 'package:form/views/exam_result/exam_result_show.dart';
 
 import '../../drawer.dart';
 
-// ignore: must_be_immutable
 class ExamResultFirst extends StatefulWidget {
-  late int role;
+  final int role;
 
   ExamResultFirst(this.role);
 
@@ -48,12 +47,9 @@ class _ExamResultFirstState extends State<ExamResultFirst> {
                 switch (snapshot.connectionState) {
                   case ConnectionState.active:
                     return _loading();
-                    // ignore: dead_code
-                    break;
+
                   case ConnectionState.waiting:
                     return _loading();
-                    // ignore: dead_code
-                    break;
 
                   case ConnectionState.done:
                     if (snapshot.hasError) {
@@ -64,10 +60,6 @@ class _ExamResultFirstState extends State<ExamResultFirst> {
                     }
                     break;
                   case ConnectionState.none:
-                    break;
-                  case ConnectionState.waiting:
-                    break;
-                  case ConnectionState.active:
                     break;
                 }
                 return Container();
@@ -82,35 +74,19 @@ class _ExamResultFirstState extends State<ExamResultFirst> {
   Widget result(List<Curriculum> curriculum, BuildContext context) {
     return DataTable(
       columns: <DataColumn>[
-        DataColumn(
-          label: Text(" المادة"),
-          numeric: false,
-        ),
-        DataColumn(
-          label: Text(" المرحلة"),
-          numeric: false,
-        ),
-       
+        DataColumn(label: Text("المادة"), numeric: false),
+        DataColumn(label: Text("المرحلة"), numeric: false),
       ],
       rows: curriculum
           .map(
             (subject) => DataRow(
               cells: [
-                DataCell(
-                  InkWell(
-                      child: Text(subject.name),
-                      onTap: () {
-                        Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return ExamResultShow(this.widget.role,
-                                    subject.name);
-                              }));
-                      }),
-                ),
-                DataCell(
-                  Text(subject.year),
-                ),
-                
+                DataCell(Text(subject.name), onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ExamResultShow(this.widget.role, subject.name);
+                  }));
+                }),
+                DataCell(Text(subject.year)),
               ],
             ),
           )
@@ -120,9 +96,7 @@ class _ExamResultFirstState extends State<ExamResultFirst> {
 
   Widget _loading() {
     return Container(
-      child: Center(
-        child: CircularProgressIndicator(),
-      ),
+      child: Center(child: CircularProgressIndicator()),
     );
   }
 }

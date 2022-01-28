@@ -5,9 +5,8 @@ import 'package:form/views/curriculum/curriculum_add.dart';
 
 import '../../drawer.dart';
 
-// ignore: must_be_immutable
 class CurriculumFinal extends StatefulWidget {
-  late int role;
+  final int role;
 
   CurriculumFinal(this.role);
 
@@ -30,7 +29,7 @@ class _CurriculumFinalState extends State<CurriculumFinal> {
                       return CurriculumAdd(this.widget.role, 2);
                     }));
                   },
-                  child: Text(" اضافة مادة ",
+                  child: Text("اضافة مادة ",
                       style: TextStyle(color: Colors.white)),
                 )
               : Container(),
@@ -62,11 +61,6 @@ class _CurriculumFinalState extends State<CurriculumFinal> {
                     }
                     break;
                   case ConnectionState.none:
-                    break;
-                  case ConnectionState.waiting:
-                    break;
-                  case ConnectionState.active:
-                    break;
                 }
                 return Container();
               },
@@ -80,60 +74,45 @@ class _CurriculumFinalState extends State<CurriculumFinal> {
   Widget result(List<Curriculum> result, BuildContext context) {
     return DataTable(
       columns: <DataColumn>[
-        DataColumn(
-          label: Text(" الاسم"),
-          numeric: false,
-        ),
-        DataColumn(
-          label: Text(" المرحلة"),
-          numeric: false,
-        ),
-        DataColumn(
-          label: Text(" حذف"),
-          numeric: false,
-        ),
+        DataColumn(label: Text("الاسم"), numeric: false),
+        DataColumn(label: Text("المرحلة"), numeric: false),
+        if (this.widget.role == 1 || this.widget.role == 2)
+          DataColumn(label: Text(""), numeric: false),
       ],
       rows: result
           .map(
             (subject) => DataRow(
               cells: [
-                DataCell(
-                  InkWell(
-                      child: Text(subject.name),
-                      onTap: () {
-                        if (this.widget.role == 1 || this.widget.role == 2) {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return CurriculumAdd(
-                              this.widget.role,
-                              subject.type,
-                              curriculum: subject,
-                            );
-                          }));
-                        }
-                      }),
-                ),
-                DataCell(
-                  Text(subject.year),
-                ),
-                DataCell(
-                  InkWell(
-                    child: Text('حذف'),
+                DataCell(Text(subject.name),
+                    onTap: this.widget.role == 1 || this.widget.role == 2
+                        ? () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return CurriculumAdd(
+                                this.widget.role,
+                                subject.type,
+                                curriculum: subject,
+                              );
+                            }));
+                          }
+                        : null),
+                DataCell(Text(subject.year)),
+                if (this.widget.role == 1 || this.widget.role == 2)
+                  DataCell(
+                    Text(
+                      'حذف',
+                      style: TextStyle(color: Colors.red),
+                    ),
                     onTap: () {
-                      if (this.widget.role == 1 || this.widget.role == 2) {
-                        CurriculumController().delet(subject.id);
-
-                        setState(() {});
-                      }
+                      CurriculumController().delet(subject.id);
+                      setState(() {});
                     },
                   ),
-                ),
               ],
             ),
           )
           .toList(),
     );
-   
   }
 
   Widget _loading() {

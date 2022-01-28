@@ -4,10 +4,9 @@ import 'package:form/models/teacher.dart';
 import 'package:form/views/teacher/teacher_add_update.dart';
 import '../../drawer.dart';
 
-// ignore: must_be_immutable
 class TeacherShow extends StatefulWidget {
-  late int role;
-  late String position;
+  final int role;
+  final String position;
 
   TeacherShow(this.role, this.position);
 
@@ -22,7 +21,7 @@ class TeacherShowState extends State<TeacherShow> {
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
         centerTitle: true,
-        title: Text('اسماء الكادر '),
+        title: Text('اسماء الكادر'),
       ),
       body: Center(
         child: Column(
@@ -33,12 +32,9 @@ class TeacherShowState extends State<TeacherShow> {
                 switch (snapshot.connectionState) {
                   case ConnectionState.active:
                     return _loading();
-                    // ignore: dead_code
-                    break;
+
                   case ConnectionState.waiting:
                     return _loading();
-                    // ignore: dead_code
-                    break;
 
                   case ConnectionState.done:
                     if (snapshot.hasError) {
@@ -49,11 +45,6 @@ class TeacherShowState extends State<TeacherShow> {
                     }
                     break;
                   case ConnectionState.none:
-                    break;
-                  case ConnectionState.waiting:
-                    break;
-                  case ConnectionState.active:
-                    break;
                 }
                 return Container();
               },
@@ -65,56 +56,40 @@ class TeacherShowState extends State<TeacherShow> {
   }
 
   Widget result(List<Teacher> result, BuildContext context) {
-
     return DataTable(
       columns: <DataColumn>[
-        DataColumn(
-          label: Text(" الاسم"),
-          numeric: false,
-        ),
-        
-        DataColumn(
-          label: Text(" حذف"),
-          numeric: false,
-        ),
+        DataColumn(label: Text("الاسم"), numeric: false),
+        if (this.widget.role == 1) DataColumn(label: Text(""), numeric: false),
       ],
       rows: result
           .map(
             (teacher) => DataRow(
               cells: [
-                DataCell(
-                  InkWell(
-                      child: Text(teacher.name),
+                DataCell(Text(teacher.name),
+                    onTap: this.widget.role == 1
+                        ? () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return TeacherAddUpdate(this.widget.role,
+                                  teacher: teacher);
+                            }));
+                          }
+                        : null),
+                if (this.widget.role == 1)
+                  DataCell(
+                    InkWell(
+                      child: Text('حذف', style: TextStyle(color: Colors.red)),
                       onTap: () {
-                        if (this.widget.role == 1 ) {
-                          Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return TeacherAddUpdate(
-                                      this.widget.role, teacher: teacher);
-                                }));
-                        }
-                      }),
-                ),
-                
-                DataCell(
-                  InkWell(
-                    child: Text('حذف'),
-                    onTap: () {
-                      if (this.widget.role == 1 ) {
-                      TeacherController().delet(teacher.id);
-
-                      setState(() {});
-
-                      }
-                    },
+                        TeacherController().delet(teacher.id);
+                        setState(() {});
+                      },
+                    ),
                   ),
-                ),
               ],
             ),
           )
           .toList(),
     );
-   
   }
 
   Widget _loading() {

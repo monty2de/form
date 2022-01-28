@@ -31,7 +31,7 @@ class _ExamResultFinalState extends State<ExamResultFinal> {
                       return ExamResultAddUpdate(this.widget.role);
                     }));
                   },
-                  child: Text(" اضافة درجة ",
+                  child: Text("اضافة درجة ",
                       style: TextStyle(color: Colors.white)),
                 )
               : Container(),
@@ -64,10 +64,6 @@ class _ExamResultFinalState extends State<ExamResultFinal> {
                     break;
                   case ConnectionState.none:
                     break;
-                  case ConnectionState.waiting:
-                    break;
-                  case ConnectionState.active:
-                    break;
                 }
                 return Container();
               },
@@ -79,44 +75,26 @@ class _ExamResultFinalState extends State<ExamResultFinal> {
   }
 
   Widget result(List<Curriculum> curriculum, BuildContext context) {
-
     return DataTable(
       columns: <DataColumn>[
-        DataColumn(
-          label: Text(" المادة"),
-          numeric: false,
-        ),
-        DataColumn(
-          label: Text(" المرحلة"),
-          numeric: false,
-        ),
-       
+        DataColumn(label: Text(" المادة"), numeric: false),
+        DataColumn(label: Text(" المرحلة"), numeric: false),
       ],
       rows: curriculum
           .map(
             (subject) => DataRow(
               cells: [
-                DataCell(
-                  InkWell(
-                      child: Text(subject.name),
-                      onTap: () {
-                        Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return ExamResultShow(this.widget.role,
-                                    subject.name);
-                              }));
-                      }),
-                ),
-                DataCell(
-                  Text(subject.year),
-                ),
-                
+                DataCell(Text(subject.name), onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ExamResultShow(this.widget.role, subject.name);
+                  }));
+                }),
+                DataCell(Text(subject.year)),
               ],
             ),
           )
           .toList(),
     );
-   
   }
 
   Widget _loading() {

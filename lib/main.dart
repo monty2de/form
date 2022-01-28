@@ -138,12 +138,10 @@ class _MyHomePageState extends State<MyHomePage> {
               switch (snapshot.connectionState) {
                 case ConnectionState.active:
                   return _loading();
-                  // ignore: dead_code
-                  break;
+
                 case ConnectionState.waiting:
                   return _loading();
-                  // ignore: dead_code
-                  break;
+
                 case ConnectionState.done:
                   if (snapshot.hasError) {
                     return Container();
@@ -153,10 +151,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   }
                   break;
                 case ConnectionState.none:
-                  break;
-                case ConnectionState.waiting:
-                  break;
-                case ConnectionState.active:
                   break;
               }
               return Container();
@@ -175,58 +169,59 @@ class _MyHomePageState extends State<MyHomePage> {
         shrinkWrap: true,
         itemCount: news.length,
         itemBuilder: (BuildContext context, int position) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    InkWell(
-                      child: Text(
+          return Container(
+            margin: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+            padding: EdgeInsets.all(5),
+            decoration: BoxDecoration(
+                border: Border.all(width: 1.5),
+                borderRadius: BorderRadius.circular(5)),
+            child: InkWell(
+              onTap: this.role_check == 1 || this.role_check == 2
+                  ? () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return NewsAddUpdate(
+                          role_check,
+                          news: news[position],
+                        );
+                      }));
+                    }
+                  : null,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
                         news[position].title,
                         style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 20,
                             fontWeight: FontWeight.w600,
                             color: Colors.black),
                       ),
-                      onTap: () {
-                        if (this.role_check == 1 || this.role_check == 2) {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return NewsAddUpdate(this.role_check, news: news[position],);
-                          }));
-                        }
-                      },
-                    ),
-                    SizedBox(height: 15),
-                    Text(
-                      news[position].body,
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black),
-                    ),
-                    this.role_check == 1 || this.role_check == 2
-                        ? InkWell(
-                            child: Text(
-                              'حذف',
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.red),
-                            ),
-                            onTap: () {
-                              NewsController().delet(news[position].id);
-                              setState(() {});
-                            },
-                          )
-                        : Container(),
-                  ],
-                ),
+                      SizedBox(height: 15),
+                      Text(
+                        news[position].body,
+                        style: TextStyle(fontSize: 15, color: Colors.black),
+                      ),
+                    ],
+                  ),
+                  this.role_check == 1 || this.role_check == 2
+                      ? TextButton(
+                          child: Text(
+                            'حذف',
+                            style: TextStyle(fontSize: 15, color: Colors.red),
+                          ),
+                          onPressed: () {
+                            NewsController().delet(news[position].id);
+                            setState(() {});
+                          },
+                        )
+                      : SizedBox.shrink(),
+                ],
               ),
-            ],
+            ),
           );
         },
       ),

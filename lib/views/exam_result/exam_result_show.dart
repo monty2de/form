@@ -74,60 +74,44 @@ class _ExamResultShowState extends State<ExamResultShow> {
   Widget result(List<ExamResult> result, BuildContext context) {
     return DataTable(
       columns: <DataColumn>[
-        DataColumn(
-          label: Text(" الاسم"),
-          numeric: false,
-        ),
-        DataColumn(
-          label: Text(" الدرجة"),
-          numeric: false,
-        ),
-        DataColumn(
-          label: Text(" حذف"),
-          numeric: false,
-        ),
+        DataColumn(label: Text(" الاسم"), numeric: false),
+        DataColumn(label: Text(" الدرجة"), numeric: false),
+        if (this.widget.role == 1 || this.widget.role == 2)
+          DataColumn(label: Text(""), numeric: false),
       ],
       rows: result
           .map(
             (examresult) => DataRow(
               cells: [
-                DataCell(
-                  InkWell(
-                      child: Text(examresult.studentName),
-                      onTap: () {
-                        if (this.widget.role == 1 || this.widget.role == 2) {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return ExamResultAddUpdate(
-                              this.widget.role,
-                              examResult: examresult,
-                            );
-                          }));
-                        }
-                      }),
-                ),
-                DataCell(
-                  Text(examresult.degree),
-                ),
-                DataCell(
-                  InkWell(
-                    child: Text('حذف'),
+                DataCell(Text(examresult.studentName),
+                    onTap: this.widget.role == 1 || this.widget.role == 2
+                        ? () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return ExamResultAddUpdate(
+                                this.widget.role,
+                                examResult: examresult,
+                              );
+                            }));
+                          }
+                        : null),
+                DataCell(Text(examresult.degree)),
+                if (this.widget.role == 1 || this.widget.role == 2)
+                  DataCell(
+                    Text(
+                      'حذف',
+                      style: TextStyle(color: Colors.red),
+                    ),
                     onTap: () {
-                      if (this.widget.role == 1 || this.widget.role == 2) {
-                        ExamResultController().delet(examresult.id);
-
-                        setState(() {});
-                      }
+                      ExamResultController().delet(examresult.id);
+                      setState(() {});
                     },
                   ),
-                ),
               ],
             ),
           )
           .toList(),
     );
-
-  
   }
 
   Widget _loading() {

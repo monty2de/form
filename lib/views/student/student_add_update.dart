@@ -253,7 +253,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             height: 50,
             child: OutlinedButton(
               child: Text(dateStudent != null
-                  ? DateFormat.yMMMMEEEEd().format(dateStudent!)
+                  ? DateFormat.yMMMMEEEEd('ar').format(dateStudent!)
                   : 'تاريخ الولادة '),
               onPressed: () {
                 showDatePicker(

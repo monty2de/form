@@ -46,7 +46,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
   Widget build(BuildContext context) {
     return Drawer(
       child: Material(
-        color: Colors.blue[900],
+        color: Colors.white70,
         child: ListView(
           children: <Widget>[
             Container(
@@ -379,8 +379,8 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
     // required IconData icon,
     required VoidCallback onClicked,
   }) {
-    final color = Colors.white;
-    final hoverColor = Colors.white70;
+    final color = Colors.blue[900];
+    final hoverColor = Colors.blue[700];
 
     return Column(
       children: [
@@ -397,7 +397,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
     required String mainCatName,
     required List<SubCategory> subCategories,
   }) {
-    final color = Colors.white;
+    final color = Colors.blue[900];
     return ListTile(
       title: Text(mainCatName, style: TextStyle(color: color)),
       subtitle: Column(

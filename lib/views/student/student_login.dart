@@ -79,11 +79,20 @@ class _StudentLoginState extends State<StudentLogin> {
                     });
                     }on FirebaseAuthException catch (e) {
 
+                      
+
                       setState(() {
                         loading =0;
                       });
              
-                      final message = e.message;
+                      var message = e.message;
+
+                      if (message == 'There is no user record corresponding to this identifier. The user may have been deleted.') {
+                        message = 'هذا الحساب غير موجود';
+                        
+                      }else if (message == 'The password is invalid or the user does not have a password.') {
+                        message = 'كلمة المرور خطأ';
+                      }
                       final snackBar = SnackBar(
                          content:  Text(message!));
                          ScaffoldMessenger.of(context).showSnackBar(snackBar);

@@ -101,12 +101,47 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Stack(
             children: [
-              Image(
-                image: AssetImage("images/home.jpg"),
-                width: MediaQuery.of(context).size.width,
-                fit: BoxFit.cover,
-                height: MediaQuery.of(context).size.height * 0.3,
-              ),
+                        //               decoration:
+                        // BoxDecoration(
+                        //   color: const Color(0xff7c94b6),
+                        //   image: new DecorationImage(
+                        //     fit: BoxFit.cover,
+                        //     colorFilter: 
+                        //       ColorFilter.mode(Colors.black.withOpacity(0.2), 
+                        //       BlendMode.dstATop),
+                        //     image: new NetworkImage(
+                        //       'http://www.server.com/image.jpg',
+                        //     ),
+                        //   ),
+                        // ),
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          decoration: BoxDecoration(
+                          color: const Color(0xff7c94b6),
+                          
+                          image: new DecorationImage(
+                            fit: BoxFit.cover,
+                            colorFilter: 
+                              ColorFilter.mode(Colors.black.withOpacity(0.3), 
+                              BlendMode.dstATop),
+                            image: AssetImage("images/home.jpg"),
+                            
+                          ),
+                        ),
+
+                        ),
+              // Image(
+                
+               
+                
+              //   image: AssetImage("images/home.jpg"),
+              //   width: MediaQuery.of(context).size.width,
+              //   fit: BoxFit.cover,
+              //   height: MediaQuery.of(context).size.height * 0.3,
+              // ),
+
+
               Container(
                 margin: const EdgeInsets.only(top: 7),
                 child: Row(
@@ -170,7 +205,7 @@ class _MyHomePageState extends State<MyHomePage> {
         itemCount: news.length,
         itemBuilder: (BuildContext context, int position) {
           return Container(
-            margin: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+            margin: const EdgeInsets.only(left: 5, right: 5, bottom: 5),
             padding: EdgeInsets.all(5),
             decoration: BoxDecoration(
                 border: Border.all(width: 1.5),

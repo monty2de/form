@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:form/Controllers/ExamTableController.dart';
 import 'package:form/models/examTable.dart';
 import 'package:form/views/exam_table/exam_table_add_update.dart';
+import 'package:intl/intl.dart';
 import '../../drawer.dart';
 
 // ignore: must_be_immutable
@@ -96,7 +97,7 @@ class _ExamTableShowState extends State<ExamTableShow> {
                           }
                         : null),
                 DataCell(
-                  Text(table.date.toString()),
+                  Text(DateFormat.yMMMMEEEEd('ar').format(table.date)),
                 ),
                 if (this.widget.role == 1 || this.widget.role == 2)
                   DataCell(

@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:form/models/examTable.dart';
 import 'package:form/utils/app_button.dart';
+import 'package:intl/intl.dart';
 
 class ExamTableAddUpdate extends StatefulWidget {
   final int role;
@@ -20,7 +21,7 @@ class ExamTableAddUpdate extends StatefulWidget {
 
 class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
   String? yearName;
-  late DateTime dateStudent;
+  late var dateStudent;
 
 
   final _formKey = GlobalKey<FormState>();
@@ -30,6 +31,11 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
 
   @override
   void initState() {
+
+
+    dateStudent = widget.examTable?.date ?? null;
+    
+    
     super.initState();
     yearName = widget.examTable?.year;
     nameController = TextEditingController(text: widget.examTable?.name);
@@ -97,22 +103,40 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
               });
             },
           ),
-          ElevatedButton(
-        child: Text('التاريخ  '),
-        onPressed: () {
-           showDatePicker(
-             context: context,
-             initialDate: DateTime.now(),
-             firstDate: DateTime(1960),
-             lastDate: DateTime (2222)
-          ). then((date) {
-             setState(() {
-                dateStudent = date!;
-             });
-           });
-        },
-       ),
-          SizedBox(height: 10),
+
+
+
+        SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 50,
+            child: OutlinedButton(
+              child: Text(dateStudent != null
+                  ? DateFormat.yMMMMEEEEd('ar').format(dateStudent!)
+                  : 'التاريخ  '),
+              onPressed: () {
+                showDatePicker(
+                        context: context,
+                        initialDate: dateStudent ?? DateTime.now(),
+                        firstDate: DateTime(1960),
+                        lastDate: DateTime(2222))
+                    .then((date) {
+                  setState(() {
+                    dateStudent = date!;
+                  });
+                });
+              },
+            ),
+          )
+
+
+          
+
+
+
+
+
+         
+         
         ],
       ),
     );

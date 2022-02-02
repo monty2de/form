@@ -86,7 +86,7 @@ class StudentController {
   search(String name) async {
     var user = await FirebaseFirestore.instance
         .collection('students')
-        .where('name', isEqualTo: name)
+        .where('name', isGreaterThanOrEqualTo: name)
         .get();
 
     item = [];

@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:form/models/teacher.dart';
 import 'package:form/utils/app_button.dart';
+import 'package:intl/intl.dart';
 
 class TeacherAddUpdate extends StatefulWidget {
   final int role;
@@ -19,7 +20,7 @@ class TeacherAddUpdate extends StatefulWidget {
 
 class TeacherAddUpdateState extends State<TeacherAddUpdate> {
   String? position;
-    late DateTime dateStudent;
+    late var dateStudent;
 
 
   final _formKey = GlobalKey<FormState>();
@@ -33,6 +34,9 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
 
   @override
   void initState() {
+  
+
+    dateStudent = widget.teacher?.BDate ?? null;
     super.initState();
     position = widget.teacher?.position;
     teacherNameController = TextEditingController(text: widget.teacher?.name);
@@ -179,21 +183,29 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
             ),
           ): Container(),
 
-          ElevatedButton(
-        child: Text('تاريخ الولادة '),
-        onPressed: () {
-           showDatePicker(
-             context: context,
-             initialDate: DateTime.now(),
-             firstDate: DateTime(1960),
-             lastDate: DateTime (2222)
-          ). then((date) {
-             setState(() {
-                dateStudent = date!;
-             });
-           });
-        },
-       )
+        SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 50,
+            child: OutlinedButton(
+              child: Text(dateStudent != null
+                  ? DateFormat.yMMMMEEEEd('ar').format(dateStudent!)
+                  : 'تاريخ الولادة  '),
+              onPressed: () {
+                showDatePicker(
+                        context: context,
+                        initialDate: dateStudent ?? DateTime.now(),
+                        firstDate: DateTime(1960),
+                        lastDate: DateTime(2222))
+                    .then((date) {
+                  setState(() {
+                    dateStudent = date!;
+                  });
+                });
+              },
+            ),
+          )
+
+        
         ],
       ),
     );

@@ -167,6 +167,16 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
       Navigator.pop(context);
       return;
     }
+
+    var checkDouble = await FirebaseFirestore.instance
+    .collection('boards')
+    .where('name', isEqualTo: boardName).where('teacherName', isEqualTo: teacherName)
+    .get();
+    if (checkDouble.docs.isNotEmpty) {
+      Navigator.pop(context);
+      return;
+    }
+
     String id = generateRandomString(32);
     final check =
         await FirebaseFirestore.instance.collection('boards').doc(id).get();

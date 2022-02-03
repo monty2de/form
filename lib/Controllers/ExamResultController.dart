@@ -18,6 +18,22 @@ class ExamResultController {
 
     return item;
   }
+  search(String stName) async {
+  
+    var q = await FirebaseFirestore.instance
+        .collection('examResult')
+        .where('studentName', isEqualTo: stName )
+        .get();
+    item = [];
+    q.docs.forEach((DocumentSnapshot element) {
+      Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+
+      item.add(ExamResult.fromFirebase(data));
+    });
+
+    return item;
+
+  }
 
   void delet(String id) async {
     // ignore: unused_local_variable

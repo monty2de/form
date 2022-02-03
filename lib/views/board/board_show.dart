@@ -29,7 +29,7 @@ class _BoardShowState extends State<BoardShow> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(widget.role),
+      drawer: NavigationDrawerWidget(),
       appBar: AppBar(
         centerTitle: true,
         title: Text('اعضاء ${widget.boardName}'),

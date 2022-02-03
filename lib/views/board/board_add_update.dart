@@ -20,6 +20,7 @@ class BoardAddUpdate extends StatefulWidget {
 class BoardAddUpdateState extends State<BoardAddUpdate> {
   String? teacherName;
   String? boardName;
+  String? isBoss;
 
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
@@ -42,6 +43,10 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
       'لجنة شؤون الطلبة',
       'اللجنة الامتحانية- اولية',
       'اللجنة الامتحانية-عليا'
+    ];
+    var msqarray = [
+      'نعم',
+      'كلا',
     ];
     return Padding(
       padding: const EdgeInsets.all(10.0),
@@ -116,6 +121,35 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
               });
             },
           ),
+
+          SizedBox(height: 10),
+          Text(
+            ' رئيس اللجنة',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          DropdownButtonFormField<String>(
+            value: isBoss,
+            items: msqarray.map((String item) {
+              return DropdownMenuItem<String>(value: item, child: Text(item));
+            }).toList(),
+            validator: (value) {
+              var temp = value ?? 0;
+              if (temp == 0) return 'يجب اختيار اسم اللجنة';
+              return null;
+            },
+            enableFeedback: !loading,
+            decoration: InputDecoration(
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              // icon: Icon(Icons.stacked_bar_chart, color: Colors.black),
+              hintStyle: TextStyle(color: Colors.black),
+            ),
+            onChanged: (value) {
+              setState(() {
+                isBoss = value;
+              });
+            },
+          ),
         ],
       ),
     );
@@ -139,7 +173,7 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
                 onPressed: () async {
                   setState(() => loading = true);
                   if (_formKey.currentState!.validate()) {
-                    await addNewBoard(boardName!, teacherName);
+                    await addNewBoard(boardName!, teacherName , isBoss);
                     setState(() => loading = true);
                   }
                 },
@@ -150,7 +184,7 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
     );
   }
 
-  Future addNewBoard(String boardName, teacherName) async {
+  Future addNewBoard(String boardName, teacherName , isboss) async {
     //This means that the user is performing an update
     if (widget.board != null) {
       if (teacherName == null) {
@@ -162,7 +196,8 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
       await item.update({
         'id': this.widget.board!.id,
         'name': boardName,
-        'teacherName': teacherName
+        'teacherName': teacherName,
+        'isBoss': isBoss,
       });
       Navigator.pop(context);
       return;
@@ -183,7 +218,7 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
     if (check.exists) id = generateRandomString(32);
 
     final orders = FirebaseFirestore.instance.collection('boards').doc(id);
-    await orders.set({'id': id, 'name': boardName, 'teacherName': teacherName});
+    await orders.set({'id': id, 'name': boardName, 'teacherName': teacherName , 'isBoss': isBoss,});
     Navigator.pop(context);
   }
 

@@ -16,7 +16,7 @@ class _DepartmentactivitiesState extends State<Departmentactivities> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(this.widget.role),
+      drawer: NavigationDrawerWidget(),
       appBar: AppBar(
         title: Text('نشاطات القسم'),
         centerTitle: true,

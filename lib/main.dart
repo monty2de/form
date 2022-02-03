@@ -1,26 +1,20 @@
-import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:form/Controllers/NewsController.dart';
 import 'package:form/models/news.dart';
-import 'package:form/views/login.dart';
 import 'package:form/views/news/news_add_update.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'drawer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  final role = await getvalidationData();
-  runApp(MyApp(role: role));
+  runApp(MyApp( ));
 }
 
 class MyApp extends StatelessWidget {
-  final int role;
 
-  const MyApp({Key? key, this.role = 0}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -34,7 +28,7 @@ class MyApp extends StatelessWidget {
           ),
           primaryColor: Colors.blue[900],
           appBarTheme: AppBarTheme(color: Colors.blue[900])),
-      home: role == 0 ? Login() : MyHomePage(role: role),
+      home: MyHomePage(),
       supportedLocales: [Locale('ar', '')],
       localeResolutionCallback: (currentLocale, supportedLocales) {
         return supportedLocales.first;
@@ -47,18 +41,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-Future<int> getvalidationData() async {
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  var role = sharedPreferences.getInt('role');
 
-  if (role == null) {
-    return 0;
-  } else if (role == 1 || role == 2 || role == 3 || role == 4) {
-    return role;
-  } else {
-    return 0;
-  }
-}
 
 class MyHomePage extends StatefulWidget {
   final int role;
@@ -83,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(role_check),
+      drawer: NavigationDrawerWidget(),
       appBar: AppBar(actions: [
         role_check == 1
             ? TextButton(

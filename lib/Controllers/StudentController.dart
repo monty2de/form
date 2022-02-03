@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:form/models/student.dart';
+import 'package:form/models/worn.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StudentController {
@@ -97,6 +98,22 @@ class StudentController {
     });
 
     return item;
+  }
+
+  worn(String stName) async {
+    var user = await FirebaseFirestore.instance
+        .collection('worns')
+        .where('stname', isEqualTo: stName)
+        .get();
+
+    var item2 = <Worn>[];
+    user.docs.forEach((DocumentSnapshot element) {
+      Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+
+      item2.add(Worn.fromFirebase(data));
+    });
+
+    return item2;
   }
 
   void delet(String id) async {

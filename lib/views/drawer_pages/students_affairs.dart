@@ -3,6 +3,8 @@ import 'package:form/Controllers/StudentController.dart';
 import 'package:form/models/student.dart';
 import 'package:form/views/student/student_add_update.dart';
 import 'package:form/views/student/student_change_pass.dart';
+import 'package:form/views/student/student_marks.dart';
+import 'package:form/views/student/student_worn.dart';
 import '../../drawer.dart';
 
 // ignore: must_be_immutable
@@ -19,7 +21,7 @@ class StudentsAffairsState extends State<StudentsAffairs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(this.widget.role),
+      drawer: NavigationDrawerWidget(),
       appBar: AppBar(
         centerTitle: true,
         title: Text('معلومات الطالب '),
@@ -207,6 +209,40 @@ class StudentsAffairsState extends State<StudentsAffairs> {
                               MaterialPageRoute(builder: (context) {
                             return StudentChangePass(
                                 result[position].pass);
+                          }));
+                        },
+                      ),
+                      SizedBox(height: 15),
+                      InkWell(
+                        child: Text(
+                          '   الدرجات',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.blue[300]),
+                        ),
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return StudentMarks(
+                                result[position].name);
+                          }));
+                        },
+                      ),
+                      SizedBox(height: 15),
+                      InkWell(
+                        child: Text(
+                          '   التبليغات',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.blue[300]),
+                        ),
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return StudentWorns(
+                                result[position].name);
                           }));
                         },
                       ),

@@ -22,6 +22,8 @@ class StudentAddUpdate extends StatefulWidget {
 
 class StudentAddUpdateState extends State<StudentAddUpdate> {
   String? yearName;
+  String? status;
+
   String? sextype;
   DateTime? dateStudent;
 
@@ -34,11 +36,14 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
   late TextEditingController studentNameController;
   late TextEditingController passController;
   late TextEditingController emailController;
+  late TextEditingController partController;
+
 
   @override
   void initState() {
     super.initState();
     yearName = widget.student?.year;
+    yearName = widget.student?.status;
     sextype = widget.student?.sex;
     dateStudent = widget.student?.BDate;
     studentNameController = TextEditingController(text: widget.student?.name);
@@ -46,6 +51,8 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
         TextEditingController(text: widget.student?.BLocation);
     locationController = TextEditingController(text: widget.student?.location);
     numberController = TextEditingController(text: widget.student?.number);
+    partController = TextEditingController(text: widget.student?.part);
+
     passController = TextEditingController();
     emailController = TextEditingController();
   }
@@ -58,6 +65,12 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
       'الثالثة',
       'الثانية',
       'الاولى',
+    ];
+    List<String> statusArry = [
+      'ناجح',
+      'راسب',
+      'متخرج',
+      'عبور',
     ];
     var sex = ['ذكر', 'انثى'];
 
@@ -142,6 +155,33 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
           ),
           SizedBox(height: 10),
           Text(
+            'الحالة',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          DropdownButtonFormField<String>(
+            value: status,
+            items: statusArry.map((String item) {
+              return DropdownMenuItem<String>(value: item, child: Text(item));
+            }).toList(),
+            validator: (value) {
+              var temp = value ?? 0;
+              if (temp == 0) return 'يجب اختيار الحالة';
+            },
+            enableFeedback: !loading,
+            decoration: InputDecoration(
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              // icon: Icon(Icons.stacked_bar_chart, color: Colors.black),
+              hintStyle: TextStyle(color: Colors.black),
+            ),
+            onChanged: (value) {
+              setState(() {
+                status = value;
+              });
+            },
+          ),
+          SizedBox(height: 10),
+          Text(
             ' مكان الولادة',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
@@ -198,6 +238,27 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             cursorColor: Colors.black,
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            style: TextStyle(color: Colors.black),
+            decoration: InputDecoration(
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              // icon: Icon(Icons.email, color: Colors.black),
+              hintStyle: TextStyle(color: Colors.black),
+            ),
+          ),
+          SizedBox(height: 10),
+          Text(
+            'الشعبة',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          TextFormField(
+            validator: (value) {
+              if (value!.isEmpty) return 'يجب ادخال الشعبة';
+              return null;
+            },
+            enabled: !loading,
+            controller: partController,
+            cursorColor: Colors.black,
             style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
               border:
@@ -307,7 +368,9 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
                         numberController.text,
                         yearName,
                         emailController.text,
-                        passController.text);
+                        passController.text,
+                        status,
+                        partController.text,);
                     setState(() => loading = true);
                   }
                 },
@@ -319,7 +382,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
   }
 
   Future addNewStudent(String studentName, sex, BLocation, BDate, location,
-      number, year, email, pass) async {
+      number, year, email, pass , status , part) async {
     //This means that the user is performing an update
     if (widget.student != null) {
       if (BDate == null) {
@@ -337,6 +400,8 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
         'location': location,
         'year': year,
         'number': number,
+        'status' : status,
+        'part' : part,
       });
       Navigator.pop(context);
       return;
@@ -361,7 +426,9 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
       'year': year,
       'number': number,
       'pass': pass,
-      'role': 3
+      'role': 3,
+      'status' : status,
+      'part' : part,
     });
 
     Navigator.pop(context);

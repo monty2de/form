@@ -19,7 +19,7 @@ class _ExamResultShowState extends State<ExamResultShow> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(this.widget.role),
+      drawer: NavigationDrawerWidget(),
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(

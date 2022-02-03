@@ -18,7 +18,7 @@ class _CurriculumFirstState extends State<CurriculumFirst> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(this.widget.role),
+      drawer: NavigationDrawerWidget(),
       appBar: AppBar(
         actions: [
           this.widget.role == 1 || this.widget.role == 2

@@ -4,9 +4,7 @@ import '../../drawer.dart';
 
 // ignore: must_be_immutable
 class About extends StatefulWidget {
-  late int role;
 
-  About(this.role);
 
   @override
   _AboutState createState() => _AboutState();
@@ -16,7 +14,7 @@ class _AboutState extends State<About> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(this.widget.role),
+      drawer: NavigationDrawerWidget(),
       appBar: AppBar(
         title: Text('نبذة عن القسم'),
         centerTitle: true,

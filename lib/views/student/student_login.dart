@@ -5,6 +5,8 @@ import 'package:form/utils/app_button.dart';
 import 'package:form/views/drawer_pages/students_affairs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../drawer.dart';
+
 
 class StudentLogin extends StatefulWidget {
   @override
@@ -19,6 +21,7 @@ class _StudentLoginState extends State<StudentLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavigationDrawerWidget(),
       appBar: AppBar(
         title: Text("تسجيل الدخول"),
       ),

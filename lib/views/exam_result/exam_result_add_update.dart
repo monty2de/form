@@ -21,7 +21,7 @@ class ExamResultAddUpdate extends StatefulWidget {
 class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
   String? yearName;
   String? subjectName;
-
+  String? stName;
 
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
@@ -55,21 +55,37 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
             'اسم الطالب',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
-          TextFormField(
-            validator: (value) {
-              if (value!.isEmpty) return 'يجب ادخال اسم الطالب';
-              return null;
+          StreamBuilder<QuerySnapshot>(
+            stream:
+                FirebaseFirestore.instance.collection('students').snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Text('error');
+              }
+              List<String> shubjects = [];
+              for (var i = 0; i < snapshot.data!.docs.length; i++) {
+                shubjects.add(snapshot.data!.docs[i]['name']);
+              }
+              return DropdownButtonFormField(
+                
+                items: shubjects.map((String item) {
+                  return DropdownMenuItem<String>(
+                    value: item,
+                    child: Text(item),
+                  );
+                }).toList(),
+                
+                enableFeedback: !loading,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  hintStyle: TextStyle(color: Colors.black),
+                ),
+                onChanged: (value) {
+                  stName = value.toString();
+                },
+              );
             },
-            enabled: !loading,
-            controller: studentNameController,
-            cursorColor: Colors.black,
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              // icon: Icon(Icons.email, color: Colors.black),
-              hintStyle: TextStyle(color: Colors.black),
-            ),
           ),
           SizedBox(height: 10),
           Text(
@@ -77,7 +93,7 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           DropdownButtonFormField<String>(
-            value: yearName,
+           
             items: yearArry.map((String item) {
               return DropdownMenuItem<String>(value: item, child: Text(item));
             }).toList(),
@@ -191,7 +207,7 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
                 onPressed: () async {
                   setState(() => loading = true);
                   if (_formKey.currentState!.validate()) {
-                    await addNewExamResult(studentNameController.text, yearName , degreeController.text , subjectName);
+                    await addNewExamResult(stName!, yearName , degreeController.text , subjectName);
                     setState(() => loading = true);
                   }
                 },

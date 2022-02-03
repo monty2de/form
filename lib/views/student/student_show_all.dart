@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:form/Controllers/StudentController.dart';
 import 'package:form/models/student.dart';
 import 'package:form/views/student/student_add_update.dart';
+import 'package:form/views/student/student_add_worn.dart';
 import '../../drawer.dart';
 
 // ignore: must_be_immutable
@@ -18,8 +19,23 @@ class StudentShowAllState extends State<StudentShowAll> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(this.widget.role),
+      drawer: NavigationDrawerWidget(),
       appBar: AppBar(
+        actions: [
+          this.widget.role == 1 || this.widget.role == 2
+              ? TextButton(
+                  onPressed: () {
+
+                    Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return WornAdd();
+                          }));
+                  },
+                  child: Text("اضافة تبليغ ",
+                      style: TextStyle(color: Colors.white)),
+                )
+              : Container(),
+        ],
         centerTitle: true,
         title: Text('قائمة الطلاب'),
       ),

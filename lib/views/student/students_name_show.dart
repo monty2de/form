@@ -18,7 +18,7 @@ class StudentsNamesShowState extends State<StudentsNamesShow> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(),
+      drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(

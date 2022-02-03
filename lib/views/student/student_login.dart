@@ -9,6 +9,8 @@ import '../../drawer.dart';
 
 
 class StudentLogin extends StatefulWidget {
+  late int role;
+  StudentLogin(this.role);
   @override
   _StudentLoginState createState() => _StudentLoginState();
 }
@@ -21,7 +23,8 @@ class _StudentLoginState extends State<StudentLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(),
+     drawer: NavigationDrawerWidget(this.widget.role),
+
       appBar: AppBar(
         title: Text("تسجيل الدخول"),
       ),

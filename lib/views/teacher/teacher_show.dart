@@ -18,7 +18,7 @@ class TeacherShowState extends State<TeacherShow> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(),
+      drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
         centerTitle: true,
         title: Text('اسماء الكادر'),

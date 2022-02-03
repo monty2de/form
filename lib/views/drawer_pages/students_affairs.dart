@@ -21,7 +21,7 @@ class StudentsAffairsState extends State<StudentsAffairs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(),
+      drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
         centerTitle: true,
         title: Text('معلومات الطالب '),
@@ -225,7 +225,7 @@ class StudentsAffairsState extends State<StudentsAffairs> {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
                             return StudentMarks(
-                                result[position].name);
+                                result[position].name , this.widget.role);
                           }));
                         },
                       ),
@@ -242,7 +242,7 @@ class StudentsAffairsState extends State<StudentsAffairs> {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
                             return StudentWorns(
-                                result[position].name);
+                                result[position].name , this.widget.role);
                           }));
                         },
                       ),

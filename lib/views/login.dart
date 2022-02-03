@@ -5,7 +5,6 @@ import 'package:form/utils/app_button.dart';
 import 'package:form/views/login_admin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../drawer.dart';
 import '../main.dart';
 
 class Login extends StatefulWidget {
@@ -20,8 +19,8 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(),
       appBar: AppBar(
+        
         title: Text("تسجيل الدخول"),
       ),
       body: Center(

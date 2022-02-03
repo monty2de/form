@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:form/Controllers/ExamResultController.dart';
 import 'package:form/Controllers/StudentController.dart';
-import 'package:form/models/examResult.dart';
 import 'package:form/models/worn.dart';
 
 import '../../drawer.dart';
@@ -9,7 +7,8 @@ import '../../drawer.dart';
 // ignore: must_be_immutable
 class StudentWorns extends StatefulWidget {
 late String name;
-StudentWorns(this.name);
+late int role;
+StudentWorns(this.name , this.role);
 
   @override
   _StudentWorns createState() => _StudentWorns();
@@ -19,7 +18,7 @@ class _StudentWorns extends State<StudentWorns> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(),
+      drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
         
         centerTitle: true,

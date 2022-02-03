@@ -17,7 +17,7 @@ class StudentsNamesFinalShowState extends State<StudentsNamesFinalShow> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(),
+      drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
         centerTitle: true,
         title: Text('قائمة الطلاب'),

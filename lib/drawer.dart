@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -25,8 +24,9 @@ import 'views/pages_lv3/students_names_first.dart';
 import 'views/teacher/teacher_show.dart';
 
 class NavigationDrawerWidget extends StatefulWidget {
+  final int role;
 
-  NavigationDrawerWidget();
+  NavigationDrawerWidget(this.role);
 
   @override
   _NavigationDrawerWidgetState createState() => _NavigationDrawerWidgetState();
@@ -39,33 +39,6 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
 
   _NavigationDrawerWidgetState() {
     randomNumber = random.nextInt(512) + 500;
-  }
-  var role;  
-  Future getvalidationData() async {
-
-
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  role = sharedPreferences.getInt('role');
-  if (role == null) {
-          setState(() {
-            role = 0;
-          });
-        }
-
-}
-
-
-@override
-void initState() {
-    getvalidationData().whenComplete(() {
-      Timer(Duration(seconds: 2), (){
-
-       
-
-    });
-    });
-    
-    super.initState();
   }
   final padding = EdgeInsets.symmetric(horizontal: 20);
 
@@ -86,7 +59,7 @@ void initState() {
                     onClicked: () {
                       Navigator.pushAndRemoveUntil(context,
                           MaterialPageRoute(builder: (context) {
-                        return MyHomePage();
+                        return MyHomePage(role: widget.role);
                       }), (Route<dynamic> route) => false);
                     },
                   ),
@@ -96,7 +69,7 @@ void initState() {
                     onClicked: () {
                       Navigator.pushAndRemoveUntil(context,
                           MaterialPageRoute(builder: (context) {
-                        return About();
+                        return About(widget.role);
                       }), (Route<dynamic> route) => false);
                     },
                   ),
@@ -110,10 +83,9 @@ void initState() {
                           SubCategory(
                               name: 'اللجنة العلمية',
                               onPressed: () async {
-                                SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-                                var role = sharedPreferences.getInt('role');
-                                if (role == 2) {
-                                  
+                                if (widget.role == 2) {
+                                  SharedPreferences sharedPreferences =
+                                      await SharedPreferences.getInstance();
                                   var id = sharedPreferences.getString('id');
                                   var user = await FirebaseFirestore.instance
                                       .collection('teachers')
@@ -126,23 +98,23 @@ void initState() {
                                   Navigator.pushAndRemoveUntil(context,
                                       MaterialPageRoute(builder: (context) {
                                     return BoardShow(
-                                        role!, ' اللجنة العلمية',
+                                        widget.role, ' اللجنة العلمية',
                                         position: position);
                                   }), (Route<dynamic> route) => false);
                                 } else {
                                   Navigator.pushAndRemoveUntil(context,
                                       MaterialPageRoute(builder: (context) {
                                     return BoardShow(
-                                        role!, ' اللجنة العلمية');
+                                        widget.role, ' اللجنة العلمية');
                                   }), (Route<dynamic> route) => false);
                                 }
                               }),
                           SubCategory(
                               name: 'مجلس القسم',
-                              onPressed: () async{
+                              onPressed: () {
                                 Navigator.pushAndRemoveUntil(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return BoardShow(role, 'مجلس القسم');
+                                  return BoardShow(widget.role, 'مجلس القسم');
                                 }), (Route<dynamic> route) => false);
                               }),
                           SubCategory(
@@ -151,7 +123,7 @@ void initState() {
                                 Navigator.pushAndRemoveUntil(context,
                                     MaterialPageRoute(builder: (context) {
                                   return BoardShow(
-                                      role, 'لجنة ضمان الجودة');
+                                      widget.role, 'لجنة ضمان الجودة');
                                 }), (Route<dynamic> route) => false);
                               }),
                           SubCategory(
@@ -160,17 +132,17 @@ void initState() {
                                 Navigator.pushAndRemoveUntil(context,
                                     MaterialPageRoute(builder: (context) {
                                   return BoardShow(
-                                      role, 'لجنة شؤون الطلبة');
+                                      widget.role, 'لجنة شؤون الطلبة');
                                 }), (Route<dynamic> route) => false);
                               }),
                           //TODO: FIND A BETTER WAY TO DO THIS
-                          if (this.role == 1 || this.role == 2)
+                          if (this.widget.role == 1 || this.widget.role == 2)
                             SubCategory(
                                 name: 'اضافة عضو جديد',
                                 onPressed: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return BoardAddUpdate(this.role);
+                                    return BoardAddUpdate(this.widget.role);
                                   }));
                                 })
                         ],
@@ -193,7 +165,7 @@ void initState() {
                               Navigator.pushAndRemoveUntil(context,
                                   MaterialPageRoute(builder: (context) {
                                 return BoardShow(
-                                    role, 'اللجنة الامتحانية- اولية');
+                                    widget.role, 'اللجنة الامتحانية- اولية');
                               }), (Route<dynamic> route) => false);
                             }),
                         SubCategory(
@@ -201,7 +173,7 @@ void initState() {
                             onPressed: () {
                               Navigator.pushAndRemoveUntil(context,
                                   MaterialPageRoute(builder: (context) {
-                                return StudentsNamesFirst(role);
+                                return StudentsNamesFirst(widget.role);
                               }), (Route<dynamic> route) => false);
                             }),
                         SubCategory(
@@ -209,7 +181,7 @@ void initState() {
                             onPressed: () {
                               Navigator.pushAndRemoveUntil(context,
                                   MaterialPageRoute(builder: (context) {
-                                return ExamTableFirst(role);
+                                return ExamTableFirst(widget.role);
                               }), (Route<dynamic> route) => false);
                             }),
                         SubCategory(
@@ -217,7 +189,7 @@ void initState() {
                             onPressed: () {
                               Navigator.pushAndRemoveUntil(context,
                                   MaterialPageRoute(builder: (context) {
-                                return ExamResultFirst(role);
+                                return ExamResultFirst(widget.role);
                               }), (Route<dynamic> route) => false);
                             }),
                       ]),
@@ -228,7 +200,7 @@ void initState() {
                               Navigator.pushAndRemoveUntil(context,
                                   MaterialPageRoute(builder: (context) {
                                 return BoardShow(
-                                    role, 'اللجنة الامتحانية-عليا');
+                                    widget.role, 'اللجنة الامتحانية-عليا');
                               }), (Route<dynamic> route) => false);
                             }),
                         SubCategory(
@@ -236,7 +208,7 @@ void initState() {
                             onPressed: () {
                               Navigator.pushAndRemoveUntil(context,
                                   MaterialPageRoute(builder: (context) {
-                                return StudentsNamesFinal(role);
+                                return StudentsNamesFinal(widget.role);
                               }), (Route<dynamic> route) => false);
                             }),
                         SubCategory(
@@ -244,7 +216,7 @@ void initState() {
                             onPressed: () {
                               Navigator.pushAndRemoveUntil(context,
                                   MaterialPageRoute(builder: (context) {
-                                return ExamTableFinal(role);
+                                return ExamTableFinal(widget.role);
                               }), (Route<dynamic> route) => false);
                             }),
                         SubCategory(
@@ -252,7 +224,7 @@ void initState() {
                             onPressed: () {
                               Navigator.pushAndRemoveUntil(context,
                                   MaterialPageRoute(builder: (context) {
-                                return ExamResultFinal(role);
+                                return ExamResultFinal(widget.role);
                               }), (Route<dynamic> route) => false);
                             }),
                       ]),
@@ -267,7 +239,7 @@ void initState() {
                             onPressed: () {
                               Navigator.pushAndRemoveUntil(context,
                                   MaterialPageRoute(builder: (context) {
-                                return TeacherShow(role, 'تدريسي');
+                                return TeacherShow(widget.role, 'تدريسي');
                               }), (Route<dynamic> route) => false);
                             }),
                         SubCategory(
@@ -275,7 +247,7 @@ void initState() {
                             onPressed: () {
                               Navigator.pushAndRemoveUntil(context,
                                   MaterialPageRoute(builder: (context) {
-                                return TeacherShow(role, 'مهندس');
+                                return TeacherShow(widget.role, 'مهندس');
                               }), (Route<dynamic> route) => false);
                             }),
                         SubCategory(
@@ -283,7 +255,7 @@ void initState() {
                             onPressed: () {
                               Navigator.pushAndRemoveUntil(context,
                                   MaterialPageRoute(builder: (context) {
-                                return TeacherShow(role, 'منتسب');
+                                return TeacherShow(widget.role, 'منتسب');
                               }), (Route<dynamic> route) => false);
                             }),
                         SubCategory(
@@ -291,17 +263,16 @@ void initState() {
                             onPressed: () {
                               Navigator.pushAndRemoveUntil(context,
                                   MaterialPageRoute(builder: (context) {
-                                return TeacherShow(role, 'خدمات');
+                                return TeacherShow(widget.role, 'خدمات');
                               }), (Route<dynamic> route) => false);
                             }),
-                        //TODO: FIND A BETTER WAY TO DO THIS
-                        if (role == 1)
+                        if (widget.role == 1)
                           SubCategory(
                               name: 'اضافة عضو جديد',
                               onPressed: () {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return TeacherAddUpdate(role);
+                                  return TeacherAddUpdate(widget.role);
                                 }));
                               }),
                       ]),
@@ -309,15 +280,15 @@ void initState() {
                   buildMenuItem(
                     text: 'شؤون الطلبة',
                     onClicked: () {
-                      if (role == 1 || role == 2) {
+                      if (widget.role == 1 || widget.role == 2) {
                         Navigator.pushAndRemoveUntil(context,
                             MaterialPageRoute(builder: (context) {
-                          return StudentShowAll(role);
+                          return StudentShowAll(widget.role);
                         }), (Route<dynamic> route) => false);
                       } else {
                         Navigator.pushAndRemoveUntil(context,
                             MaterialPageRoute(builder: (context) {
-                          return StudentLogin();
+                          return StudentLogin(this.widget.role);
                         }), (Route<dynamic> route) => false);
                       }
                     },
@@ -328,7 +299,7 @@ void initState() {
                     onClicked: () {
                       Navigator.pushAndRemoveUntil(context,
                           MaterialPageRoute(builder: (context) {
-                        return Departmentactivities(role);
+                        return Departmentactivities(widget.role);
                       }), (Route<dynamic> route) => false);
                     },
                   ),
@@ -341,7 +312,7 @@ void initState() {
                           onPressed: () {
                             Navigator.pushAndRemoveUntil(context,
                                 MaterialPageRoute(builder: (context) {
-                              return CurriculumFirst(role);
+                              return CurriculumFirst(widget.role);
                             }), (Route<dynamic> route) => false);
                           }),
                       SubCategory(
@@ -349,7 +320,7 @@ void initState() {
                           onPressed: () {
                             Navigator.pushAndRemoveUntil(context,
                                 MaterialPageRoute(builder: (context) {
-                              return CurriculumFinal(role);
+                              return CurriculumFinal(widget.role);
                             }), (Route<dynamic> route) => false);
                           })
                     ],
@@ -363,7 +334,7 @@ void initState() {
                         onPressed: () {
                           Navigator.pushAndRemoveUntil(context,
                               MaterialPageRoute(builder: (context) {
-                            return CurriculumFinal(role);
+                            return CurriculumFinal(widget.role);
                           }), (Route<dynamic> route) => false);
                         },
                       ),
@@ -372,13 +343,13 @@ void initState() {
                           onPressed: () {
                             Navigator.pushAndRemoveUntil(context,
                                 MaterialPageRoute(builder: (context) {
-                              return StudentsNamesFinalShow(role);
+                              return StudentsNamesFinalShow(widget.role);
                             }), (Route<dynamic> route) => false);
                           })
                     ],
                   ),
                   Divider(thickness: 2),
-                  role != 0 ? buildMenuItem(
+                  this.widget.role != 0 ?  buildMenuItem(
                     text: 'تسجيل الخروج',
                     onClicked: () async {
                       SharedPreferences sharedPreferences =
@@ -388,18 +359,20 @@ void initState() {
                       // ignore: deprecated_member_use
                       sharedPreferences.commit();
                       Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return Login();
-                                }));
+                              MaterialPageRoute(builder: (context) {
+                            return Login();
+                          }));
                     },
-                  ):buildMenuItem(
+                  ) : buildMenuItem(
                     text: 'تسجيل الدخول',
-                    onClicked: () async {
+                    onClicked: ()  {
+                  
+
+                 
                       Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return Login();
-                                }));
-              
+                              MaterialPageRoute(builder: (context) {
+                            return Login();
+                          }));
                     },
                   ),
                 ],

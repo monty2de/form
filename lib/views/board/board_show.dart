@@ -5,6 +5,7 @@ import 'package:form/views/board/board_add_update.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../drawer.dart';
+import '../../utils/results_wrapper.dart';
 
 class BoardShow extends StatefulWidget {
   final int role;
@@ -70,43 +71,52 @@ class _BoardShowState extends State<BoardShow> {
   }
 
   Widget result(List<Board> result, BuildContext context) {
-    return DataTable(
-      columns: <DataColumn>[
-        DataColumn(label: Text(" الاسم"), numeric: false),
-        if (widget.role == 1 || widget.role == 2)
-          DataColumn(label: Text(""), numeric: false),
-      ],
-      rows: result
-          .map(
-            (board) => DataRow(
-              cells: [
-                DataCell(
-                  Text(board.teacherName),
-                  onTap: widget.role == 1 || widget.role == 2
-                      ? () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return BoardAddUpdate(widget.role, board: board);
-                          }));
-                        }
-                      : null,
-                  showEditIcon: widget.role == 1 || widget.role == 2,
-                ),
-                if (widget.role == 1 || widget.role == 2)
+    return checkIfListEmpty(
+      dataList: result,
+      child: DataTable(
+        columns: <DataColumn>[
+          DataColumn(label: Text(" الاسم"), numeric: false),
+          if (widget.role == 1 || widget.role == 2)
+            DataColumn(label: Text(""), numeric: false),
+        ],
+        rows: result
+            .map(
+              (board) => DataRow(
+                cells: [
                   DataCell(
-                    Text(
-                      'حذف',
-                      style: TextStyle(color: Colors.red),
+                    Row(
+                      children: [
+                        Text(board.teacherName),
+                        if (board.isBoss == 'نعم') Text(' (رئيس اللجنة)'),
+                      ],
                     ),
-                    onTap: () {
-                      BoardController().delet(board.id);
-                      setState(() {});
-                    },
+                    onTap: widget.role == 1 || widget.role == 2
+                        ? () async {
+                            await Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return BoardAddUpdate(widget.role, board: board);
+                            }));
+                            setState(() {});
+                          }
+                        : null,
+                    showEditIcon: widget.role == 1 || widget.role == 2,
                   ),
-              ],
-            ),
-          )
-          .toList(),
+                  if (widget.role == 1 || widget.role == 2)
+                    DataCell(
+                      Text(
+                        'حذف',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                      onTap: () {
+                        BoardController().delet(board.id);
+                        setState(() {});
+                      },
+                    ),
+                ],
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 

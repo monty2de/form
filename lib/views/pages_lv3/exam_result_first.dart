@@ -5,6 +5,7 @@ import 'package:form/views/exam_result/exam_result_add_update.dart';
 import 'package:form/views/exam_result/exam_result_show.dart';
 
 import '../../drawer.dart';
+import '../../utils/results_wrapper.dart';
 
 class ExamResultFirst extends StatefulWidget {
   final int role;
@@ -72,25 +73,29 @@ class _ExamResultFirstState extends State<ExamResultFirst> {
   }
 
   Widget result(List<Curriculum> curriculum, BuildContext context) {
-    return DataTable(
-      columns: <DataColumn>[
-        DataColumn(label: Text("المادة"), numeric: false),
-        DataColumn(label: Text("المرحلة"), numeric: false),
-      ],
-      rows: curriculum
-          .map(
-            (subject) => DataRow(
-              cells: [
-                DataCell(Text(subject.name), onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return ExamResultShow(this.widget.role, subject.name);
-                  }));
-                }),
-                DataCell(Text(subject.year)),
-              ],
-            ),
-          )
-          .toList(),
+    return checkIfListEmpty(
+      dataList: curriculum,
+      child: DataTable(
+        columns: <DataColumn>[
+          DataColumn(label: Text("المادة"), numeric: false),
+          DataColumn(label: Text("المرحلة"), numeric: false),
+        ],
+        rows: curriculum
+            .map(
+              (subject) => DataRow(
+                cells: [
+                  DataCell(Text(subject.name), onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return ExamResultShow(this.widget.role, subject.name);
+                    }));
+                  }),
+                  DataCell(Text(subject.year)),
+                ],
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 

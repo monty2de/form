@@ -4,6 +4,7 @@ import 'package:form/models/examTable.dart';
 import 'package:form/views/exam_table/exam_table_add_update.dart';
 import 'package:intl/intl.dart';
 import '../../drawer.dart';
+import '../../utils/results_wrapper.dart';
 
 // ignore: must_be_immutable
 class ExamTableShow extends StatefulWidget {
@@ -73,47 +74,50 @@ class _ExamTableShowState extends State<ExamTableShow> {
   }
 
   Widget result(List<ExamTable> result, BuildContext context) {
-    return DataTable(
-      columns: <DataColumn>[
-        DataColumn(label: Text(" الاسم"), numeric: false),
-        DataColumn(label: Text(" التاريخ"), numeric: false),
-        if (this.widget.role == 1 || this.widget.role == 2)
-          DataColumn(label: Text(""), numeric: false),
-      ],
-      rows: result
-          .map(
-            (table) => DataRow(
-              cells: [
-                DataCell(Text(table.name),
-                    onTap: this.widget.role == 1 || this.widget.role == 2
-                        ? () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return ExamTableAddUpdate(
-                                widget.role,
-                                examTable: table,
-                              );
-                            }));
-                          }
-                        : null),
-                DataCell(
-                  Text(DateFormat.yMMMMEEEEd('ar').format(table.date)),
-                ),
-                if (this.widget.role == 1 || this.widget.role == 2)
+    return checkIfListEmpty(
+      dataList: result,
+      child: DataTable(
+        columns: <DataColumn>[
+          DataColumn(label: Text(" الاسم"), numeric: false),
+          DataColumn(label: Text(" التاريخ"), numeric: false),
+          if (this.widget.role == 1 || this.widget.role == 2)
+            DataColumn(label: Text(""), numeric: false),
+        ],
+        rows: result
+            .map(
+              (table) => DataRow(
+                cells: [
+                  DataCell(Text(table.name),
+                      onTap: this.widget.role == 1 || this.widget.role == 2
+                          ? () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return ExamTableAddUpdate(
+                                  widget.role,
+                                  examTable: table,
+                                );
+                              }));
+                            }
+                          : null),
                   DataCell(
-                    Text(
-                      'حذف',
-                      style: TextStyle(color: Colors.red),
-                    ),
-                    onTap: () {
-                      ExamTableController().delet(table.id, this.widget.year);
-                      setState(() {});
-                    },
+                    Text(DateFormat.yMMMMEEEEd('ar').format(table.date)),
                   ),
-              ],
-            ),
-          )
-          .toList(),
+                  if (this.widget.role == 1 || this.widget.role == 2)
+                    DataCell(
+                      Text(
+                        'حذف',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                      onTap: () {
+                        ExamTableController().delet(table.id, this.widget.year);
+                        setState(() {});
+                      },
+                    ),
+                ],
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 

@@ -33,6 +33,7 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
     super.initState();
     teacherName = widget.board?.teacherName;
     boardName = widget.board?.name;
+    isBoss = widget.board?.isBoss;
   }
 
   Widget textSection() {
@@ -121,7 +122,6 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
               });
             },
           ),
-
           SizedBox(height: 10),
           Text(
             ' رئيس اللجنة',
@@ -173,7 +173,7 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
                 onPressed: () async {
                   setState(() => loading = true);
                   if (_formKey.currentState!.validate()) {
-                    await addNewBoard(boardName!, teacherName , isBoss);
+                    await addNewBoard(boardName!, teacherName, isBoss);
                     setState(() => loading = true);
                   }
                 },
@@ -184,7 +184,7 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
     );
   }
 
-  Future addNewBoard(String boardName, teacherName , isboss) async {
+  Future addNewBoard(String boardName, teacherName, isboss) async {
     //This means that the user is performing an update
     if (widget.board != null) {
       if (teacherName == null) {
@@ -204,9 +204,10 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
     }
 
     var checkDouble = await FirebaseFirestore.instance
-    .collection('boards')
-    .where('name', isEqualTo: boardName).where('teacherName', isEqualTo: teacherName)
-    .get();
+        .collection('boards')
+        .where('name', isEqualTo: boardName)
+        .where('teacherName', isEqualTo: teacherName)
+        .get();
     if (checkDouble.docs.isNotEmpty) {
       Navigator.pop(context);
       return;
@@ -218,7 +219,12 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
     if (check.exists) id = generateRandomString(32);
 
     final orders = FirebaseFirestore.instance.collection('boards').doc(id);
-    await orders.set({'id': id, 'name': boardName, 'teacherName': teacherName , 'isBoss': isBoss,});
+    await orders.set({
+      'id': id,
+      'name': boardName,
+      'teacherName': teacherName,
+      'isBoss': isBoss,
+    });
     Navigator.pop(context);
   }
 

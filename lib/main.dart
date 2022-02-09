@@ -5,14 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:form/Controllers/NewsController.dart';
 import 'package:form/models/news.dart';
-import 'package:form/views/login.dart';
+import 'package:form/utils/results_wrapper.dart';
 import 'package:form/views/news/news_add_update.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'drawer.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   final role = await getvalidationData();
   runApp(MyApp(role: role));
 }
@@ -34,13 +35,13 @@ class MyApp extends StatelessWidget {
           ),
           primaryColor: Colors.blue[900],
           appBarTheme: AppBarTheme(color: Colors.blue[900])),
-      home: role == 0 ? Login() : MyHomePage(role: role),
+      home: MyHomePage(role: role),
       supportedLocales: [Locale('ar', '')],
       localeResolutionCallback: (currentLocale, supportedLocales) {
         return supportedLocales.first;
       },
       localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
+        ...GlobalMaterialLocalizations.delegates,
         GlobalWidgetsLocalizations.delegate,
       ],
     );
@@ -101,46 +102,39 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Stack(
             children: [
-                        //               decoration:
-                        // BoxDecoration(
-                        //   color: const Color(0xff7c94b6),
-                        //   image: new DecorationImage(
-                        //     fit: BoxFit.cover,
-                        //     colorFilter: 
-                        //       ColorFilter.mode(Colors.black.withOpacity(0.2), 
-                        //       BlendMode.dstATop),
-                        //     image: new NetworkImage(
-                        //       'http://www.server.com/image.jpg',
-                        //     ),
-                        //   ),
-                        // ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height * 0.3,
-                          decoration: BoxDecoration(
-                          color: const Color(0xff7c94b6),
-                          
-                          image: new DecorationImage(
-                            fit: BoxFit.cover,
-                            colorFilter: 
-                              ColorFilter.mode(Colors.black.withOpacity(0.3), 
-                              BlendMode.dstATop),
-                            image: AssetImage("images/home.jpg"),
-                            
-                          ),
-                        ),
-
-                        ),
+              //               decoration:
+              // BoxDecoration(
+              //   color: const Color(0xff7c94b6),
+              //   image: new DecorationImage(
+              //     fit: BoxFit.cover,
+              //     colorFilter:
+              //       ColorFilter.mode(Colors.black.withOpacity(0.2),
+              //       BlendMode.dstATop),
+              //     image: new NetworkImage(
+              //       'http://www.server.com/image.jpg',
+              //     ),
+              //   ),
+              // ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.3,
+                decoration: BoxDecoration(
+                  color: const Color(0xff7c94b6),
+                  image: new DecorationImage(
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                        Colors.black.withOpacity(0.3), BlendMode.dstATop),
+                    image: AssetImage("images/home.jpg"),
+                  ),
+                ),
+              ),
               // Image(
-                
-               
-                
+
               //   image: AssetImage("images/home.jpg"),
               //   width: MediaQuery.of(context).size.width,
               //   fit: BoxFit.cover,
               //   height: MediaQuery.of(context).size.height * 0.3,
               // ),
-
 
               Container(
                 margin: const EdgeInsets.only(top: 7),
@@ -197,68 +191,71 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget result(List<News> news, BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        physics: const AlwaysScrollableScrollPhysics(),
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        itemCount: news.length,
-        itemBuilder: (BuildContext context, int position) {
-          return Container(
-            margin: const EdgeInsets.only(left: 5, right: 5, bottom: 5),
-            padding: EdgeInsets.all(5),
-            decoration: BoxDecoration(
-                border: Border.all(width: 1.5),
-                borderRadius: BorderRadius.circular(5)),
-            child: InkWell(
-              onTap: this.role_check == 1 || this.role_check == 2
-                  ? () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return NewsAddUpdate(
-                          role_check,
-                          news: news[position],
-                        );
-                      }));
-                    }
-                  : null,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        news[position].title,
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black),
-                      ),
-                      SizedBox(height: 15),
-                      Text(
-                        news[position].body,
-                        style: TextStyle(fontSize: 15, color: Colors.black),
-                      ),
-                    ],
-                  ),
-                  this.role_check == 1 || this.role_check == 2
-                      ? TextButton(
-                          child: Text(
-                            'حذف',
-                            style: TextStyle(fontSize: 15, color: Colors.red),
-                          ),
-                          onPressed: () {
-                            NewsController().delet(news[position].id);
-                            setState(() {});
-                          },
-                        )
-                      : SizedBox.shrink(),
-                ],
+    return checkIfListEmpty(
+      dataList: news,
+      child: Expanded(
+        child: ListView.builder(
+          physics: const AlwaysScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          itemCount: news.length,
+          itemBuilder: (BuildContext context, int position) {
+            return Container(
+              margin: const EdgeInsets.only(left: 5, right: 5, bottom: 5),
+              padding: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                  border: Border.all(width: 1.5),
+                  borderRadius: BorderRadius.circular(5)),
+              child: InkWell(
+                onTap: this.role_check == 1 || this.role_check == 2
+                    ? () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return NewsAddUpdate(
+                            role_check,
+                            news: news[position],
+                          );
+                        }));
+                      }
+                    : null,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          news[position].title,
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black),
+                        ),
+                        SizedBox(height: 15),
+                        Text(
+                          news[position].body,
+                          style: TextStyle(fontSize: 15, color: Colors.black),
+                        ),
+                      ],
+                    ),
+                    this.role_check == 1 || this.role_check == 2
+                        ? TextButton(
+                            child: Text(
+                              'حذف',
+                              style: TextStyle(fontSize: 15, color: Colors.red),
+                            ),
+                            onPressed: () {
+                              NewsController().delet(news[position].id);
+                              setState(() {});
+                            },
+                          )
+                        : SizedBox.shrink(),
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

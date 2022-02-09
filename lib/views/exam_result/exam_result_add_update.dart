@@ -8,11 +8,10 @@ import 'package:form/utils/app_button.dart';
 class ExamResultAddUpdate extends StatefulWidget {
   final int role;
 
-
   /// Should be passed when updating the curriculum
   final ExamResult? examResult;
 
-  ExamResultAddUpdate(this.role,  {this.examResult});
+  ExamResultAddUpdate(this.role, {this.examResult});
 
   @override
   ExamResultAddUpdateState createState() => ExamResultAddUpdateState();
@@ -33,7 +32,8 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
   void initState() {
     super.initState();
     yearName = widget.examResult?.year;
-    studentNameController = TextEditingController(text: widget.examResult?.studentName);
+    studentNameController =
+        TextEditingController(text: widget.examResult?.studentName);
     degreeController = TextEditingController(text: widget.examResult?.degree);
   }
 
@@ -67,14 +67,13 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
                 shubjects.add(snapshot.data!.docs[i]['name']);
               }
               return DropdownButtonFormField(
-                
+                value: stName,
                 items: shubjects.map((String item) {
                   return DropdownMenuItem<String>(
                     value: item,
                     child: Text(item),
                   );
                 }).toList(),
-                
                 enableFeedback: !loading,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -93,12 +92,12 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           DropdownButtonFormField<String>(
-           
+            value: yearName,
             items: yearArry.map((String item) {
               return DropdownMenuItem<String>(value: item, child: Text(item));
             }).toList(),
             validator: (value) {
-              var temp = value?? 0;
+              var temp = value ?? 0;
               if (temp == 0) return 'يجب اختيار المرحلة';
               return null;
             },
@@ -135,16 +134,13 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
               hintStyle: TextStyle(color: Colors.black),
             ),
           ),
-
           Text(
             '  اسم المادة ',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance
-                .collection('curriculum')
-                
-                .snapshots(),
+            stream:
+                FirebaseFirestore.instance.collection('curriculum').snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Text('error');
@@ -154,6 +150,7 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
                 shubjects.add(snapshot.data!.docs[i]['name']);
               }
               return DropdownButtonFormField(
+                value: subjectName,
                 items: shubjects.map((String item) {
                   return DropdownMenuItem<String>(
                     value: item,
@@ -161,14 +158,14 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
                   );
                 }).toList(),
                 validator: (value) {
-              var temp = value?? 0;
-              if (temp == 0) return 'يجب اختيار اسم المادة';
-              return null;
-            },
+                  var temp = value ?? 0;
+                  if (temp == 0) return 'يجب اختيار اسم المادة';
+                  return null;
+                },
                 enableFeedback: !loading,
                 decoration: InputDecoration(
-                  border:
-                      OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10)),
                   // icon: Icon(Icons.stacked_bar_chart, color: Colors.black),
                   hintStyle: TextStyle(color: Colors.black),
                 ),
@@ -207,7 +204,8 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
                 onPressed: () async {
                   setState(() => loading = true);
                   if (_formKey.currentState!.validate()) {
-                    await addNewExamResult(stName!, yearName , degreeController.text , subjectName);
+                    await addNewExamResult(
+                        stName!, yearName, degreeController.text, subjectName);
                     setState(() => loading = true);
                   }
                 },
@@ -218,23 +216,26 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
     );
   }
 
-  Future addNewExamResult(String studentName, year , degree, subjectName) async {
-    
+  Future addNewExamResult(String studentName, year, degree, subjectName) async {
     //This means that the user is performing an update
     if (widget.examResult != null) {
-
       if (subjectName == null) {
-      subjectName = this.widget.examResult?.subjectName;
+        subjectName = this.widget.examResult?.subjectName;
       }
       if (year == null) {
-      year = this.widget.examResult?.year;
+        year = this.widget.examResult?.year;
       }
 
       var subject = FirebaseFirestore.instance
           .collection('examResult')
           .doc(this.widget.examResult!.id);
-      await subject.update(
-          {'id': this.widget.examResult!.id, 'studentName': studentName, 'year': year , 'degree': degree , 'subjectName':subjectName});
+      await subject.update({
+        'id': this.widget.examResult!.id,
+        'studentName': studentName,
+        'year': year,
+        'degree': degree,
+        'subjectName': subjectName
+      });
       Navigator.pop(context);
       return;
     }
@@ -244,8 +245,13 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
     if (check.exists) id = generateRandomString(32);
 
     final orders = FirebaseFirestore.instance.collection('examResult').doc(id);
-    await orders
-        .set({'id': id, 'studentName': studentName, 'year': year , 'degree': degree , 'subjectName':subjectName});
+    await orders.set({
+      'id': id,
+      'studentName': studentName,
+      'year': year,
+      'degree': degree,
+      'subjectName': subjectName
+    });
     Navigator.pop(context);
   }
 

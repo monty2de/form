@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:form/views/board/board_add_update.dart';
 import 'package:form/views/drawer_pages/about.dart';
 import 'package:form/views/drawer_pages/department_activities.dart';
+import 'package:form/views/drawer_pages/students_affairs.dart';
 import 'package:form/views/login.dart';
 import 'package:form/views/pages_lv2/curriculum_final.dart';
 import 'package:form/views/pages_lv2/curriculum_first.dart';
@@ -64,6 +65,17 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     },
                   ),
                   const SizedBox(height: 24),
+                  if (widget.role == 0 || widget.role == 4)
+                    buildMenuItem(
+                      text: 'تسجيل الدخول',
+                      onClicked: () {
+                        Navigator.pushAndRemoveUntil(context,
+                            MaterialPageRoute(builder: (context) {
+                          return Login();
+                        }), (Route<dynamic> route) => false);
+                      },
+                    ),
+                  const SizedBox(height: 24),
                   buildMenuItem(
                     text: ' نبذة عن القسم ',
                     onClicked: () {
@@ -73,7 +85,6 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                       }), (Route<dynamic> route) => false);
                     },
                   ),
-                  Divider(thickness: 2),
                   buildMenuItemWithSubCategory(
                     mainCatName: 'لجان القسم',
                     subCategories: [
@@ -154,7 +165,6 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                           })
                     ],
                   ),
-                  Divider(thickness: 2),
                   buildMenuItemWithSubCategory(
                     mainCatName: 'اللجنة الامتحانية',
                     subCategories: [
@@ -230,7 +240,6 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                       ]),
                     ],
                   ),
-                  Divider(thickness: 2),
                   buildMenuItemWithSubCategory(
                       mainCatName: 'كادر القسم',
                       subCategories: [
@@ -276,7 +285,6 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                                 }));
                               }),
                       ]),
-                  Divider(thickness: 2),
                   buildMenuItem(
                     text: 'شؤون الطلبة',
                     onClicked: () {
@@ -286,14 +294,20 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                           return StudentShowAll(widget.role);
                         }), (Route<dynamic> route) => false);
                       } else {
-                        Navigator.pushAndRemoveUntil(context,
-                            MaterialPageRoute(builder: (context) {
-                          return StudentLogin(this.widget.role);
-                        }), (Route<dynamic> route) => false);
+                        if (widget.role != 3) {
+                          Navigator.pushAndRemoveUntil(context,
+                              MaterialPageRoute(builder: (context) {
+                            return StudentLogin(this.widget.role);
+                          }), (Route<dynamic> route) => false);
+                        } else {
+                          Navigator.pushAndRemoveUntil(context,
+                              MaterialPageRoute(builder: (context) {
+                            return StudentsAffairs(widget.role);
+                          }), (Route<dynamic> route) => false);
+                        }
                       }
                     },
                   ),
-                  Divider(thickness: 2),
                   buildMenuItem(
                     text: 'نشاطات القسم',
                     onClicked: () {
@@ -303,7 +317,6 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                       }), (Route<dynamic> route) => false);
                     },
                   ),
-                  Divider(thickness: 2),
                   buildMenuItemWithSubCategory(
                     mainCatName: 'المناهج',
                     subCategories: [
@@ -325,7 +338,6 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                           })
                     ],
                   ),
-                  Divider(thickness: 2),
                   buildMenuItemWithSubCategory(
                     mainCatName: 'الدراسات العليا',
                     subCategories: [
@@ -348,33 +360,22 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                           })
                     ],
                   ),
-                  Divider(thickness: 2),
-                  this.widget.role != 0 ?  buildMenuItem(
-                    text: 'تسجيل الخروج',
-                    onClicked: () async {
-                      SharedPreferences sharedPreferences =
-                          await SharedPreferences.getInstance();
+                  if (widget.role != 0 && widget.role != 4)
+                    buildMenuItem(
+                      text: 'تسجيل الخروج',
+                      onClicked: () async {
+                        SharedPreferences sharedPreferences =
+                            await SharedPreferences.getInstance();
 
-                      sharedPreferences.clear();
-                      // ignore: deprecated_member_use
-                      sharedPreferences.commit();
-                      Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return Login();
-                          }));
-                    },
-                  ) : buildMenuItem(
-                    text: 'تسجيل الدخول',
-                    onClicked: ()  {
-                  
-
-                 
-                      Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return Login();
-                          }));
-                    },
-                  ),
+                        sharedPreferences.clear();
+                        // ignore: deprecated_member_use
+                        sharedPreferences.commit();
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return Login();
+                        }));
+                      },
+                    )
                 ],
               ),
             ),
@@ -390,13 +391,11 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
     required VoidCallback onClicked,
   }) {
     final color = Colors.blue[900];
-    final hoverColor = Colors.blue[700];
 
     return Column(
       children: [
         ListTile(
           title: Text(text, style: TextStyle(color: color)),
-          hoverColor: hoverColor,
           onTap: onClicked,
         ),
       ],
@@ -408,28 +407,20 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
     required List<SubCategory> subCategories,
   }) {
     final color = Colors.blue[900];
-    return ListTile(
+    return ExpansionTile(
       title: Text(mainCatName, style: TextStyle(color: color)),
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Divider(thickness: 2),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: subCategories
-                .map(
-                  (e) => e.subCategories == null
-                      ? TextButton(
-                          onPressed: e.onPressed,
-                          child: Text(e.name, style: TextStyle(color: color)),
-                        )
-                      : buildMenuItemWithSubCategory(
-                          mainCatName: e.name, subCategories: e.subCategories!),
-                )
-                .toList(),
-          ),
-        ],
-      ),
+      expandedAlignment: Alignment.centerRight,
+      children: subCategories
+          .map(
+            (e) => e.subCategories == null
+                ? TextButton(
+                    onPressed: e.onPressed,
+                    child: Text(e.name, style: TextStyle(color: color)),
+                  )
+                : buildMenuItemWithSubCategory(
+                    mainCatName: e.name, subCategories: e.subCategories!),
+          )
+          .toList(),
     );
   }
 }

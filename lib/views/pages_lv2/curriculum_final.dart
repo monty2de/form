@@ -4,6 +4,7 @@ import 'package:form/models/curriculum.dart';
 import 'package:form/views/curriculum/curriculum_add.dart';
 
 import '../../drawer.dart';
+import '../../utils/results_wrapper.dart';
 
 class CurriculumFinal extends StatefulWidget {
   final int role;
@@ -72,46 +73,49 @@ class _CurriculumFinalState extends State<CurriculumFinal> {
   }
 
   Widget result(List<Curriculum> result, BuildContext context) {
-    return DataTable(
-      columns: <DataColumn>[
-        DataColumn(label: Text("الاسم"), numeric: false),
-        DataColumn(label: Text("المرحلة"), numeric: false),
-        if (this.widget.role == 1 || this.widget.role == 2)
-          DataColumn(label: Text(""), numeric: false),
-      ],
-      rows: result
-          .map(
-            (subject) => DataRow(
-              cells: [
-                DataCell(Text(subject.name),
-                    onTap: this.widget.role == 1 || this.widget.role == 2
-                        ? () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return CurriculumAdd(
-                                this.widget.role,
-                                subject.type,
-                                curriculum: subject,
-                              );
-                            }));
-                          }
-                        : null),
-                DataCell(Text(subject.year)),
-                if (this.widget.role == 1 || this.widget.role == 2)
-                  DataCell(
-                    Text(
-                      'حذف',
-                      style: TextStyle(color: Colors.red),
+    return checkIfListEmpty(
+      dataList: result,
+      child: DataTable(
+        columns: <DataColumn>[
+          DataColumn(label: Text("الاسم"), numeric: false),
+          DataColumn(label: Text("المرحلة"), numeric: false),
+          if (this.widget.role == 1 || this.widget.role == 2)
+            DataColumn(label: Text(""), numeric: false),
+        ],
+        rows: result
+            .map(
+              (subject) => DataRow(
+                cells: [
+                  DataCell(Text(subject.name),
+                      onTap: this.widget.role == 1 || this.widget.role == 2
+                          ? () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return CurriculumAdd(
+                                  this.widget.role,
+                                  subject.type,
+                                  curriculum: subject,
+                                );
+                              }));
+                            }
+                          : null),
+                  DataCell(Text(subject.year)),
+                  if (this.widget.role == 1 || this.widget.role == 2)
+                    DataCell(
+                      Text(
+                        'حذف',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                      onTap: () {
+                        CurriculumController().delet(subject.id);
+                        setState(() {});
+                      },
                     ),
-                    onTap: () {
-                      CurriculumController().delet(subject.id);
-                      setState(() {});
-                    },
-                  ),
-              ],
-            ),
-          )
-          .toList(),
+                ],
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 

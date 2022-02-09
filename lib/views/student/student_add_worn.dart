@@ -7,9 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:form/utils/app_button.dart';
 
 class WornAdd extends StatefulWidget {
-
-
-
   @override
   WornAddState createState() => WornAddState();
 }
@@ -17,20 +14,17 @@ class WornAdd extends StatefulWidget {
 class WornAddState extends State<WornAdd> {
   String? stName;
 
-
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
 
   late TextEditingController bodyController;
-@override
+  @override
   void initState() {
     super.initState();
     bodyController = TextEditingController();
   }
 
   Widget textSection() {
- 
-  
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
@@ -51,14 +45,13 @@ class WornAddState extends State<WornAdd> {
                 shubjects.add(snapshot.data!.docs[i]['name']);
               }
               return DropdownButtonFormField(
-                
+                value: stName,
                 items: shubjects.map((String item) {
                   return DropdownMenuItem<String>(
                     value: item,
                     child: Text(item),
                   );
                 }).toList(),
-                
                 enableFeedback: !loading,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -72,7 +65,6 @@ class WornAddState extends State<WornAdd> {
             },
           ),
           SizedBox(height: 10),
-
           Text(
             ' الوصف',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -82,6 +74,7 @@ class WornAddState extends State<WornAdd> {
               if (value!.isEmpty) return 'يجب ادخال الوصف';
               return null;
             },
+            maxLines: 3,
             enabled: !loading,
             controller: bodyController,
             cursorColor: Colors.black,
@@ -92,11 +85,6 @@ class WornAddState extends State<WornAdd> {
               hintStyle: TextStyle(color: Colors.black),
             ),
           ),
-
-
-          
-          
-        
         ],
       ),
     );
@@ -112,7 +100,7 @@ class WornAddState extends State<WornAdd> {
             Navigator.pop(context, false);
           },
         ),
-        title: Text( 'اضافة نبليغ'),
+        title: Text('اضافة تبليغ'),
       ),
       body: Center(
         child: ListView(
@@ -126,8 +114,7 @@ class WornAddState extends State<WornAdd> {
                 onPressed: () async {
                   setState(() => loading = true);
                   if (_formKey.currentState!.validate()) {
-                    await addNewWorn(
-                       stName! , bodyController.text);
+                    await addNewWorn(stName!, bodyController.text);
                     setState(() => loading = true);
                   }
                 },
@@ -139,15 +126,13 @@ class WornAddState extends State<WornAdd> {
   }
 
   Future addNewWorn(String studentName, body) async {
-  
-  String id = generateRandomString(32);
+    String id = generateRandomString(32);
     final check =
         await FirebaseFirestore.instance.collection('worns').doc(id).get();
     if (check.exists) id = generateRandomString(32);
 
     final orders = FirebaseFirestore.instance.collection('worns').doc(id);
-    await orders.set({'id': id, 'stname': stName, 'body': body });
-
+    await orders.set({'id': id, 'stname': stName, 'body': body});
 
     Navigator.pop(context);
   }

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:form/Controllers/ExamResultController.dart';
 import 'package:form/models/examResult.dart';
 
-import '../../drawer.dart';
+import '../../utils/results_wrapper.dart';
 
 // ignore: must_be_immutable
 class StudentMarks extends StatefulWidget {
-late String name;
-late int role;
-StudentMarks(this.name , this.role);
+  late String name;
+  late int role;
+  StudentMarks(this.name, this.role);
 
   @override
   _StudentMarksState createState() => _StudentMarksState();
@@ -18,9 +18,7 @@ class _StudentMarksState extends State<StudentMarks> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
-        
         centerTitle: true,
         title: Text('الدرجات'),
       ),
@@ -56,23 +54,26 @@ class _StudentMarksState extends State<StudentMarks> {
   }
 
   Widget result(List<ExamResult> result, BuildContext context) {
-    return DataTable(
-      columns: <DataColumn>[
-        DataColumn(label: Text("اسم المادة"), numeric: false),
-        DataColumn(label: Text("الدرجة"), numeric: false),
-     
-      ],
-      rows: result
-          .map(
-            (subject) => DataRow(
-              cells: [
-                DataCell(Text(subject.subjectName),),
-                DataCell(Text(subject.degree)),
-                
-              ],
-            ),
-          )
-          .toList(),
+    return checkIfListEmpty(
+      dataList: result,
+      child: DataTable(
+        columns: <DataColumn>[
+          DataColumn(label: Text("اسم المادة"), numeric: false),
+          DataColumn(label: Text("الدرجة"), numeric: false),
+        ],
+        rows: result
+            .map(
+              (subject) => DataRow(
+                cells: [
+                  DataCell(
+                    Text(subject.subjectName),
+                  ),
+                  DataCell(Text(subject.degree)),
+                ],
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 

@@ -3,6 +3,7 @@ import 'package:form/Controllers/TeacherController.dart';
 import 'package:form/models/teacher.dart';
 import 'package:form/views/teacher/teacher_add_update.dart';
 import '../../drawer.dart';
+import '../../utils/results_wrapper.dart';
 
 class TeacherShow extends StatefulWidget {
   final int role;
@@ -56,39 +57,43 @@ class TeacherShowState extends State<TeacherShow> {
   }
 
   Widget result(List<Teacher> result, BuildContext context) {
-    return DataTable(
-      columns: <DataColumn>[
-        DataColumn(label: Text("الاسم"), numeric: false),
-        if (this.widget.role == 1) DataColumn(label: Text(""), numeric: false),
-      ],
-      rows: result
-          .map(
-            (teacher) => DataRow(
-              cells: [
-                DataCell(Text(teacher.name),
-                    onTap: this.widget.role == 1
-                        ? () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return TeacherAddUpdate(this.widget.role,
-                                  teacher: teacher);
-                            }));
-                          }
-                        : null),
-                if (this.widget.role == 1)
-                  DataCell(
-                    InkWell(
-                      child: Text('حذف', style: TextStyle(color: Colors.red)),
-                      onTap: () {
-                        TeacherController().delet(teacher.id);
-                        setState(() {});
-                      },
+    return checkIfListEmpty(
+      dataList: result,
+      child: DataTable(
+        columns: <DataColumn>[
+          DataColumn(label: Text("الاسم"), numeric: false),
+          if (this.widget.role == 1)
+            DataColumn(label: Text(""), numeric: false),
+        ],
+        rows: result
+            .map(
+              (teacher) => DataRow(
+                cells: [
+                  DataCell(Text(teacher.name),
+                      onTap: this.widget.role == 1
+                          ? () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return TeacherAddUpdate(this.widget.role,
+                                    teacher: teacher);
+                              }));
+                            }
+                          : null),
+                  if (this.widget.role == 1)
+                    DataCell(
+                      InkWell(
+                        child: Text('حذف', style: TextStyle(color: Colors.red)),
+                        onTap: () {
+                          TeacherController().delet(teacher.id);
+                          setState(() {});
+                        },
+                      ),
                     ),
-                  ),
-              ],
-            ),
-          )
-          .toList(),
+                ],
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 

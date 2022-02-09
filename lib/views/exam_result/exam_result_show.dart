@@ -4,6 +4,7 @@ import 'package:form/models/examResult.dart';
 import 'package:form/views/exam_result/exam_result_add_update.dart';
 
 import '../../drawer.dart';
+import '../../utils/results_wrapper.dart';
 
 // ignore: must_be_immutable
 class ExamResultShow extends StatefulWidget {
@@ -72,45 +73,48 @@ class _ExamResultShowState extends State<ExamResultShow> {
   }
 
   Widget result(List<ExamResult> result, BuildContext context) {
-    return DataTable(
-      columns: <DataColumn>[
-        DataColumn(label: Text(" الاسم"), numeric: false),
-        DataColumn(label: Text(" الدرجة"), numeric: false),
-        if (this.widget.role == 1 || this.widget.role == 2)
-          DataColumn(label: Text(""), numeric: false),
-      ],
-      rows: result
-          .map(
-            (examresult) => DataRow(
-              cells: [
-                DataCell(Text(examresult.studentName),
-                    onTap: this.widget.role == 1 || this.widget.role == 2
-                        ? () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return ExamResultAddUpdate(
-                                this.widget.role,
-                                examResult: examresult,
-                              );
-                            }));
-                          }
-                        : null),
-                DataCell(Text(examresult.degree)),
-                if (this.widget.role == 1 || this.widget.role == 2)
-                  DataCell(
-                    Text(
-                      'حذف',
-                      style: TextStyle(color: Colors.red),
+    return checkIfListEmpty(
+      dataList: result,
+      child: DataTable(
+        columns: <DataColumn>[
+          DataColumn(label: Text(" الاسم"), numeric: false),
+          DataColumn(label: Text(" الدرجة"), numeric: false),
+          if (this.widget.role == 1 || this.widget.role == 2)
+            DataColumn(label: Text(""), numeric: false),
+        ],
+        rows: result
+            .map(
+              (examresult) => DataRow(
+                cells: [
+                  DataCell(Text(examresult.studentName),
+                      onTap: this.widget.role == 1 || this.widget.role == 2
+                          ? () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return ExamResultAddUpdate(
+                                  this.widget.role,
+                                  examResult: examresult,
+                                );
+                              }));
+                            }
+                          : null),
+                  DataCell(Text(examresult.degree)),
+                  if (this.widget.role == 1 || this.widget.role == 2)
+                    DataCell(
+                      Text(
+                        'حذف',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                      onTap: () {
+                        ExamResultController().delet(examresult.id);
+                        setState(() {});
+                      },
                     ),
-                    onTap: () {
-                      ExamResultController().delet(examresult.id);
-                      setState(() {});
-                    },
-                  ),
-              ],
-            ),
-          )
-          .toList(),
+                ],
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 

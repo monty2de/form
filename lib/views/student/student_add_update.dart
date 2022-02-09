@@ -38,14 +38,13 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
   late TextEditingController emailController;
   late TextEditingController partController;
 
-
   @override
   void initState() {
     super.initState();
     yearName = widget.student?.year;
-    yearName = widget.student?.status;
     sextype = widget.student?.sex;
     dateStudent = widget.student?.BDate;
+    status = widget.student?.status;
     studentNameController = TextEditingController(text: widget.student?.name);
     bLocationController =
         TextEditingController(text: widget.student?.BLocation);
@@ -72,8 +71,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
       'متخرج',
       'عبور',
     ];
-    var sex = ['ذكر', 'انثى'];
-
+    List<String> sex = ['ذكر', 'انثى'];
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
@@ -111,12 +109,12 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             validator: (value) {
               var temp = value ?? 0;
               if (temp == 0) return 'يجب اختيار المرحلة';
+              return null;
             },
             enableFeedback: !loading,
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              // icon: Icon(Icons.stacked_bar_chart, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
             onChanged: (value) {
@@ -144,7 +142,6 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              // icon: Icon(Icons.stacked_bar_chart, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
             onChanged: (value) {
@@ -166,6 +163,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             validator: (value) {
               var temp = value ?? 0;
               if (temp == 0) return 'يجب اختيار الحالة';
+              return null;
             },
             enableFeedback: !loading,
             decoration: InputDecoration(
@@ -360,17 +358,18 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
                   setState(() => loading = true);
                   if (_formKey.currentState!.validate()) {
                     await addNewStudent(
-                        studentNameController.text,
-                        sextype,
-                        bLocationController.text,
-                        dateStudent,
-                        locationController.text,
-                        numberController.text,
-                        yearName,
-                        emailController.text,
-                        passController.text,
-                        status,
-                        partController.text,);
+                      studentNameController.text,
+                      sextype,
+                      bLocationController.text,
+                      dateStudent,
+                      locationController.text,
+                      numberController.text,
+                      yearName,
+                      emailController.text,
+                      passController.text,
+                      status,
+                      partController.text,
+                    );
                     setState(() => loading = true);
                   }
                 },
@@ -382,7 +381,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
   }
 
   Future addNewStudent(String studentName, sex, BLocation, BDate, location,
-      number, year, email, pass , status , part) async {
+      number, year, email, pass, status, part) async {
     //This means that the user is performing an update
     if (widget.student != null) {
       if (BDate == null) {
@@ -400,8 +399,8 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
         'location': location,
         'year': year,
         'number': number,
-        'status' : status,
-        'part' : part,
+        'status': status,
+        'part': part,
       });
       Navigator.pop(context);
       return;
@@ -427,8 +426,8 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
       'number': number,
       'pass': pass,
       'role': 3,
-      'status' : status,
-      'part' : part,
+      'status': status,
+      'part': part,
     });
 
     Navigator.pop(context);

@@ -67,6 +67,7 @@ class NewsAddUpdateState extends State<NewsAddUpdate> {
             },
             enabled: !loading,
             controller: bodyController,
+            maxLines: 3,
             cursorColor: Colors.black,
             style: TextStyle(color: Colors.black),
             decoration: InputDecoration(

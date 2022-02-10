@@ -296,7 +296,7 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
 
       var message = e.message;
       if (message ==
-          'Error: [firebase_auth/email-already-in-use] The email address is already in use by another account.') {
+          'The email address is already in use by another account.') {
         message = 'الايميل مستخدم ';
       } 
       final snackBar = SnackBar(content: Text(message!));

@@ -430,13 +430,14 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
         'part': part,
       });
     } on FirebaseAuthException catch (e) {
+      print(e.message);
       setState(() {
         loading = false;
       });
 
       var message = e.message;
       if (message ==
-          'Error: [firebase_auth/email-already-in-use] The email address is already in use by another account.') {
+          'The email address is already in use by another account.') {
         message = 'الايميل مستخدم ';
       } 
       final snackBar = SnackBar(content: Text(message!));

@@ -408,6 +408,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
   }) {
     final color = Colors.blue[900];
     return ExpansionTile(
+      expandedCrossAxisAlignment: CrossAxisAlignment.start,
       title: Text(mainCatName, style: TextStyle(color: color)),
       expandedAlignment: Alignment.centerRight,
       children: subCategories

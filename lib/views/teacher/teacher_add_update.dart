@@ -267,7 +267,9 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
       Navigator.pop(context);
       return;
     }
-    UserCredential _authResult = await FirebaseAuth.instance
+    try {
+
+      UserCredential _authResult = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email.trim(), password: pass);
 
         FirebaseFirestore.instance
@@ -286,6 +288,21 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
       'role': 2,
       'position': position
     });
+      
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        loading = false;
+      });
+
+      var message = e.message;
+      if (message ==
+          'Error: [firebase_auth/email-already-in-use] The email address is already in use by another account.') {
+        message = 'الايميل مستخدم ';
+      } 
+      final snackBar = SnackBar(content: Text(message!));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+    
 
     Navigator.pop(context);
   }

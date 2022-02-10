@@ -405,30 +405,43 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
       Navigator.pop(context);
       return;
     }
+    try {
+      UserCredential _authResult = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email.trim(), password: pass);
 
-    UserCredential _authResult = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: email.trim(), password: pass);
+      FirebaseFirestore.instance
+          .collection('students')
+          .doc(
+            _authResult.user!.uid,
+          )
+          .set({
+        'id': _authResult.user!.uid,
+        'name': studentName,
+        'email': email,
+        'sex': sex,
+        'BLocation': BLocation,
+        'BDate': BDate,
+        'location': location,
+        'year': year,
+        'number': number,
+        'pass': pass,
+        'role': 3,
+        'status': status,
+        'part': part,
+      });
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        loading = false;
+      });
 
-    FirebaseFirestore.instance
-        .collection('students')
-        .doc(
-          _authResult.user!.uid,
-        )
-        .set({
-      'id': _authResult.user!.uid,
-      'name': studentName,
-      'email': email,
-      'sex': sex,
-      'BLocation': BLocation,
-      'BDate': BDate,
-      'location': location,
-      'year': year,
-      'number': number,
-      'pass': pass,
-      'role': 3,
-      'status': status,
-      'part': part,
-    });
+      var message = e.message;
+      if (message ==
+          'Error: [firebase_auth/email-already-in-use] The email address is already in use by another account.') {
+        message = 'الايميل مستخدم ';
+      } 
+      final snackBar = SnackBar(content: Text(message!));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
 
     Navigator.pop(context);
   }

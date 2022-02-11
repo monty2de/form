@@ -1,5 +1,3 @@
-// ignore_for_file: non_constant_identifier_names
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -92,7 +90,6 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              // icon: Icon(Icons.email, color: Colors.black),
               hintStyle: TextStyle(color: Colors.black),
             ),
           ),
@@ -380,12 +377,12 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
     );
   }
 
-  Future addNewStudent(String studentName, sex, BLocation, BDate, location,
+  Future addNewStudent(String studentName, sex, bLocation, bDate, location,
       number, year, email, pass, status, part) async {
     //This means that the user is performing an update
     if (widget.student != null) {
-      if (BDate == null) {
-        BDate = this.widget.student!.BDate;
+      if (bDate == null) {
+        bDate = this.widget.student!.BDate;
       }
       var subject = FirebaseFirestore.instance
           .collection('students')
@@ -394,8 +391,8 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
         'id': this.widget.student!.id,
         'name': studentName,
         'sex': sex,
-        'BLocation': BLocation,
-        'BDate': BDate,
+        'BLocation': bLocation,
+        'BDate': bDate,
         'location': location,
         'year': year,
         'number': number,
@@ -419,8 +416,8 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
         'name': studentName,
         'email': email,
         'sex': sex,
-        'BLocation': BLocation,
-        'BDate': BDate,
+        'BLocation': bLocation,
+        'BDate': bDate,
         'location': location,
         'year': year,
         'number': number,
@@ -436,10 +433,9 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
       });
 
       var message = e.message;
-      if (message ==
-          'The email address is already in use by another account.') {
+      if (e.code == 'email-already-in-use') {
         message = 'الايميل مستخدم ';
-      } 
+      }
       final snackBar = SnackBar(content: Text(message!));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }

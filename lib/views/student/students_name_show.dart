@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:form/Controllers/StudentController.dart';
 import 'package:form/models/student.dart';
@@ -73,6 +74,8 @@ class StudentsNamesShowState extends State<StudentsNamesShow> {
           DataColumn(label: Text("المرحلة"), numeric: false),
           if (this.widget.role == 1 || this.widget.role == 2)
             DataColumn(label: Text(""), numeric: false),
+          if (this.widget.role == 1 || this.widget.role == 2)
+            DataColumn(label: Text(""), numeric: false),
         ],
         rows: result
             .map(
@@ -96,6 +99,32 @@ class StudentsNamesShowState extends State<StudentsNamesShow> {
 
                       setState(() {});
                     }),
+                  if (this.widget.role == 1 || this.widget.role == 2)
+                    if (student.year != 'عليا ثانية' ||
+                        student.year != 'الرابعة')
+                      DataCell(
+                          Text('ترحيل', style: TextStyle(color: Colors.red)),
+                          onTap: () async {
+                        var newYear;
+
+                        if (student.year == 'عليا اولى') {
+                          newYear = 'عليا ثانية';
+                        } else if (student.year == 'الاولى') {
+                          newYear = 'الثانية';
+                        } else if (student.year == 'الثانية') {
+                          newYear = 'الثالثة';
+                        } else if (student.year == 'الثالثة') {
+                          newYear = 'الرابعة';
+                        }
+
+                        var subject = FirebaseFirestore.instance
+                            .collection('students')
+                            .doc(student.id);
+                        await subject.update({'year': newYear});
+                        Navigator.pop(context);
+
+                        setState(() {});
+                      }),
                 ],
               ),
             )

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:form/Controllers/TeacherController.dart';
 import 'package:form/models/teacher.dart';
 import 'package:form/views/teacher/teacher_add_update.dart';
+import 'package:form/views/teacher/teacher_profile.dart';
 import '../../drawer.dart';
 import '../../utils/results_wrapper.dart';
 
@@ -21,6 +22,21 @@ class TeacherShowState extends State<TeacherShow> {
     return Scaffold(
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
+
+        actions: [
+          this.widget.role == 2 
+              ? TextButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return TeacherProfile(this.widget.role);
+                    }));
+                  },
+                  child:
+                      Text(" البروفايل  ", style: TextStyle(color: Colors.white)),
+                )
+              : Container(),
+        ],
         centerTitle: true,
         title: Text('اسماء الكادر'),
       ),

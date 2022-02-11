@@ -42,7 +42,7 @@ class _CurriculumFirstState extends State<CurriculumFirst> {
         child: Column(
           children: <Widget>[
             FutureBuilder(
-              future: CurriculumController().index(1),
+              future: CurriculumController().index(1 , ''),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.active:

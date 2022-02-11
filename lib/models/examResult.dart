@@ -1,7 +1,7 @@
 class ExamResult {
-  late String id, studentName, year, subjectName, degree;
+  late String id, studentName, year, subjectName, degree ,semister;
 
-  ExamResult({id, studentName, year, degree, subjectName});
+  ExamResult({id, studentName, year, degree, subjectName , semister});
 
   ExamResult.fromFirebase(var data) {
     this.id = data['id'];
@@ -9,5 +9,6 @@ class ExamResult {
     this.year = data['year'];
     this.degree = data['degree'];
     this.subjectName = data['subjectName'];
+    this.semister = data['semister'] ?? '';
   }
 }

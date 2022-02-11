@@ -19,6 +19,7 @@ class ExamResultAddUpdate extends StatefulWidget {
 
 class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
   String? yearName;
+  String? semisterName;
   String? subjectName;
   String? stName;
 
@@ -32,6 +33,8 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
   void initState() {
     super.initState();
     yearName = widget.examResult?.year;
+    semisterName = widget.examResult?.semister;
+
     studentNameController =
         TextEditingController(text: widget.examResult?.studentName);
     degreeController = TextEditingController(text: widget.examResult?.degree);
@@ -45,6 +48,11 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
       'الثالثة',
       'الثانية',
       'الاولى',
+    ];
+
+    List<String> semisterArry = [
+      'الكورس الاول',
+      'الكورس الثاني',
     ];
 
     return Padding(
@@ -111,6 +119,34 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
             onChanged: (value) {
               setState(() {
                 yearName = value;
+              });
+            },
+          ),
+          SizedBox(height: 10),
+          Text(
+            'الفصل الدراسي',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          DropdownButtonFormField<String>(
+            value: semisterName,
+            items: semisterArry.map((String item) {
+              return DropdownMenuItem<String>(value: item, child: Text(item));
+            }).toList(),
+            validator: (value) {
+              var temp = value ?? 0;
+              if (temp == 0) return 'يجب اختيار الفصل الدراسي';
+              return null;
+            },
+            enableFeedback: !loading,
+            decoration: InputDecoration(
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              // icon: Icon(Icons.stacked_bar_chart, color: Colors.black),
+              hintStyle: TextStyle(color: Colors.black),
+            ),
+            onChanged: (value) {
+              setState(() {
+                semisterName = value;
               });
             },
           ),
@@ -205,7 +241,7 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
                   setState(() => loading = true);
                   if (_formKey.currentState!.validate()) {
                     await addNewExamResult(
-                        stName!, yearName, degreeController.text, subjectName);
+                        stName!, yearName, degreeController.text, subjectName , semisterName);
                     setState(() => loading = true);
                   }
                 },
@@ -216,7 +252,7 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
     );
   }
 
-  Future addNewExamResult(String studentName, year, degree, subjectName) async {
+  Future addNewExamResult(String studentName, year, degree, subjectName , semister) async {
     //This means that the user is performing an update
     if (widget.examResult != null) {
       if (subjectName == null) {
@@ -234,7 +270,9 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
         'studentName': studentName,
         'year': year,
         'degree': degree,
-        'subjectName': subjectName
+        'subjectName': subjectName,
+        'semister': semister,
+
       });
       Navigator.pop(context);
       return;
@@ -250,7 +288,8 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
       'studentName': studentName,
       'year': year,
       'degree': degree,
-      'subjectName': subjectName
+      'subjectName': subjectName,
+      'semister': semister,
     });
     Navigator.pop(context);
   }

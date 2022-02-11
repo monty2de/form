@@ -1,5 +1,5 @@
 class Curriculum {
-  final String id, name, year;
+  final String id, name, year , semister;
   final int type;
 
   Curriculum({
@@ -7,6 +7,7 @@ class Curriculum {
     required this.name,
     required this.year,
     required this.type,
+    required this.semister,
   });
 
   factory Curriculum.fromFirebase(var data) {
@@ -14,6 +15,8 @@ class Curriculum {
         id: data['id'],
         name: data['name'],
         year: data['year'],
-        type: data['type']);
+        type: data['type'],
+        semister: data['semister'] ?? '',
+        );
   }
 }

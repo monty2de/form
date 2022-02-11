@@ -4,19 +4,38 @@ import 'package:form/models/curriculum.dart';
 class CurriculumController {
   var curriculumItem = <Curriculum>[];
 
-  index(int type) async {
-    var q = await FirebaseFirestore.instance
-        .collection('curriculum')
-        .where('type', isEqualTo: type)
-        .get();
-    curriculumItem = [];
-    q.docs.forEach((DocumentSnapshot element) {
-      Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+  index(int type, String semister) async {
+    if (semister == '') {
 
-      curriculumItem.add(Curriculum.fromFirebase(data));
-    });
+      var q = await FirebaseFirestore.instance
+          .collection('curriculum')
+          .where('type', isEqualTo: type)
+          .get();
+      curriculumItem = [];
+      q.docs.forEach((DocumentSnapshot element) {
+        Map<String, dynamic> data = element.data() as Map<String, dynamic>;
 
-    return curriculumItem;
+        curriculumItem.add(Curriculum.fromFirebase(data));
+      });
+
+      return curriculumItem;
+    } else {
+
+
+
+      var q = await FirebaseFirestore.instance
+          .collection('curriculum')
+          .where('type', isEqualTo: type).where('semister', isEqualTo: semister).get();
+          
+      curriculumItem = [];
+      q.docs.forEach((DocumentSnapshot element) {
+        Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+
+        curriculumItem.add(Curriculum.fromFirebase(data));
+      });
+
+      return curriculumItem;
+    }
   }
 
   void delet(String id) async {

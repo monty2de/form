@@ -9,6 +9,8 @@ import 'package:form/views/drawer_pages/students_affairs.dart';
 import 'package:form/views/login.dart';
 import 'package:form/views/pages_lv2/curriculum_final.dart';
 import 'package:form/views/pages_lv2/curriculum_first.dart';
+import 'package:form/views/pages_lv3/exam_result_semister_final.dart';
+import 'package:form/views/pages_lv3/exam_result_semister_first.dart';
 import 'package:form/views/student/student_login.dart';
 import 'package:form/views/student/student_show_all.dart';
 import 'package:form/views/student/students_name_final_show.dart';
@@ -199,7 +201,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                             onPressed: () {
                               Navigator.pushAndRemoveUntil(context,
                                   MaterialPageRoute(builder: (context) {
-                                return ExamResultFirst(widget.role);
+                                return ShowSemisterFirst(widget.role);
                               }), (Route<dynamic> route) => false);
                             }),
                       ]),
@@ -234,7 +236,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                             onPressed: () {
                               Navigator.pushAndRemoveUntil(context,
                                   MaterialPageRoute(builder: (context) {
-                                return ExamResultFinal(widget.role);
+                                return ShowSemisterFinal(widget.role);
                               }), (Route<dynamic> route) => false);
                             }),
                       ]),

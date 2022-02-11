@@ -20,6 +20,7 @@ class CurriculumAdd extends StatefulWidget {
 
 class CurriculumAddState extends State<CurriculumAdd> {
   String? yearName;
+  String? semisterName;
 
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
@@ -31,6 +32,8 @@ class CurriculumAddState extends State<CurriculumAdd> {
   void initState() {
     super.initState();
     yearName = widget.curriculum?.year;
+    semisterName = widget.curriculum?.semister;
+
     nameController = TextEditingController(text: widget.curriculum?.name);
     yearController = TextEditingController(text: widget.curriculum?.year);
   }
@@ -43,6 +46,10 @@ class CurriculumAddState extends State<CurriculumAdd> {
       'الثالثة',
       'الثانية',
       'الاولى',
+    ];
+    List<String> semisterArry = [
+      'الكورس الاول',
+      'الكورس الثاني',
     ];
 
     return Padding(
@@ -97,6 +104,34 @@ class CurriculumAddState extends State<CurriculumAdd> {
               });
             },
           ),
+          SizedBox(height: 10),
+          Text(
+            'الفصل الدراسي',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          DropdownButtonFormField<String>(
+            value: semisterName,
+            items: semisterArry.map((String item) {
+              return DropdownMenuItem<String>(value: item, child: Text(item));
+            }).toList(),
+            validator: (value) {
+              var temp = value ?? 0;
+              if (temp == 0) return 'يجب اختيار الفصل الدراسي';
+              return null;
+            },
+            enableFeedback: !loading,
+            decoration: InputDecoration(
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              // icon: Icon(Icons.stacked_bar_chart, color: Colors.black),
+              hintStyle: TextStyle(color: Colors.black),
+            ),
+            onChanged: (value) {
+              setState(() {
+                semisterName = value;
+              });
+            },
+          ),
         ],
       ),
     );
@@ -126,7 +161,7 @@ class CurriculumAddState extends State<CurriculumAdd> {
                 onPressed: () async {
                   setState(() => loading = true);
                   if (_formKey.currentState!.validate()) {
-                    await addNewCurriculum(nameController.text, yearName);
+                    await addNewCurriculum(nameController.text, yearName , semisterName);
                     setState(() => loading = true);
                   }
                 },
@@ -137,14 +172,14 @@ class CurriculumAddState extends State<CurriculumAdd> {
     );
   }
 
-  Future addNewCurriculum(String name, year) async {
+  Future addNewCurriculum(String name, year , semisterName) async {
     //This means that the user is performing an update
     if (widget.curriculum != null) {
       var subject = FirebaseFirestore.instance
           .collection('curriculum')
           .doc(this.widget.curriculum!.id);
       await subject.update(
-          {'id': this.widget.curriculum!.id, 'name': name, 'year': year});
+          {'id': this.widget.curriculum!.id, 'name': name, 'year': year , 'semister' : semisterName});
       Navigator.pop(context);
       return;
     }
@@ -155,7 +190,7 @@ class CurriculumAddState extends State<CurriculumAdd> {
 
     final orders = FirebaseFirestore.instance.collection('curriculum').doc(id);
     await orders
-        .set({'id': id, 'name': name, 'year': year, 'type': this.widget.type});
+        .set({'id': id, 'name': name, 'year': year, 'type': this.widget.type ,  'semister' : semisterName});
     Navigator.pop(context);
   }
 

@@ -9,11 +9,10 @@ import 'package:intl/intl.dart';
 class ExamTableAddUpdate extends StatefulWidget {
   final int role;
 
-
   /// Should be passed when updating the curriculum
   final ExamTable? examTable;
 
-  ExamTableAddUpdate(this.role,  {this.examTable});
+  ExamTableAddUpdate(this.role, {this.examTable});
 
   @override
   ExamTableAddUpdateState createState() => ExamTableAddUpdateState();
@@ -23,7 +22,6 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
   String? yearName;
   late var dateStudent;
 
-
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
 
@@ -31,11 +29,8 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
 
   @override
   void initState() {
-
-
     dateStudent = widget.examTable?.date ?? null;
-    
-    
+
     super.initState();
     yearName = widget.examTable?.year;
     nameController = TextEditingController(text: widget.examTable?.name);
@@ -49,6 +44,7 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
       'الثالثة',
       'الثانية',
       'الاولى',
+      'غير محدد'
     ];
 
     return Padding(
@@ -86,8 +82,8 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
               return DropdownMenuItem<String>(value: item, child: Text(item));
             }).toList(),
             validator: (value) {
-              var temp = value?? 0;
-              if ( temp == 0 ) return 'يجب اختيار المرحلة';
+              var temp = value ?? 0;
+              if (temp == 0) return 'يجب اختيار المرحلة';
               return null;
             },
             enableFeedback: !loading,
@@ -103,10 +99,7 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
               });
             },
           ),
-
-
-
-        SizedBox(
+          SizedBox(
             width: MediaQuery.of(context).size.width,
             height: 50,
             child: OutlinedButton(
@@ -127,16 +120,6 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
               },
             ),
           )
-
-
-          
-
-
-
-
-
-         
-         
         ],
       ),
     );
@@ -166,7 +149,8 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
                 onPressed: () async {
                   setState(() => loading = true);
                   if (_formKey.currentState!.validate()) {
-                    await addNewExamTable(nameController.text, yearName , dateStudent);
+                    await addNewExamTable(
+                        nameController.text, yearName, dateStudent);
                     setState(() => loading = true);
                   }
                 },
@@ -177,80 +161,85 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
     );
   }
 
-  Future addNewExamTable(String name, year , date) async {
-    
+  Future addNewExamTable(String name, year, date) async {
     //This means that the user is performing an update
     if (widget.examTable != null) {
       if (year == null) {
-      year = this.widget.examTable?.year;
+        year = this.widget.examTable?.year;
       }
       if (date == null) {
-      date = this.widget.examTable?.date;
+        date = this.widget.examTable?.date;
       }
-      
+
       var id;
-      var testExist = await FirebaseFirestore.instance.collection('examTable').where('year' , isEqualTo: year).get();
-      testExist.docs.forEach((data) {           
+      var testExist = await FirebaseFirestore.instance
+          .collection('examTable')
+          .where('year', isEqualTo: year)
+          .get();
+      testExist.docs.forEach((data) {
         id = data.data()['id'];
       });
 
-    // ignore: unused_local_variable
-    var item  =  FirebaseFirestore.instance.collection('examTable').doc(id).collection('Item').doc(this.widget.examTable?.id).update({
-      'id' : this.widget.examTable?.id,
-      'name' : name,
-      'date' : date,
-      'year' : year,
-    });
+      // ignore: unused_local_variable
+      var item = FirebaseFirestore.instance
+          .collection('examTable')
+          .doc(id)
+          .collection('Item')
+          .doc(this.widget.examTable?.id)
+          .update({
+        'id': this.widget.examTable?.id,
+        'name': name,
+        'date': date,
+        'year': year,
+      });
 
       Navigator.pop(context);
       return;
     }
 
-
-
-
     var id;
-    var testExist = await FirebaseFirestore.instance.collection('examTable').where('year' , isEqualTo: year).get();
-    if(testExist.docs.isEmpty){
-       id = generateRandomString(32);
+    var testExist = await FirebaseFirestore.instance
+        .collection('examTable')
+        .where('year', isEqualTo: year)
+        .get();
+    if (testExist.docs.isEmpty) {
+      id = generateRandomString(32);
 
-      var check = await FirebaseFirestore.instance.collection('examTable').doc(id).get();
-      if(check.exists){
+      var check = await FirebaseFirestore.instance
+          .collection('examTable')
+          .doc(id)
+          .get();
+      if (check.exists) {
         id = generateRandomString(32);
       }
 
-      var examYear  =  FirebaseFirestore.instance.collection('examTable').doc(id) ;
+      var examYear = FirebaseFirestore.instance.collection('examTable').doc(id);
       await examYear.set({
-      'id' : id,
-      'year' : year,
-      
-      
+        'id': id,
+        'year': year,
       });
-
-    }else{
-      testExist.docs.forEach((data) {           
-        id = data.data()['id']   ;
- 
+    } else {
+      testExist.docs.forEach((data) {
+        id = data.data()['id'];
       });
-
     }
     // ignore: non_constant_identifier_names
     var id_for_item = generateRandomString(32);
     // ignore: unused_local_variable
-    var item  =  FirebaseFirestore.instance.collection('examTable').doc(id).collection('Item').doc(id_for_item).set({
-      'id' : id_for_item,
-      'name' : name,
-      'date' : date,
-      'year' : year,
-      });
-
-
+    var item = FirebaseFirestore.instance
+        .collection('examTable')
+        .doc(id)
+        .collection('Item')
+        .doc(id_for_item)
+        .set({
+      'id': id_for_item,
+      'name': name,
+      'date': date,
+      'year': year,
+    });
 
     Navigator.pop(context);
-
-
-
-  } 
+  }
 
   String generateRandomString(int len) {
     var r = Random.secure();

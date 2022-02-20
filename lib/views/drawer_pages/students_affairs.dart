@@ -90,169 +90,77 @@ class StudentsAffairsState extends State<StudentsAffairs> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Row(
+                        Text(
+                          'الاسم: ${result[position].name}',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black),
+                        ),
+                        SizedBox(height: 15),
+                        Text(
+                          'المرحلة: ${result[position].year}',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black),
+                        ),
+                        SizedBox(height: 15),
+                        Text(
+                          'رقم الهاتف: ${result[position].number}',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black),
+                        ),
+                        SizedBox(height: 15),
+                        Wrap(
+                          runSpacing: 10,
+                          spacing: 10,
                           children: [
-                            Text(
-                              'الاسم:',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black),
+                            TapableSquare(
+                              title: 'الدرجات',
+                              onTab: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return StudentWorns(
+                                      result[position].name, this.widget.role);
+                                }));
+                              },
                             ),
-                            InkWell(
-                              child: Text(
-                                result[position].name,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black),
-                              ),
-                              onTap: () {
-                                if (this.widget.role == 1 ||
-                                    this.widget.role == 2) {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return StudentAddUpdate(
-                                      this.widget.role,
-                                      student: result[position],
-                                    );
-                                  }));
-                                }
+                            TapableSquare(
+                              title: 'التبليغات',
+                              onTab: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return StudentWorns(
+                                      result[position].name, this.widget.role);
+                                }));
+                              },
+                            ),
+                            TapableSquare(
+                              title: 'تغيير كلمة السر',
+                              onTab: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return StudentChangePass(
+                                      result[position].pass);
+                                }));
+                              },
+                            ),
+                            TapableSquare(
+                              title: 'تعديل المعلومات',
+                              onTab: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return StudentAddUpdate(this.widget.role,
+                                      student: result[position]);
+                                }));
                               },
                             ),
                           ],
                         ),
                         SizedBox(height: 15),
-                        Row(
-                          children: [
-                            Text(
-                              'المرحلة:',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black),
-                            ),
-                            InkWell(
-                              child: Text(
-                                result[position].year,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black),
-                              ),
-                              onTap: () {
-                                if (this.widget.role == 1 ||
-                                    this.widget.role == 2) {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return StudentAddUpdate(this.widget.role,
-                                        student: result[position]);
-                                  }));
-                                }
-                              },
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 15),
-                        Row(
-                          children: [
-                            Text(
-                              'رقم الهاتف:',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black),
-                            ),
-                            InkWell(
-                              child: Text(
-                                result[position].number,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black),
-                              ),
-                              onTap: () {
-                                if (this.widget.role == 1 ||
-                                    this.widget.role == 2) {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return StudentAddUpdate(
-                                      this.widget.role,
-                                      student: result[position],
-                                    );
-                                  }));
-                                }
-                              },
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 15),
-                        InkWell(
-                          child: Text(
-                            'تعديل المعلومات',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.red),
-                          ),
-                          onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return StudentAddUpdate(this.widget.role,
-                                  student: result[position]);
-                            }));
-                          },
-                        ),
-                        SizedBox(height: 15),
-                        InkWell(
-                          child: Text(
-                            ' تغيير كلمة السر',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.red),
-                          ),
-                          onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return StudentChangePass(result[position].pass);
-                            }));
-                          },
-                        ),
-                        SizedBox(height: 15),
-                        InkWell(
-                          child: Text(
-                            '   الدرجات',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.blue[300]),
-                          ),
-                          onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return StudentMarks(
-                                  result[position].name, this.widget.role);
-                            }));
-                          },
-                        ),
-                        SizedBox(height: 15),
-                        InkWell(
-                          child: Text(
-                            'التبليغات',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.blue[300]),
-                          ),
-                          onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return StudentWorns(
-                                  result[position].name, this.widget.role);
-                            }));
-                          },
-                        ),
                       ],
                     ),
                   )),
@@ -270,6 +178,42 @@ class StudentsAffairsState extends State<StudentsAffairs> {
       child: Center(
         child: CircularProgressIndicator(),
       ),
+    );
+  }
+}
+
+class TapableSquare extends StatelessWidget {
+  const TapableSquare({
+    Key? key,
+    required this.title,
+    required this.onTab,
+  }) : super(key: key);
+
+  final String title;
+  final VoidCallback onTab;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        width: 150,
+        height: 150,
+        decoration: BoxDecoration(
+          border: Border.all(),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Center(
+          child: Text(
+            title,
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.blue[700]),
+          ),
+        ),
+      ),
+      onTap: onTab,
     );
   }
 }

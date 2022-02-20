@@ -62,6 +62,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
       'الثالثة',
       'الثانية',
       'الاولى',
+      'غير محدد'
     ];
     List<String> statusArry = [
       'ناجح',
@@ -98,27 +99,34 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             'المرحلة',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
-          DropdownButtonFormField<String>(
-            value: yearName,
-            items: yearArry.map((String item) {
-              return DropdownMenuItem<String>(value: item, child: Text(item));
-            }).toList(),
-            validator: (value) {
-              var temp = value ?? 0;
-              if (temp == 0) return 'يجب اختيار المرحلة';
-              return null;
-            },
-            enableFeedback: !loading,
-            decoration: InputDecoration(
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              hintStyle: TextStyle(color: Colors.black),
+          IgnorePointer(
+            ignoring: widget.role != 2,
+            child: DropdownButtonFormField<String>(
+              value: yearName,
+              items: yearArry.map((String item) {
+                return DropdownMenuItem<String>(
+                  value: item,
+                  child: Text(item),
+                );
+              }).toList(),
+              validator: (value) {
+                var temp = value ?? 0;
+                if (temp == 0) return 'يجب اختيار المرحلة';
+                return null;
+              },
+              enableFeedback: !loading,
+              decoration: InputDecoration(
+                enabled: widget.role == 2,
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                hintStyle: TextStyle(color: Colors.black),
+              ),
+              onChanged: (value) {
+                setState(() {
+                  yearName = value;
+                });
+              },
             ),
-            onChanged: (value) {
-              setState(() {
-                yearName = value;
-              });
-            },
           ),
           SizedBox(height: 10),
           Text(
@@ -152,28 +160,33 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             'الحالة',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
-          DropdownButtonFormField<String>(
-            value: status,
-            items: statusArry.map((String item) {
-              return DropdownMenuItem<String>(value: item, child: Text(item));
-            }).toList(),
-            validator: (value) {
-              var temp = value ?? 0;
-              if (temp == 0) return 'يجب اختيار الحالة';
-              return null;
-            },
-            enableFeedback: !loading,
-            decoration: InputDecoration(
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              // icon: Icon(Icons.stacked_bar_chart, color: Colors.black),
-              hintStyle: TextStyle(color: Colors.black),
+          IgnorePointer(
+            ignoring: widget.role != 2,
+            child: DropdownButtonFormField<String>(
+              value: status,
+              items: statusArry.map((String item) {
+                return DropdownMenuItem<String>(value: item, child: Text(item));
+              }).toList(),
+              validator: (value) {
+                var temp = value ?? 0;
+                if (temp == 0) return 'يجب اختيار الحالة';
+                return null;
+              },
+              enableFeedback: !loading,
+              decoration: InputDecoration(
+                enabled: widget.role == 2,
+
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                // icon: Icon(Icons.stacked_bar_chart, color: Colors.black),
+                hintStyle: TextStyle(color: Colors.black),
+              ),
+              onChanged: (value) {
+                setState(() {
+                  status = value;
+                });
+              },
             ),
-            onChanged: (value) {
-              setState(() {
-                status = value;
-              });
-            },
           ),
           SizedBox(height: 10),
           Text(
@@ -251,7 +264,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
               if (value!.isEmpty) return 'يجب ادخال الشعبة';
               return null;
             },
-            enabled: !loading,
+            enabled: !loading && widget.role == 2,
             controller: partController,
             cursorColor: Colors.black,
             style: TextStyle(color: Colors.black),
@@ -268,18 +281,23 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
                   'الايميل',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 )
-              : Container(),
+              : SizedBox(),
           widget.student == null
-              ? TextFormField(
-                  enabled: !loading,
-                  controller: emailController,
-                  cursorColor: Colors.black,
-                  style: TextStyle(color: Colors.black),
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    // icon: Icon(Icons.email, color: Colors.black),
-                    hintStyle: TextStyle(color: Colors.black),
+              ? IgnorePointer(
+                  ignoring: widget.role != 2,
+                  child: TextFormField(
+                    enabled: !loading,
+                    controller: emailController,
+                    cursorColor: Colors.black,
+                    style: TextStyle(color: Colors.black),
+                    decoration: InputDecoration(
+                      enabled: widget.role == 2,
+
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      // icon: Icon(Icons.email, color: Colors.black),
+                      hintStyle: TextStyle(color: Colors.black),
+                    ),
                   ),
                 )
               : Container(),

@@ -24,16 +24,33 @@ class StudentShowAllState extends State<StudentShowAll> {
       appBar: AppBar(
         actions: [
           this.widget.role == 1 || this.widget.role == 2
-              ? TextButton(
-                  onPressed: () {
+              ? PopupMenuButton(
+                  // add icon, by default "3 dot" icon
+                  // icon: Icon(Icons.book)
+                  itemBuilder: (context) {
+                  return [
+                    PopupMenuItem<int>(
+                      value: 0,
+                      child: Text("اضافة طالب"),
+                    ),
+                    PopupMenuItem<int>(
+                      value: 1,
+                      child: Text("اضافة تبليغ"),
+                    ),
+                  ];
+                }, onSelected: (value) {
+                  if (value == 0) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return StudentAddUpdate(widget.role);
+                    }));
+                  } else if (value == 1) {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return WornAdd();
                     }));
-                  },
-                  child: Text("اضافة تبليغ ",
-                      style: TextStyle(color: Colors.white)),
-                )
+                  }
+                })
               : Container(),
         ],
         centerTitle: true,

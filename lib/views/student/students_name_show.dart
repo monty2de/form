@@ -115,8 +115,8 @@ class StudentsNamesShowState extends State<StudentsNamesShow> {
                           newYear = 'الثالثة';
                         } else if (student.year == 'الثالثة') {
                           newYear = 'الرابعة';
-                        }else if (student.year == 'الرابعة') {
-                          newYear = 'متخرج';
+                        } else {
+                          newYear = 'غير محدد';
                         }
 
                         var subject = FirebaseFirestore.instance

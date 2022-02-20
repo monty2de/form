@@ -48,6 +48,7 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
       'الثالثة',
       'الثانية',
       'الاولى',
+      'غير محدد'
     ];
 
     List<String> semisterArry = [
@@ -240,8 +241,8 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
                 onPressed: () async {
                   setState(() => loading = true);
                   if (_formKey.currentState!.validate()) {
-                    await addNewExamResult(
-                        stName!, yearName, degreeController.text, subjectName , semisterName);
+                    await addNewExamResult(stName!, yearName,
+                        degreeController.text, subjectName, semisterName);
                     setState(() => loading = true);
                   }
                 },
@@ -252,7 +253,8 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
     );
   }
 
-  Future addNewExamResult(String studentName, year, degree, subjectName , semister) async {
+  Future addNewExamResult(
+      String studentName, year, degree, subjectName, semister) async {
     //This means that the user is performing an update
     if (widget.examResult != null) {
       if (subjectName == null) {
@@ -272,7 +274,6 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
         'degree': degree,
         'subjectName': subjectName,
         'semister': semister,
-
       });
       Navigator.pop(context);
       return;

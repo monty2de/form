@@ -1,11 +1,31 @@
 class Student {
   // ignore: non_constant_identifier_names
-  late String id, name , BLocation, email, location, number, sex, year , pass , status , part;
+  late String id,
+      name,
+      BLocation,
+      email,
+      location,
+      number,
+      sex,
+      year,
+      pass,
+      status,
+      part;
   // ignore: non_constant_identifier_names
   late DateTime BDate;
 
-  // ignore: non_constant_identifier_names
-  Student({id, name, BDate, BLocation, email, location, number, sex, year , status , part});
+  Student(
+      {id,
+      name,
+      BDate,
+      BLocation,
+      email,
+      location,
+      number,
+      sex,
+      year,
+      status,
+      part});
 
   Student.fromFirebase(var data) {
     this.id = data['id'];
@@ -20,7 +40,5 @@ class Student {
     this.pass = data['pass'];
     this.status = data['status'] ?? '';
     this.part = data['part'] ?? '';
-
-
   }
 }

@@ -46,6 +46,7 @@ class CurriculumAddState extends State<CurriculumAdd> {
       'الثالثة',
       'الثانية',
       'الاولى',
+      'غير محدد'
     ];
     List<String> semisterArry = [
       'الكورس الاول',
@@ -161,7 +162,8 @@ class CurriculumAddState extends State<CurriculumAdd> {
                 onPressed: () async {
                   setState(() => loading = true);
                   if (_formKey.currentState!.validate()) {
-                    await addNewCurriculum(nameController.text, yearName , semisterName);
+                    await addNewCurriculum(
+                        nameController.text, yearName, semisterName);
                     setState(() => loading = true);
                   }
                 },
@@ -172,14 +174,18 @@ class CurriculumAddState extends State<CurriculumAdd> {
     );
   }
 
-  Future addNewCurriculum(String name, year , semisterName) async {
+  Future addNewCurriculum(String name, year, semisterName) async {
     //This means that the user is performing an update
     if (widget.curriculum != null) {
       var subject = FirebaseFirestore.instance
           .collection('curriculum')
           .doc(this.widget.curriculum!.id);
-      await subject.update(
-          {'id': this.widget.curriculum!.id, 'name': name, 'year': year , 'semister' : semisterName});
+      await subject.update({
+        'id': this.widget.curriculum!.id,
+        'name': name,
+        'year': year,
+        'semister': semisterName
+      });
       Navigator.pop(context);
       return;
     }
@@ -189,8 +195,13 @@ class CurriculumAddState extends State<CurriculumAdd> {
     if (check.exists) id = generateRandomString(32);
 
     final orders = FirebaseFirestore.instance.collection('curriculum').doc(id);
-    await orders
-        .set({'id': id, 'name': name, 'year': year, 'type': this.widget.type ,  'semister' : semisterName});
+    await orders.set({
+      'id': id,
+      'name': name,
+      'year': year,
+      'type': this.widget.type,
+      'semister': semisterName
+    });
     Navigator.pop(context);
   }
 

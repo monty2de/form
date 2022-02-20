@@ -372,10 +372,10 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                         sharedPreferences.clear();
                         // ignore: deprecated_member_use
                         sharedPreferences.commit();
-                        Navigator.push(context,
+                        Navigator.pushAndRemoveUntil(context,
                             MaterialPageRoute(builder: (context) {
                           return Login();
-                        }));
+                        }), (Route<dynamic> route) => false);
                       },
                     )
                 ],

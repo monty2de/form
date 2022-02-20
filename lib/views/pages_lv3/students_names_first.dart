@@ -16,7 +16,8 @@ class StudentsNamesFirst extends StatefulWidget {
 }
 
 class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
-  late TextEditingController studentNameController = new TextEditingController();
+  late TextEditingController studentNameController =
+      new TextEditingController();
 
   var globalKey = GlobalKey<FormState>();
 
@@ -25,26 +26,11 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
     return Scaffold(
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
-        actions: [
-          this.widget.role == 1 || this.widget.role == 2
-              ? TextButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return StudentAddUpdate(this.widget.role);
-                    }));
-                  },
-                  child:
-                      Text(" اضافة  ", style: TextStyle(color: Colors.white)),
-                )
-              : Container(),
-        ],
         centerTitle: true,
         title: Text('اسماء الطلبة'),
       ),
       body: Center(
         child: ListView(
-
           // mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Form(
@@ -141,7 +127,6 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
                 },
               ),
             ),
-
           ],
         ),
       ),

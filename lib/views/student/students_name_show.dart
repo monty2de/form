@@ -100,33 +100,30 @@ class StudentsNamesShowState extends State<StudentsNamesShow> {
                       setState(() {});
                     }),
                   if (this.widget.role == 1 || this.widget.role == 2)
-                    if (student.year != 'عليا ثانية' ||
-                        student.year != 'الرابعة')
-                      DataCell(
-                          Text('ترحيل', style: TextStyle(color: Colors.red)),
-                          onTap: () async {
-                        var newYear;
+                    DataCell(Text('ترحيل', style: TextStyle(color: Colors.red)),
+                        onTap: () async {
+                      var newYear;
 
-                        if (student.year == 'عليا اولى') {
-                          newYear = 'عليا ثانية';
-                        } else if (student.year == 'الاولى') {
-                          newYear = 'الثانية';
-                        } else if (student.year == 'الثانية') {
-                          newYear = 'الثالثة';
-                        } else if (student.year == 'الثالثة') {
-                          newYear = 'الرابعة';
-                        } else {
-                          newYear = 'غير محدد';
-                        }
+                      if (student.year == 'عليا اولى') {
+                        newYear = 'عليا ثانية';
+                      } else if (student.year == 'الاولى') {
+                        newYear = 'الثانية';
+                      } else if (student.year == 'الثانية') {
+                        newYear = 'الثالثة';
+                      } else if (student.year == 'الثالثة') {
+                        newYear = 'الرابعة';
+                      } else {
+                        newYear = 'غير محدد';
+                      }
 
-                        var subject = FirebaseFirestore.instance
-                            .collection('students')
-                            .doc(student.id);
-                        await subject.update({'year': newYear});
-                        Navigator.pop(context);
+                      var subject = FirebaseFirestore.instance
+                          .collection('students')
+                          .doc(student.id);
+                      await subject.update({'year': newYear});
+                      Navigator.pop(context);
 
-                        setState(() {});
-                      }),
+                      setState(() {});
+                    }),
                 ],
               ),
             )

@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:form/data/arrays.dart';
+import 'package:form/main.dart';
 import 'package:form/models/examResult.dart';
 import 'package:form/utils/app_button.dart';
 
@@ -41,21 +43,6 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
   }
 
   Widget textSection() {
-    List<String> yearArry = [
-      'عليا اولى',
-      'عليا ثانية',
-      'الرابعة',
-      'الثالثة',
-      'الثانية',
-      'الاولى',
-      'غير محدد'
-    ];
-
-    List<String> semisterArry = [
-      'الكورس الاول',
-      'الكورس الثاني',
-    ];
-
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
@@ -65,8 +52,9 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           StreamBuilder<QuerySnapshot>(
-            stream:
-                FirebaseFirestore.instance.collection('students').snapshots(),
+            stream: FirebaseFirestore.instance
+                .collection(isTestMood ? 'studentsTest' : 'students')
+                .snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Text('error');
@@ -176,8 +164,9 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           StreamBuilder<QuerySnapshot>(
-            stream:
-                FirebaseFirestore.instance.collection('curriculum').snapshots(),
+            stream: FirebaseFirestore.instance
+                .collection(isTestMood ? 'curriculumTest' : 'curriculum')
+                .snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Text('error');
@@ -265,7 +254,7 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
       }
 
       var subject = FirebaseFirestore.instance
-          .collection('examResult')
+          .collection(isTestMood ? 'examResultTest' : 'examResult')
           .doc(this.widget.examResult!.id);
       await subject.update({
         'id': this.widget.examResult!.id,
@@ -279,11 +268,15 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
       return;
     }
     String id = generateRandomString(32);
-    final check =
-        await FirebaseFirestore.instance.collection('examResult').doc(id).get();
+    final check = await FirebaseFirestore.instance
+        .collection(isTestMood ? 'examResultTest' : 'examResult')
+        .doc(id)
+        .get();
     if (check.exists) id = generateRandomString(32);
 
-    final orders = FirebaseFirestore.instance.collection('examResult').doc(id);
+    final orders = FirebaseFirestore.instance
+        .collection(isTestMood ? 'examResultTest' : 'examResult')
+        .doc(id);
     await orders.set({
       'id': id,
       'studentName': studentName,

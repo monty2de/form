@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:form/main.dart';
 import 'package:form/utils/app_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: must_be_immutable
 class TeacherChangePass extends StatefulWidget {
-  late String currentPass , email;
-  TeacherChangePass(this.currentPass , this.email);
+  late String currentPass, email;
+  TeacherChangePass(this.currentPass, this.email);
   @override
   _TeacherChangePass createState() => _TeacherChangePass();
 }
@@ -106,7 +107,6 @@ class _TeacherChangePass extends State<TeacherChangePass> {
                   if (_formKey.currentState!.validate()) {
                     await changePass(
                         currentPassController.text, newPassController.text);
-                    
                   }
                 },
                 title: 'حفظ'),
@@ -125,7 +125,7 @@ class _TeacherChangePass extends State<TeacherChangePass> {
       setState(() {
         loading = false;
       });
-      
+
       return;
     } else {
       var email = this.widget.email;
@@ -139,7 +139,9 @@ class _TeacherChangePass extends State<TeacherChangePass> {
       try {
         await userCredential.user?.updatePassword(newPass);
 
-        var subject = FirebaseFirestore.instance.collection('teachers').doc(id);
+        var subject = FirebaseFirestore.instance
+            .collection(isTestMood ? 'teachersTest' : 'teachers')
+            .doc(id);
         await subject.update({'pass': newPass});
       } catch (e) {}
 

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:form/main.dart';
 import 'package:form/models/teacher.dart';
 import 'package:form/utils/app_button.dart';
 import 'package:intl/intl.dart';
@@ -257,7 +258,7 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
         BDate = this.widget.teacher!.BDate;
       }
       var subject = FirebaseFirestore.instance
-          .collection('teachers')
+          .collection(isTestMood ? 'teachersTest' : 'teachers')
           .doc(this.widget.teacher!.id);
       await subject.update({
         'id': this.widget.teacher!.id,
@@ -276,7 +277,7 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
           .createUserWithEmailAndPassword(email: email.trim(), password: pass);
 
       FirebaseFirestore.instance
-          .collection('teachers')
+          .collection(isTestMood ? 'teachersTest' : 'teachers')
           .doc(
             _authResult.user!.uid,
           )

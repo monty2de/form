@@ -6,32 +6,44 @@ import 'package:form/views/student/students_name_show.dart';
 import '../../drawer.dart';
 
 // ignore: must_be_immutable
-class StudentsNamesFirst extends StatefulWidget {
+class StudentsNamesFinal extends StatefulWidget {
   late int role;
 
-  StudentsNamesFirst(this.role);
+  StudentsNamesFinal(this.role);
 
   @override
-  _StudentsNamesFirstState createState() => _StudentsNamesFirstState();
+  _StudentsNamesFinalState createState() => _StudentsNamesFinalState();
 }
 
-class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
+class _StudentsNamesFinalState extends State<StudentsNamesFinal> {
   late TextEditingController studentNameController =
       new TextEditingController();
 
   var globalKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
+        actions: [
+          this.widget.role == 1 || this.widget.role == 2
+              ? TextButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return StudentAddUpdate(this.widget.role);
+                    }));
+                  },
+                  child:
+                      Text(" اضافة  ", style: TextStyle(color: Colors.white)),
+                )
+              : Container(),
+        ],
         centerTitle: true,
         title: Text('اسماء الطلبة'),
       ),
       body: Center(
         child: ListView(
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Form(
               key: globalKey,
@@ -57,7 +69,7 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
             Center(
               child: InkWell(
                 child: Text(
-                  '  المرحلة الاولى  ',
+                  '  المرحلة الأولى  ',
                   style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.w600,
@@ -65,7 +77,7 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
                 ),
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return StudentsNamesShow(this.widget.role, 'الاولى');
+                    return StudentsNamesShow(this.widget.role, 'عليا اولى');
                   }));
                 },
               ),
@@ -84,45 +96,7 @@ class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
                 ),
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return StudentsNamesShow(this.widget.role, 'الثانية');
-                  }));
-                },
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Center(
-              child: InkWell(
-                child: Text(
-                  '  المرحلة الثالثة   ',
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black),
-                ),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return StudentsNamesShow(this.widget.role, 'الثالثة');
-                  }));
-                },
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Center(
-              child: InkWell(
-                child: Text(
-                  '  المرحلة الرابعة   ',
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black),
-                ),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return StudentsNamesShow(this.widget.role, 'الرابعة');
+                    return StudentsNamesShow(this.widget.role, 'عليا ثانية');
                   }));
                 },
               ),

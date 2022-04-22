@@ -1,19 +1,65 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:form/Controllers/NewsController.dart';
+import 'package:form/data/arrays.dart';
+import 'package:form/data/curriculums.dart';
+import 'package:form/data/exams.dart';
+import 'package:form/data/students.dart';
 import 'package:form/models/news.dart';
 import 'package:form/utils/results_wrapper.dart';
 import 'package:form/views/news/news_add_update.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'drawer.dart';
 import 'firebase_options.dart';
+// 1=> admin / 2=> teacher / 3=> student / 4=> guest
+
+// over.mind100@gmail.com
+// test1234
+// حساب مدرس
+
+// test@uot.com
+// 12345678
+// حساب طالب
+
+// m
+// 1
+// حساب ادمن
+
+bool isTestMood = true;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+// // students
+//   for (var i = 0; i < students.length; i++) {
+//     await createStudent(students[i], i);
+//   }
+
+//   // curruculums
+//   for (var i = 0; i < cs.length; i++) {
+//     await curr(cs[i], i);
+//   }
+
+//   // exams
+//   for (var item in yearArry) {
+//     var examYear = FirebaseFirestore.instance
+//         .collection(isTestMood ? 'examTableTest' : "examTable")
+//         .doc();
+//     await examYear.set({
+//       'year': item,
+//       'id': examYear.id,
+//     });
+//   }
+//   for (var i = 0; i < exams.length; i++) {
+//     await examAdd(exams[i], i);
+//   }
+
   final role = await getvalidationData();
   runApp(MyApp(role: role));
 }
@@ -267,4 +313,71 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
+
+Future createStudent(Map<String, dynamic> student, int index) async {
+  UserCredential? _authResult;
+  if (!isTestMood)
+    _authResult = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: 'stEmail$index@temp.com', password: student['pass']);
+  try {
+    FirebaseFirestore.instance
+        .collection(isTestMood ? 'studentsTest' : 'students')
+        .doc(_authResult?.user?.uid)
+        .set({
+      'id': _authResult?.user?.uid ?? '$index',
+      'name': student['name'],
+      'email': 'stEmail$index@temp.com',
+      'sex': student['sex'],
+      'BLocation': student['location'],
+      'BDate': DateTime(2000).toIso8601String(),
+      'location': 'baghdad',
+      'year': student['year'],
+      'number': student['number'],
+      'pass': student['pass'],
+      'role': 3,
+      'status': student['status'],
+      'part': student['part'],
+      'shift': student['shift'],
+    });
+  } on FirebaseAuthException catch (e) {
+    print(e.message);
+  }
+}
+
+Future curr(Map<String, dynamic> curr, int index) async {
+  final currs = FirebaseFirestore.instance
+      .collection(isTestMood ? 'curriculumTest' : 'curriculum')
+      .doc();
+  await currs.set({
+    'id': currs.id,
+    'name': curr['name'],
+    'year': curr['year'],
+    'type': curr['type'],
+    'semister': curr['semister'],
+    "units": curr['units'],
+  });
+}
+
+Future examAdd(Map<String, dynamic> exam, int index) async {
+  var year = await FirebaseFirestore.instance
+      .collection(isTestMood ? 'examTableTest' : "examTable")
+      .where('year', isEqualTo: exam['year'])
+      .get();
+
+  var item = FirebaseFirestore.instance
+      .collection(isTestMood ? 'examTableTest' : "examTable")
+      .doc(year.docs.first.id)
+      .collection('Item')
+      .doc();
+  final date = exam['date'].split('/');
+  final dateTime =
+      DateTime(int.parse(date[2]), int.parse(date[0]), int.parse(date[1]));
+  await item.set({
+    'id': item.id,
+    'name': exam['name'],
+    'date': dateTime.toIso8601String(),
+    'year': exam['year'],
+    "semister": exam['semister']
+  });
 }

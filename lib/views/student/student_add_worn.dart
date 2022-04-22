@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:form/main.dart';
 import 'package:form/utils/app_button.dart';
 
 class WornAdd extends StatefulWidget {
@@ -34,8 +35,9 @@ class WornAddState extends State<WornAdd> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           StreamBuilder<QuerySnapshot>(
-            stream:
-                FirebaseFirestore.instance.collection('students').snapshots(),
+            stream: FirebaseFirestore.instance
+                .collection(isTestMood ? 'studentsTest' : 'students')
+                .snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Text('error');
@@ -127,11 +129,15 @@ class WornAddState extends State<WornAdd> {
 
   Future addNewWorn(String studentName, body) async {
     String id = generateRandomString(32);
-    final check =
-        await FirebaseFirestore.instance.collection('worns').doc(id).get();
+    final check = await FirebaseFirestore.instance
+        .collection(isTestMood ? 'wornsTest' : 'worns')
+        .doc(id)
+        .get();
     if (check.exists) id = generateRandomString(32);
 
-    final orders = FirebaseFirestore.instance.collection('worns').doc(id);
+    final orders = FirebaseFirestore.instance
+        .collection(isTestMood ? 'wornsTest' : 'worns')
+        .doc(id);
     await orders.set({'id': id, 'stname': stName, 'body': body});
 
     Navigator.pop(context);

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:form/main.dart';
 import 'package:form/utils/app_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -106,7 +107,6 @@ class _StudentChangePass extends State<StudentChangePass> {
                   if (_formKey.currentState!.validate()) {
                     await changePass(
                         currentPassController.text, newPassController.text);
-                    
                   }
                 },
                 title: 'حفظ'),
@@ -125,7 +125,7 @@ class _StudentChangePass extends State<StudentChangePass> {
       setState(() {
         loading = false;
       });
-      
+
       return;
     } else {
       var email = sharedPreferences.getString('email');
@@ -139,7 +139,9 @@ class _StudentChangePass extends State<StudentChangePass> {
       try {
         await userCredential.user?.updatePassword(newPass);
 
-        var subject = FirebaseFirestore.instance.collection('students').doc(id);
+        var subject = FirebaseFirestore.instance
+            .collection(isTestMood ? 'studentsTest' : 'students')
+            .doc(id);
         await subject.update({'pass': newPass});
       } catch (e) {}
 

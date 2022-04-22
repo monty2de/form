@@ -35,39 +35,37 @@ class _ExamTableShowState extends State<ExamTableShow> {
         title: Text('جدول الامتحانات'),
       ),
       body: Center(
-        child: Column(
-          children: <Widget>[
-            FutureBuilder(
-              future: ExamTableController().index(this.widget.year),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.active:
-                    return _loading();
-                    // ignore: dead_code
-                    break;
-                  case ConnectionState.waiting:
-                    return _loading();
-                    // ignore: dead_code
-                    break;
-                  case ConnectionState.done:
-                    if (snapshot.hasError) {
-                      return Container();
-                    }
-                    if (snapshot.hasData) {
-                      return result(snapshot.data, context);
-                    }
-                    break;
-                  case ConnectionState.none:
-                    break;
-                  case ConnectionState.waiting:
-                    break;
-                  case ConnectionState.active:
-                    break;
-                }
-                return Container();
-              },
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: FutureBuilder(
+            future: ExamTableController().index(this.widget.year),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.active:
+                  return _loading();
+                  // ignore: dead_code
+                  break;
+                case ConnectionState.waiting:
+                  return _loading();
+                  // ignore: dead_code
+                  break;
+                case ConnectionState.done:
+                  if (snapshot.hasError) {
+                    return Container();
+                  }
+                  if (snapshot.hasData) {
+                    return result(snapshot.data, context);
+                  }
+                  break;
+                case ConnectionState.none:
+                  break;
+                case ConnectionState.waiting:
+                  break;
+                case ConnectionState.active:
+                  break;
+              }
+              return Container();
+            },
+          ),
         ),
       ),
     );
@@ -78,8 +76,10 @@ class _ExamTableShowState extends State<ExamTableShow> {
       dataList: result,
       child: DataTable(
         columns: <DataColumn>[
-          DataColumn(label: Text(" الاسم"), numeric: false),
-          DataColumn(label: Text(" التاريخ"), numeric: false),
+          DataColumn(label: Text("الاسم"), numeric: false),
+          DataColumn(
+              label: Expanded(child: Text("الفصل الدراسي")), numeric: false),
+          DataColumn(label: Text("التاريخ"), numeric: false),
           if (this.widget.role == 1 || this.widget.role == 2)
             DataColumn(label: Text(""), numeric: false),
         ],
@@ -99,6 +99,9 @@ class _ExamTableShowState extends State<ExamTableShow> {
                               }));
                             }
                           : null),
+                  DataCell(
+                    Text(table.semister),
+                  ),
                   DataCell(
                     Text(DateFormat.yMMMMEEEEd('ar').format(table.date)),
                   ),

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:form/Controllers/StudentController.dart';
+import 'package:form/main.dart';
 import 'package:form/models/student.dart';
 import 'package:form/views/student/student_add_update.dart';
 import '../../drawer.dart';
@@ -33,33 +34,35 @@ class StudentsNamesShowState extends State<StudentsNamesShow> {
         centerTitle: true,
         title: Text('قائمة الطلاب'),
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            FutureBuilder(
-              future: StudentController().index(this.widget.year),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.active:
-                    return _loading();
-                  case ConnectionState.waiting:
-                    return _loading();
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              FutureBuilder(
+                future: StudentController().index(this.widget.year),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.active:
+                      return _loading();
+                    case ConnectionState.waiting:
+                      return _loading();
 
-                  case ConnectionState.done:
-                    if (snapshot.hasError) {
-                      return Container();
-                    }
-                    if (snapshot.hasData) {
-                      return result(snapshot.data, context);
-                    }
-                    break;
-                  case ConnectionState.none:
-                    break;
-                }
-                return Container();
-              },
-            ),
-          ],
+                    case ConnectionState.done:
+                      if (snapshot.hasError) {
+                        return Container();
+                      }
+                      if (snapshot.hasData) {
+                        return result(snapshot.data, context);
+                      }
+                      break;
+                    case ConnectionState.none:
+                      break;
+                  }
+                  return Container();
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -106,7 +109,7 @@ class StudentsNamesShowState extends State<StudentsNamesShow> {
 
                       if (student.year == 'عليا اولى') {
                         newYear = 'عليا ثانية';
-                      } else if (student.year == 'الاولى') {
+                      } else if (student.year == 'الأولى') {
                         newYear = 'الثانية';
                       } else if (student.year == 'الثانية') {
                         newYear = 'الثالثة';
@@ -117,7 +120,7 @@ class StudentsNamesShowState extends State<StudentsNamesShow> {
                       }
 
                       var subject = FirebaseFirestore.instance
-                          .collection('students')
+                          .collection(isTestMood ? 'studentsTest' : 'students')
                           .doc(student.id);
                       await subject.update({'year': newYear});
                       Navigator.pop(context);

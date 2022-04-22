@@ -6,43 +6,31 @@ import 'package:form/views/student/students_name_show.dart';
 import '../../drawer.dart';
 
 // ignore: must_be_immutable
-class StudentsNamesFinal extends StatefulWidget {
+class StudentsNamesFirst extends StatefulWidget {
   late int role;
 
-  StudentsNamesFinal(this.role);
+  StudentsNamesFirst(this.role);
 
   @override
-  _StudentsNamesFinalState createState() => _StudentsNamesFinalState();
+  _StudentsNamesFirstState createState() => _StudentsNamesFirstState();
 }
 
-class _StudentsNamesFinalState extends State<StudentsNamesFinal> {
-  late TextEditingController studentNameController = new TextEditingController();
+class _StudentsNamesFirstState extends State<StudentsNamesFirst> {
+  late TextEditingController studentNameController =
+      new TextEditingController();
 
   var globalKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
-        actions: [
-          this.widget.role == 1 || this.widget.role == 2
-              ? TextButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return StudentAddUpdate(this.widget.role);
-                    }));
-                  },
-                  child:
-                      Text(" اضافة  ", style: TextStyle(color: Colors.white)),
-                )
-              : Container(),
-        ],
         centerTitle: true,
         title: Text('اسماء الطلبة'),
       ),
       body: Center(
-        child: ListView(
+        child: Column(
           children: <Widget>[
             Form(
               key: globalKey,
@@ -59,53 +47,39 @@ class _StudentsNamesFinalState extends State<StudentsNamesFinal> {
                         }));
                       }
                     },
-                    child:
-                        Text(" بحث", style: TextStyle(color: Colors.white70)),
+                    child: Text("بحث", style: TextStyle(color: Colors.white70)),
                   ),
                 ],
               ),
             ),
-            Center(
-              child: InkWell(
-                child: Text(
-                  '  المرحلة الاولى  ',
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black),
-                ),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return StudentsNamesShow(this.widget.role, 'عليا اولى');
-                  }));
-                },
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Center(
-              child: InkWell(
-                child: Text(
-                  '  المرحلة الثانية  ',
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black),
-                ),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return StudentsNamesShow(this.widget.role, 'عليا ثانية');
-                  }));
-                },
-              ),
-            ),
+            yearWidget(
+                year: 'الأولى',
+                title: 'المرحلة الأولى',
+                context: context,
+                role: widget.role),
+            SizedBox(height: 20),
+            yearWidget(
+                year: 'الثانية',
+                title: 'المرحلة الثانية',
+                context: context,
+                role: widget.role),
+            SizedBox(height: 20),
+            yearWidget(
+                year: 'الثالثة',
+                title: 'المرحلة الثالثة',
+                context: context,
+                role: widget.role),
+            SizedBox(height: 20),
+            yearWidget(
+                year: 'الرابعة',
+                title: 'المرحلة الرابعة',
+                context: context,
+                role: widget.role),
           ],
         ),
       ),
     );
   }
-
 
   Container textSection() {
     return Container(
@@ -136,4 +110,25 @@ class _StudentsNamesFinalState extends State<StudentsNamesFinal> {
       ),
     );
   }
+}
+
+Widget yearWidget(
+    {required String year,
+    required String title,
+    required int role,
+    required BuildContext context}) {
+  return Center(
+    child: InkWell(
+      child: Text(
+        title,
+        style: TextStyle(
+            fontSize: 30, fontWeight: FontWeight.w600, color: Colors.black),
+      ),
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return StudentsNamesShow(role, year);
+        }));
+      },
+    ),
+  );
 }

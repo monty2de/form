@@ -2,6 +2,9 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:form/data/arrays.dart';
+import 'package:form/main.dart';
 import 'package:form/models/curriculum.dart';
 import 'package:form/utils/app_button.dart';
 
@@ -27,6 +30,7 @@ class CurriculumAddState extends State<CurriculumAdd> {
 
   late TextEditingController nameController;
   late TextEditingController yearController;
+  late TextEditingController unitsController;
 
   @override
   void initState() {
@@ -36,23 +40,11 @@ class CurriculumAddState extends State<CurriculumAdd> {
 
     nameController = TextEditingController(text: widget.curriculum?.name);
     yearController = TextEditingController(text: widget.curriculum?.year);
+    unitsController =
+        TextEditingController(text: widget.curriculum?.units.toString());
   }
 
   Widget textSection() {
-    List<String> yearArry = [
-      'عليا اولى',
-      'عليا ثانية',
-      'الرابعة',
-      'الثالثة',
-      'الثانية',
-      'الاولى',
-      'غير محدد'
-    ];
-    List<String> semisterArry = [
-      'الكورس الاول',
-      'الكورس الثاني',
-    ];
-
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
@@ -69,6 +61,28 @@ class CurriculumAddState extends State<CurriculumAdd> {
             enabled: !loading,
             controller: nameController,
             cursorColor: Colors.black,
+            style: TextStyle(color: Colors.black),
+            decoration: InputDecoration(
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              // icon: Icon(Icons.email, color: Colors.black),
+              hintStyle: TextStyle(color: Colors.black),
+            ),
+          ),
+          SizedBox(height: 10),
+          Text(
+            'الوحدات',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          TextFormField(
+            validator: (value) {
+              if (value!.isEmpty) return 'يجب ادخال الوحدات';
+              return null;
+            },
+            enabled: !loading,
+            controller: unitsController,
+            cursorColor: Colors.black,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
               border:
@@ -162,8 +176,8 @@ class CurriculumAddState extends State<CurriculumAdd> {
                 onPressed: () async {
                   setState(() => loading = true);
                   if (_formKey.currentState!.validate()) {
-                    await addNewCurriculum(
-                        nameController.text, yearName, semisterName);
+                    await addNewCurriculum(nameController.text, yearName,
+                        semisterName, unitsController.text);
                     setState(() => loading = true);
                   }
                 },
@@ -174,33 +188,39 @@ class CurriculumAddState extends State<CurriculumAdd> {
     );
   }
 
-  Future addNewCurriculum(String name, year, semisterName) async {
+  Future addNewCurriculum(String name, year, semisterName, units) async {
     //This means that the user is performing an update
     if (widget.curriculum != null) {
       var subject = FirebaseFirestore.instance
-          .collection('curriculum')
+          .collection(isTestMood ? 'curriculumTest' : 'curriculum')
           .doc(this.widget.curriculum!.id);
       await subject.update({
         'id': this.widget.curriculum!.id,
         'name': name,
         'year': year,
-        'semister': semisterName
+        'semister': semisterName,
+        "units": units,
       });
       Navigator.pop(context);
       return;
     }
     String id = generateRandomString(32);
-    final check =
-        await FirebaseFirestore.instance.collection('curriculum').doc(id).get();
+    final check = await FirebaseFirestore.instance
+        .collection(isTestMood ? 'curriculumTest' : 'curriculum')
+        .doc(id)
+        .get();
     if (check.exists) id = generateRandomString(32);
 
-    final orders = FirebaseFirestore.instance.collection('curriculum').doc(id);
+    final orders = FirebaseFirestore.instance
+        .collection(isTestMood ? 'curriculumTest' : 'curriculum')
+        .doc(id);
     await orders.set({
       'id': id,
       'name': name,
       'year': year,
-      'type': this.widget.type,
-      'semister': semisterName
+      'type': widget.type,
+      'semister': semisterName,
+      "units": units,
     });
     Navigator.pop(context);
   }

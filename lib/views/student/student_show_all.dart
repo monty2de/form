@@ -3,12 +3,12 @@ import 'package:form/Controllers/StudentController.dart';
 import 'package:form/models/student.dart';
 import 'package:form/views/student/student_add_update.dart';
 import 'package:form/views/student/student_add_worn.dart';
+import 'package:form/views/student/students_names_first.dart';
 import '../../drawer.dart';
 import '../../utils/results_wrapper.dart';
 
-// ignore: must_be_immutable
 class StudentShowAll extends StatefulWidget {
-  late int role;
+  final int role;
 
   StudentShowAll(this.role);
 
@@ -56,37 +56,53 @@ class StudentShowAllState extends State<StudentShowAll> {
         centerTitle: true,
         title: Text('قائمة الطلاب'),
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            FutureBuilder(
-              future: StudentController().all(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.active:
-                    return _loading();
-                    // ignore: dead_code
-                    break;
-                  case ConnectionState.waiting:
-                    return _loading();
-                    // ignore: dead_code
-                    break;
-
-                  case ConnectionState.done:
-                    if (snapshot.hasError) {
-                      return Container();
-                    }
-                    if (snapshot.hasData) {
-                      return result(snapshot.data, context);
-                    }
-                    break;
-                  case ConnectionState.none:
-                    break;
-                }
-                return Container();
-              },
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              yearWidget(
+                  year: 'الأولى',
+                  title: 'المرحلة الأولى',
+                  context: context,
+                  role: widget.role),
+              SizedBox(height: 20),
+              yearWidget(
+                  year: 'الثانية',
+                  title: 'المرحلة الثانية',
+                  context: context,
+                  role: widget.role),
+              SizedBox(height: 20),
+              yearWidget(
+                  year: 'الثالثة',
+                  title: 'المرحلة الثالثة',
+                  context: context,
+                  role: widget.role),
+              SizedBox(height: 20),
+              yearWidget(
+                  year: 'الرابعة',
+                  title: 'المرحلة الرابعة',
+                  context: context,
+                  role: widget.role),
+              SizedBox(height: 20),
+              yearWidget(
+                  year: 'عليا اولى',
+                  title: 'عليا اولى',
+                  context: context,
+                  role: widget.role),
+              SizedBox(height: 20),
+              yearWidget(
+                  year: 'عليا ثانية',
+                  title: 'عليا ثانية',
+                  context: context,
+                  role: widget.role),
+              SizedBox(height: 20),
+              yearWidget(
+                  year: 'غير محدد',
+                  title: 'غير محدد',
+                  context: context,
+                  role: widget.role),
+            ],
+          ),
         ),
       ),
     );

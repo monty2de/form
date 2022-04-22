@@ -43,7 +43,7 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
           children: <Widget>[
             InkWell(
               child: Text(
-                '  المرحلة الاولى  ',
+                '  المرحلة الأولى  ',
                 style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w600,
@@ -51,7 +51,7 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return ExamTableShow(this.widget.role, 'الاولى');
+                  return ExamTableShow(this.widget.role, 'الأولى');
                 }));
               },
             ),
@@ -106,8 +106,6 @@ class _ExamTableFirstState extends State<ExamTableFirst> {
                 }));
               },
             ),
-            
-            
           ],
         ),
       ),

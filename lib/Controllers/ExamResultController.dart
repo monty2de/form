@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:form/main.dart';
 import 'package:form/models/examResult.dart';
 
 class ExamResultController {
@@ -6,7 +7,7 @@ class ExamResultController {
 
   index(String subjName) async {
     var q = await FirebaseFirestore.instance
-        .collection('examResult')
+        .collection(isTestMood ? 'examResultTest' : 'examResult')
         .where('subjectName', isEqualTo: subjName)
         .get();
     item = [];
@@ -18,11 +19,11 @@ class ExamResultController {
 
     return item;
   }
+
   search(String stName) async {
-  
     var q = await FirebaseFirestore.instance
-        .collection('examResult')
-        .where('studentName', isEqualTo: stName )
+        .collection(isTestMood ? 'examResultTest' : 'examResult')
+        .where('studentName', isEqualTo: stName)
         .get();
     item = [];
     q.docs.forEach((DocumentSnapshot element) {
@@ -32,13 +33,12 @@ class ExamResultController {
     });
 
     return item;
-
   }
 
   void delet(String id) async {
     // ignore: unused_local_variable
     var q = await FirebaseFirestore.instance
-        .collection('examResult')
+        .collection(isTestMood ? 'examResultTest' : 'examResult')
         .doc(id)
         .delete();
   }

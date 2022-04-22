@@ -6,16 +6,16 @@ import 'package:form/views/curriculum/curriculum_add.dart';
 import '../../drawer.dart';
 import '../../utils/results_wrapper.dart';
 
-class CurriculumFirst extends StatefulWidget {
+class CurriculumFinal extends StatefulWidget {
   final int role;
 
-  CurriculumFirst(this.role);
+  CurriculumFinal(this.role);
 
   @override
-  _CurriculumFirstState createState() => _CurriculumFirstState();
+  _CurriculumFinalState createState() => _CurriculumFinalState();
 }
 
-class _CurriculumFirstState extends State<CurriculumFirst> {
+class _CurriculumFinalState extends State<CurriculumFinal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,43 +27,44 @@ class _CurriculumFirstState extends State<CurriculumFirst> {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return CurriculumAdd(this.widget.role, 1);
+                      return CurriculumAdd(this.widget.role, 2);
                     }));
                   },
-                  child: Text(" اضافة مادة ",
+                  child: Text("اضافة مادة ",
                       style: TextStyle(color: Colors.white)),
                 )
-              : SizedBox.shrink(),
+              : Container(),
         ],
         centerTitle: true,
         title: Text('المناهج'),
       ),
       body: Center(
-        child: Column(
-          children: <Widget>[
-            FutureBuilder(
-              future: CurriculumController().index(1 , ''),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.active:
-                    return _loading();
-                  case ConnectionState.waiting:
-                    return _loading();
-                  case ConnectionState.done:
-                    if (snapshot.hasError) {
-                      return Container();
-                    }
-                    if (snapshot.hasData) {
-                      return result(snapshot.data, context);
-                    }
-                    break;
-                  case ConnectionState.none:
-                    break;
-                }
-                return Container();
-              },
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: FutureBuilder(
+            future: CurriculumController().index(2, ''),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.active:
+                  return _loading();
+                  // ignore: dead_code
+                  break;
+                case ConnectionState.waiting:
+                  return _loading();
+                  // ignore: dead_code
+                  break;
+                case ConnectionState.done:
+                  if (snapshot.hasError) {
+                    return Container();
+                  }
+                  if (snapshot.hasData) {
+                    return result(snapshot.data, context);
+                  }
+                  break;
+                case ConnectionState.none:
+              }
+              return Container();
+            },
+          ),
         ),
       ),
     );
@@ -99,12 +100,13 @@ class _CurriculumFirstState extends State<CurriculumFirst> {
                   DataCell(Text(subject.year)),
                   if (this.widget.role == 1 || this.widget.role == 2)
                     DataCell(
-                      Text('حذف', style: TextStyle(color: Colors.red)),
+                      Text(
+                        'حذف',
+                        style: TextStyle(color: Colors.red),
+                      ),
                       onTap: () {
-                        {
-                          CurriculumController().delet(subject.id);
-                          setState(() {});
-                        }
+                        CurriculumController().delet(subject.id);
+                        setState(() {});
                       },
                     ),
                 ],

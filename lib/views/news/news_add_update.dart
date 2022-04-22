@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:form/main.dart';
 import 'package:form/models/news.dart';
 import 'package:form/utils/app_button.dart';
 
@@ -121,7 +122,7 @@ class NewsAddUpdateState extends State<NewsAddUpdate> {
     //This means that the user is performing an update
     if (widget.news != null) {
       var subject = FirebaseFirestore.instance
-          .collection('news')
+          .collection(isTestMood ? "newsTest" : 'news')
           .doc(this.widget.news?.id);
       await subject
           .update({'id': this.widget.news?.id, 'title': title, 'body': body});
@@ -129,11 +130,15 @@ class NewsAddUpdateState extends State<NewsAddUpdate> {
       return;
     }
     String id = generateRandomString(32);
-    final check =
-        await FirebaseFirestore.instance.collection('news').doc(id).get();
+    final check = await FirebaseFirestore.instance
+        .collection(isTestMood ? "newsTest" : 'news')
+        .doc(id)
+        .get();
     if (check.exists) id = generateRandomString(32);
 
-    final orders = FirebaseFirestore.instance.collection('news').doc(id);
+    final orders = FirebaseFirestore.instance
+        .collection(isTestMood ? "newsTest" : 'news')
+        .doc(id);
     await orders.set({'id': id, 'title': title, 'body': body});
     Navigator.pop(context);
   }

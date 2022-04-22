@@ -13,14 +13,13 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
- var loading = 0;
+  var loading = 0;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        
         title: Text("تسجيل الدخول"),
       ),
       body: Center(
@@ -41,70 +40,66 @@ class _LoginState extends State<Login> {
                   obscureText: true,
                 ),
                 SizedBox(height: 20),
-                loading == 1? _loading():Container(),
+                loading == 1 ? _loading() : Container(),
                 AppButton(
                   title: "تسجيل الدخول",
                   onPressed: () async {
-                   late UserCredential authResult;
-                   setState(() {
-                        loading = 1;
-                      });
+                    late UserCredential authResult;
+                    setState(() {
+                      loading = 1;
+                    });
                     try {
-                      
-                       authResult = await FirebaseAuth.instance
-                        .signInWithEmailAndPassword(
-                            email: emailController.text.trim(),
-                            password: passwordController.text);
+                      authResult = await FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                              email: emailController.text.trim(),
+                              password: passwordController.text);
 
-                      
-                    SharedPreferences sharedPreferences =
-                        await SharedPreferences.getInstance();
+                      SharedPreferences sharedPreferences =
+                          await SharedPreferences.getInstance();
 
-                    var user = await FirebaseFirestore.instance
-                        .collection('students')
-                        .where('id', isEqualTo: authResult.user!.uid)
-                        .get();
-                    if (user.docs.isEmpty) {
-                      user = await FirebaseFirestore.instance
-                          .collection('teachers')
+                      var user = await FirebaseFirestore.instance
+                          .collection(isTestMood ? 'studentsTest' : 'students')
                           .where('id', isEqualTo: authResult.user!.uid)
                           .get();
-                    }
-                    setState(() {
+                      if (user.docs.isEmpty) {
+                        user = await FirebaseFirestore.instance
+                            .collection(
+                                isTestMood ? 'teachersTest' : 'teachers')
+                            .where('id', isEqualTo: authResult.user!.uid)
+                            .get();
+                      }
+                      setState(() {
                         loading = 0;
                       });
 
-                    user.docs.forEach((data) {
-                      sharedPreferences.setInt('role', data.data()['role']);
-                      sharedPreferences.setString('id', data.data()['id']);
-                      // ignore: unused_local_variable
-                      var role = int.parse(
-                          sharedPreferences.getInt('role').toString());
-                      Navigator.pushAndRemoveUntil(context,
-                          MaterialPageRoute(builder: (context) {
-                        return MyHomePage(role: role);
-                      }), (Route<dynamic> route) => false);
-                    });
-                      
+                      user.docs.forEach((data) {
+                        sharedPreferences.setInt('role', data.data()['role']);
+                        sharedPreferences.setString('id', data.data()['id']);
+                        // ignore: unused_local_variable
+                        var role = int.parse(
+                            sharedPreferences.getInt('role').toString());
+                        Navigator.pushAndRemoveUntil(context,
+                            MaterialPageRoute(builder: (context) {
+                          return MyHomePage(role: role);
+                        }), (Route<dynamic> route) => false);
+                      });
                     } on FirebaseAuthException catch (e) {
                       print(e.message);
                       setState(() {
-                        loading =0;
+                        loading = 0;
                       });
-             
+
                       var message = e.message;
-                      if (message == 'There is no user record corresponding to this identifier. The user may have been deleted.') {
+                      if (message ==
+                          'There is no user record corresponding to this identifier. The user may have been deleted.') {
                         message = 'هذا الحساب غير موجود';
-                        
-                      }else if (message == 'The password is invalid or the user does not have a password.') {
+                      } else if (message ==
+                          'The password is invalid or the user does not have a password.') {
                         message = 'كلمة المرور خطأ';
                       }
-                      final snackBar = SnackBar(
-                         content:  Text(message!));
-                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      final snackBar = SnackBar(content: Text(message!));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }
-                    
-                    
                   },
                 ),
                 SizedBox(height: 60),

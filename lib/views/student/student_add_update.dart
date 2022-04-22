@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:form/data/arrays.dart';
+import 'package:form/main.dart';
 import 'package:form/models/student.dart';
 import 'package:form/utils/app_button.dart';
 import 'package:intl/intl.dart';
@@ -19,10 +21,12 @@ class StudentAddUpdate extends StatefulWidget {
 }
 
 class StudentAddUpdateState extends State<StudentAddUpdate> {
-  String? yearName;
+  late String yearName;
   String? status;
 
-  String? sextype;
+  late String sextype;
+  String? shift;
+
   DateTime? dateStudent;
 
   final _formKey = GlobalKey<FormState>();
@@ -39,38 +43,24 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
   @override
   void initState() {
     super.initState();
-    yearName = widget.student?.year;
-    sextype = widget.student?.sex;
-    dateStudent = widget.student?.BDate;
+    yearName = widget.student?.year ?? 'الأولى';
+    sextype = widget.student?.sex ?? 'ذكر';
+    shift = widget.student?.shift;
+    dateStudent = widget.student?.bDate;
     status = widget.student?.status;
     studentNameController = TextEditingController(text: widget.student?.name);
     bLocationController =
-        TextEditingController(text: widget.student?.BLocation);
+        TextEditingController(text: widget.student?.bLocation);
     locationController = TextEditingController(text: widget.student?.location);
     numberController = TextEditingController(text: widget.student?.number);
     partController = TextEditingController(text: widget.student?.part);
 
-    passController = TextEditingController();
-    emailController = TextEditingController();
+    passController = TextEditingController(text: widget.student?.pass);
+    emailController = TextEditingController(text: widget.student?.email);
   }
 
   Widget textSection() {
-    List<String> yearArry = [
-      'عليا اولى',
-      'عليا ثانية',
-      'الرابعة',
-      'الثالثة',
-      'الثانية',
-      'الاولى',
-      'غير محدد'
-    ];
-    List<String> statusArry = [
-      'ناجح',
-      'راسب',
-      'متخرج',
-      'عبور',
-    ];
-    List<String> sex = ['ذكر', 'انثى'];
+    print(widget.role);
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
@@ -100,7 +90,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           IgnorePointer(
-            ignoring: widget.role != 2,
+            ignoring: widget.role > 2,
             child: DropdownButtonFormField<String>(
               value: yearName,
               items: yearArry.map((String item) {
@@ -116,14 +106,14 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
               },
               enableFeedback: !loading,
               decoration: InputDecoration(
-                enabled: widget.role == 2,
+                enabled: !loading && widget.role <= 2,
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                 hintStyle: TextStyle(color: Colors.black),
               ),
               onChanged: (value) {
                 setState(() {
-                  yearName = value;
+                  yearName = value!;
                 });
               },
             ),
@@ -151,9 +141,39 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             ),
             onChanged: (value) {
               setState(() {
-                sextype = value;
+                sextype = value!;
               });
             },
+          ),
+          SizedBox(height: 10),
+          Text(
+            'الدوام',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          IgnorePointer(
+            ignoring: widget.role > 2,
+            child: DropdownButtonFormField<String>(
+              value: shift,
+              items: shifts.map((String item) {
+                return DropdownMenuItem<String>(value: item, child: Text(item));
+              }).toList(),
+              validator: (value) {
+                var temp = value ?? 0;
+                if (temp == 0) return 'يجب اختيار الدوام';
+                return null;
+              },
+              enableFeedback: !loading,
+              decoration: InputDecoration(
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                hintStyle: TextStyle(color: Colors.black),
+              ),
+              onChanged: (value) {
+                setState(() {
+                  shift = value;
+                });
+              },
+            ),
           ),
           SizedBox(height: 10),
           Text(
@@ -161,7 +181,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           IgnorePointer(
-            ignoring: widget.role != 2,
+            ignoring: widget.role > 2,
             child: DropdownButtonFormField<String>(
               value: status,
               items: statusArry.map((String item) {
@@ -174,7 +194,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
               },
               enableFeedback: !loading,
               decoration: InputDecoration(
-                enabled: widget.role == 2,
+                enabled: !loading && widget.role == 2,
 
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
@@ -264,7 +284,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
               if (value!.isEmpty) return 'يجب ادخال الشعبة';
               return null;
             },
-            enabled: !loading && widget.role == 2,
+            enabled: !loading && widget.role <= 2,
             controller: partController,
             cursorColor: Colors.black,
             style: TextStyle(color: Colors.black),
@@ -282,25 +302,22 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 )
               : SizedBox(),
-          widget.student == null
-              ? IgnorePointer(
-                  ignoring: widget.role != 2,
-                  child: TextFormField(
-                    enabled: !loading,
-                    controller: emailController,
-                    cursorColor: Colors.black,
-                    style: TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      enabled: widget.role == 2,
-
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      // icon: Icon(Icons.email, color: Colors.black),
-                      hintStyle: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                )
-              : Container(),
+          IgnorePointer(
+            ignoring: widget.role > 2,
+            child: TextFormField(
+              enabled: !loading,
+              controller: emailController,
+              cursorColor: Colors.black,
+              style: TextStyle(color: Colors.black),
+              decoration: InputDecoration(
+                enabled: widget.role <= 2,
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                // icon: Icon(Icons.email, color: Colors.black),
+                hintStyle: TextStyle(color: Colors.black),
+              ),
+            ),
+          ),
           SizedBox(height: 10),
           widget.student == null
               ? Text(
@@ -376,7 +393,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
                       studentNameController.text,
                       sextype,
                       bLocationController.text,
-                      dateStudent,
+                      dateStudent?.toIso8601String(),
                       locationController.text,
                       numberController.text,
                       yearName,
@@ -384,9 +401,10 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
                       passController.text,
                       status,
                       partController.text,
+                      shift,
                     );
-                    setState(() => loading = true);
                   }
+                  setState(() => loading = false);
                 },
                 title: 'حفظ'),
           ],
@@ -395,15 +413,30 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
     );
   }
 
-  Future addNewStudent(String studentName, sex, bLocation, bDate, location,
-      number, year, email, pass, status, part) async {
+  Future addNewStudent(
+      String studentName,
+      String sex,
+      String? bLocation,
+      String? bDate,
+      String? location,
+      String? number,
+      String year,
+      String email,
+      String pass,
+      String? status,
+      String? part,
+      String? shift) async {
     //This means that the user is performing an update
     if (widget.student != null) {
-      if (bDate == null) {
-        bDate = this.widget.student!.BDate;
+      if (email != widget.student!.email) {
+        UserCredential _authResult = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+                email: widget.student!.email, password: widget.student!.pass);
+        _authResult.user?.updateEmail(email);
       }
+
       var subject = FirebaseFirestore.instance
-          .collection('students')
+          .collection(isTestMood ? 'studentsTest' : 'students')
           .doc(this.widget.student!.id);
       await subject.update({
         'id': this.widget.student!.id,
@@ -416,6 +449,8 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
         'number': number,
         'status': status,
         'part': part,
+        "email": email,
+        "shift": shift
       });
       Navigator.pop(context);
       return;
@@ -425,7 +460,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
           .createUserWithEmailAndPassword(email: email.trim(), password: pass);
 
       FirebaseFirestore.instance
-          .collection('students')
+          .collection(isTestMood ? 'studentsTest' : 'students')
           .doc(
             _authResult.user!.uid,
           )
@@ -443,6 +478,7 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
         'role': 3,
         'status': status,
         'part': part,
+        "shift": shift
       });
     } on FirebaseAuthException catch (e) {
       print(e.message);
@@ -455,6 +491,13 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
         message = 'الايميل مستخدم ';
       }
       final snackBar = SnackBar(content: Text(message!));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } catch (e) {
+      print(e);
+      setState(() {
+        loading = false;
+      });
+      final snackBar = SnackBar(content: Text('حجث خطأ غير معروف'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
 

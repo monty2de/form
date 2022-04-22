@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:form/main.dart';
 import 'package:form/models/board.dart';
 
 class BoardController {
@@ -6,7 +7,7 @@ class BoardController {
 
   index(String boardName) async {
     var q = await FirebaseFirestore.instance
-        .collection('boards')
+        .collection(isTestMood ? 'boards' : 'boards')
         .where('name', isEqualTo: boardName)
         .get();
     item = [];
@@ -20,8 +21,9 @@ class BoardController {
   }
 
   void delet(String id) async {
-    // ignore: unused_local_variable
-    var q =
-        await FirebaseFirestore.instance.collection('boards').doc(id).delete();
+    await FirebaseFirestore.instance
+        .collection(isTestMood ? 'boards' : 'boards')
+        .doc(id)
+        .delete();
   }
 }

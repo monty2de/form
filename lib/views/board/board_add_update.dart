@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:form/main.dart';
 import 'package:form/models/board.dart';
 import 'package:form/utils/app_button.dart';
 
@@ -58,8 +59,9 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           StreamBuilder<QuerySnapshot>(
-            stream:
-                FirebaseFirestore.instance.collection('teachers').snapshots(),
+            stream: FirebaseFirestore.instance
+                .collection(isTestMood ? 'teachersTest' : 'teachers')
+                .snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Text('error');
@@ -191,7 +193,7 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
         teacherName = this.widget.board?.teacherName;
       }
       var item = FirebaseFirestore.instance
-          .collection('boards')
+          .collection(isTestMood ? 'boardsTest' : 'boards')
           .doc(this.widget.board!.id);
       await item.update({
         'id': this.widget.board!.id,
@@ -204,7 +206,7 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
     }
 
     var checkDouble = await FirebaseFirestore.instance
-        .collection('boards')
+        .collection(isTestMood ? 'boardsTest' : 'boards')
         .where('name', isEqualTo: boardName)
         .where('teacherName', isEqualTo: teacherName)
         .get();
@@ -214,11 +216,15 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
     }
 
     String id = generateRandomString(32);
-    final check =
-        await FirebaseFirestore.instance.collection('boards').doc(id).get();
+    final check = await FirebaseFirestore.instance
+        .collection(isTestMood ? 'boardsTest' : 'boards')
+        .doc(id)
+        .get();
     if (check.exists) id = generateRandomString(32);
 
-    final orders = FirebaseFirestore.instance.collection('boards').doc(id);
+    final orders = FirebaseFirestore.instance
+        .collection(isTestMood ? 'boardsTest' : 'boards')
+        .doc(id);
     await orders.set({
       'id': id,
       'name': boardName,

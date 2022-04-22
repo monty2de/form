@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:form/main.dart';
 import 'package:form/models/student.dart';
 import 'package:form/models/worn.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,7 +9,7 @@ class StudentController {
 
   index(String year) async {
     var q = await FirebaseFirestore.instance
-        .collection('students')
+        .collection(isTestMood ? 'studentsTest' : 'students')
         .where('year', isEqualTo: year)
         .get();
     item = [];
@@ -20,28 +21,32 @@ class StudentController {
 
     return item;
   }
-  all()async {
-     var q = await FirebaseFirestore.instance
-        .collection('students')
-        
-        .get();
-    item = [];
-    q.docs.forEach((DocumentSnapshot element) {
-      Map<String, dynamic> data = element.data() as Map<String, dynamic>;
 
-      item.add(Student.fromFirebase(data));
-    });
+  all() async {
+    try {
+      var q = await FirebaseFirestore.instance
+          .collection(isTestMood ? 'studentsTest' : 'students')
+          .get();
+      item = [];
+      q.docs.forEach((DocumentSnapshot element) {
+        Map<String, dynamic> data = element.data() as Map<String, dynamic>;
 
-    return item;
+        item.add(Student.fromFirebase(data));
+      });
+
+      return item;
+    } catch (e) {
+      print(e);
+    }
   }
 
   show() async {
     var q = await FirebaseFirestore.instance
-        .collection('students')
+        .collection(isTestMood ? 'studentsTest' : 'students')
         .where('year', isEqualTo: 'عليا اولى')
         .get();
     var q2 = await FirebaseFirestore.instance
-        .collection('students')
+        .collection(isTestMood ? 'studentsTest' : 'students')
         .where('year', isEqualTo: 'عليا ثانية')
         .get();
     item = [];
@@ -69,7 +74,7 @@ class StudentController {
     } else {
       var id = sharedPreferences.getString('id');
       var user = await FirebaseFirestore.instance
-          .collection('students')
+          .collection(isTestMood ? 'studentsTest' : 'students')
           .where('id', isEqualTo: id)
           .get();
 
@@ -86,7 +91,7 @@ class StudentController {
 
   search(String name) async {
     var user = await FirebaseFirestore.instance
-        .collection('students')
+        .collection(isTestMood ? 'studentsTest' : 'students')
         .where('name', isGreaterThanOrEqualTo: name)
         .get();
 
@@ -102,7 +107,7 @@ class StudentController {
 
   worn(String stName) async {
     var user = await FirebaseFirestore.instance
-        .collection('worns')
+        .collection(isTestMood ? 'wornsTest' : 'worns')
         .where('stname', isEqualTo: stName)
         .get();
 
@@ -117,10 +122,9 @@ class StudentController {
   }
 
   void delet(String id) async {
-
     // ignore: unused_local_variable
     var q = await FirebaseFirestore.instance
-        .collection('students')
+        .collection(isTestMood ? 'studentsTest' : 'students')
         .doc(id)
         .delete();
   }

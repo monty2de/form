@@ -62,7 +62,7 @@ class _StudentLoginState extends State<StudentLogin> {
                           await SharedPreferences.getInstance();
 
                       var user = await FirebaseFirestore.instance
-                          .collection('students')
+                          .collection(isTestMood ? 'studentsTest' : 'students')
                           .where('id', isEqualTo: authResult.user!.uid)
                           .get();
 

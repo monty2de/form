@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:form/data/arrays.dart';
 import 'package:form/views/exam_result/exam_result_add_update.dart';
-import 'package:form/views/pages_lv3/exam_result_final.dart';
-import 'package:form/views/pages_lv3/exam_result_first.dart';
+import 'package:form/views/exam_result/exam_result_final.dart';
 
 import '../../drawer.dart';
 import '../../utils/results_wrapper.dart';
 
-class ShowSemisterFirst extends StatefulWidget {
+class ShowSemisterFinal extends StatefulWidget {
   final int role;
 
-  ShowSemisterFirst(this.role);
+  ShowSemisterFinal(this.role);
 
   @override
-  _ShowSemisterFirstState createState() => _ShowSemisterFirstState();
+  _ShowSemisterFinalState createState() => _ShowSemisterFinalState();
 }
 
-class _ShowSemisterFirstState extends State<ShowSemisterFirst> {
-  List<String> semisterArry = [
-      'الكورس الاول',
-      'الكورس الثاني',
-    ];
+class _ShowSemisterFinalState extends State<ShowSemisterFinal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,9 +41,7 @@ class _ShowSemisterFirstState extends State<ShowSemisterFirst> {
       body: Center(
         child: Column(
           children: <Widget>[
-
             result(semisterArry, context),
-            
           ],
         ),
       ),
@@ -60,20 +54,17 @@ class _ShowSemisterFirstState extends State<ShowSemisterFirst> {
       child: DataTable(
         columns: <DataColumn>[
           DataColumn(label: Text("الكورس"), numeric: false),
-        
         ],
         rows: semister
             .map(
               (subject) => DataRow(
                 cells: [
                   DataCell(Text(subject), onTap: () {
-                    print(subject);
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return ExamResultFirst(this.widget.role , subject);
+                      return ExamResultFinal(this.widget.role, subject);
                     }));
                   }),
-           
                 ],
               ),
             )
@@ -81,6 +72,4 @@ class _ShowSemisterFirstState extends State<ShowSemisterFirst> {
       ),
     );
   }
-
- 
 }

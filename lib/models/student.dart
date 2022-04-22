@@ -1,44 +1,49 @@
 class Student {
-  // ignore: non_constant_identifier_names
-  late String id,
-      name,
-      BLocation,
-      email,
-      location,
-      number,
-      sex,
-      year,
-      pass,
-      status,
-      part;
-  // ignore: non_constant_identifier_names
-  late DateTime BDate;
+  final String id;
+  final String name;
+  final String? bLocation;
+  final String email;
+  final String? location;
+  final String? number;
+  final String? sex;
+  final String year;
+  final String pass;
+  final String? status;
+  final String? part;
+  final String shift;
+  final DateTime? bDate;
 
-  Student(
-      {id,
-      name,
-      BDate,
-      BLocation,
-      email,
-      location,
-      number,
-      sex,
-      year,
-      status,
-      part});
+  Student({
+    this.bDate,
+    required this.id,
+    required this.name,
+    this.bLocation,
+    required this.email,
+    this.location,
+    this.number,
+    this.sex,
+    required this.year,
+    required this.pass,
+    this.status,
+    this.part,
+    required this.shift,
+  });
 
-  Student.fromFirebase(var data) {
-    this.id = data['id'];
-    this.name = data['name'];
-    this.BDate = data['BDate'].toDate();
-    this.BLocation = data['BLocation'];
-    this.email = data['email'];
-    this.location = data['location'];
-    this.number = data['number'];
-    this.sex = data['sex'];
-    this.year = data['year'];
-    this.pass = data['pass'];
-    this.status = data['status'] ?? '';
-    this.part = data['part'] ?? '';
+  factory Student.fromFirebase(Map<String, dynamic> map) {
+    return Student(
+      id: map['id'] ?? '',
+      name: map['name'] ?? '',
+      bLocation: map['BLocation'],
+      email: map['email'] ?? '',
+      location: map['location'],
+      number: map['number'].toString(),
+      sex: map['sex'],
+      year: map['year'] ?? '',
+      pass: map['pass'] ?? '',
+      status: map['status'],
+      part: map['part'],
+      shift: map['shift'] ?? '',
+      bDate: DateTime.parse(map['BDate']),
+    );
   }
 }

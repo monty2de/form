@@ -43,7 +43,7 @@ class _ExamTableFinalState extends State<ExamTableFinal> {
           children: <Widget>[
             InkWell(
               child: Text(
-                '  المرحلة الاولى  ',
+                '  المرحلة الأولى  ',
                 style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w600,

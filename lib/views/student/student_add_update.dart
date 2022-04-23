@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:form/data/arrays.dart';
 import 'package:form/main.dart';
 import 'package:form/models/student.dart';
 import 'package:form/utils/app_button.dart';
+import 'package:form/views/teacher/teacher_add_update.dart';
 import 'package:intl/intl.dart';
 
 class StudentAddUpdate extends StatefulWidget {
@@ -428,13 +428,6 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
       String? shift) async {
     //This means that the user is performing an update
     if (widget.student != null) {
-      if (email != widget.student!.email) {
-        UserCredential _authResult = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(
-                email: widget.student!.email, password: widget.student!.pass);
-        _authResult.user?.updateEmail(email);
-      }
-
       var subject = FirebaseFirestore.instance
           .collection(isTestMood ? 'studentsTest' : 'students')
           .doc(this.widget.student!.id);
@@ -456,48 +449,44 @@ class StudentAddUpdateState extends State<StudentAddUpdate> {
       return;
     }
     try {
-      UserCredential _authResult = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email.trim(), password: pass);
+      final scollection = FirebaseFirestore.instance
+          .collection(isTestMood ? 'studentsTest' : 'students');
+      final userExist = await checkIfUserExsists(scollection, 'email', email);
 
-      FirebaseFirestore.instance
-          .collection(isTestMood ? 'studentsTest' : 'students')
-          .doc(
-            _authResult.user!.uid,
-          )
-          .set({
-        'id': _authResult.user!.uid,
-        'name': studentName,
-        'email': email,
-        'sex': sex,
-        'BLocation': bLocation,
-        'BDate': bDate,
-        'location': location,
-        'year': year,
-        'number': number,
-        'pass': pass,
-        'role': 3,
-        'status': status,
-        'part': part,
-        "shift": shift
-      });
-    } on FirebaseAuthException catch (e) {
-      print(e.message);
-      setState(() {
-        loading = false;
-      });
-
-      var message = e.message;
-      if (e.code == 'email-already-in-use') {
-        message = 'الايميل مستخدم ';
+      if (userExist) {
+        final doc = scollection.doc();
+        doc.set({
+          'id': doc.id,
+          'name': studentName,
+          'email': email,
+          'sex': sex,
+          'BLocation': bLocation,
+          'BDate': bDate,
+          'location': location,
+          'year': year,
+          'number': number,
+          'pass': pass,
+          'role': 3,
+          'status': status,
+          'part': part,
+          "shift": shift
+        });
+      } else {
+        throw 'email-already-in-use';
       }
-      final snackBar = SnackBar(content: Text(message!));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } catch (e) {
       print(e);
       setState(() {
         loading = false;
       });
-      final snackBar = SnackBar(content: Text('حجث خطأ غير معروف'));
+
+      var message = e.toString();
+      if (message.contains('email-already-in-use')) {
+        message = 'الايميل مستخدم ';
+      } else {
+        message = 'حدث خطأ غير معروف';
+      }
+      final snackBar = SnackBar(content: Text(message));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
 

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:form/main.dart';
 import 'package:form/models/teacher.dart';
@@ -273,39 +272,47 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
       return;
     }
     try {
-      UserCredential _authResult = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email.trim(), password: pass);
-
-      FirebaseFirestore.instance
-          .collection(isTestMood ? 'teachersTest' : 'teachers')
-          .doc(
-            _authResult.user!.uid,
-          )
-          .set({
-        'id': _authResult.user!.uid,
-        'name': teacherName,
-        'email': email,
-        'BDate': BDate,
-        'location': location,
-        'number': number,
-        'pass': pass,
-        'role': 2,
-        'position': position
-      });
-    } on FirebaseAuthException catch (e) {
+      final tcollection = FirebaseFirestore.instance
+          .collection(isTestMood ? 'teachersTest' : 'teachers');
+      final userExist = await checkIfUserExsists(tcollection, 'email', email);
+      if (!userExist) {
+        final doc = tcollection.doc();
+        doc.set({
+          'id': doc.id,
+          'name': teacherName,
+          'email': email,
+          'BDate': BDate,
+          'location': location,
+          'number': number,
+          'pass': pass,
+          'role': 2,
+          'position': position
+        });
+      } else {
+        throw 'email-already-in-use';
+      }
+    } catch (e) {
       setState(() {
         loading = false;
       });
 
-      var message = e.message;
-      if (message ==
-          'The email address is already in use by another account.') {
+      var message = e.toString();
+      if (message.contains('email-already-in-use')) {
         message = 'الايميل مستخدم ';
       }
-      final snackBar = SnackBar(content: Text(message!));
+      final snackBar = SnackBar(content: Text(message));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
 
     Navigator.pop(context);
   }
+}
+
+Future<bool> checkIfUserExsists(
+    CollectionReference<Map<String, dynamic>> collection,
+    String field,
+    String isEqual) async {
+  return (await collection.where(field, isEqualTo: isEqual).get())
+      .docs
+      .isNotEmpty;
 }

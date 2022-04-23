@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:form/main.dart';
 import 'package:form/utils/app_button.dart';
@@ -128,22 +127,24 @@ class _StudentChangePass extends State<StudentChangePass> {
 
       return;
     } else {
-      var email = sharedPreferences.getString('email');
+      final scol = FirebaseFirestore.instance
+          .collection(isTestMood ? 'studentsTest' : 'students');
       var id = sharedPreferences.getString('id');
-      UserCredential userCredential =
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email!.trim(),
-        password: currentPass,
-      );
-
       try {
-        await userCredential.user?.updatePassword(newPass);
-
-        var subject = FirebaseFirestore.instance
-            .collection(isTestMood ? 'studentsTest' : 'students')
-            .doc(id);
+        var subject = scol.doc(id);
         await subject.update({'pass': newPass});
-      } catch (e) {}
+      } catch (e) {
+        print(e);
+        print(e);
+        String message = '';
+        if (e.toString().contains('The password is invalid')) {
+          message = 'كلمة المرور خطأ';
+        } else {
+          message = 'خطأ غير معروف';
+        }
+        final snackBar = SnackBar(content: Text(message));
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
 
       Navigator.pop(context);
     }

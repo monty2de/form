@@ -13,7 +13,6 @@ import 'package:form/views/exam_result/exam_result_semister_first.dart';
 import 'package:form/views/exam_table/exam_table_final.dart';
 import 'package:form/views/exam_table/exam_table_first.dart';
 import 'package:form/views/login.dart';
-import 'package:form/views/student/student_login.dart';
 import 'package:form/views/student/student_show_all.dart';
 import 'package:form/views/student/students_name_final_show.dart';
 import 'package:form/views/student/students_names_final.dart';
@@ -149,8 +148,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                                       widget.role, 'لجنة شؤون الطلبة');
                                 }), (Route<dynamic> route) => false);
                               }),
-                          //TODO: FIND A BETTER WAY TO DO THIS
-                          if (this.widget.role == 1 || this.widget.role == 2)
+                          if (this.widget.role <= 2)
                             SubCategory(
                                 name: 'اضافة عضو جديد',
                                 onPressed: () {
@@ -300,7 +298,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                         if (widget.role != 3) {
                           Navigator.pushAndRemoveUntil(context,
                               MaterialPageRoute(builder: (context) {
-                            return StudentLogin(this.widget.role);
+                            return Login();
                           }), (Route<dynamic> route) => false);
                         } else {
                           Navigator.pushAndRemoveUntil(context,

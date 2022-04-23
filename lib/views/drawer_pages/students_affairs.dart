@@ -3,7 +3,6 @@ import 'package:form/Controllers/StudentController.dart';
 import 'package:form/models/student.dart';
 import 'package:form/views/student/student_add_update.dart';
 import 'package:form/views/student/student_change_pass.dart';
-import 'package:form/views/student/student_marks.dart';
 import 'package:form/views/student/student_worn.dart';
 import '../../drawer.dart';
 import '../../utils/results_wrapper.dart';
@@ -27,9 +26,10 @@ class StudentsAffairsState extends State<StudentsAffairs> {
         centerTitle: true,
         title: Text('معلومات الطالب '),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             FutureBuilder(
               future: StudentController().profile(),
@@ -71,104 +71,99 @@ class StudentsAffairsState extends State<StudentsAffairs> {
   Widget result(List<Student> result, BuildContext context) {
     return checkIfListEmpty(
       dataList: result,
-      child: Expanded(
-        child: ListView.builder(
-          physics: const AlwaysScrollableScrollPhysics(),
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemCount: result.length,
-          itemBuilder: (BuildContext context, int position) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 30, right: 30, bottom: 30),
-                  child: Expanded(
-                      child: Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'الاسم: ${result[position].name}',
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black),
-                        ),
-                        SizedBox(height: 15),
-                        Text(
-                          'المرحلة: ${result[position].year}',
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black),
-                        ),
-                        SizedBox(height: 15),
-                        Text(
-                          'رقم الهاتف: ${result[position].number}',
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black),
-                        ),
-                        SizedBox(height: 15),
-                        Wrap(
-                          runSpacing: 10,
-                          spacing: 10,
-                          children: [
-                            TapableSquare(
-                              title: 'الدرجات',
-                              onTab: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return StudentWorns(
-                                      result[position].name, this.widget.role);
-                                }));
-                              },
-                            ),
-                            TapableSquare(
-                              title: 'التبليغات',
-                              onTab: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return StudentWorns(
-                                      result[position].name, this.widget.role);
-                                }));
-                              },
-                            ),
-                            TapableSquare(
-                              title: 'تغيير كلمة السر',
-                              onTab: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return StudentChangePass(
-                                      result[position].pass);
-                                }));
-                              },
-                            ),
-                            TapableSquare(
-                              title: 'تعديل المعلومات',
-                              onTab: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return StudentAddUpdate(this.widget.role,
-                                      student: result[position]);
-                                }));
-                              },
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 15),
-                      ],
-                    ),
-                  )),
+      child: ListView.builder(
+        physics: const AlwaysScrollableScrollPhysics(),
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        itemCount: result.length,
+        itemBuilder: (BuildContext context, int position) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
+                child: Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'الاسم: ${result[position].name}',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black),
+                      ),
+                      SizedBox(height: 15),
+                      Text(
+                        'المرحلة: ${result[position].year}',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black),
+                      ),
+                      SizedBox(height: 15),
+                      Text(
+                        'رقم الهاتف: ${result[position].number}',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black),
+                      ),
+                      SizedBox(height: 15),
+                      Wrap(
+                        runSpacing: 10,
+                        spacing: 10,
+                        children: [
+                          TapableSquare(
+                            title: 'الدرجات',
+                            onTab: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return StudentWorns(
+                                    result[position].name, this.widget.role);
+                              }));
+                            },
+                          ),
+                          TapableSquare(
+                            title: 'التبليغات',
+                            onTab: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return StudentWorns(
+                                    result[position].name, this.widget.role);
+                              }));
+                            },
+                          ),
+                          TapableSquare(
+                            title: 'تغيير كلمة السر',
+                            onTab: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return StudentChangePass(result[position].pass);
+                              }));
+                            },
+                          ),
+                          TapableSquare(
+                            title: 'تعديل المعلومات',
+                            onTab: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return StudentAddUpdate(this.widget.role,
+                                    student: result[position]);
+                              }));
+                            },
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 15),
+                    ],
+                  ),
                 ),
-              ],
-            );
-          },
-        ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

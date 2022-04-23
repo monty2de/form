@@ -132,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       drawer: NavigationDrawerWidget(role_check),
       appBar: AppBar(actions: [
-        role_check == 1
+        role_check <= 2
             ? TextButton(
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -148,19 +148,6 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Stack(
             children: [
-              //               decoration:
-              // BoxDecoration(
-              //   color: const Color(0xff7c94b6),
-              //   image: new DecorationImage(
-              //     fit: BoxFit.cover,
-              //     colorFilter:
-              //       ColorFilter.mode(Colors.black.withOpacity(0.2),
-              //       BlendMode.dstATop),
-              //     image: new NetworkImage(
-              //       'http://www.server.com/image.jpg',
-              //     ),
-              //   ),
-              // ),
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.3,
@@ -174,14 +161,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
-              // Image(
-
-              //   image: AssetImage("images/home.jpg"),
-              //   width: MediaQuery.of(context).size.width,
-              //   fit: BoxFit.cover,
-              //   height: MediaQuery.of(context).size.height * 0.3,
-              // ),
-
               Container(
                 margin: const EdgeInsets.only(top: 7),
                 child: Row(
@@ -253,7 +232,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   border: Border.all(width: 1.5),
                   borderRadius: BorderRadius.circular(5)),
               child: InkWell(
-                onTap: this.role_check == 1 || this.role_check == 2
+                onTap: this.role_check <= 2
                     ? () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
@@ -284,7 +263,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ],
                     ),
-                    this.role_check == 1 || this.role_check == 2
+                    this.role_check <= 2
                         ? TextButton(
                             child: Text(
                               'حذف',
@@ -316,16 +295,12 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 Future createStudent(Map<String, dynamic> student, int index) async {
-  UserCredential? _authResult;
-  if (!isTestMood)
-    _authResult = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: 'stEmail$index@temp.com', password: student['pass']);
   try {
-    FirebaseFirestore.instance
+    final doc = FirebaseFirestore.instance
         .collection(isTestMood ? 'studentsTest' : 'students')
-        .doc(_authResult?.user?.uid)
-        .set({
-      'id': _authResult?.user?.uid ?? '$index',
+        .doc();
+    doc.set({
+      'id': doc.id,
       'name': student['name'],
       'email': 'stEmail$index@temp.com',
       'sex': student['sex'],
@@ -340,8 +315,8 @@ Future createStudent(Map<String, dynamic> student, int index) async {
       'part': student['part'],
       'shift': student['shift'],
     });
-  } on FirebaseAuthException catch (e) {
-    print(e.message);
+  } catch (e) {
+    print(e);
   }
 }
 

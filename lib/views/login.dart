@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:form/utils/app_button.dart';
 import 'package:form/views/login_admin.dart';
@@ -16,6 +15,26 @@ class _LoginState extends State<Login> {
   var loading = 0;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  Future _storeUser(
+      QuerySnapshot<Map<String, dynamic>> user, BuildContext context) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    final userPass = user.docs.first.data()['pass'];
+    if (userPass == passwordController.text)
+      user.docs.forEach((data) {
+        sharedPreferences.setInt('role', data.data()['role']);
+        sharedPreferences.setString('id', data.data()['id']);
+        // ignore: unused_local_variable
+        var role = int.parse(sharedPreferences.getInt('role').toString());
+        Navigator.pushAndRemoveUntil(context,
+            MaterialPageRoute(builder: (context) {
+          return MyHomePage(role: role);
+        }), (Route<dynamic> route) => false);
+      });
+    else
+      throw 'The password is invalid';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,60 +63,46 @@ class _LoginState extends State<Login> {
                 AppButton(
                   title: "تسجيل الدخول",
                   onPressed: () async {
-                    late UserCredential authResult;
                     setState(() {
                       loading = 1;
                     });
                     try {
-                      authResult = await FirebaseAuth.instance
-                          .signInWithEmailAndPassword(
-                              email: emailController.text.trim(),
-                              password: passwordController.text);
-
-                      SharedPreferences sharedPreferences =
-                          await SharedPreferences.getInstance();
-
-                      var user = await FirebaseFirestore.instance
+                      final student = await FirebaseFirestore.instance
                           .collection(isTestMood ? 'studentsTest' : 'students')
-                          .where('id', isEqualTo: authResult.user!.uid)
+                          .where('email',
+                              isEqualTo: emailController.text.trim())
                           .get();
-                      if (user.docs.isEmpty) {
-                        user = await FirebaseFirestore.instance
+                      if (student.docs.isEmpty) {
+                        final teacher = await FirebaseFirestore.instance
                             .collection(
                                 isTestMood ? 'teachersTest' : 'teachers')
-                            .where('id', isEqualTo: authResult.user!.uid)
+                            .where('email',
+                                isEqualTo: emailController.text.trim())
                             .get();
+
+                        if (teacher.docs.isEmpty) {
+                          throw 'User does not exist';
+                        }
+                        await _storeUser(teacher, context);
+                      } else {
+                        await _storeUser(student, context);
                       }
                       setState(() {
                         loading = 0;
                       });
-
-                      user.docs.forEach((data) {
-                        sharedPreferences.setInt('role', data.data()['role']);
-                        sharedPreferences.setString('id', data.data()['id']);
-                        // ignore: unused_local_variable
-                        var role = int.parse(
-                            sharedPreferences.getInt('role').toString());
-                        Navigator.pushAndRemoveUntil(context,
-                            MaterialPageRoute(builder: (context) {
-                          return MyHomePage(role: role);
-                        }), (Route<dynamic> route) => false);
-                      });
-                    } on FirebaseAuthException catch (e) {
-                      print(e.message);
+                    } catch (e) {
+                      print(e);
                       setState(() {
                         loading = 0;
                       });
 
-                      var message = e.message;
-                      if (message ==
-                          'There is no user record corresponding to this identifier. The user may have been deleted.') {
+                      String message = e.toString();
+                      if (message.contains('User does not exist')) {
                         message = 'هذا الحساب غير موجود';
-                      } else if (message ==
-                          'The password is invalid or the user does not have a password.') {
+                      } else if (message.contains('The password is invalid')) {
                         message = 'كلمة المرور خطأ';
                       }
-                      final snackBar = SnackBar(content: Text(message!));
+                      final snackBar = SnackBar(content: Text(message));
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }
                   },

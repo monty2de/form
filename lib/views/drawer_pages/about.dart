@@ -24,7 +24,6 @@ class _AboutState extends State<About> {
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: ListView(
           children: <Widget>[
-            //TODO: ADD THE REQUIRED "ABOUT"
             Text(
               'إن التطور الهائل الذي حدث في مجال صناعة الحاسبات والبرمجيات'
               'وتأثيره على مختلف علوم المعرفة وتطبيقاته الواسعة جدا في شتى مجالات'

@@ -204,18 +204,12 @@ class CurriculumAddState extends State<CurriculumAdd> {
       Navigator.pop(context);
       return;
     }
-    String id = generateRandomString(32);
-    final check = await FirebaseFirestore.instance
-        .collection(isTestMood ? 'curriculumTest' : 'curriculum')
-        .doc(id)
-        .get();
-    if (check.exists) id = generateRandomString(32);
 
     final orders = FirebaseFirestore.instance
         .collection(isTestMood ? 'curriculumTest' : 'curriculum')
-        .doc(id);
+        .doc();
     await orders.set({
-      'id': id,
+      'id': orders.id,
       'name': name,
       'year': year,
       'type': widget.type,
@@ -223,13 +217,5 @@ class CurriculumAddState extends State<CurriculumAdd> {
       "units": units,
     });
     Navigator.pop(context);
-  }
-
-  String generateRandomString(int len) {
-    var r = Random.secure();
-    const _chars =
-        'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-    return List.generate(len, (index) => _chars[r.nextInt(_chars.length)])
-        .join();
   }
 }

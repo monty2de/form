@@ -215,30 +215,15 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
       return;
     }
 
-    String id = generateRandomString(32);
-    final check = await FirebaseFirestore.instance
-        .collection(isTestMood ? 'boardsTest' : 'boards')
-        .doc(id)
-        .get();
-    if (check.exists) id = generateRandomString(32);
-
     final orders = FirebaseFirestore.instance
         .collection(isTestMood ? 'boardsTest' : 'boards')
-        .doc(id);
+        .doc();
     await orders.set({
-      'id': id,
+      'id': orders.id,
       'name': boardName,
       'teacherName': teacherName,
       'isBoss': isBoss,
     });
     Navigator.pop(context);
-  }
-
-  String generateRandomString(int len) {
-    var r = Random.secure();
-    const _chars =
-        'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-    return List.generate(len, (index) => _chars[r.nextInt(_chars.length)])
-        .join();
   }
 }

@@ -22,7 +22,7 @@ class _ShowSemisterFirstState extends State<ShowSemisterFirst> {
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
         actions: [
-          this.widget.role == 1 || this.widget.role == 2
+          this.widget.role <= 2
               ? TextButton(
                   onPressed: () {
                     Navigator.push(context,
@@ -38,11 +38,9 @@ class _ShowSemisterFirstState extends State<ShowSemisterFirst> {
         centerTitle: true,
         title: Text('الفصل الدراسي '),
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            result(semisterArry, context),
-          ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: result(semisterArry, context),
         ),
       ),
     );

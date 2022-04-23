@@ -33,40 +33,42 @@ class _ExamResultShowState extends State<ExamResultShow> {
         centerTitle: true,
         title: Text('النتائج'),
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            FutureBuilder(
-              future: ExamResultController().index(this.widget.subjectName),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.active:
-                    return _loading();
-                    // ignore: dead_code
-                    break;
-                  case ConnectionState.waiting:
-                    return _loading();
-                    // ignore: dead_code
-                    break;
-                  case ConnectionState.done:
-                    if (snapshot.hasError) {
-                      return Container();
-                    }
-                    if (snapshot.hasData) {
-                      return result(snapshot.data, context);
-                    }
-                    break;
-                  case ConnectionState.none:
-                    break;
-                  case ConnectionState.waiting:
-                    break;
-                  case ConnectionState.active:
-                    break;
-                }
-                return Container();
-              },
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              FutureBuilder(
+                future: ExamResultController().index(this.widget.subjectName),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.active:
+                      return _loading();
+                      // ignore: dead_code
+                      break;
+                    case ConnectionState.waiting:
+                      return _loading();
+                      // ignore: dead_code
+                      break;
+                    case ConnectionState.done:
+                      if (snapshot.hasError) {
+                        return Container();
+                      }
+                      if (snapshot.hasData) {
+                        return result(snapshot.data, context);
+                      }
+                      break;
+                    case ConnectionState.none:
+                      break;
+                    case ConnectionState.waiting:
+                      break;
+                    case ConnectionState.active:
+                      break;
+                  }
+                  return Container();
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -79,15 +81,15 @@ class _ExamResultShowState extends State<ExamResultShow> {
         columns: <DataColumn>[
           DataColumn(label: Text(" الاسم"), numeric: false),
           DataColumn(label: Text(" الدرجة"), numeric: false),
-          if (this.widget.role == 1 || this.widget.role == 2)
+          if (this.widget.role <= 2)
             DataColumn(label: Text(""), numeric: false),
         ],
         rows: result
             .map(
               (examresult) => DataRow(
                 cells: [
-                  DataCell(Text(examresult.studentName),
-                      onTap: this.widget.role == 1 || this.widget.role == 2
+                  DataCell(Text(examresult.studentName!),
+                      onTap: this.widget.role <= 2
                           ? () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
@@ -98,15 +100,15 @@ class _ExamResultShowState extends State<ExamResultShow> {
                               }));
                             }
                           : null),
-                  DataCell(Text(examresult.degree)),
-                  if (this.widget.role == 1 || this.widget.role == 2)
+                  DataCell(Text(examresult.finalDegree!)),
+                  if (this.widget.role <= 2)
                     DataCell(
                       Text(
                         'حذف',
                         style: TextStyle(color: Colors.red),
                       ),
                       onTap: () {
-                        ExamResultController().delet(examresult.id);
+                        ExamResultController().delet(examresult.id!);
                         setState(() {});
                       },
                     ),

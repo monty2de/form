@@ -38,11 +38,9 @@ class _ShowSemisterFinalState extends State<ShowSemisterFinal> {
         centerTitle: true,
         title: Text('الفصل الدراسي '),
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            result(semisterArry, context),
-          ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: result(semisterArry, context),
         ),
       ),
     );

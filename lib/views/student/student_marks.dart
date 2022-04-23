@@ -66,9 +66,9 @@ class _StudentMarksState extends State<StudentMarks> {
               (subject) => DataRow(
                 cells: [
                   DataCell(
-                    Text(subject.subjectName),
+                    Text(subject.subjectName!),
                   ),
-                  DataCell(Text(subject.degree)),
+                  DataCell(Text(subject.degree!)),
                 ],
               ),
             )

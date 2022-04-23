@@ -1,14 +1,36 @@
 class ExamResult {
-  late String id, studentName, year, subjectName, degree ,semister;
+  final String? id,
+      studentName,
+      year,
+      subjectName,
+      degree,
+      semister,
+      semersterDegree,
+      finalDegree,
+      avarege;
 
-  ExamResult({id, studentName, year, degree, subjectName , semister});
+  ExamResult(
+      {required this.id,
+      required this.studentName,
+      required this.year,
+      required this.degree,
+      required this.subjectName,
+      required this.semister,
+      required this.semersterDegree,
+      required this.finalDegree,
+      required this.avarege});
 
-  ExamResult.fromFirebase(var data) {
-    this.id = data['id'];
-    this.studentName = data['studentName'];
-    this.year = data['year'];
-    this.degree = data['degree'];
-    this.subjectName = data['subjectName'];
-    this.semister = data['semister'] ?? '';
+  factory ExamResult.fromFirebase(var data) {
+    return ExamResult(
+      id: data['id'],
+      studentName: data['studentName'],
+      year: data['year'],
+      degree: data['degree'],
+      semister: data['semister'] ?? '',
+      subjectName: data['subjectName'] ?? '',
+      finalDegree: data['finalDegree'] ?? '',
+      semersterDegree: data['semersterDegree'] ?? '',
+      avarege: data['avarege'] ?? '',
+    );
   }
 }

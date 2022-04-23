@@ -128,26 +128,11 @@ class WornAddState extends State<WornAdd> {
   }
 
   Future addNewWorn(String studentName, body) async {
-    String id = generateRandomString(32);
-    final check = await FirebaseFirestore.instance
-        .collection(isTestMood ? 'wornsTest' : 'worns')
-        .doc(id)
-        .get();
-    if (check.exists) id = generateRandomString(32);
-
     final orders = FirebaseFirestore.instance
         .collection(isTestMood ? 'wornsTest' : 'worns')
-        .doc(id);
-    await orders.set({'id': id, 'stname': stName, 'body': body});
+        .doc();
+    await orders.set({'id': orders.id, 'stname': stName, 'body': body});
 
     Navigator.pop(context);
-  }
-
-  String generateRandomString(int len) {
-    var r = Random.secure();
-    const _chars =
-        'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-    return List.generate(len, (index) => _chars[r.nextInt(_chars.length)])
-        .join();
   }
 }

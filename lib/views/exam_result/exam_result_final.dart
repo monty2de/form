@@ -11,8 +11,7 @@ class ExamResultFinal extends StatefulWidget {
   late int role;
   late String semister;
 
-
-  ExamResultFinal(this.role ,  this.semister);
+  ExamResultFinal(this.role, this.semister);
 
   @override
   _ExamResultFinalState createState() => _ExamResultFinalState();
@@ -32,7 +31,7 @@ class _ExamResultFinalState extends State<ExamResultFinal> {
           },
         ),
         actions: [
-          this.widget.role == 1 || this.widget.role == 2
+          this.widget.role <= 2
               ? TextButton(
                   onPressed: () {
                     Navigator.push(context,
@@ -48,36 +47,38 @@ class _ExamResultFinalState extends State<ExamResultFinal> {
         centerTitle: true,
         title: Text('اسماء المواد'),
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            FutureBuilder(
-              future: CurriculumController().index(2 , this.widget.semister),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.active:
-                    return _loading();
-                    // ignore: dead_code
-                    break;
-                  case ConnectionState.waiting:
-                    return _loading();
-                    // ignore: dead_code
-                    break;
-                  case ConnectionState.done:
-                    if (snapshot.hasError) {
-                      return Container();
-                    }
-                    if (snapshot.hasData) {
-                      return result(snapshot.data, context);
-                    }
-                    break;
-                  case ConnectionState.none:
-                    break;
-                }
-                return Container();
-              },
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              FutureBuilder(
+                future: CurriculumController().index(2, this.widget.semister),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.active:
+                      return _loading();
+                      // ignore: dead_code
+                      break;
+                    case ConnectionState.waiting:
+                      return _loading();
+                      // ignore: dead_code
+                      break;
+                    case ConnectionState.done:
+                      if (snapshot.hasError) {
+                        return Container();
+                      }
+                      if (snapshot.hasData) {
+                        return result(snapshot.data, context);
+                      }
+                      break;
+                    case ConnectionState.none:
+                      break;
+                  }
+                  return Container();
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

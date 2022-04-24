@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,6 +14,7 @@ import 'package:form/data/students.dart';
 import 'package:form/data/teachers.dart';
 import 'package:form/models/news.dart';
 import 'package:form/utils/results_wrapper.dart';
+import 'package:form/views/carousel_with_Dots.dart';
 import 'package:form/views/news/news_add_update.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'drawer.dart';
@@ -225,67 +227,31 @@ class _MyHomePageState extends State<MyHomePage> {
     return checkIfListEmpty(
       dataList: news,
       child: Expanded(
-        child: ListView.builder(
-          physics: const AlwaysScrollableScrollPhysics(),
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemCount: news.length,
-          itemBuilder: (BuildContext context, int position) {
-            return Container(
-              margin: const EdgeInsets.only(left: 5, right: 5, bottom: 5),
-              padding: EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                  border: Border.all(width: 1.5),
-                  borderRadius: BorderRadius.circular(5)),
-              child: InkWell(
-                onTap: this.role_check <= 2
-                    ? () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return NewsAddUpdate(
-                            role_check,
-                            news: news[position],
-                          );
-                        }));
-                      }
-                    : null,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          news[position].title,
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black),
-                        ),
-                        SizedBox(height: 15),
-                        Text(
-                          news[position].body,
-                          style: TextStyle(fontSize: 15, color: Colors.black),
-                        ),
-                      ],
-                    ),
-                    this.role_check <= 2
-                        ? TextButton(
-                            child: Text(
-                              'حذف',
-                              style: TextStyle(fontSize: 15, color: Colors.red),
-                            ),
-                            onPressed: () {
-                              NewsController().delet(news[position].id);
-                              setState(() {});
-                            },
-                          )
-                        : SizedBox.shrink(),
-                  ],
-                ),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 200,
+              child: CarouselWithIndicator(news: news, role: role_check),
+            ),
+            Expanded(
+              child: ListView.builder(
+                physics: const AlwaysScrollableScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: news.length,
+                itemBuilder: (BuildContext context, int position) {
+                  final onenews = news[position];
+                  return NewsWidget(
+                      news: onenews,
+                      role: role_check,
+                      onNewsDelete: () {
+                        NewsController().delet(onenews.id);
+                        setState(() {});
+                      });
+                },
               ),
-            );
-          },
+            ),
+          ],
         ),
       ),
     );
@@ -295,6 +261,69 @@ class _MyHomePageState extends State<MyHomePage> {
     return Container(
       child: Center(
         child: CircularProgressIndicator(),
+      ),
+    );
+  }
+}
+
+class NewsWidget extends StatelessWidget {
+  final News news;
+  final int role;
+  final VoidCallback onNewsDelete;
+  const NewsWidget(
+      {Key? key,
+      required this.news,
+      required this.role,
+      required this.onNewsDelete})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(left: 5, right: 5, bottom: 5),
+      padding: EdgeInsets.all(5),
+      decoration: BoxDecoration(
+          border: Border.all(width: 1.5),
+          borderRadius: BorderRadius.circular(5)),
+      child: InkWell(
+        onTap: role <= 2
+            ? () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return NewsAddUpdate(role, news: news);
+                }));
+              }
+            : null,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  news.title,
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black),
+                ),
+                SizedBox(height: 15),
+                Text(
+                  news.body,
+                  style: TextStyle(fontSize: 15, color: Colors.black),
+                ),
+              ],
+            ),
+            role <= 2
+                ? TextButton(
+                    child: Text(
+                      'حذف',
+                      style: TextStyle(fontSize: 15, color: Colors.red),
+                    ),
+                    onPressed: onNewsDelete,
+                  )
+                : SizedBox.shrink(),
+          ],
+        ),
       ),
     );
   }

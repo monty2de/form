@@ -32,7 +32,7 @@ import 'firebase_options.dart';
 // 1
 // حساب ادمن
 
-bool isTestMood = true;
+bool isTestMood = false;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -141,10 +141,12 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(actions: [
         role_check <= 2
             ? TextButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                onPressed: () async {
+                  await Navigator.push(context,
+                      MaterialPageRoute(builder: (context) {
                     return NewsAddUpdate(role_check);
                   }));
+                  setState(() {});
                 },
                 child:
                     Text(" اضافة خبر ", style: TextStyle(color: Colors.white)),

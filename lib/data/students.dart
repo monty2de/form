@@ -3,955 +3,780 @@ final List<Map<String, dynamic>> students = [
     "name": "احمد حازم عباس",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 770842933,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "اسراء نهار غازي",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 525345336,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "بيداء قاسم باكور",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 365356113,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "حسين علي كامل",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 356311516,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "حوراء موفق خليل",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 365311563,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "حيدر صادق وسم",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 635351163,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "رونق محمد داود",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356351636,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "زهراء فراس حميد",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356635163,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "زين العابدين رؤوف حبيب",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "غير محدد",
-    "location": "البصرة",
-    "number": 653635163,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "زينب حامد خلف",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 356356113,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "زينب فراس عبد الحسن",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356311156,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "زينب لطيف جبر",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356613156,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "سارة سعيد خليل",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356351635,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "سجاد عدنان خلف",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "غير محدد",
-    "location": "بغداد",
-    "number": 356111356,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "سجاد منذر حميد",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "ديالى",
-    "number": 356356135,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "سماء لؤي كريم",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 356356136,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "سنا الرحمن مصطفى حكمت",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 679667967,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "صفا الياسر حسين",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356311563,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "صفا حسن عبيد",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 425222145,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "صفا علي محمد",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "غير محدد",
-    "location": "بغداد",
-    "number": 365374574,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "صفاء نامس سعيد",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "البصرة",
-    "number": 475474474,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "طيبة حسين فاضل",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "البصرة",
-    "number": 467471474,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "عباس عطيه هندول",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 474746741,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "عبد الباسط محمد مطشر",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 796729696,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "عبد الرحمن محمد شاكر",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "غير محدد",
-    "location": "بغداد",
-    "number": 696986292,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "علي حازم كاظم",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 696967679,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "علي حيدر هلال",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "ذي قار",
-    "number": 796798679,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "علي رعد محمد عبد الحسن",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 796679672,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "غدير اياد قاسم",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 679679762,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "فاطمة احمد ابراهيم",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 769679627,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "فاطمة ماجد مهدي ",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 796969622,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "فرح اسماعيل حضير",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 696796696,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "كرار سعد موحي",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "ذي قار",
-    "number": 696979677,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "كرار علي جاسب",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 697967679,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "محمد حسين حيدر",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 966797696,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "محمد ياس خضير",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 696797691,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "محمود عباس فاضل",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 679679671,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "مرتضى حكمان سايه مير",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 697679696,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "نرجس عدنان صالح",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 574675675,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "نور اسماعيل حمد",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "ديالى",
-    "number": 796796969,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "هدى قيصر قيس",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 796796796,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "هدى كريم عبود",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 967996796,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "ياسر صلاح كاظم",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 967969697,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "احمد ستار جبار",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 124234232,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "أمير عمار محمد علي فاضل",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 252353553,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "امير هاني شاكر",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 235253255,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "اية مهند اسماعيل",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 474764744,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "تبارك اثير فاضل",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 576574777,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "تقى احمد عداي",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "ذي قار",
-    "number": 769697769,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "جعفر عبد الحسن عريبي بدن",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "غير محدد",
-    "location": "بغداد",
-    "number": 796969697,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "جمانة حيدر علي",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 769669677,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "حسن علي ناصر",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 777767969,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "حسنين علي زوير",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 769769697,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "حسين خالد حميد",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 769969676,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "ديمة سالار مجلوم",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 769679677,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "رؤى طه ياسين",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "ديالى",
-    "number": 796796977,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "زينب احمد صالح",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 457474743,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "زينب عيسى عطيه",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 345437345,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "زينه وسام كريم",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 735734557,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "سبأ عبد حمد محمد",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 757457347,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "شهلاء عبد الله مدلول",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "ذي قار",
-    "number": 753745745,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "صفاء هاشم سعد",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "غير محدد",
-    "location": "بغداد",
-    "number": 753454743,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "طيبة هيثم سلمان",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 457347545,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "عبدالرحمن صلاح الدين حسن ",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 745457477,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "علي حازم جواد",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 870708707,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "علي حسين كاظم جدوع",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 780700760,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "عمار حاتم علوان",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 870078078,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "عمر حارث ناصر",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 780678067,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "فاطمة رعد كريم عبد الرضا",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 457648675,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "فاطمة فاضل ميذاب",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 679657965,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "كوثر ستار عيدان ",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 679595677,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "محمد باقر هادي حسن كاظم",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 675969565,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "محمد عباس شايع",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 569697569,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "محمد وليد برهان",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "ذي قار",
-    "number": 659759765,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "مروة اسعد بشير",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 679596767,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "مريم حيدر خزعل",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 596795679,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "مصطفى احسان فخري",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 596795965,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "مصطفى سعدي كريم",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 769567969,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "منتظر عباس رزاق",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "نينوى",
-    "number": 697669579,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "منار هاشم سعد",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 957796779,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "مهتدى يونس راضي",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 765976956,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "مينا حيدر محمد حسين ",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 679769676,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "نور الزهراء حسين",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 659769676,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "نور الهدى طالب عبد",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 597976597,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "هاني رائد تركي",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 759765796,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "ياسر علاء عبد الحسين",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 756669569,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "ابراهيم نهاد ذاكر احمد",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 542354432,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -960,9 +785,6 @@ final List<Map<String, dynamic>> students = [
     "name": "ابو بكر نايف حسن",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 352345352,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -971,9 +793,6 @@ final List<Map<String, dynamic>> students = [
     "name": "أحمد جعفر برهان",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 547647547,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -982,9 +801,6 @@ final List<Map<String, dynamic>> students = [
     "name": "اسماعيل محمد جاسم",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 547675467,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -993,9 +809,6 @@ final List<Map<String, dynamic>> students = [
     "name": "اية رعد عبد وحيد",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "غير محدد",
-    "location": "بغداد",
-    "number": 547567456,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1004,9 +817,6 @@ final List<Map<String, dynamic>> students = [
     "name": "حسنين محمد جاسم",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 679697697,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1015,9 +825,6 @@ final List<Map<String, dynamic>> students = [
     "name": "حسين خريج يازع ",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 970878800,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1026,9 +833,6 @@ final List<Map<String, dynamic>> students = [
     "name": "حسين عبد الحمزة ابراهيم",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "ذي قار",
-    "number": 760806766,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1037,9 +841,6 @@ final List<Map<String, dynamic>> students = [
     "name": "حسين علي عامر",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 708706706,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1048,9 +849,6 @@ final List<Map<String, dynamic>> students = [
     "name": "حسين يوسف حسين",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 585685685,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1059,9 +857,6 @@ final List<Map<String, dynamic>> students = [
     "name": "حميدة عبد الخالق  مهدي",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 845674577,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1070,9 +865,6 @@ final List<Map<String, dynamic>> students = [
     "name": "حيدر سعد قاسم",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 476575467,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1081,9 +873,6 @@ final List<Map<String, dynamic>> students = [
     "name": "رسل جليل عبد العباس",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 764743564,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1092,9 +881,6 @@ final List<Map<String, dynamic>> students = [
     "name": "رضا جواد كاظم",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 745674567,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1103,9 +889,6 @@ final List<Map<String, dynamic>> students = [
     "name": "رهام سالم هادي",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 567546754,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1114,9 +897,6 @@ final List<Map<String, dynamic>> students = [
     "name": "سارة علاء صالح فالح",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 745675467,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1125,9 +905,6 @@ final List<Map<String, dynamic>> students = [
     "name": "طيبة مالك رمضان",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 475463436,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1136,9 +913,6 @@ final List<Map<String, dynamic>> students = [
     "name": "عباس محمد رحيم  عبد الحسن",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "ديالى",
-    "number": 456435646,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1147,9 +921,6 @@ final List<Map<String, dynamic>> students = [
     "name": "عبد الرحمن سرمد محمد حسن",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 645645666,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1158,9 +929,6 @@ final List<Map<String, dynamic>> students = [
     "name": "عبد المعز عبد الله كاظم",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 645664354,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1169,9 +937,6 @@ final List<Map<String, dynamic>> students = [
     "name": "علي حيدر منصور",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 552352532,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1180,9 +945,6 @@ final List<Map<String, dynamic>> students = [
     "name": "علي عماد عادل",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 235325235,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1191,9 +953,6 @@ final List<Map<String, dynamic>> students = [
     "name": "غفران عبد الستار جبار ",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 534253425,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1202,9 +961,6 @@ final List<Map<String, dynamic>> students = [
     "name": "فياض سمير جمعة",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 253425324,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1213,9 +969,6 @@ final List<Map<String, dynamic>> students = [
     "name": "قاسم صباح هاشم",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 486854868,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1224,9 +977,6 @@ final List<Map<String, dynamic>> students = [
     "name": "محمد صادق رعد حسن هاشم",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 458577656,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1235,9 +985,6 @@ final List<Map<String, dynamic>> students = [
     "name": "محمد فاضل كامل",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 636463563,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1246,9 +993,6 @@ final List<Map<String, dynamic>> students = [
     "name": "محمد مصطفى حسين",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 365464356,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1257,9 +1001,6 @@ final List<Map<String, dynamic>> students = [
     "name": "محمد مهدي رشيد",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 645634643,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1268,9 +1009,6 @@ final List<Map<String, dynamic>> students = [
     "name": "مروان عباس رحيم جودي",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 769678989,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1279,9 +1017,6 @@ final List<Map<String, dynamic>> students = [
     "name": "مريم قاسم محمد ",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 674575456,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1290,9 +1025,6 @@ final List<Map<String, dynamic>> students = [
     "name": "مسلم عبد الحسين سلمان",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 675848564,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1301,9 +1033,6 @@ final List<Map<String, dynamic>> students = [
     "name": "المصطفى محمد احمد",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 643765385,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1312,9 +1041,6 @@ final List<Map<String, dynamic>> students = [
     "name": "منتظر محمد عبد الجبار",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 845685844,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1323,9 +1049,6 @@ final List<Map<String, dynamic>> students = [
     "name": "مهدي عباس عبد الحسن",
     "year": "الأولى",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 456486548,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1334,9 +1057,6 @@ final List<Map<String, dynamic>> students = [
     "name": "نور ماجد حميد مجيد",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 956794844,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1345,9 +1065,6 @@ final List<Map<String, dynamic>> students = [
     "name": "هبة الله محمود جلوب طارش",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 458458444,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1356,9 +1073,6 @@ final List<Map<String, dynamic>> students = [
     "name": "هدير محمد نعمة ",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "ديالى",
-    "number": 845634754,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1367,9 +1081,6 @@ final List<Map<String, dynamic>> students = [
     "name": "ورود حافظ عباس",
     "year": "الأولى",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 437347657,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -1378,1351 +1089,1104 @@ final List<Map<String, dynamic>> students = [
     "name": "احمد صلاح حسن كاظم",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 770842933,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "أمل أسامه خضير",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 525345336,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "امير حمود كاطع فهد (رس)",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 365356113,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "اميمة قاسم صالح",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 356311516,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "ايه ظافر محمد عبد القادر",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 365311563,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "تبارك نجم عبد الله (رس)",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 635351163,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "حارث عادل مدب",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356351636,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "حنين شكر محمود (رس)",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 356635163,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "رحمه ماجد سعدي (رس)",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "البصرة",
-    "number": 653635163,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "رسل ليث فيصل (رس)",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 356356113,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "رقيه حيدر فليح",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356311156,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "رنا محمد عبد القادر جبوري",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356613156,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "رؤى عبد الناصر حسن خضير",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356351635,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "ريام صادق حمود شريدة",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356111356,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "زهراء بلال كاظم (رس)",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "ديالى",
-    "number": 356356135,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "زهراء كامل حسين قاسم",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356356136,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "زينب عامر محمد",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 679667967,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "سجاد محمد حسن جميل",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356311563,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "سجى حميد حسن",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 425222145,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "سجى عبد الكريم عبد (رس)",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 365374574,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "سجى عماد الدين محسن محمد ",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 475474474,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "سفيان مظهور محمود حمزة",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 467471474,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "صلاح احمد صلاح احمد",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 474746741,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "عبدالله عدنان كريم فليح",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 796729696,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "عدنان عمر عدنان منير",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 696986292,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "علي حسن عيدان كاظم",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 696967679,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "علي حسين وانس نايف",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "ذي قار",
-    "number": 796798679,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "علي عبد الكريم حسين",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 796679672,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "علي محمد شاكر",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 679679762,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "عمر عصام الدين عبد السلام",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 769679627,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "فاطمة علاء عبد الجليل ",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 796969622,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "فاطمة هادي مالح",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 696796696,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "فاطمه رعد نصيف",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "ذي قار",
-    "number": 696979677,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "فاطمه غازي فيصل علي",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 697967679,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "محمد فلاح علي",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 966797696,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "مريم احمد عداي",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 696797691,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "مصطفى جمال جبار",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 679679671,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "مصطفى حسن عباس",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 697679696,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "معاذ سلام عبد ناصر",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 574675675,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "ميادة حسن عزيز حسن",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "ديالى",
-    "number": 796796969,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "نور صبحي جواد كاظم",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 796796796,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "يوسف فلاح عبد فلحي",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 967996796,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "ابراهيم محمد علي",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 967969697,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "آية جواد كاظم عوده",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 124234232,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "ايوب قتيبة عماد الدين",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 252353553,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "تبارك فتاح لطيف كاظم",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 235253255,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "حسن محمد غازي عبد الحسين",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 474764744,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "حليمه عبدالكريم مصطفى راشد",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 576574777,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "حوراء قاسم محمد عنين",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "ذي قار",
-    "number": 769697769,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "حيدر محمد حسين",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 796969697,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "خديجه محمد جلال",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 769669677,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "داليا اسامة علي فرج",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 777767969,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "رامي عبدالله نجم",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 769769697,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "رَود محمد عيسى",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 769969676,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "زهراء عصام عبدالله سعودي",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 769679677,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "زينب رعد طارش كعيد",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "ديالى",
-    "number": 796796977,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "سجاد احمد عبد (رس)",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 457474743,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "سيف حميد محمد",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 345437345,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "سيف مهند رمزي (رس)",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 735734557,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "شهد صلاح الدين حسن",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 757457347,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "صلاح محمد عباس حمد",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "ذي قار",
-    "number": 753745745,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "عائشة علي منذر اسماعيل",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 753454743,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "عبدالله علي موسى",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 457347545,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "عقيل عادل محمد (رس)",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 745457477,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "علي عبدالله معارج حامي",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 870708707,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "فاطمة ماجد خلف",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 780700760,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "فاطمة مؤيد غالي",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 870078078,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "محمد حازم راجي سهل",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 780678067,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "محمد رائد يوسف فياض",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 457648675,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "محمد طاهر كاظم (رس)",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 679657965,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "محمد علي حسين فليح حسن",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 679595677,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "محمد كردي عبد الله (رس)",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 675969565,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "مريم كمال مصطفى",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 569697569,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "مصطفى علي مطر",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "ذي قار",
-    "number": 659759765,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "منار احمد خلف فهيد",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 679596767,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "منار سمير حسين لفتة",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 596795679,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "منار عزيز عاكول (رس)",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 596795965,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "منتـظر احمـد شـاكـر عودة",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 769567969,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "مهدي حسن لطيف (رس)",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "نينوى",
-    "number": 697669579,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "نبأ قاسم رسن جري",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 957796779,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "نور باسم سالم زيدان العامري",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 765976956,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "وصال جابر شاكر حمزة",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 679769676,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "يعقوب حامد حسين",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 659769676,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "احمد حسين جاسم",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 597976597,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "احمد حيدر عبد المهدي",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 759765796,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "احمد رزاق عطار (رس)",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 756669569,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "احمد نبيل عباس",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 542354432,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "اسراء علي داود",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 352345352,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "ايناس خالد علي (رس)",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 547647547,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "ايه جواد كاظم محمد",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 547675467,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "تكتم جابر لطيف",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 547567456,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "حسنين موسى عمران كاظم",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 679697697,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "حسين حمزة جاسم",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 970878800,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "حوراء جبار محمود (رس)",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "ذي قار",
-    "number": 760806766,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "حيدر عبد الحر عبد علي",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 708706706,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "خالد محمد شافي (رس)",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 585685685,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "رانيا عبدالجبار محي",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 845674577,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "رانيه احمد علي اكبر علي",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 476575467,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "زينب أحمد علي رسن",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 764743564,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "زينب محسن خلف كيطان",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 745674567,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "سجاد منير خير الله",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 567546754,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "سجاد هاشم عنيد (رس)",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 745675467,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "سجى قيس مزهر اسكندر",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 475463436,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "سكينه عمار عباس رشيد",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "ديالى",
-    "number": 456435646,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "عبدالاله صباح حميد عبيد",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 645645666,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "علي أحمد عبد الزهره محمد رضا",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 645664354,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "علي حسين جعفر حسن",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 552352532,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "علي عباس فاضل",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 235325235,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "علي محسن كامل داخل",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 534253425,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "علي محمد حمزه",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 253425324,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "علي هيثم حميد عبد الحسن",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 486854868,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "فاطمة قاسم بلاسم",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 458577656,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "فاطمة ناصر جاسب عجيل",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 636463563,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "كاظم عباس صاحب",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 365464356,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "كرار فالح فاخر عبد الحسن",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 645634643,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "مرتضى سعد جهاد (رس)",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 769678989,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "مرتضى عبد الرسول صالح",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 674575456,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "مرتضى محمد نزال",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 675848564,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "مصطفى عايد نوري مالك",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 643765385,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "منى احمد حسين علوان",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 845685844,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "نور عبدالسلام محمد أمين",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 456486548,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "نورالهدى محمد رضا حيدر",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 956794844,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "C"
   },
   {
     "name": "احمد حسن عبد الكريم حسين",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 458458444,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2731,9 +2195,6 @@ final List<Map<String, dynamic>> students = [
     "name": "احمد غانم هاشم",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "ديالى",
-    "number": 845634754,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2742,9 +2203,6 @@ final List<Map<String, dynamic>> students = [
     "name": "احمد وليد كامل احمد",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 437347657,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2753,9 +2211,6 @@ final List<Map<String, dynamic>> students = [
     "name": "اسراء هادي طه",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 554534534,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2764,9 +2219,6 @@ final List<Map<String, dynamic>> students = [
     "name": "بكر محمد اسماعيل",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 543234325,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2775,9 +2227,6 @@ final List<Map<String, dynamic>> students = [
     "name": "جعفر رضا حسين",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "صلاح الدين",
-    "number": 252452345,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2786,9 +2235,6 @@ final List<Map<String, dynamic>> students = [
     "name": "جعفر عادل عبد الرسول",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 744746777,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2797,9 +2243,6 @@ final List<Map<String, dynamic>> students = [
     "name": "جمانة عبد علي تقي عبد علي",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 765765756,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2808,9 +2251,6 @@ final List<Map<String, dynamic>> students = [
     "name": "حارث عباس صاحب",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 734764367,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2819,9 +2259,6 @@ final List<Map<String, dynamic>> students = [
     "name": "حسن حمزة حكمت عبد",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 753474377,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2830,9 +2267,6 @@ final List<Map<String, dynamic>> students = [
     "name": "حسين جبار رحيم لفتة",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 467346743,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2841,9 +2275,6 @@ final List<Map<String, dynamic>> students = [
     "name": "حسين صالح حسن كاظم",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 734673463,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2852,9 +2283,6 @@ final List<Map<String, dynamic>> students = [
     "name": "حسين علاء عبد الرزاق ",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 569579696,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2863,9 +2291,6 @@ final List<Map<String, dynamic>> students = [
     "name": "حسين علي معين نجم",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 479964979,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2874,9 +2299,6 @@ final List<Map<String, dynamic>> students = [
     "name": "حنين عامر ظاهر",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 794457959,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2885,9 +2307,6 @@ final List<Map<String, dynamic>> students = [
     "name": "حيدر عبد الرسول عبد الحسين",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 479549795,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2896,9 +2315,6 @@ final List<Map<String, dynamic>> students = [
     "name": "رائد رافد عباس",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 979747474,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2907,9 +2323,6 @@ final List<Map<String, dynamic>> students = [
     "name": "زينب عبد الله اكرم",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 479579697,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2918,9 +2331,6 @@ final List<Map<String, dynamic>> students = [
     "name": "سلوان عبيد ذبيح فرج",
     "year": "الثانية",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 683868368,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2929,9 +2339,6 @@ final List<Map<String, dynamic>> students = [
     "name": "صفاء نايوخ خيزران زكم",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 974794699,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2940,9 +2347,6 @@ final List<Map<String, dynamic>> students = [
     "name": "طارق علي سلمان داود",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 479976474,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2951,9 +2355,6 @@ final List<Map<String, dynamic>> students = [
     "name": "عبد الاله خليل غلام كاظم",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 632646236,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2962,9 +2363,6 @@ final List<Map<String, dynamic>> students = [
     "name": "عبد الله علي عبد الاله مهدي",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 623653636,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2973,9 +2371,6 @@ final List<Map<String, dynamic>> students = [
     "name": "علي عبد الامير داود سبع",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 623463262,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2984,9 +2379,6 @@ final List<Map<String, dynamic>> students = [
     "name": "فاضل فاخر عنيد جابر ",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 623632636,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -2995,9 +2387,6 @@ final List<Map<String, dynamic>> students = [
     "name": "لجين محمد جاسم طه",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 632356326,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -3006,9 +2395,6 @@ final List<Map<String, dynamic>> students = [
     "name": "مآب عبد الحسن باوي",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 326236547,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -3017,9 +2403,6 @@ final List<Map<String, dynamic>> students = [
     "name": "مازن سنان جلال عبد المجيد",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 763873568,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -3028,9 +2411,6 @@ final List<Map<String, dynamic>> students = [
     "name": "محمد سعدي فاضل شبيب",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 468356483,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -3039,9 +2419,6 @@ final List<Map<String, dynamic>> students = [
     "name": "محمد عماد عيسى",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "ديالى",
-    "number": 835683583,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -3050,9 +2427,6 @@ final List<Map<String, dynamic>> students = [
     "name": "مرتضى فاضل عباس",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 388468658,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -3061,9 +2435,6 @@ final List<Map<String, dynamic>> students = [
     "name": "مقتدى حسين نعمة رسن",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 468346868,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -3072,9 +2443,6 @@ final List<Map<String, dynamic>> students = [
     "name": "محمد فاضل خضير",
     "year": "الثانية",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 683868388,
     "shift": "مسائي",
     "role": 3,
     "pass": "st12345678"
@@ -3083,1298 +2451,1062 @@ final List<Map<String, dynamic>> students = [
     "name": "ابراهيم عمر ياسين ",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 770842933,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "احمد داود بداي",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 525345336,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "احمد سامي حسن ",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 365356113,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "احمد علي اصغر محمد",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 356311516,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "اسامة رائد سعدي جاسم",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 365311563,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "استبرق حسين وهب عليوي",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 635351163,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "اطياف فرج علي عبد الله ",
     "year": "الثالثة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356351636,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "براق باسم طالب عباس",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 356635163,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "تبارك صباح حسن ",
     "year": "الثالثة",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "البصرة",
-    "number": 653635163,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "تقي محمد عيدان ",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 356356113,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "حنين كريم حاجم",
     "year": "الثالثة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356311156,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "دانية علي رياح طارش",
     "year": "الثالثة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356613156,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "دعاء جاسب بوه فرج ",
     "year": "الثالثة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356351635,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "ذوالفقار كاطع جار الله سطام",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356111356,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "رسل محمد ناطق علي غالب",
     "year": "الثالثة",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "ديالى",
-    "number": 356356135,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "زهراء حسين علي راشد",
     "year": "الثالثة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356356136,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "زهراء علاء حسين",
     "year": "الثالثة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 679667967,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "زين العابدين عباس فاضل علي",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356311563,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "زين العابدين عبد الغني",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 425222145,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "زينب هاشم محسن",
     "year": "الثالثة",
     "sex": "انثى",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 365374574,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "سجاد رحمن سلمان",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 475474474,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "سجاد فهمي جابر ",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 467471474,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "سجاد مشتاق خليل",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 474746741,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "سجى احمد علي حسين ",
     "year": "الثالثة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 796729696,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "سمر اياد عبد الكاظم ",
     "year": "الثالثة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 696986292,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "شروق فاضل عبد الرضا فاضل",
     "year": "الثالثة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 696967679,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "عبد الله عادل عبد قاسم",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "ذي قار",
-    "number": 796798679,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "علي حسن علي فليح",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 796679672,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "علي حيدر عبد الرزاق محمد ",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 679679762,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "عمر ناطق فوزي حسن",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 769679627,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "فهد خليفة ابراهيم ",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 796969622,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "ليث جاسم كاظم شرقي ",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 696796696,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "محمد عباس هاشم جلوب",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "ذي قار",
-    "number": 696979677,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "محمد عماد ستار",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 697967679,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "محمدعبدالحميدعبدالرضا ",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 966797696,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "ميس رعد حسين",
     "year": "الثالثة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 696797691,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "نبأ ياسين عبد الله",
     "year": "الثالثة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 679679671,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "نغم عبد علي صالح",
     "year": "الثالثة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 697679696,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "همام  علي حميد غضبان",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 574675675,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "ابراهيم عبد الجبار داغر",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "ديالى",
-    "number": 796796969,
     "shift": "مسائي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "احمد علي فليح",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 796796796,
     "shift": "مسائي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "اشراق خلف محمد",
     "year": "الثالثة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 967996796,
     "shift": "مسائي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "بسام حازم اسماعيل",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 967969697,
     "shift": "مسائي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "حيدر عبد الحكيم مزهر شلو",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 124234232,
     "shift": "مسائي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "شيرين فخري احمدكله ",
     "year": "الثالثة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 252353553,
     "shift": "مسائي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "محمد حسن حيدر",
     "year": "الثالثة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 235253255,
     "shift": "مسائي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "هبة مناف علي ظاهر",
     "year": "الثالثة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 474764744,
     "shift": "مسائي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "احمدعبدالحسين عبد الرسول (رس،س،م)",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 770842933,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "اسراء فارس عبداللطيف",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 525345336,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "انس عباس جليل(رس،س،صباحي)",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 365356113,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "آيات إسماعيل خضير",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 356311516,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "ايه مؤيد جاسم",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 365311563,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "جنة تمار مرتضى",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 635351163,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "حسين احمد كاطع",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356351636,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "حسين اياد سواد عبادي",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356635163,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "حيدر ماجد مظلوم",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 653635163,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "راميه حسين ناصر",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356356113,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "رقيه كريم عويد",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356311156,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "زينب سعد فرحان",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356613156,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "ساره محمود حسين",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356351635,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "سجاد عزيز صويح",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356111356,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "سجاد محمود محمد",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "ديالى",
-    "number": 356356135,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "شهد صفاء عبد الحسين هاشم",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 356356136,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "شهد علاء حسين",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 679667967,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "عبد الكريم عادل عباس (رس،س،مسائي) ",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "رسوب",
-    "location": "بغداد",
-    "number": 356311563,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "عبدالرحمن عماد جواد",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 425222145,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "عبدالله حذيفه محمد",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 365374574,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "علي انمار برهان",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 475474474,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "علي حسين علي حسين",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 467471474,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "علي فارس مطر",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 474746741,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "فاطمه رحيم قاسم",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 796729696,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "كوثر كمال محسن",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 696986292,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "محمد خالد ابراهيم",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 696967679,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "محمد خضير ياس",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "ذي قار",
-    "number": 796798679,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "محمد سعد عبد الوهاب",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 796679672,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "محمد ناجح حميد",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 679679762,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "مريم جاسم صبر",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 769679627,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "مريم جمعه سندال",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 796969622,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "مريم زيدان خلف",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 696796696,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "مريم محمد صادق عبد الامير",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "ذي قار",
-    "number": 696979677,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "مصطفى ثامر علي",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 697967679,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "نعمان منذر محمود",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 966797696,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "A"
   },
   {
     "name": "يوسف جمال حسين  ",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 696797691,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "اسراء صعب سلمان",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 679679671,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "إستبرق جنيد محمود",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 697679696,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "إياد طارق حسن",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 574675675,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "بنت الهدى علي سليم",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "ديالى",
-    "number": 796796969,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "حسن جلال جبار",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 796796796,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "حسن هيثم احمد",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 967996796,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "ذكرى هيثم عبد",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 967969697,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "رحمة جاسم عيلان حسين",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 124234232,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "رحمة حبيب إسماعيل",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 252353553,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "رغد شاكر كريم",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 235253255,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "رفاه شاكر جاعد",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 474764744,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "رقيه اراز نعمه",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 253635636,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "ريم راسم بشار",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 473467347,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "زكية كاظم كريم",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 347534737,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "زهراء إبراهيم عبد علي",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 769569568,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "زهراء علي حسن",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 685986956,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "زهراء محمد عمر",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 965979979,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "زينة اسماعيل محمود",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 674637347,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "سجاد رياض داخل",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 743743745,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "سجاد عباس كاظم",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 457543774,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "صلاح مهدي حسين",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 435734675,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "ضيف الله جواد",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "ديالى",
-    "number": 342515151,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "عبدالله طه عبدالله",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 251123525,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "علي ابراهيم كامل",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 512351535,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "فاطمة محمد سعدون",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 251325215,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "فاطمه جميل ابراهيم",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 2535152213,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "فقار كريم مطلك",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 253153255,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "كاظم صادق كاظم",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 523152151,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "كرار كامل عبدالله",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 521352135,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "محمد مهدي مجيد نعمه",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "البصرة",
-    "number": 523135255,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "مصطفى حميد كريم",
     "year": "الرابعة",
     "sex": "ذكر",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 512535233,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "ملاك عقيل هاشم",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 325123525,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "نبأ ضياء جاسب",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "ذي قار",
-    "number": 523513512,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "هدى نزيه عبد محمود",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 235512531,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
+    "pass": "st12345678",
+    "part": "B"
   },
   {
     "name": "ورود مسلم إبراهيم",
     "year": "الرابعة",
     "sex": "انثى",
-    "status": "ناجح",
-    "location": "بغداد",
-    "number": 325231355,
     "shift": "صباحي",
     "role": 3,
-    "pass": "st12345678"
-  },
+    "pass": "st12345678",
+    "part": "B"
+  }
 ];

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:form/main.dart';
+import 'package:form/models/absence.dart';
 import 'package:form/models/student.dart';
 import 'package:form/models/worn.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -119,6 +120,33 @@ class StudentController {
     });
 
     return item2;
+  }
+
+  Future<List<Abscence>> abscences(String id) async {
+    var x = FirebaseFirestore.instance
+        .collection(isTestMood ? 'abscencesTest' : 'abscences');
+    if (id.isNotEmpty) x.where('stId', isEqualTo: id);
+
+    final ab = await x.get();
+    print(ab.docs.length);
+    var item2 = <Abscence>[];
+    ab.docs.forEach((DocumentSnapshot element) {
+      Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+      try {
+        item2.add(Abscence.fromfirebase(data));
+      } catch (e) {
+        print(e);
+      }
+    });
+
+    return item2;
+  }
+
+  void abdDelete(String id) async {
+    await FirebaseFirestore.instance
+        .collection(isTestMood ? 'abscencesTest' : 'abscences')
+        .doc(id)
+        .delete();
   }
 
   void delet(String id) async {

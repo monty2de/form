@@ -13,6 +13,7 @@ import 'package:form/views/exam_result/exam_result_semister_first.dart';
 import 'package:form/views/exam_table/exam_table_final.dart';
 import 'package:form/views/exam_table/exam_table_first.dart';
 import 'package:form/views/login.dart';
+import 'package:form/views/student/student_abscence.dart';
 import 'package:form/views/student/student_show_all.dart';
 import 'package:form/views/student/students_name_final_show.dart';
 import 'package:form/views/student/students_names_final.dart';
@@ -307,6 +308,15 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                           }), (Route<dynamic> route) => false);
                         }
                       }
+                    },
+                  ),
+                  buildMenuItem(
+                    text: 'غيابات الطلبة',
+                    onClicked: () {
+                      Navigator.pushAndRemoveUntil(context,
+                          MaterialPageRoute(builder: (context) {
+                        return StudentAbscece('', widget.role);
+                      }), (Route<dynamic> route) => false);
                     },
                   ),
                   buildMenuItem(

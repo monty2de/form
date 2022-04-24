@@ -96,7 +96,7 @@ class _CurriculumFirstState extends State<CurriculumFirst> {
                           : null),
                   DataCell(Text(subject.year)),
                   DataCell(Text(subject.semister)),
-                  if (this.widget.role == 1 || this.widget.role == 2)
+                  if (this.widget.role <= 2)
                     DataCell(
                       Text('حذف', style: TextStyle(color: Colors.red)),
                       onTap: () {

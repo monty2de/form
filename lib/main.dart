@@ -10,6 +10,7 @@ import 'package:form/data/arrays.dart';
 import 'package:form/data/curriculums.dart';
 import 'package:form/data/exams.dart';
 import 'package:form/data/students.dart';
+import 'package:form/data/teachers.dart';
 import 'package:form/models/news.dart';
 import 'package:form/utils/results_wrapper.dart';
 import 'package:form/views/news/news_add_update.dart';
@@ -39,6 +40,11 @@ void main() async {
 // // students
 //   for (var i = 0; i < students.length; i++) {
 //     await createStudent(students[i], i);
+//   }
+
+// // teachers
+//   for (var i = 0; i < ts.length; i++) {
+//     await createTeacher(ts[i], i);
 //   }
 
 //   // curruculums
@@ -99,18 +105,18 @@ Future<int> getvalidationData() async {
   var role = sharedPreferences.getInt('role');
 
   if (role == null) {
-    return 0;
+    return 5;
   } else if (role == 1 || role == 2 || role == 3 || role == 4) {
     return role;
   } else {
-    return 0;
+    return 5;
   }
 }
 
 class MyHomePage extends StatefulWidget {
   final int role;
 
-  const MyHomePage({Key? key, this.role = 0}) : super(key: key);
+  const MyHomePage({Key? key, this.role = 5}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -304,16 +310,37 @@ Future createStudent(Map<String, dynamic> student, int index) async {
       'name': student['name'],
       'email': 'stEmail$index@temp.com',
       'sex': student['sex'],
-      'BLocation': student['location'],
+      'BLocation': '',
       'BDate': DateTime(2000).toIso8601String(),
-      'location': 'baghdad',
+      'location': '',
       'year': student['year'],
-      'number': student['number'],
+      'number': '',
       'pass': student['pass'],
       'role': 3,
-      'status': student['status'],
+      'status': null,
       'part': student['part'],
       'shift': student['shift'],
+    });
+  } catch (e) {
+    print(e);
+  }
+}
+
+Future createTeacher(Map<String, dynamic> teacher, int index) async {
+  try {
+    final doc = FirebaseFirestore.instance
+        .collection(isTestMood ? 'teachersTest' : 'teachers')
+        .doc();
+    doc.set({
+      'id': doc.id,
+      'name': teacher['name'],
+      'email': 'tchEmail$index@temp.com',
+      'BDate': DateTime(2000).toIso8601String(),
+      'location': 'baghdad',
+      'number': '',
+      'position': 'تدريسي',
+      'pass': 'tch12345678',
+      'role': 2,
     });
   } catch (e) {
     print(e);

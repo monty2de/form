@@ -122,10 +122,10 @@ class StudentController {
     return item2;
   }
 
-  Future<List<Abscence>> abscences(String id) async {
+  Future<List<Abscence>> abscences(String? id) async {
     var x = FirebaseFirestore.instance
-        .collection(isTestMood ? 'abscencesTest' : 'abscences');
-    if (id.isNotEmpty) x.where('stId', isEqualTo: id);
+        .collection(isTestMood ? 'abscencesTest' : 'abscences')
+        .where('stId', isEqualTo: id);
 
     final ab = await x.get();
     print(ab.docs.length);

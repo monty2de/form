@@ -60,7 +60,8 @@ class _ShowSemisterFinalState extends State<ShowSemisterFinal> {
                   DataCell(Text(subject), onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return ExamResultFinal(this.widget.role, subject);
+                      return ExamResultSelectYearFinal(
+                          role: this.widget.role, semister: subject);
                     }));
                   }),
                 ],

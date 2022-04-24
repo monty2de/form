@@ -4,6 +4,7 @@ import 'package:form/models/student.dart';
 import 'package:form/views/student/student_abscence.dart';
 import 'package:form/views/student/student_add_update.dart';
 import 'package:form/views/student/student_change_pass.dart';
+import 'package:form/views/student/student_marks.dart';
 import 'package:form/views/student/student_worn.dart';
 import '../../drawer.dart';
 import '../../utils/results_wrapper.dart';
@@ -121,7 +122,7 @@ class StudentsAffairsState extends State<StudentsAffairs> {
                             onTab: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
-                                return StudentWorns(
+                                return StudentMarks(
                                     result[position].name, this.widget.role);
                               }));
                             },

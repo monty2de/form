@@ -32,10 +32,10 @@ class TeacherController {
         .delete();
   }
 
-  profile() async {
+  profile(bool isMyProfile, String? tid) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
-    var id = sharedPreferences.getString('id');
+    var id = isMyProfile ? sharedPreferences.getString('id') : tid;
     var user = await FirebaseFirestore.instance
         .collection(isTestMood ? 'teachersTest' : 'teachers')
         .where('id', isEqualTo: id)

@@ -41,7 +41,7 @@ class _CurriculumFirstState extends State<CurriculumFirst> {
       body: Center(
         child: SingleChildScrollView(
           child: FutureBuilder(
-            future: CurriculumController().index(1, ''),
+            future: CurriculumController().index(1, null, null),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.active:

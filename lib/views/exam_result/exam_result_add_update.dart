@@ -29,6 +29,7 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
   late TextEditingController studentNameController;
   late TextEditingController degreeController;
   late TextEditingController semesterDegreeController;
+  late TextEditingController resolutionDegreeController;
   late TextEditingController finalDegreeController;
   late TextEditingController avaregeDegreeController;
 
@@ -41,6 +42,8 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
     stName = widget.examResult?.studentName;
     semesterDegreeController =
         TextEditingController(text: widget.examResult?.semersterDegree);
+    resolutionDegreeController =
+        TextEditingController(text: widget.examResult?.resolutionDegree);
     finalDegreeController =
         TextEditingController(text: widget.examResult?.finalDegree);
     avaregeDegreeController =
@@ -79,6 +82,7 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
             ),
             onChanged: (value) {
               setState(() {
+                stName = null;
                 yearName = value;
               });
             },
@@ -146,6 +150,7 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
             ),
             onChanged: (value) {
               setState(() {
+                subjectName = null;
                 semisterName = value;
               });
             },
@@ -197,6 +202,26 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
               },
             ),
           Text(
+            'السعي',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          TextFormField(
+            validator: (value) {
+              if (value!.isEmpty) return 'يجب ادخال الدرجة';
+              return null;
+            },
+            enabled: !loading,
+            controller: semesterDegreeController,
+            cursorColor: Colors.black,
+            style: TextStyle(color: Colors.black),
+            decoration: InputDecoration(
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              // icon: Icon(Icons.email, color: Colors.black),
+              hintStyle: TextStyle(color: Colors.black),
+            ),
+          ),
+          Text(
             'درجة الدفتر',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
@@ -217,16 +242,12 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
             ),
           ),
           Text(
-            'السعي',
+            'درجة القرار',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           TextFormField(
-            validator: (value) {
-              if (value!.isEmpty) return 'يجب ادخال الدرجة';
-              return null;
-            },
             enabled: !loading,
-            controller: semesterDegreeController,
+            controller: resolutionDegreeController,
             cursorColor: Colors.black,
             style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
@@ -308,14 +329,16 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
                   setState(() => loading = true);
                   if (_formKey.currentState!.validate()) {
                     await addNewExamResult(
-                        stName!,
-                        yearName,
-                        degreeController.text,
-                        subjectName,
-                        semisterName,
-                        semesterDegreeController.text,
-                        finalDegreeController.text,
-                        avaregeDegreeController.text);
+                      stName!,
+                      yearName,
+                      degreeController.text,
+                      subjectName,
+                      semisterName,
+                      semesterDegreeController.text,
+                      finalDegreeController.text,
+                      avaregeDegreeController.text,
+                      resolutionDegreeController.text,
+                    );
                     setState(() => loading = false);
                   }
                 },
@@ -327,7 +350,7 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
   }
 
   Future addNewExamResult(String studentName, year, degree, subjectName,
-      semister, semisterD, finalD, avarege) async {
+      semister, semisterD, finalD, avarege, resolutionD) async {
     //This means that the user is performing an update
     if (widget.examResult != null) {
       if (subjectName == null) {
@@ -350,6 +373,7 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
         'finalDegree': finalD,
         'semersterDegree': semisterD,
         'avarege': avarege,
+        "resolutionDegree": resolutionD,
       });
       Navigator.pop(context);
       return;
@@ -368,6 +392,7 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
       'finalDegree': finalD,
       'semersterDegree': semisterD,
       'avarege': avarege,
+      "resolutionDegree": resolutionD,
     });
     Navigator.pop(context);
   }

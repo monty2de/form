@@ -50,6 +50,7 @@ class AbscenceAddState extends State<AbscenceAdd> {
             ),
             onChanged: (value) {
               setState(() {
+                stName = null;
                 yearName = value;
               });
             },
@@ -209,7 +210,7 @@ class AbscenceAddState extends State<AbscenceAdd> {
             Navigator.pop(context, false);
           },
         ),
-        title: Text('اضافة تبليغ'),
+        title: Text('اضافة غياب'),
       ),
       body: Center(
         child: ListView(

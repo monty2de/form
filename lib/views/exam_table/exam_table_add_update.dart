@@ -21,12 +21,12 @@ class ExamTableAddUpdate extends StatefulWidget {
 class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
   String? yearName;
   String? semisterName;
+  String? subjectName;
+
   late DateTime? dateStudent;
 
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
-
-  late TextEditingController nameController;
 
   @override
   void initState() {
@@ -35,7 +35,7 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
     dateStudent = widget.examTable?.date ?? null;
 
     semisterName = widget.examTable?.semister;
-    nameController = TextEditingController(text: widget.examTable?.name);
+    subjectName = widget.examTable?.name;
   }
 
   Widget textSection() {
@@ -43,26 +43,6 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
       padding: const EdgeInsets.all(10.0),
       child: Column(
         children: <Widget>[
-          Text(
-            'اسم المادة',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-          TextFormField(
-            validator: (value) {
-              if (value!.isEmpty) return 'يجب ادخال اسم المادة';
-              return null;
-            },
-            enabled: !loading,
-            controller: nameController,
-            cursorColor: Colors.black,
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              // icon: Icon(Icons.email, color: Colors.black),
-              hintStyle: TextStyle(color: Colors.black),
-            ),
-          ),
           SizedBox(height: 10),
           Text(
             'المرحلة',
@@ -87,6 +67,7 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
             ),
             onChanged: (value) {
               setState(() {
+                subjectName = null;
                 yearName = value;
               });
             },
@@ -119,6 +100,52 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
               });
             },
           ),
+          if (semisterName != null && yearName != null)
+            Text(
+              '  اسم المادة ',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+          if (semisterName != null && yearName != null)
+            StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection(isTestMood ? 'curriculumTest' : 'curriculum')
+                  .where('year', isEqualTo: yearName)
+                  .where('semister', isEqualTo: semisterName)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Text('error');
+                }
+                List<String> shubjects = [];
+                for (var i = 0; i < snapshot.data!.docs.length; i++) {
+                  shubjects.add(snapshot.data!.docs[i]['name']);
+                }
+                return DropdownButtonFormField(
+                  value: subjectName,
+                  items: shubjects.map((String item) {
+                    return DropdownMenuItem<String>(
+                      value: item,
+                      child: Text(item),
+                    );
+                  }).toList(),
+                  validator: (value) {
+                    var temp = value ?? 0;
+                    if (temp == 0) return 'يجب اختيار اسم المادة';
+                    return null;
+                  },
+                  enableFeedback: !loading,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    // icon: Icon(Icons.stacked_bar_chart, color: Colors.black),
+                    hintStyle: TextStyle(color: Colors.black),
+                  ),
+                  onChanged: (value) {
+                    subjectName = value.toString();
+                  },
+                );
+              },
+            ),
           SizedBox(height: 10),
           SizedBox(
             width: MediaQuery.of(context).size.width,
@@ -170,7 +197,7 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
                 onPressed: () async {
                   setState(() => loading = true);
                   if (_formKey.currentState!.validate()) {
-                    await addNewExamTable(nameController.text, yearName,
+                    await addNewExamTable(subjectName!, yearName,
                         dateStudent?.toIso8601String(), semisterName);
                   }
                   setState(() => loading = false);

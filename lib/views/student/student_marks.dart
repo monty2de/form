@@ -68,7 +68,7 @@ class _StudentMarksState extends State<StudentMarks> {
                   DataCell(
                     Text(subject.subjectName!),
                   ),
-                  DataCell(Text(subject.degree!)),
+                  DataCell(Text(subject.finalDegree!)),
                 ],
               ),
             )

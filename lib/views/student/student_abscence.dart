@@ -9,7 +9,7 @@ import '../../utils/results_wrapper.dart';
 
 // ignore: must_be_immutable
 class StudentAbscece extends StatefulWidget {
-  late String id;
+  late String? id;
   late int role;
   StudentAbscece(this.id, this.role);
 
@@ -24,7 +24,7 @@ class _StudentAbsceceState extends State<StudentAbscece> {
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
         centerTitle: true,
-        title: Text('التبليغات'),
+        title: Text('الغيابات'),
         actions: [
           this.widget.role == 1 || this.widget.role == 2
               ? TextButton(
@@ -88,7 +88,7 @@ class _StudentAbsceceState extends State<StudentAbscece> {
             .map(
               (subject) => DataRow(
                 cells: [
-                  DataCell(Expanded(child: Text(subject.stName))),
+                  DataCell(Text(subject.stName)),
                   DataCell(Text(subject.year)),
                   DataCell(Text(subject.subject)),
                   DataCell(

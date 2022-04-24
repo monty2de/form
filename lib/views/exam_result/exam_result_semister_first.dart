@@ -61,7 +61,8 @@ class _ShowSemisterFirstState extends State<ShowSemisterFirst> {
                     print(subject);
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return ExamResultFirst(this.widget.role, subject);
+                      return ExamResultSelectYearFirst(
+                          role: this.widget.role, semister: subject);
                     }));
                   }),
                 ],

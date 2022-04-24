@@ -6,12 +6,91 @@ import 'package:form/views/exam_result/exam_result_show.dart';
 
 import '../../utils/results_wrapper.dart';
 
+class ExamResultSelectYearFinal extends StatelessWidget {
+  final int role;
+  final String semister;
+  const ExamResultSelectYearFinal(
+      {Key? key, required this.role, required this.semister})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+          ),
+          onPressed: () {
+            Navigator.pop(context, false);
+          },
+        ),
+        actions: [
+          this.role <= 2
+              ? TextButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return ExamResultAddUpdate(this.role);
+                    }));
+                  },
+                  child: Text("اضافة درجة ",
+                      style: TextStyle(color: Colors.white)),
+                )
+              : Container(),
+        ],
+        centerTitle: true,
+        title: Text('المراحل'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            InkWell(
+              child: Text(
+                '  المرحلة الأولى  ',
+                style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black),
+              ),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ExamResultFinal(role, semister, 'عليا اولى');
+                }));
+              },
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            InkWell(
+              child: Text(
+                '  المرحلة الثانية  ',
+                style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black),
+              ),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ExamResultFinal(role, semister, 'عليا ثانية');
+                }));
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 // ignore: must_be_immutable
 class ExamResultFinal extends StatefulWidget {
-  late int role;
-  late String semister;
+  final int role;
+  final String semister;
+  final String year;
 
-  ExamResultFinal(this.role, this.semister);
+  ExamResultFinal(this.role, this.semister, this.year);
 
   @override
   _ExamResultFinalState createState() => _ExamResultFinalState();
@@ -52,7 +131,8 @@ class _ExamResultFinalState extends State<ExamResultFinal> {
           child: Column(
             children: <Widget>[
               FutureBuilder(
-                future: CurriculumController().index(2, this.widget.semister),
+                future: CurriculumController()
+                    .index(2, this.widget.semister, widget.year),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   switch (snapshot.connectionState) {
                     case ConnectionState.active:

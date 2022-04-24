@@ -81,7 +81,12 @@ class TeacherShowState extends State<TeacherShow> {
                                     teacher: teacher);
                               }));
                             }
-                          : null),
+                          : () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return TeacherProfile(3, id: teacher.id);
+                              }));
+                            }),
                   if (this.widget.role == 1)
                     DataCell(
                       InkWell(

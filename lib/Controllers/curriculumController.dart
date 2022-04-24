@@ -3,38 +3,28 @@ import 'package:form/main.dart';
 import 'package:form/models/curriculum.dart';
 
 class CurriculumController {
-  var curriculumItem = <Curriculum>[];
+  index(
+    int type,
+    String? semister,
+    String? year,
+  ) async {
+    var curriculumItem = <Curriculum>[];
 
-  index(int type, String semister) async {
-    if (semister == '') {
-      var q = await FirebaseFirestore.instance
-          .collection(isTestMood ? 'curriculumTest' : 'curriculum')
-          .where('type', isEqualTo: type)
-          .get();
-      curriculumItem = [];
-      q.docs.forEach((DocumentSnapshot element) {
-        Map<String, dynamic> data = element.data() as Map<String, dynamic>;
-
-        curriculumItem.add(Curriculum.fromFirebase(data));
-      });
-
-      return curriculumItem;
-    } else {
-      var q = await FirebaseFirestore.instance
-          .collection(isTestMood ? 'curriculumTest' : 'curriculum')
-          .where('type', isEqualTo: type)
-          .where('semister', isEqualTo: semister)
-          .get();
-
-      curriculumItem = [];
-      q.docs.forEach((DocumentSnapshot element) {
-        Map<String, dynamic> data = element.data() as Map<String, dynamic>;
-
-        curriculumItem.add(Curriculum.fromFirebase(data));
-      });
-
-      return curriculumItem;
-    }
+    var q = FirebaseFirestore.instance
+        .collection(isTestMood ? 'curriculumTest' : 'curriculum')
+        .where('type', isEqualTo: type)
+        .where('semister', isEqualTo: semister)
+        .where('year', isEqualTo: year);
+    final d = await q.get();
+    print(d.docs.length);
+    d.docs.forEach((DocumentSnapshot element) {
+      try {
+        curriculumItem.add(Curriculum.fromFirebase(element.data()));
+      } catch (e) {
+        print(e);
+      }
+    });
+    return curriculumItem;
   }
 
   void delet(String id) async {

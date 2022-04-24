@@ -10,8 +10,10 @@ import '../../utils/results_wrapper.dart';
 // ignore: must_be_immutable
 class TeacherProfile extends StatefulWidget {
   late int role;
+  bool isMyprofile;
+  String? id;
 
-  TeacherProfile(this.role);
+  TeacherProfile(this.role, {this.isMyprofile = false, this.id});
 
   @override
   TeacherProfileState createState() => TeacherProfileState();
@@ -21,7 +23,8 @@ class TeacherProfileState extends State<TeacherProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(this.widget.role),
+      drawer:
+          widget.isMyprofile ? NavigationDrawerWidget(this.widget.role) : null,
       appBar: AppBar(
         centerTitle: true,
         title: Text('معلومات الموظف '),
@@ -31,7 +34,8 @@ class TeacherProfileState extends State<TeacherProfile> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             FutureBuilder(
-              future: TeacherController().profile(),
+              future:
+                  TeacherController().profile(widget.isMyprofile, widget.id),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.active:

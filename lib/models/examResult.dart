@@ -6,6 +6,7 @@ class ExamResult {
       degree,
       semister,
       semersterDegree,
+      resolutionDegree,
       finalDegree,
       avarege;
 
@@ -18,6 +19,7 @@ class ExamResult {
       required this.semister,
       required this.semersterDegree,
       required this.finalDegree,
+      required this.resolutionDegree,
       required this.avarege});
 
   factory ExamResult.fromFirebase(var data) {
@@ -31,6 +33,7 @@ class ExamResult {
       finalDegree: data['finalDegree'] ?? '',
       semersterDegree: data['semersterDegree'] ?? '',
       avarege: data['avarege'] ?? '',
+      resolutionDegree: data['resolutionDegree'] ?? '',
     );
   }
 }

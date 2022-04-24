@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -152,73 +151,75 @@ class _MyHomePageState extends State<MyHomePage> {
               )
             : Container(),
       ], title: Text('الرئيسية'), centerTitle: true),
-      body: Column(
-        children: [
-          Stack(
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.3,
-                decoration: BoxDecoration(
-                  color: const Color(0xff7c94b6),
-                  image: new DecorationImage(
-                    fit: BoxFit.cover,
-                    colorFilter: ColorFilter.mode(
-                        Colors.black.withOpacity(0.3), BlendMode.dstATop),
-                    image: AssetImage("images/home.jpg"),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  decoration: BoxDecoration(
+                    color: const Color(0xff7c94b6),
+                    image: new DecorationImage(
+                      fit: BoxFit.cover,
+                      colorFilter: ColorFilter.mode(
+                          Colors.black.withOpacity(0.3), BlendMode.dstATop),
+                      image: AssetImage("images/home.jpg"),
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 7),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Image(
-                        image: AssetImage("images/Logoo2.png"),
-                        height: 60,
-                        width: 90),
-                    Image(
-                      image: AssetImage("images/logo1.png"),
-                      width: 90,
-                      height: 70,
-                    ),
-                  ],
+                Container(
+                  margin: const EdgeInsets.only(top: 7),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image(
+                          image: AssetImage("images/Logoo2.png"),
+                          height: 60,
+                          width: 90),
+                      Image(
+                        image: AssetImage("images/logo1.png"),
+                        width: 90,
+                        height: 70,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-          Text(
-            'اخبار القسم',
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
-          ),
-          Divider(thickness: 2),
-          SizedBox(height: 10),
-          FutureBuilder(
-            future: NewsController().index(),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.active:
-                  return _loading();
+              ],
+            ),
+            Text(
+              'اخبار القسم',
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+            ),
+            Divider(thickness: 2),
+            SizedBox(height: 10),
+            FutureBuilder(
+              future: NewsController().index(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.active:
+                    return _loading();
 
-                case ConnectionState.waiting:
-                  return _loading();
+                  case ConnectionState.waiting:
+                    return _loading();
 
-                case ConnectionState.done:
-                  if (snapshot.hasError) {
-                    return Container();
-                  }
-                  if (snapshot.hasData) {
-                    return result(snapshot.data, context);
-                  }
-                  break;
-                case ConnectionState.none:
-                  break;
-              }
-              return Container();
-            },
-          ),
-        ],
+                  case ConnectionState.done:
+                    if (snapshot.hasError) {
+                      return Container();
+                    }
+                    if (snapshot.hasData) {
+                      return result(snapshot.data, context);
+                    }
+                    break;
+                  case ConnectionState.none:
+                    break;
+                }
+                return Container();
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -226,33 +227,24 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget result(List<News> news, BuildContext context) {
     return checkIfListEmpty(
       dataList: news,
-      child: Expanded(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 200,
-              child: CarouselWithIndicator(news: news, role: role_check),
-            ),
-            Expanded(
-              child: ListView.builder(
-                physics: const AlwaysScrollableScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: news.length,
-                itemBuilder: (BuildContext context, int position) {
-                  final onenews = news[position];
-                  return NewsWidget(
-                      news: onenews,
-                      role: role_check,
-                      onNewsDelete: () {
-                        NewsController().delet(onenews.id);
-                        setState(() {});
-                      });
-                },
-              ),
-            ),
-          ],
-        ),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 200,
+            child: CarouselWithIndicator(news: news),
+          ),
+          Column(
+            children: news
+                .map((n) => NewsWidget(
+                    news: n,
+                    role: role_check,
+                    onNewsDelete: () {
+                      NewsController().delet(n.id);
+                      setState(() {});
+                    }))
+                .toList(),
+          ),
+        ],
       ),
     );
   }
@@ -293,12 +285,14 @@ class NewsWidget extends StatelessWidget {
                 }));
               }
             : null,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: role <= 2
+                  ? MainAxisAlignment.spaceBetween
+                  : MainAxisAlignment.center,
+              children: [
                 Text(
                   news.title,
                   style: TextStyle(
@@ -306,22 +300,23 @@ class NewsWidget extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                       color: Colors.black),
                 ),
-                SizedBox(height: 15),
-                Text(
-                  news.body,
-                  style: TextStyle(fontSize: 15, color: Colors.black),
-                ),
+                role <= 2
+                    ? TextButton(
+                        child: Text(
+                          'حذف',
+                          style: TextStyle(fontSize: 15, color: Colors.red),
+                        ),
+                        onPressed: onNewsDelete,
+                      )
+                    : SizedBox.shrink(),
               ],
             ),
-            role <= 2
-                ? TextButton(
-                    child: Text(
-                      'حذف',
-                      style: TextStyle(fontSize: 15, color: Colors.red),
-                    ),
-                    onPressed: onNewsDelete,
-                  )
-                : SizedBox.shrink(),
+            SizedBox(height: 15),
+            Text(
+              news.body,
+              maxLines: role <= 2 ? null : 3,
+              style: TextStyle(fontSize: 15, color: Colors.black),
+            ),
           ],
         ),
       ),

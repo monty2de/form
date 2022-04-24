@@ -6,11 +6,8 @@ import 'package:form/models/news.dart';
 
 class CarouselWithIndicator extends StatefulWidget {
   final List<News> news;
-  final int role;
 
-  const CarouselWithIndicator(
-      {Key? key, required this.news, required this.role})
-      : super(key: key);
+  const CarouselWithIndicator({Key? key, required this.news}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
     return _CarouselWithIndicatorState();
@@ -27,19 +24,24 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
       Expanded(
         child: CarouselSlider(
           items: widget.news
-              .map((n) => NewsWidget(
-                  news: n,
-                  role: widget.role,
-                  onNewsDelete: () {
-                    NewsController().delet(n.id);
-                    setState(() {});
-                  }))
+              .map((n) => SizedBox(
+                    width: double.infinity,
+                    child: NewsWidget(
+                        news: n,
+                        role: 5,
+                        onNewsDelete: () {
+                          NewsController().delet(n.id);
+                          setState(() {});
+                        }),
+                  ))
               .toList(),
           carouselController: _controller,
           options: CarouselOptions(
               autoPlay: true,
+              height: 300,
               enlargeCenterPage: true,
-              aspectRatio: 2.0,
+              // aspectRatio: 2,
+              enableInfiniteScroll: false,
               onPageChanged: (index, reason) {
                 setState(() {
                   _current = index;

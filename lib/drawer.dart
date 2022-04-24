@@ -78,13 +78,23 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                       },
                     ),
                   const SizedBox(height: 24),
+                  buildMenuItem(
+                    text: ' نبذة عن القسم ',
+                    onClicked: () {
+                      Navigator.pushAndRemoveUntil(context,
+                          MaterialPageRoute(builder: (context) {
+                        return About(widget.role);
+                      }), (Route<dynamic> route) => false);
+                    },
+                  ),
                   if (widget.role == 2)
                     buildMenuItem(
                       text: 'بروفايل المدرس',
                       onClicked: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return TeacherProfile(this.widget.role);
+                          return TeacherProfile(this.widget.role,
+                              isMyprofile: true);
                         }));
                       },
                     ),
@@ -317,7 +327,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     onClicked: () {
                       Navigator.pushAndRemoveUntil(context,
                           MaterialPageRoute(builder: (context) {
-                        return StudentAbscece('', widget.role);
+                        return StudentAbscece(null, widget.role);
                       }), (Route<dynamic> route) => false);
                     },
                   ),

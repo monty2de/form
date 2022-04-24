@@ -19,6 +19,7 @@ import 'package:form/views/student/students_name_final_show.dart';
 import 'package:form/views/student/students_names_final.dart';
 import 'package:form/views/student/students_names_first.dart';
 import 'package:form/views/teacher/teacher_add_update.dart';
+import 'package:form/views/teacher/teacher_profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'main.dart';
 import 'views/board/board_show.dart';
@@ -66,7 +67,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     },
                   ),
                   const SizedBox(height: 24),
-                  if (widget.role == 0 || widget.role == 4)
+                  if (widget.role == 5 || widget.role == 4)
                     buildMenuItem(
                       text: 'تسجيل الدخول',
                       onClicked: () {
@@ -77,15 +78,16 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                       },
                     ),
                   const SizedBox(height: 24),
-                  buildMenuItem(
-                    text: ' نبذة عن القسم ',
-                    onClicked: () {
-                      Navigator.pushAndRemoveUntil(context,
-                          MaterialPageRoute(builder: (context) {
-                        return About(widget.role);
-                      }), (Route<dynamic> route) => false);
-                    },
-                  ),
+                  if (widget.role == 2)
+                    buildMenuItem(
+                      text: 'بروفايل المدرس',
+                      onClicked: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return TeacherProfile(this.widget.role);
+                        }));
+                      },
+                    ),
                   buildMenuItemWithSubCategory(
                     mainCatName: 'لجان القسم',
                     subCategories: [

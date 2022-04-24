@@ -14,8 +14,11 @@ class TeacherController {
     item = [];
     q.docs.forEach((DocumentSnapshot element) {
       Map<String, dynamic> data = element.data() as Map<String, dynamic>;
-
-      item.add(Teacher.fromFirebase(data));
+      try {
+        item.add(Teacher.fromFirebase(data));
+      } catch (e) {
+        print(e);
+      }
     });
 
     return item;
@@ -42,7 +45,11 @@ class TeacherController {
     user.docs.forEach((DocumentSnapshot element) {
       Map<String, dynamic> data = element.data() as Map<String, dynamic>;
 
-      item.add(Teacher.fromFirebase(data));
+      try {
+        item.add(Teacher.fromFirebase(data));
+      } catch (e) {
+        print(e);
+      }
     });
 
     return item;

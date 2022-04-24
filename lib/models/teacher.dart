@@ -9,11 +9,11 @@ class Teacher {
   Teacher.fromFirebase(var data) {
     this.id = data['id'];
     this.name = data['name'];
-    this.BDate = data['BDate'].toDate();
+    this.BDate = DateTime.tryParse(data['BDate']) ?? DateTime.now();
     this.email = data['email'];
-    this.location = data['location'];
-    this.number = data['number'];
-    this.position = data['position'];
+    this.location = data['location'] ?? '';
+    this.number = data['number'] ?? "";
+    this.position = data['position'] ?? '';
     this.pass = data['pass'];
   }
 }

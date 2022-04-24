@@ -22,51 +22,38 @@ class TeacherShowState extends State<TeacherShow> {
     return Scaffold(
       drawer: NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
-
-        actions: [
-          this.widget.role == 2 
-              ? TextButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return TeacherProfile(this.widget.role);
-                    }));
-                  },
-                  child:
-                      Text(" البروفايل  ", style: TextStyle(color: Colors.white)),
-                )
-              : Container(),
-        ],
         centerTitle: true,
         title: Text('اسماء الكادر'),
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            FutureBuilder(
-              future: TeacherController().index(this.widget.position),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.active:
-                    return _loading();
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              FutureBuilder(
+                future: TeacherController().index(this.widget.position),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.active:
+                      return _loading();
 
-                  case ConnectionState.waiting:
-                    return _loading();
+                    case ConnectionState.waiting:
+                      return _loading();
 
-                  case ConnectionState.done:
-                    if (snapshot.hasError) {
-                      return Container();
-                    }
-                    if (snapshot.hasData) {
-                      return result(snapshot.data, context);
-                    }
-                    break;
-                  case ConnectionState.none:
-                }
-                return Container();
-              },
-            ),
-          ],
+                    case ConnectionState.done:
+                      if (snapshot.hasError) {
+                        return Container();
+                      }
+                      if (snapshot.hasData) {
+                        return result(snapshot.data, context);
+                      }
+                      break;
+                    case ConnectionState.none:
+                  }
+                  return Container();
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

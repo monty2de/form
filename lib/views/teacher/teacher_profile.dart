@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form/Controllers/TeacherController.dart';
 import 'package:form/models/teacher.dart';
+import 'package:form/views/drawer_pages/students_affairs.dart';
 import 'package:form/views/teacher/teacher_add_update.dart';
 import 'package:form/views/teacher/teacher_change_pass.dart';
 import '../../drawer.dart';
@@ -66,139 +67,125 @@ class TeacherProfileState extends State<TeacherProfile> {
     );
   }
 
-  Widget result(List<Teacher> result, BuildContext context) {
-    return checkIfListEmpty(
-      dataList: result,
-      child: Expanded(
-        child: ListView.builder(
-          physics: const AlwaysScrollableScrollPhysics(),
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemCount: result.length,
-          itemBuilder: (BuildContext context, int position) {
-            return Column(
+  Widget result(List<Teacher> results, BuildContext context) {
+    final result = results.first;
+    return ListView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
+          child: Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 30, right: 30, bottom: 30),
-                  child: Expanded(
-                      child: Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          children: [
-                            Text(
-                              'الاسم:',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black),
-                            ),
-                            InkWell(
-                              child: Text(
-                                result[position].name,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black),
-                              ),
-                              onTap: () {
-                                if (this.widget.role == 1 ||
-                                    this.widget.role == 2) {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return TeacherAddUpdate(
-                                      this.widget.role,
-                                      teacher: result[position],
-                                    );
-                                  }));
-                                }
-                              },
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 15),
-                        
-                        
-                        Row(
-                          children: [
-                            Text(
-                              'رقم الهاتف:',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black),
-                            ),
-                            InkWell(
-                              child: Text(
-                                result[position].number,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black),
-                              ),
-                              onTap: () {
-                                if (this.widget.role == 1 ||
-                                    this.widget.role == 2) {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return TeacherAddUpdate(
-                                      this.widget.role,
-                                      teacher: result[position],
-                                    );
-                                  }));
-                                }
-                              },
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 15),
-                        InkWell(
-                          child: Text(
-                            'تعديل المعلومات',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.red),
-                          ),
-                          onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return TeacherAddUpdate(this.widget.role,
-                                  teacher: result[position]);
-                            }));
-                          },
-                        ),
-                        SizedBox(height: 15),
-                        InkWell(
-                          child: Text(
-                            ' تغيير كلمة السر',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.red),
-                          ),
-                          onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return TeacherChangePass(result[position].pass , result[position].email);
-                            }));
-                          },
-                        ),
-                        
-                        
-                      ],
+              children: <Widget>[
+                Row(
+                  children: [
+                    Text(
+                      'الاسم:',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
                     ),
-                  )),
+                    Text(
+                      result.name,
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 15),
+                Row(
+                  children: [
+                    Text(
+                      'رقم الهاتف:',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
+                    ),
+                    Text(
+                      result.number,
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 15),
+                Row(
+                  children: [
+                    Text(
+                      'البريد الالكتروني:',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
+                    ),
+                    Text(
+                      result.email,
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 15),
+                Wrap(
+                  runSpacing: 10,
+                  spacing: 10,
+                  children: [
+                    if (this.widget.role <= 2)
+                      TapableSquare(
+                        title: 'تعديل المعلومات',
+                        onTab: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return TeacherAddUpdate(this.widget.role,
+                                teacher: result);
+                          }));
+                        },
+                      ),
+                    if (this.widget.role <= 2)
+                      TapableSquare(
+                        title: 'تغيير كلمة السر',
+                        onTab: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return TeacherChangePass(result.pass, result.email);
+                          }));
+                        },
+                      ),
+                    TapableSquare(
+                      title: 'المحاضرات',
+                      onTab: () {},
+                    ),
+                    TapableSquare(
+                      title: 'السيرة الذاتية',
+                      onTab: () {},
+                    ),
+                    TapableSquare(
+                      title: 'البحوث الرصينة',
+                      onTab: () {},
+                    ),
+                    TapableSquare(
+                      title: 'المحاضرات الفديوية',
+                      onTab: () {},
+                    ),
+                  ],
                 ),
               ],
-            );
-          },
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 

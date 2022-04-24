@@ -19,7 +19,7 @@ class TeacherAddUpdate extends StatefulWidget {
 
 class TeacherAddUpdateState extends State<TeacherAddUpdate> {
   String? position;
-  late var dateStudent;
+  late DateTime? dateStudent;
 
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
@@ -32,13 +32,13 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
 
   @override
   void initState() {
-    dateStudent = widget.teacher?.BDate ?? null;
+    dateStudent = widget.teacher?.BDate;
     super.initState();
     position = widget.teacher?.position;
     teacherNameController = TextEditingController(text: widget.teacher?.name);
     numberController = TextEditingController(text: widget.teacher?.number);
     passController = TextEditingController();
-    emailController = TextEditingController();
+    emailController = TextEditingController(text: widget.teacher?.email);
     locationController = TextEditingController(text: widget.teacher?.location);
   }
 
@@ -139,26 +139,22 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
             ),
           ),
           SizedBox(height: 10),
-          widget.teacher == null
-              ? Text(
-                  'الايميل',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                )
-              : Container(),
-          widget.teacher == null
-              ? TextFormField(
-                  enabled: !loading,
-                  controller: emailController,
-                  cursorColor: Colors.black,
-                  style: TextStyle(color: Colors.black),
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    // icon: Icon(Icons.email, color: Colors.black),
-                    hintStyle: TextStyle(color: Colors.black),
-                  ),
-                )
-              : Container(),
+          Text(
+            'الايميل',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          TextFormField(
+            enabled: !loading,
+            controller: emailController,
+            cursorColor: Colors.black,
+            style: TextStyle(color: Colors.black),
+            decoration: InputDecoration(
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              // icon: Icon(Icons.email, color: Colors.black),
+              hintStyle: TextStyle(color: Colors.black),
+            ),
+          ),
           SizedBox(height: 10),
           widget.teacher == null
               ? Text(
@@ -237,7 +233,7 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
                         numberController.text,
                         emailController.text,
                         passController.text,
-                        position);
+                        position ?? '');
                   }
                   setState(() => loading = false);
                 },
@@ -249,24 +245,22 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
   }
 
   // ignore: non_constant_identifier_names
-  Future addNewTeacher(String teacherName, BDate, location, number, email, pass,
-      position) async {
+  Future addNewTeacher(String teacherName, DateTime? BDate, String location,
+      String number, String email, String pass, String position) async {
     //This means that the user is performing an update
     if (widget.teacher != null) {
-      if (BDate == null) {
-        BDate = this.widget.teacher!.BDate;
-      }
       var subject = FirebaseFirestore.instance
           .collection(isTestMood ? 'teachersTest' : 'teachers')
-          .doc(this.widget.teacher!.id);
+          .doc(widget.teacher!.id);
       await subject.update({
         'id': this.widget.teacher!.id,
         'name': teacherName,
-        'BDate': BDate,
+        'BDate': BDate?.toIso8601String(),
         'location': location,
         'number': number,
         'role': 2,
-        'position': position
+        'position': position,
+        "email": email,
       });
       Navigator.pop(context);
       return;
@@ -281,7 +275,7 @@ class TeacherAddUpdateState extends State<TeacherAddUpdate> {
           'id': doc.id,
           'name': teacherName,
           'email': email,
-          'BDate': BDate,
+          'BDate': BDate?.toIso8601String(),
           'location': location,
           'number': number,
           'pass': pass,

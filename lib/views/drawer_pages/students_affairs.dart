@@ -166,6 +166,10 @@ class StudentsAffairsState extends State<StudentsAffairs> {
                               }));
                             },
                           ),
+                          TapableSquare(
+                            title: 'المحاضرات',
+                            onTab: () {},
+                          ),
                         ],
                       ),
                       SizedBox(height: 15),

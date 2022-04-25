@@ -110,7 +110,9 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
               stream: FirebaseFirestore.instance
                   .collection(isTestMood ? 'curriculumTest' : 'curriculum')
                   .where('year', isEqualTo: yearName)
-                  .where('semister', isEqualTo: semisterName)
+                  .where('semister',
+                      isEqualTo:
+                          semisterName != 'الأول والثاني' ? null : semisterName)
                   .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {

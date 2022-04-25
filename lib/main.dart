@@ -53,19 +53,19 @@ void main() async {
 //     await curr(cs[i], i);
 //   }
 
-//   // exams
-//   for (var item in yearArry) {
-//     var examYear = FirebaseFirestore.instance
-//         .collection(isTestMood ? 'examTableTest' : "examTable")
-//         .doc();
-//     await examYear.set({
-//       'year': item,
-//       'id': examYear.id,
-//     });
-//   }
-//   for (var i = 0; i < exams.length; i++) {
-//     await examAdd(exams[i], i);
-//   }
+  // exams
+  // for (var item in yearArry) {
+  //   var examYear = FirebaseFirestore.instance
+  //       .collection(isTestMood ? 'examTableTest' : "examTable")
+  //       .doc();
+  //   await examYear.set({
+  //     'year': item,
+  //     'id': examYear.id,
+  //   });
+  // }
+  // for (var i = 0; i < exams.length; i++) {
+  //   await examAdd(exams[i], i);
+  // }
 
   final role = await getvalidationData();
   runApp(MyApp(role: role));
@@ -388,24 +388,28 @@ Future curr(Map<String, dynamic> curr, int index) async {
 }
 
 Future examAdd(Map<String, dynamic> exam, int index) async {
-  var year = await FirebaseFirestore.instance
-      .collection(isTestMood ? 'examTableTest' : "examTable")
-      .where('year', isEqualTo: exam['year'])
-      .get();
-
-  var item = FirebaseFirestore.instance
-      .collection(isTestMood ? 'examTableTest' : "examTable")
-      .doc(year.docs.first.id)
-      .collection('Item')
-      .doc();
-  final date = exam['date'].split('/');
-  final dateTime =
-      DateTime(int.parse(date[2]), int.parse(date[0]), int.parse(date[1]));
-  await item.set({
-    'id': item.id,
-    'name': exam['name'],
-    'date': dateTime.toIso8601String(),
-    'year': exam['year'],
-    "semister": exam['semister']
-  });
+  try {
+    var year = await FirebaseFirestore.instance
+        .collection(isTestMood ? 'examTableTest' : "examTable")
+        .where('year', isEqualTo: exam['year'])
+        .get();
+    print(year.docs.first.id);
+    var item = FirebaseFirestore.instance
+        .collection(isTestMood ? 'examTableTest' : "examTable")
+        .doc(year.docs.first.id)
+        .collection('Item')
+        .doc();
+    final date = exam['date'].split('/');
+    final dateTime =
+        DateTime(int.parse(date[2]), int.parse(date[0]), int.parse(date[1]));
+    await item.set({
+      'id': item.id,
+      'name': exam['name'],
+      'date': dateTime.toIso8601String(),
+      'year': exam['year'],
+      "semister": exam['semister']
+    });
+  } catch (e) {
+    print(e);
+  }
 }

@@ -160,12 +160,14 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
               '  اسم المادة ',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
-          if (semisterName != null && yearName != null)
+          if ((semisterName != null) && yearName != null)
             StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection(isTestMood ? 'curriculumTest' : 'curriculum')
                   .where('year', isEqualTo: yearName)
-                  .where('semister', isEqualTo: semisterName)
+                  .where('semister',
+                      isEqualTo:
+                          semisterName != 'الأول والثاني' ? null : semisterName)
                   .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {

@@ -123,7 +123,6 @@ class StudentsNamesShowState extends State<StudentsNamesShow> {
                           .collection(isTestMood ? 'studentsTest' : 'students')
                           .doc(student.id);
                       await subject.update({'year': newYear});
-                      Navigator.pop(context);
 
                       setState(() {});
                     }),

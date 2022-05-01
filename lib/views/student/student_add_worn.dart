@@ -35,8 +35,8 @@ class WornAddState extends State<WornAdd> {
                 .collection(isTestMood ? 'studentsTest' : 'students')
                 .snapshots(),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return Text('error');
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Text('loading..');
               }
               List<String> shubjects = [];
               for (var i = 0; i < snapshot.data!.docs.length; i++) {

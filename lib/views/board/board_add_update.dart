@@ -61,8 +61,8 @@ class BoardAddUpdateState extends State<BoardAddUpdate> {
                 .collection(isTestMood ? 'teachersTest' : 'teachers')
                 .snapshots(),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return Text('error');
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Text('loading..');
               }
               List<String> shubjects = [];
               for (var i = 0; i < snapshot.data!.docs.length; i++) {

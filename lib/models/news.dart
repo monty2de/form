@@ -1,7 +1,7 @@
 class News {
   late String id, title, body;
 
-  News({id, body, title});
+  News({required this.id, required this.body, required this.title});
 
   News.fromFirebase(var data) {
     this.id = data['id'];

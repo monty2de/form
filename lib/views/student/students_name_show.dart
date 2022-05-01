@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:form/Controllers/StudentController.dart';
 import 'package:form/main.dart';
 import 'package:form/models/student.dart';
+import 'package:form/utils/confirm_dialog.dart';
+import 'package:form/views/drawer_pages/students_affairs.dart';
 import 'package:form/views/student/student_add_update.dart';
 import '../../drawer.dart';
 import '../../utils/results_wrapper.dart';
@@ -85,46 +87,67 @@ class StudentsNamesShowState extends State<StudentsNamesShow> {
               (student) => DataRow(
                 cells: [
                   DataCell(Text(student.name),
-                      onTap: this.widget.role == 1 || this.widget.role == 2
+                      onTap: this.widget.role <= 2
                           ? () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
-                                return StudentAddUpdate(this.widget.role,
-                                    student: student);
+                                return StudentsAffairs(widget.role,
+                                    sId: student.id);
                               }));
+                              // Navigator.push(context,
+                              //     MaterialPageRoute(builder: (context) {
+                              //   return StudentAddUpdate(this.widget.role,
+                              //       student: student);
+                              // }));
                             }
                           : null),
                   DataCell(Text(student.year)),
                   if (this.widget.role == 1 || this.widget.role == 2)
                     DataCell(Text('حذف', style: TextStyle(color: Colors.red)),
                         onTap: () {
-                      StudentController().delet(student.id);
+                      showDialog(
+                          context: context,
+                          builder: (c) {
+                            return ConfirmDialog(onOkay: () {
+                              StudentController().delet(student.id);
 
-                      setState(() {});
+                              setState(() {});
+                            });
+                          });
                     }),
                   if (this.widget.role == 1 || this.widget.role == 2)
                     DataCell(Text('ترحيل', style: TextStyle(color: Colors.red)),
-                        onTap: () async {
-                      var newYear;
+                        onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (c) {
+                            return ConfirmDialog(
+                              onOkay: () async {
+                                var newYear;
 
-                      if (student.year == 'عليا اولى') {
-                        newYear = 'عليا ثانية';
-                      } else if (student.year == 'الأولى') {
-                        newYear = 'الثانية';
-                      } else if (student.year == 'الثانية') {
-                        newYear = 'الثالثة';
-                      } else if (student.year == 'الثالثة') {
-                        newYear = 'الرابعة';
-                      } else {
-                        newYear = 'غير محدد';
-                      }
+                                if (student.year == 'عليا اولى') {
+                                  newYear = 'عليا ثانية';
+                                } else if (student.year == 'الأولى') {
+                                  newYear = 'الثانية';
+                                } else if (student.year == 'الثانية') {
+                                  newYear = 'الثالثة';
+                                } else if (student.year == 'الثالثة') {
+                                  newYear = 'الرابعة';
+                                } else {
+                                  newYear = 'غير محدد';
+                                }
 
-                      var subject = FirebaseFirestore.instance
-                          .collection(isTestMood ? 'studentsTest' : 'students')
-                          .doc(student.id);
-                      await subject.update({'year': newYear});
+                                var subject = FirebaseFirestore.instance
+                                    .collection(isTestMood
+                                        ? 'studentsTest'
+                                        : 'students')
+                                    .doc(student.id);
+                                await subject.update({'year': newYear});
 
-                      setState(() {});
+                                setState(() {});
+                              },
+                            );
+                          });
                     }),
                 ],
               ),

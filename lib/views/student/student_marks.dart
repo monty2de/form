@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:form/Controllers/ExamResultController.dart';
 import 'package:form/models/examResult.dart';
+import 'package:form/views/exam_result/exam_result_add_update.dart';
+import 'package:form/views/exam_result/exam_result_show.dart';
 
 import '../../utils/results_wrapper.dart';
 
@@ -8,7 +10,9 @@ import '../../utils/results_wrapper.dart';
 class StudentMarks extends StatefulWidget {
   late String name;
   late int role;
-  StudentMarks(this.name, this.role);
+  late String? year;
+
+  StudentMarks(this.name, this.role, this.year);
 
   @override
   _StudentMarksState createState() => _StudentMarksState();
@@ -22,32 +26,44 @@ class _StudentMarksState extends State<StudentMarks> {
         centerTitle: true,
         title: Text('الدرجات'),
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            FutureBuilder(
-              future: ExamResultController().search(this.widget.name),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.active:
-                    return _loading();
-                  case ConnectionState.waiting:
-                    return _loading();
-                  case ConnectionState.done:
-                    if (snapshot.hasError) {
-                      return Container();
-                    }
-                    if (snapshot.hasData) {
-                      return result(snapshot.data, context);
-                    }
-                    break;
-                  case ConnectionState.none:
-                    break;
-                }
-                return Container();
-              },
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              FutureBuilder(
+                future: ExamResultController().search(this.widget.name),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.active:
+                      return _loading();
+                    case ConnectionState.waiting:
+                      return _loading();
+
+                    case ConnectionState.done:
+                      if (snapshot.hasError) {
+                        print(snapshot.error);
+                        return Container();
+                      }
+                      if (snapshot.hasData) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            result(snapshot.data, context),
+                            SizedBox(height: 10),
+                            if (widget.year == 'الرابعة')
+                              Text(getAvarage(snapshot.data))
+                          ],
+                        );
+                      }
+                      break;
+                    case ConnectionState.none:
+                      break;
+                  }
+                  return Container();
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -59,16 +75,30 @@ class _StudentMarksState extends State<StudentMarks> {
       child: DataTable(
         columns: <DataColumn>[
           DataColumn(label: Text("اسم المادة"), numeric: false),
+          DataColumn(label: Text("الفصل الدراسي"), numeric: false),
           DataColumn(label: Text("الدرجة"), numeric: false),
         ],
         rows: result
             .map(
               (subject) => DataRow(
                 cells: [
-                  DataCell(
-                    Text(subject.subjectName!),
-                  ),
-                  DataCell(Text(subject.finalDegree!)),
+                  DataCell(Text(subject.subjectName!),
+                      onTap: widget.role <= 2
+                          ? () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return ExamResultAddUpdate(
+                                  this.widget.role,
+                                  examResult: subject,
+                                );
+                              }));
+                            }
+                          : null),
+                  DataCell(Text(subject.semister!)),
+                  if (this.widget.role <= 2)
+                    DataCell(Text(subject.finalDegree!)),
+                  if (this.widget.role > 2)
+                    DataCell(Text(getFinalDegreeText(subject.finalDegree!))),
                 ],
               ),
             )
@@ -84,4 +114,10 @@ class _StudentMarksState extends State<StudentMarks> {
       ),
     );
   }
+}
+
+String getAvarage(List<ExamResult> results) {
+  if (results.isNotEmpty)
+    return "المعدل: ${(results.fold<int>(0, (a, b) => a + int.parse(b.finalDegree ?? '0')) / results.length)}";
+  return 'المعدل: 0';
 }

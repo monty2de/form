@@ -13,8 +13,7 @@ class CurriculumController {
     var q = FirebaseFirestore.instance
         .collection(isTestMood ? 'curriculumTest' : 'curriculum')
         .where('type', isEqualTo: type)
-        .where('semister',
-            isEqualTo: semister != 'الأول والثاني' ? null : semister)
+        .where('semister', isEqualTo: semister)
         .where('year', isEqualTo: year);
     final d = await q.get();
     print(d.docs.length);

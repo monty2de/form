@@ -66,28 +66,28 @@ class StudentController {
     return item;
   }
 
-  profile() async {
+  profile(String? sId) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    if (sharedPreferences.getInt('role') == 1 ||
-        sharedPreferences.getInt('role') == 4) {
-      item = [];
-      return item;
-    } else {
-      var id = sharedPreferences.getString('id');
-      var user = await FirebaseFirestore.instance
-          .collection(isTestMood ? 'studentsTest' : 'students')
-          .where('id', isEqualTo: id)
-          .get();
+    // if (sharedPreferences.getInt('role') == 1 ||
+    //     sharedPreferences.getInt('role') == 4) {
+    //   item = [];
+    //   return item;
+    // } else {
+    var id = sId ?? sharedPreferences.getString('id');
+    var user = await FirebaseFirestore.instance
+        .collection(isTestMood ? 'studentsTest' : 'students')
+        .where('id', isEqualTo: id)
+        .get();
 
-      item = [];
-      user.docs.forEach((DocumentSnapshot element) {
-        Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+    item = [];
+    user.docs.forEach((DocumentSnapshot element) {
+      Map<String, dynamic> data = element.data() as Map<String, dynamic>;
 
-        item.add(Student.fromFirebase(data));
-      });
+      item.add(Student.fromFirebase(data));
+    });
 
-      return item;
-    }
+    return item;
+    // }
   }
 
   search(String name) async {

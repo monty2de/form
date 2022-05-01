@@ -9,11 +9,11 @@ import 'package:form/views/student/student_worn.dart';
 import '../../drawer.dart';
 import '../../utils/results_wrapper.dart';
 
-// ignore: must_be_immutable
 class StudentsAffairs extends StatefulWidget {
-  late int role;
+  final int role;
+  final String? sId;
 
-  StudentsAffairs(this.role);
+  StudentsAffairs(this.role, {this.sId});
 
   @override
   StudentsAffairsState createState() => StudentsAffairsState();
@@ -23,7 +23,8 @@ class StudentsAffairsState extends State<StudentsAffairs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(this.widget.role),
+      drawer:
+          widget.sId != null ? null : NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
         centerTitle: true,
         title: Text('معلومات الطالب '),
@@ -34,7 +35,7 @@ class StudentsAffairsState extends State<StudentsAffairs> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             FutureBuilder(
-              future: StudentController().profile(),
+              future: StudentController().profile(widget.sId),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.active:
@@ -122,8 +123,8 @@ class StudentsAffairsState extends State<StudentsAffairs> {
                             onTab: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
-                                return StudentMarks(
-                                    result[position].name, this.widget.role);
+                                return StudentMarks(result[position].name,
+                                    this.widget.role, result[position].year);
                               }));
                             },
                           ),

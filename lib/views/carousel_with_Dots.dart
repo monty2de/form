@@ -26,13 +26,7 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
           items: widget.news
               .map((n) => SizedBox(
                     width: double.infinity,
-                    child: NewsWidget(
-                        news: n,
-                        role: 5,
-                        onNewsDelete: () {
-                          NewsController().delet(n.id);
-                          setState(() {});
-                        }),
+                    child: NewsWidget(news: n, role: 5, onNewsDelete: () {}),
                   ))
               .toList(),
           carouselController: _controller,

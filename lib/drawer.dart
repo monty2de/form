@@ -302,13 +302,13 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                   buildMenuItem(
                     text: 'شؤون الطلبة',
                     onClicked: () {
-                      if (widget.role == 1 || widget.role == 2) {
+                      if (widget.role <= 2) {
                         Navigator.pushAndRemoveUntil(context,
                             MaterialPageRoute(builder: (context) {
                           return StudentShowAll(widget.role);
                         }), (Route<dynamic> route) => false);
                       } else {
-                        if (widget.role != 3) {
+                        if (widget.role <= 2) {
                           Navigator.pushAndRemoveUntil(context,
                               MaterialPageRoute(builder: (context) {
                             return Login();

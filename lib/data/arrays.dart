@@ -1,7 +1,6 @@
 List<String> semisterArry = [
   'الأول',
   'الثاني',
-  'الأول والثاني',
 ];
 List<String> yearArry = [
   'عليا اولى',

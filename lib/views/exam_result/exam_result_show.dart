@@ -100,7 +100,10 @@ class _ExamResultShowState extends State<ExamResultShow> {
                               }));
                             }
                           : null),
-                  DataCell(Text(examresult.finalDegree!)),
+                  if (this.widget.role <= 2)
+                    DataCell(Text(examresult.finalDegree!)),
+                  if (this.widget.role > 2)
+                    DataCell(Text(getFinalDegreeText(examresult.finalDegree!))),
                   if (this.widget.role <= 2)
                     DataCell(
                       Text(
@@ -127,4 +130,22 @@ class _ExamResultShowState extends State<ExamResultShow> {
       ),
     );
   }
+}
+
+String getFinalDegreeText(String value) {
+  final deg = int.tryParse(value) ?? 0;
+  if (deg < 50) {
+    return 'راسب';
+  } else if (deg >= 50 && deg <= 60) {
+    return 'ضعيف';
+  } else if (deg >= 61 && deg <= 70) {
+    return 'مقبول';
+  } else if (deg >= 71 && deg <= 80) {
+    return 'متوسط';
+  } else if (deg >= 81 && deg <= 90) {
+    return 'جيد';
+  } else if (deg >= 91 && deg <= 100) {
+    return 'جيد جدا';
+  }
+  return 'غير معروف';
 }

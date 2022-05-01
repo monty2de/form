@@ -9,6 +9,7 @@ import 'package:form/Controllers/NewsController.dart';
 import 'package:form/data/arrays.dart';
 import 'package:form/data/curriculums.dart';
 import 'package:form/data/exams.dart';
+import 'package:form/data/news.dart';
 import 'package:form/data/students.dart';
 import 'package:form/data/teachers.dart';
 import 'package:form/models/news.dart';
@@ -43,6 +44,12 @@ void main() async {
 //     await createStudent(students[i], i);
 //   }
 
+// // examResult
+//   final forth = students.where((s) => s['year'] == 'الرابعة').toList();
+//   for (var i = 0; i < forth.length; i++) {
+//     await createExamResults(forth[i]);
+//   }
+
 // // teachers
 //   for (var i = 0; i < ts.length; i++) {
 //     await createTeacher(ts[i], i);
@@ -53,19 +60,19 @@ void main() async {
 //     await curr(cs[i], i);
 //   }
 
-  // exams
-  // for (var item in yearArry) {
-  //   var examYear = FirebaseFirestore.instance
-  //       .collection(isTestMood ? 'examTableTest' : "examTable")
-  //       .doc();
-  //   await examYear.set({
-  //     'year': item,
-  //     'id': examYear.id,
-  //   });
-  // }
-  // for (var i = 0; i < exams.length; i++) {
-  //   await examAdd(exams[i], i);
-  // }
+//   // exams
+//   for (var item in yearArry) {
+//     var examYear = FirebaseFirestore.instance
+//         .collection(isTestMood ? 'examTableTest' : "examTable")
+//         .doc();
+//     await examYear.set({
+//       'year': item,
+//       'id': examYear.id,
+//     });
+//   }
+//   for (var i = 0; i < exams.length; i++) {
+//     await examAdd(exams[i], i);
+//   }
 
   final role = await getvalidationData();
   runApp(MyApp(role: role));
@@ -211,7 +218,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       return Container();
                     }
                     if (snapshot.hasData) {
-                      return result(snapshot.data, context);
+                      return Column(
+                        children: [
+                          SizedBox(
+                            height: 200,
+                            child: CarouselWithIndicator(news: fakenews),
+                          ),
+                          result(snapshot.data, context),
+                        ],
+                      );
                     }
                     break;
                   case ConnectionState.none:
@@ -230,23 +245,15 @@ class _MyHomePageState extends State<MyHomePage> {
     return checkIfListEmpty(
       dataList: news,
       child: Column(
-        children: [
-          SizedBox(
-            height: 200,
-            child: CarouselWithIndicator(news: news),
-          ),
-          Column(
-            children: news
-                .map((n) => NewsWidget(
-                    news: n,
-                    role: role_check,
-                    onNewsDelete: () {
-                      NewsController().delet(n.id);
-                      setState(() {});
-                    }))
-                .toList(),
-          ),
-        ],
+        children: news
+            .map((n) => NewsWidget(
+                news: n,
+                role: role_check,
+                onNewsDelete: () {
+                  NewsController().delet(n.id);
+                  setState(() {});
+                }))
+            .toList(),
       ),
     );
   }
@@ -352,6 +359,54 @@ Future createStudent(Map<String, dynamic> student, int index) async {
   }
 }
 
+Future createExamResults(Map<String, dynamic> student) async {
+  try {
+    final ycs = cs.where((c) =>
+        c['year'] == student['year'] &&
+        (c['semister'] == 'الأول' || c['semister'] == 'الأول والثاني'));
+    print(ycs.length);
+    for (var i in ycs) {
+      final orders = FirebaseFirestore.instance
+          .collection(isTestMood ? 'examResultTest' : 'examResult')
+          .doc();
+      await orders.set({
+        'id': orders.id,
+        'studentName': student['name'],
+        'year': student['year'],
+        'degree': 0,
+        'subjectName': i['name'],
+        'semister': 'الأول',
+        'finalDegree': "0",
+        'semersterDegree': '0',
+        "resolutionDegree": '0',
+      });
+    }
+    final ycs2 = cs.where((c) =>
+        c['year'] == student['year'] &&
+        (c['semister'] == 'الثاني' || c['semister'] == 'الأول والثاني'));
+    print(ycs2.length);
+
+    for (var i in ycs2) {
+      final orders2 = FirebaseFirestore.instance
+          .collection(isTestMood ? 'examResultTest' : 'examResult')
+          .doc();
+      await orders2.set({
+        'id': orders2.id,
+        'studentName': student['name'],
+        'year': student['year'],
+        'degree': 0,
+        'subjectName': i['name'],
+        'semister': 'الثاني',
+        'finalDegree': "0",
+        'semersterDegree': '0',
+        "resolutionDegree": '0',
+      });
+    }
+  } catch (e) {
+    print(e);
+  }
+}
+
 Future createTeacher(Map<String, dynamic> teacher, int index) async {
   try {
     final doc = FirebaseFirestore.instance
@@ -377,6 +432,30 @@ Future curr(Map<String, dynamic> curr, int index) async {
   final currs = FirebaseFirestore.instance
       .collection(isTestMood ? 'curriculumTest' : 'curriculum')
       .doc();
+  if (curr['semister'] == 'الأول والثاني') {
+    final currs1 = FirebaseFirestore.instance
+        .collection(isTestMood ? 'curriculumTest' : 'curriculum')
+        .doc();
+    await currs1.set({
+      'id': currs1.id,
+      'name': curr['name'],
+      'year': curr['year'],
+      'type': curr['type'],
+      'semister': "الأول",
+      "units": curr['units'],
+    });
+    final currs2 = FirebaseFirestore.instance
+        .collection(isTestMood ? 'curriculumTest' : 'curriculum')
+        .doc();
+    await currs2.set({
+      'id': currs2.id,
+      'name': curr['name'],
+      'year': curr['year'],
+      'type': curr['type'],
+      'semister': "الثاني",
+      "units": curr['units'],
+    });
+  }
   await currs.set({
     'id': currs.id,
     'name': curr['name'],

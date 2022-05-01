@@ -27,7 +27,7 @@ class ExamResult {
       id: data['id'],
       studentName: data['studentName'],
       year: data['year'],
-      degree: data['degree'],
+      degree: data['degree']?.toString() ?? '',
       semister: data['semister'] ?? '',
       subjectName: data['subjectName'] ?? '',
       finalDegree: data['finalDegree'] ?? '',

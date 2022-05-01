@@ -110,13 +110,11 @@ class ExamTableAddUpdateState extends State<ExamTableAddUpdate> {
               stream: FirebaseFirestore.instance
                   .collection(isTestMood ? 'curriculumTest' : 'curriculum')
                   .where('year', isEqualTo: yearName)
-                  .where('semister',
-                      isEqualTo:
-                          semisterName != 'الأول والثاني' ? null : semisterName)
+                  .where('semister', isEqualTo: semisterName)
                   .snapshots(),
               builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return Text('error');
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Text('loading..');
                 }
                 List<String> shubjects = [];
                 for (var i = 0; i < snapshot.data!.docs.length; i++) {

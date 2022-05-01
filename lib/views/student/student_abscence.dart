@@ -21,7 +21,8 @@ class _StudentAbsceceState extends State<StudentAbscece> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(this.widget.role),
+      drawer:
+          widget.id != null ? null : NavigationDrawerWidget(this.widget.role),
       appBar: AppBar(
         centerTitle: true,
         title: Text('الغيابات'),

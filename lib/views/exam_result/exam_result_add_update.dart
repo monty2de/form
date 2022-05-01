@@ -31,7 +31,7 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
   late TextEditingController semesterDegreeController;
   late TextEditingController resolutionDegreeController;
   late TextEditingController finalDegreeController;
-  late TextEditingController avaregeDegreeController;
+  // late TextEditingController avaregeDegreeController;
 
   @override
   void initState() {
@@ -41,16 +41,24 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
     subjectName = widget.examResult?.subjectName;
     stName = widget.examResult?.studentName;
     semesterDegreeController =
-        TextEditingController(text: widget.examResult?.semersterDegree);
+        TextEditingController(text: widget.examResult?.semersterDegree ?? "0");
     resolutionDegreeController =
-        TextEditingController(text: widget.examResult?.resolutionDegree);
+        TextEditingController(text: widget.examResult?.resolutionDegree ?? "0");
     finalDegreeController =
-        TextEditingController(text: widget.examResult?.finalDegree);
-    avaregeDegreeController =
-        TextEditingController(text: widget.examResult?.finalDegree);
+        TextEditingController(text: widget.examResult?.finalDegree ?? "0");
+    // avaregeDegreeController =
+    //     TextEditingController(text: widget.examResult?.finalDegree);
     studentNameController =
         TextEditingController(text: widget.examResult?.studentName);
-    degreeController = TextEditingController(text: widget.examResult?.degree);
+    degreeController =
+        TextEditingController(text: widget.examResult?.degree ?? "0");
+  }
+
+  String getFinalDegree() {
+    final degree = int.parse(semesterDegreeController.text) +
+        int.parse(degreeController.text) +
+        int.parse(resolutionDegreeController.text);
+    return degree.toString();
   }
 
   Widget textSection() {
@@ -165,13 +173,11 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
               stream: FirebaseFirestore.instance
                   .collection(isTestMood ? 'curriculumTest' : 'curriculum')
                   .where('year', isEqualTo: yearName)
-                  .where('semister',
-                      isEqualTo:
-                          semisterName != 'الأول والثاني' ? null : semisterName)
+                  .where('semister', isEqualTo: semisterName)
                   .snapshots(),
               builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return Text('error');
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Text('loading..');
                 }
                 List<String> shubjects = [];
                 for (var i = 0; i < snapshot.data!.docs.length; i++) {
@@ -214,6 +220,7 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
             },
             enabled: !loading,
             controller: semesterDegreeController,
+            onChanged: (v) => finalDegreeController.text = getFinalDegree(),
             cursorColor: Colors.black,
             style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
@@ -233,6 +240,7 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
               return null;
             },
             enabled: !loading,
+            onChanged: (v) => finalDegreeController.text = getFinalDegree(),
             controller: degreeController,
             cursorColor: Colors.black,
             style: TextStyle(color: Colors.black),
@@ -252,6 +260,7 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
             controller: resolutionDegreeController,
             cursorColor: Colors.black,
             style: TextStyle(color: Colors.black),
+            onChanged: (v) => finalDegreeController.text = getFinalDegree(),
             decoration: InputDecoration(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
@@ -268,7 +277,7 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
               if (value!.isEmpty) return 'يجب ادخال الدرجة';
               return null;
             },
-            enabled: !loading,
+            enabled: false,
             controller: finalDegreeController,
             cursorColor: Colors.black,
             style: TextStyle(color: Colors.black),
@@ -279,28 +288,28 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
               hintStyle: TextStyle(color: Colors.black),
             ),
           ),
-          if (yearName == 'الرابعة')
-            Text(
-              'المعدل',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
-          if (yearName == 'الرابعة')
-            TextFormField(
-              validator: (value) {
-                if (value!.isEmpty) return 'يجب ادخال الدرجة';
-                return null;
-              },
-              enabled: !loading,
-              controller: avaregeDegreeController,
-              cursorColor: Colors.black,
-              style: TextStyle(color: Colors.black),
-              decoration: InputDecoration(
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                // icon: Icon(Icons.email, color: Colors.black),
-                hintStyle: TextStyle(color: Colors.black),
-              ),
-            ),
+          // if (yearName == 'الرابعة')
+          //   Text(
+          //     'المعدل',
+          //     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          //   ),
+          // if (yearName == 'الرابعة')
+          //   TextFormField(
+          //     validator: (value) {
+          //       if (value!.isEmpty) return 'يجب ادخال الدرجة';
+          //       return null;
+          //     },
+          //     enabled: !loading,
+          //     controller: avaregeDegreeController,
+          //     cursorColor: Colors.black,
+          //     style: TextStyle(color: Colors.black),
+          //     decoration: InputDecoration(
+          //       border:
+          //           OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+          //       // icon: Icon(Icons.email, color: Colors.black),
+          //       hintStyle: TextStyle(color: Colors.black),
+          //     ),
+          //   ),
         ],
       ),
     );
@@ -338,7 +347,6 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
                       semisterName,
                       semesterDegreeController.text,
                       finalDegreeController.text,
-                      avaregeDegreeController.text,
                       resolutionDegreeController.text,
                     );
                     setState(() => loading = false);
@@ -352,7 +360,7 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
   }
 
   Future addNewExamResult(String studentName, year, degree, subjectName,
-      semister, semisterD, finalD, avarege, resolutionD) async {
+      semister, semisterD, finalD, resolutionD) async {
     //This means that the user is performing an update
     if (widget.examResult != null) {
       if (subjectName == null) {
@@ -374,7 +382,6 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
         'semister': semister,
         'finalDegree': finalD,
         'semersterDegree': semisterD,
-        'avarege': avarege,
         "resolutionDegree": resolutionD,
       });
       Navigator.pop(context);
@@ -393,7 +400,6 @@ class ExamResultAddUpdateState extends State<ExamResultAddUpdate> {
       'semister': semister,
       'finalDegree': finalD,
       'semersterDegree': semisterD,
-      'avarege': avarege,
       "resolutionDegree": resolutionD,
     });
     Navigator.pop(context);

@@ -302,12 +302,15 @@ class NewsWidget extends StatelessWidget {
                   ? MainAxisAlignment.spaceBetween
                   : MainAxisAlignment.center,
               children: [
-                Text(
-                  news.title,
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black),
+                Expanded(
+                  child: Text(
+                    news.title,
+                    textAlign: role <= 2 ? null : TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black),
+                  ),
                 ),
                 role <= 2
                     ? TextButton(

@@ -146,19 +146,19 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       drawer: NavigationDrawerWidget(role_check),
       appBar: AppBar(actions: [
-        role_check <= 2
-            ? TextButton(
-                onPressed: () async {
-                  await Navigator.push(context,
-                      MaterialPageRoute(builder: (context) {
-                    return NewsAddUpdate(role_check);
-                  }));
-                  setState(() {});
-                },
-                child:
-                    Text(" اضافة خبر ", style: TextStyle(color: Colors.white)),
-              )
-            : Container(),
+        // role_check <= 2
+        //     ? TextButton(
+        //         onPressed: () async {
+        //           await Navigator.push(context,
+        //               MaterialPageRoute(builder: (context) {
+        //             return NewsAddUpdate(role_check);
+        //           }));
+        //           setState(() {});
+        //         },
+        //         child:
+        //             Text(" اضافة خبر ", style: TextStyle(color: Colors.white)),
+        //       )
+        //     : Container(),
       ], title: Text('الرئيسية'), centerTitle: true),
       body: SingleChildScrollView(
         child: Column(

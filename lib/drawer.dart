@@ -87,17 +87,17 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                       }), (Route<dynamic> route) => false);
                     },
                   ),
-                  if (widget.role == 2)
-                    buildMenuItem(
-                      text: 'بروفايل المدرس',
-                      onClicked: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return TeacherProfile(this.widget.role,
-                              isMyprofile: true);
-                        }));
-                      },
-                    ),
+                  // if (widget.role == 2)
+                  //   buildMenuItem(
+                  //     text: 'بروفايل المدرس',
+                  //     onClicked: () {
+                  //       Navigator.push(context,
+                  //           MaterialPageRoute(builder: (context) {
+                  //         return TeacherProfile(this.widget.role,
+                  //             isMyprofile: true);
+                  //       }));
+                  //     },
+                  //   ),
                   buildMenuItemWithSubCategory(
                     mainCatName: 'لجان القسم',
                     subCategories: [
